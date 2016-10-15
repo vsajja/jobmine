@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.ratpack:ratpack-gradle:1.1.1'
+    }
+}
+
+apply plugin: 'io.ratpack.ratpack-groovy'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+    compile 'redis.clients:jedis:1.5.1'
+    compile ratpack.dependency('hikari')
+    runtime 'org.slf4j:slf4j-simple:1.7.12'
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
