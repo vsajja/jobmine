@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('uiApp', [
+  .module('jobmineApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
