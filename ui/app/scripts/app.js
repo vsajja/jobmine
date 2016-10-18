@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name uiApp
+ * @name jobmineApp
  * @description
- * # uiApp
+ * # jobmineApp
  *
  * Main module of the application.
  */
@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
