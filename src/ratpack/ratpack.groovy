@@ -50,8 +50,8 @@ ratpack {
         }
 
         get("db") { Sql sql ->
-            def schemas = sql.rows("show schemas")
-            render schemas?.join(', ')
+            def schemas = sql.rows("select * from public.user")
+            render schemas?.join(' ')
         }
 
         files {
