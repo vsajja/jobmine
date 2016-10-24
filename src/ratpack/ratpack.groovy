@@ -55,7 +55,7 @@ ratpack {
         }
 
         files {
-            dir "public"
+            dir "dist"
         }
     }
 }
