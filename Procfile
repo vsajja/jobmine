@@ -1,3 +1,3 @@
-web: build/install/${rootProject.name}/bin/${rootProject.name}
+web: build/install/jobmine/bin/jobmine
 
 
