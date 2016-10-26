@@ -41,5 +41,7 @@ angular
         redirectTo: '/'
       });
 
-    RestangularProvider.setBaseUrl('http://localhost:5050');
+    // TODO: for dev point to Ratpack server
+     RestangularProvider.setBaseUrl('http://localhost');
+    // RestangularProvider.setBaseUrl('http://localhost:5050');
   });
