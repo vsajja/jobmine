@@ -16,9 +16,11 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'smart-table',
+    'restangular'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -38,4 +40,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    RestangularProvider.setBaseUrl('http://localhost:5050');
   });

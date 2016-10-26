@@ -1,6 +1,29 @@
-<h1>
-  <p>This is the jobs view.</p>
-</h1>
+<table st-table="rowCollection" class="table table-striped">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Employer</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in rowCollection">
+    <td><img height="50px" width="50px" src="data:image/jpg;base64, {{row.employerlogo}}"></td>
+    <td>{{row.jobpostingid}}</td>
+    <td>{{row.title}}</td>
+    <td>{{row.employername}}</td>
+    <td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>
+    <td>{{row.location}}</td>
+    <td><span class="label label-success">Approved</span></td>
+    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Details</a></td>
+  </tr>
+  </tbody>
+</table>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -13,13 +36,13 @@
 
         <!-- implement shortlist -->
         <style>
-          .custom{
-            color:#7f8c8d;
-            opacity:0.7;
+          .custom {
+            color: #7f8c8d;
+            opacity: 0.7;
           }
 
-          .custom:active{
-            color:red
+          .custom:active {
+            color: red
           }
         </style>
 
@@ -69,7 +92,8 @@
           </ul>
           <p><strong>Benefits:</strong></p>
           <ul>
-            <li>ABC Corp provides top-tier employee compensation benefits and a relaxed, team-oriented work environment,
+            <li>ABC Corp provides top-tier employee compensation benefits and a relaxed, team-oriented work
+              environment,
               including: Medical, Life, Dental
             </li>
           </ul>
@@ -88,70 +112,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Apply</button>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="col-md-12">
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        <input type="text" class="form-control" placeholder="Job Title, Skills or Company">
-        <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-        <input type="text" class="form-control" placeholder="Location">
-
-        <button type="submit" class="btn btn-default">Search</button>
-
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="col-md-12" id="customer-orders">
-  <div class="box">
-    <hr>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>Job Id</th>
-          <th>Date Posted</th>
-          <th>Last Day to Apply</th>
-          <th>Status</th>
-          <th>Job Details</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th># 1735</th>
-          <td>22/06/2013</td>
-          <td>$ 150.00</td>
-          <td><span class="label label-info">Pending</span>
-          </td>
-          <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">View</a>
-          </td>
-        </tr>
-        <tr>
-          <th># 1735</th>
-          <td>22/06/2013</td>
-          <td>$ 150.00</td>
-          <td><span class="label label-info">Pending</span>
-          </td>
-          <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">View</a>
-          </td>
-        </tr>
-        <tr>
-          <th># 1735</th>
-          <td>22/06/2013</td>
-          <td>$ 150.00</td>
-          <td><span class="label label-success">Approved</span>
-          </td>
-          <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">View</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

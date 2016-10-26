@@ -1,10 +1,7 @@
 import jooq.tables.JobPosting
 import jooq.tables.daos.JobPostingDao
 import org.jooq.Configuration
-import org.jooq.DSLContext
 import org.jooq.SQLDialect
-import org.jooq.SelectJoinStep
-import org.jooq.impl.DSL
 import org.jooq.impl.DefaultConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -21,7 +18,6 @@ import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.sql.SqlModule
 import ratpack.hikari.HikariModule
 import ratpack.handling.RequestLogger
-import ratpack.exec.Blocking
 
 import com.zaxxer.hikari.HikariConfig
 import java.text.SimpleDateFormat
@@ -61,38 +57,34 @@ ratpack {
 
         get {
             println "/ ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new Date())}"
-            render "Hello world!"
+            render 'Hello world!'
         }
 
         get('ping') {
             println "/ping ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new Date())}"
-            render "Hello world!"
+            render 'Hello world!'
         }
 
         get('jobs') {
+//            DataSource dataSource = registry.get(DataSource.class);
+//            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES)
+//            SelectJoinStep from = create.select().from(JobPosting.JOB_POSTING)
+//            Blocking.get {
+//                from.fetch().intoMaps()
+//            }.then { maps ->
+//                render maps
+//            }
+
+            response.headers.add('Access-Control-Allow-Origin', '*');
+
             DataSource dataSource = registry.get(DataSource.class);
             Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
             List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
             render json(jobPostings)
-
-            //            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES)
-//            SelectJoinStep<Record> from =create.select().from(JobPosting.JOB_POSTING);
-//            Promise<List<Map<String, Object>>> promise = ratpack.exec.Blocking.get(() -> from.fetch().intoMaps());
-        }
-
-        get('jobs2') {
-            DataSource dataSource = registry.get(DataSource.class);
-            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES)
-            SelectJoinStep from = create.select().from(JobPosting.JOB_POSTING)
-            Blocking.get {
-                from.fetch().intoMaps()
-            }.then { maps ->
-                render maps
-            }
         }
 
         files {
-            dir "dist"
+            dir 'dist'
         }
     }
 }
