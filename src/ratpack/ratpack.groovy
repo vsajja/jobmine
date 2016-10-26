@@ -1,3 +1,4 @@
+import com.zaxxer.hikari.HikariConfig
 import jooq.tables.JobPosting
 import jooq.tables.daos.JobPostingDao
 import org.jooq.Configuration
@@ -5,22 +6,20 @@ import org.jooq.SQLDialect
 import org.jooq.impl.DefaultConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import vsajja.org.redis.RedisConfig
-import javax.sql.DataSource
-
-import static ratpack.groovy.Groovy.ratpack
-import static ratpack.jackson.Jackson.json;
-
-import vsajja.org.postgres.PostgresConfig
-import vsajja.org.postgres.PostgresModule
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.sql.SqlModule
-import ratpack.hikari.HikariModule
 import ratpack.handling.RequestLogger
+import ratpack.hikari.HikariModule
+import vsajja.org.postgres.PostgresConfig
+import vsajja.org.postgres.PostgresModule
+import vsajja.org.redis.RedisConfig
 
-import com.zaxxer.hikari.HikariConfig
+import javax.sql.DataSource
 import java.text.SimpleDateFormat
+
+import static ratpack.groovy.Groovy.ratpack
+import static ratpack.jackson.Jackson.json
 
 final Logger log = LoggerFactory.getLogger(this.class)
 
@@ -65,22 +64,14 @@ ratpack {
             render 'Hello world!'
         }
 
-        get('jobs') {
-//            DataSource dataSource = registry.get(DataSource.class);
-//            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES)
-//            SelectJoinStep from = create.select().from(JobPosting.JOB_POSTING)
-//            Blocking.get {
-//                from.fetch().intoMaps()
-//            }.then { maps ->
-//                render maps
-//            }
-
-            response.headers.add('Access-Control-Allow-Origin', '*');
-
-            DataSource dataSource = registry.get(DataSource.class);
-            Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-            List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
-            render json(jobPostings)
+        prefix('api/v1') {
+            get('jobs') {
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                DataSource dataSource = registry.get(DataSource.class)
+                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
+                List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
+                render json(jobPostings)
+            }
         }
 
         files {
