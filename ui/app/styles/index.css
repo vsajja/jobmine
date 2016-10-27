@@ -1,3 +1,48 @@
+/* fit to screen */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  /*background: #FFFFFF;*/
+  /*color: #FFFFFF;*/
+  position: relative;
+}
+
+#header {
+  height: 50px;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background: #1d2129;
+  position: fixed;
+}
+
+#footer {
+  height: 50px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  background: #CCCCCC;
+  position: fixed;
+}
+
+#content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 20px;
+}
+
+#content > div {
+  padding: 70px 0;
+}
+
+/* end fit to screen */
+
 /* start - footer social icons */
 ul.social-network {
   list-style: none;
@@ -88,5 +133,4 @@ a.socialIcon:hover, .socialHoverClass {
 .ico {
   background-color: #D3D3D3;
 }
-
 /* end -- Footer social icons */
