@@ -1,8 +1,11 @@
 import com.zaxxer.hikari.HikariConfig
-import jooq.tables.JobPosting
+import groovy.json.JsonSlurper
 import jooq.tables.daos.JobPostingDao
+import jooq.tables.pojos.JobPosting
 import org.jooq.Configuration
+import org.jooq.DSLContext
 import org.jooq.SQLDialect
+import org.jooq.impl.DSL
 import org.jooq.impl.DefaultConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,15 +14,19 @@ import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
+import ratpack.http.client.HttpClient
 import vsajja.org.postgres.PostgresConfig
 import vsajja.org.postgres.PostgresModule
 import vsajja.org.redis.RedisConfig
 
 import javax.sql.DataSource
+import java.sql.Date
 import java.text.SimpleDateFormat
 
 import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
+
+import static jooq.Tables.*;
 
 final Logger log = LoggerFactory.getLogger(this.class)
 
@@ -47,8 +54,6 @@ ratpack {
                             configData.get('/postgres', PostgresConfig))
         }
         module SqlModule
-
-        bind JobPostingDao
     }
 
     handlers {
@@ -59,11 +64,6 @@ ratpack {
             render 'Hello world!'
         }
 
-        get('ping') {
-            println "/ping ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new Date())}"
-            render 'Hello world!'
-        }
-
         prefix('api/v1') {
             get('jobs') {
                 response.headers.add('Access-Control-Allow-Origin', '*')
@@ -71,6 +71,66 @@ ratpack {
                 Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
                 List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
                 render json(jobPostings)
+            }
+        }
+
+        get('data/jobs') {
+            DataSource dataSource = registry.get(DataSource.class)
+            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+            HttpClient httpClient = registry.get(HttpClient.class)
+
+            URI uri = new URI('http://api.indeed.com/ads/apisearch' +
+                    '?publisher=6453215428478291' +
+                    '&v=2' +
+                    '&format=json' +
+                    '&limit=25' +
+                    '&q=software' +
+                    '&l=Waterloo' +
+                    '&co=ca'
+            )
+
+            httpClient.get(uri).then {
+                def root = new JsonSlurper().parseText(it.body.text)
+
+                // get total results
+                int totalResults = root.totalResults
+                log.info(totalResults.toString())
+
+                1.step(totalResults, 25) {
+                    httpClient.get(uri).then { response ->
+                        root = new JsonSlurper().parseText(response.body.text)
+                        root.results.each {
+                            if (!it.expired) {
+                                SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+                                log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
+                                create.insertInto(JOB_POSTING)
+                                        .set(JOB_POSTING.TITLE, it.jobtitle.toString())
+                                        .set(JOB_POSTING.EMPLOYERNAME, it.company.toString())
+                                        .set(JOB_POSTING.DESCRIPTION_9, it.snippet.toString())
+                                        .set(JOB_POSTING.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
+                                        .set(JOB_POSTING.LOCATION, it.formattedLocation.toString())
+                                        .execute()
+
+                            }
+                        }
+                    }
+                }
+                render totalResults.toString()
+            }
+        }
+
+        prefix('test') {
+            get('jobs/insert') {
+                DataSource dataSource = registry.get(DataSource.class)
+                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                create.insertInto(JOB_POSTING)
+                        .set(JOB_POSTING.TITLE, 'Software Developer II')
+                        .set(JOB_POSTING.EMPLOYERNAME, 'BlackBerry')
+                        .set(JOB_POSTING.DESCRIPTION_9, 'Description')
+                        .set(JOB_POSTING.DATEPOSTED_9, new Date(123))
+                        .set(JOB_POSTING.LOCATION, 'Waterloo')
+                        .execute()
             }
         }
 

@@ -23,6 +23,7 @@ dependencies {
     compile 'org.jooq:jooq:3.7.1'
     compile 'org.pac4j:pac4j-http:1.8.5'
     compile 'org.pac4j:pac4j-oauth:1.8.5'
+    compile 'joda-time:joda-time:2.9.4'
     compile ratpack.dependency('hikari')
     compile ratpack.dependency('pac4j')
     runtime 'org.slf4j:slf4j-simple:1.7.12'
