@@ -13,8 +13,8 @@
   </thead>
   <tbody>
   <tr ng-repeat="row in rowCollection">
-    <!-- TODO: get employer logo -->
-    <td><img height="50px" width="50px" src="data:image/png;base64,{{row.employerlogo}}"></td>
+    <!-- TODO: better way for logos -->
+    <td><img height="50px" width="50px" src="{{'data:image/png;base64,' + row.employerlogo}}"></td>
     <td>{{row.jobpostingid}}</td>
     <td>{{row.title}}</td>
     <td>{{row.employername}}</td>
