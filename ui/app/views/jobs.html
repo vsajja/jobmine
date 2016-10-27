@@ -1,44 +1,51 @@
 <h1>jobs</h1>
 
 <!--<div class="container">-->
-  <!--<div class="col-md-12">-->
-    <!--<form class="form-horizontal" role="form">-->
-      <!--<div class="form-group">-->
-        <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
-        <!--<input type="text" class="form-control" placeholder="Job Title, Skills or Company">-->
-        <!--<input type="text" class="form-control" placeholder="Location">-->
-        <!--<a href="#/jobs">-->
-          <!--<button type="submit" class="btn btn-default">Search</button>-->
-        <!--</a>-->
-      <!--</div>-->
-    <!--</form>-->
-  <!--</div>-->
+<!--<div class="col-md-12">-->
+<!--<form class="form-horizontal" role="form">-->
+<!--<div class="form-group">-->
+<!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+<!--<input type="text" class="form-control" placeholder="Job Title, Skills or Company">-->
+<!--<input type="text" class="form-control" placeholder="Location">-->
+<!--<a href="#/jobs">-->
+<!--<button type="submit" class="btn btn-default">Search</button>-->
+<!--</a>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
 <!--</div>-->
 
 <h1></h1>
 
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
   <tr>
-    <th colspan="7"><input st-search="" class="form-control" placeholder="Search results ..." type="text"/></th>
+    <th colspan="4"><input st-search="" class="form-control" placeholder="Search results ..." type="text"/></th>
+    <th colspan="4"><input class="form-control" placeholder="Location" type="text"/></th>
   </tr>
   <thead>
   <tr>
-    <th st-sort="title" class="st-sort-ascent">Title</th>
+    <th></th>
     <th st-sort="employername" class="st-sort-ascent">Employer</th>
+    <th st-sort="title" class="st-sort-ascent">Title</th>
     <th st-sort="location" class="st-sort-ascent">Location</th>
-    <th >Description</th>
+    <!--<th >Description</th>-->
     <th>Status</th>
-    <th>Details</th>
+    <th>Apply</th>
+    <th>Applicants</th>
   </tr>
   </thead>
   <tbody>
   <tr ng-repeat="row in rowCollection">
-    <td>{{row.title}}</td>
+    <!-- TODO: load icon -->
+    <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
+    </td>
     <td>{{row.employername}}</td>
+    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sm">{{row.title}}</a></td>
     <td>{{row.location}}</td>
-    <td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>
+    <!--<td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>-->
     <td><span class="label label-warning">Pending</span></td>
-    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Details</a></td>
+    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Apply</a></td>
+    <td style="text-align: center">0</td>
   </tr>
   </tbody>
 </table>
@@ -52,7 +59,7 @@
           aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Software Engineer</h4>
 
-        <!-- implement shortlist -->
+        <!-- TODO: implement shortlist -->
         <style>
           .custom {
             color: #7f8c8d;
@@ -63,7 +70,8 @@
             color: red
           }
         </style>
-
+        <!-- TODO: implement share button -->
+        <td><a class="btn btn-primary btn-sm">Share</a></td>
         <button class="custom">
           <span class="glyphicon glyphicon-heart"></span>
         </button>
