@@ -1,24 +1,25 @@
-<div class="container">
-  <div class="col-md-12">
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        <input type="text" class="form-control" placeholder="Job Title, Skills or Company">
-        <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-        <input type="text" class="form-control" placeholder="Location">
-        <a href="#/jobs">
-          <button type="submit" class="btn btn-default">Search</button>
-        </a>
-      </div>
-    </form>
-  </div>
-</div>
+<h1>jobs</h1>
+
+<!--<div class="container">-->
+  <!--<div class="col-md-12">-->
+    <!--<form class="form-horizontal" role="form">-->
+      <!--<div class="form-group">-->
+        <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+        <!--<input type="text" class="form-control" placeholder="Job Title, Skills or Company">-->
+        <!--<input type="text" class="form-control" placeholder="Location">-->
+        <!--<a href="#/jobs">-->
+          <!--<button type="submit" class="btn btn-default">Search</button>-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
+<!--</div>-->
 
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
-  <thead>
   <tr>
-    <th colspan="6"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+    <th colspan="7"><input st-search="" class="form-control" placeholder="Search results ..." type="text"/></th>
   </tr>
+  <thead>
   <tr>
     <th st-sort="title" class="st-sort-ascent">Title</th>
     <th st-sort="employername" class="st-sort-ascent">Employer</th>
