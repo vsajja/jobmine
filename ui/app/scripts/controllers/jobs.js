@@ -19,27 +19,28 @@ angular.module('jobmineApp')
 
     // This will query /jobs and return a promise.
     jobs.getList().then(function(jobs) {
-      $scope.rowCollection = jobs;
+      $scope.rowList = jobs;
+      $scope.rowCollection = [].concat($scope.rowList);
     });
 
-    //
+
     //$scope.rowCollection = [
     //  {
-    //    firstName: 'Laurent',
+    //    title: 'Laurent',
     //    lastName: 'Renard',
     //    birthDate: new Date('1987-05-21'),
     //    balance: 102,
     //    email: 'whatever@gmail.com'
     //  },
     //  {
-    //    firstName: 'Blandine',
+    //    title: 'Blandine',
     //    lastName: 'Faivre',
     //    birthDate: new Date('1987-04-25'),
     //    balance: -2323.22,
     //    email: 'oufblandou@gmail.com'
     //  },
     //  {
-    //    firstName: 'Francoise',
+    //    title: 'Francoise',
     //    lastName: 'Frere',
     //    birthDate: new Date('1955-08-27'),
     //    balance: 42343,
