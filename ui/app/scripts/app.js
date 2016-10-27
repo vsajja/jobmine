@@ -43,5 +43,5 @@ angular
 
     // TODO: for dev point to Ratpack server
     RestangularProvider.setBaseUrl('/api/v1');
-     //RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
-  });
+    // RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
+  });clear
