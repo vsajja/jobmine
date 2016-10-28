@@ -7,7 +7,9 @@ package jooq;
 import javax.annotation.Generated;
 
 import jooq.tables.JobPosting;
+import jooq.tables.School;
 import jooq.tables.records.JobPostingRecord;
+import jooq.tables.records.SchoolRecord;
 
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
@@ -33,12 +35,14 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	public static final Identity<JobPostingRecord, Integer> IDENTITY_JOB_POSTING = Identities0.IDENTITY_JOB_POSTING;
+	public static final Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = Identities0.IDENTITY_SCHOOL;
 
 	// -------------------------------------------------------------------------
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
 	public static final UniqueKey<JobPostingRecord> JOB_POSTING_PKEY = UniqueKeys0.JOB_POSTING_PKEY;
+	public static final UniqueKey<SchoolRecord> SCHOOL_SCHOOLD_PK = UniqueKeys0.SCHOOL_SCHOOLD_PK;
 
 	// -------------------------------------------------------------------------
 	// FOREIGN KEY definitions
@@ -51,9 +55,11 @@ public class Keys {
 
 	private static class Identities0 extends AbstractKeys {
 		public static Identity<JobPostingRecord, Integer> IDENTITY_JOB_POSTING = createIdentity(JobPosting.JOB_POSTING, JobPosting.JOB_POSTING.JOBPOSTINGID);
+		public static Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = createIdentity(School.SCHOOL, School.SCHOOL.SCHOOLD);
 	}
 
 	private static class UniqueKeys0 extends AbstractKeys {
 		public static final UniqueKey<JobPostingRecord> JOB_POSTING_PKEY = createUniqueKey(JobPosting.JOB_POSTING, JobPosting.JOB_POSTING.JOBPOSTINGID);
+		public static final UniqueKey<SchoolRecord> SCHOOL_SCHOOLD_PK = createUniqueKey(School.SCHOOL, School.SCHOOL.SCHOOLD);
 	}
 }

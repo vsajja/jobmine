@@ -1,1 +1,37 @@
 <h1>schools</h1>
+
+<table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
+  <tr>
+    <!-- TODO: add dropdown, filter by location etc -->
+    <th colspan="9"><input st-search="" class="form-control" placeholder="Search School, Location, Type..."
+                           type="text"/></th>
+  </tr>
+  <thead>
+  <tr>
+    <th>Logo</th>
+    <th st-sort="name" class="st-sort-ascent">School</th>
+    <th st-sort="schooltype" class="st-sort-ascent">Type</th>
+    <th st-sort="city" class="st-sort-ascent">City</th>
+    <th st-sort="provinceorstate" class="st-sort-ascent">Province/State</th>
+    <th st-sort="country" class="st-sort-ascent">Country</th>
+    <th st-sort="established" class="st-sort-ascent">Established</th>
+    <th st-sort="totalstudents" class="st-sort-ascent">Total Students (approx)</th>
+    <th st-sort="registeredstudents" class="st-sort-ascent">Students on JobMine</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in rowCollection">
+    <!-- TODO: load icon -->
+    <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
+    </td>
+    <td><h2>{{row.name}}</h2></td>
+    <td>{{row.schooltype}}</td>
+    <td>{{row.city}}</td>
+    <td>{{row.provinceorstate}}</td>
+    <td>{{row.country}}</td>
+    <td>{{row.established}}</td>
+    <td><h1>{{row.totalstudents | number}}</h1></td>
+    <td><h1>0</h1></td>
+  </tr>
+  </tbody>
+</table>

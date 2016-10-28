@@ -27,4 +27,9 @@ public class Sequences {
 	 * The sequence <code>public.job_posting_jobpostingid_seq</code>
 	 */
 	public static final Sequence<Long> JOB_POSTING_JOBPOSTINGID_SEQ = new SequenceImpl<Long>("job_posting_jobpostingid_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+
+	/**
+	 * The sequence <code>public.school_schoold_seq</code>
+	 */
+	public static final Sequence<Long> SCHOOL_SCHOOLD_SEQ = new SequenceImpl<Long>("school_schoold_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 }

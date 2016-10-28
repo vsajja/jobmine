@@ -3,15 +3,15 @@
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
   <tr>
     <!-- TODO: add dropdown, filter by location etc -->
-    <th colspan="8"><input st-search="" class="form-control" placeholder="Search Company, Job Title, or Skills..." type="text"/></th>
+    <th colspan="9"><input st-search="" class="form-control" placeholder="Search Company, Job Title, or Skills..." type="text"/></th>
   </tr>
   <thead>
   <tr>
     <th>Logo</th>
     <th st-sort="employername" class="st-sort-ascent">Company</th>
-    <th st-sort="title" class="st-sort-ascent">Title</th>
     <th st-sort="location" class="st-sort-ascent">Location</th>
-    <!--<th >Description</th>-->
+    <th st-sort="title" class="st-sort-ascent">Title</th>
+    <th >Description</th>
     <th>Status</th>
     <th>Apply</th>
     <th>Openings</th>
@@ -24,9 +24,9 @@
     <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
     </td>
     <td>{{row.employername}}</td>
-    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sm">{{row.title}}</a></td>
     <td>{{row.location}}</td>
-    <!--<td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>-->
+    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sm">{{row.title}}</a></td>
+    <td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>
     <td><span class="label label-warning">Pending</span></td>
     <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Apply</a></td>
     <td style="text-align: center"><h1>0</h1></td>
@@ -61,63 +61,66 @@
           <span class="glyphicon glyphicon-heart"></span>
         </button>
       </div>
+
       <div class="modal-body">
-        <div>
-          <p><strong>Location:</strong>
-            Kirkland WA</p>
+        <!-- TODO: description -->
+        TODO
+        <!--<div>-->
+          <!--<p><strong>Location:</strong>-->
+            <!--Kirkland WA</p>-->
 
-          <p><strong>Industry:</strong> Computer Software
-            <br><strong>Occupational Category:</strong> 15-1132.00 Software Developers, Application
-            <br><strong>Hours:</strong> Full-time, 40 hours per week
-            <br><strong>Salary:</strong> USD 100000
-          </p>
+          <!--<p><strong>Industry:</strong> Computer Software-->
+            <!--<br><strong>Occupational Category:</strong> 15-1132.00 Software Developers, Application-->
+            <!--<br><strong>Hours:</strong> Full-time, 40 hours per week-->
+            <!--<br><strong>Salary:</strong> USD 100000-->
+          <!--</p>-->
 
-          <p>
-            <strong>Description:</strong> ABC Company Inc.
-            seeks a full-time mid-level software engineer to develop in-house tools.
-          </p>
+          <!--<p>-->
+            <!--<strong>Description:</strong> ABC Company Inc.-->
+            <!--seeks a full-time mid-level software engineer to develop in-house tools.-->
+          <!--</p>-->
 
-          <p><strong>Responsibilities:</strong></p>
-          <ul>
-            <li>Design and write specifications for tools for in-house customers</li>
-            <li>Build tools according to specifications</li>
-          </ul>
-          <p><strong>Educational requirements:</strong></p>
-          <ul>
-            <li>Bachelor's Degree in Computer Science, Information Systems or related fields of study.</li>
-          </ul>
-          <p><strong>Experience requirements:</strong></p>
-          <ul>
-            <li>Minumum 3 years experience as a software engineer</li>
-          </ul>
-          <p><strong>Desired Skills:</strong></p>
-          <ul>
-            <li>Web application development using Java/J2EE</li>
-            <li>Web application development using Python or familiarity with dynamic programming languages</li>
-          </ul>
-          <p><strong>Qualifications:</strong></p>
-          <ul>
-            <li>Ability to work in a team environment with members of varying skill levels.</li>
-            <li>Highly motivated.</li>
-            <li>Learns quickly.</li>
-          </ul>
-          <p><strong>Benefits:</strong></p>
-          <ul>
-            <li>ABC Corp provides top-tier employee compensation benefits and a relaxed, team-oriented work
-              environment,
-              including: Medical, Life, Dental
-            </li>
-          </ul>
-          <p><strong>Incentives:</strong></p>
-          <ul>
-            <li>Performance-based annual bonus plan, project-completion bonuses</li>
-          </ul>
-          <p>If interested in this position, please email us your resume, along with salary requirements and a cover
-            letter to
-            Jobs@abc.123.</p>
+          <!--<p><strong>Responsibilities:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Design and write specifications for tools for in-house customers</li>-->
+            <!--<li>Build tools according to specifications</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Educational requirements:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Bachelor's Degree in Computer Science, Information Systems or related fields of study.</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Experience requirements:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Minumum 3 years experience as a software engineer</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Desired Skills:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Web application development using Java/J2EE</li>-->
+            <!--<li>Web application development using Python or familiarity with dynamic programming languages</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Qualifications:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Ability to work in a team environment with members of varying skill levels.</li>-->
+            <!--<li>Highly motivated.</li>-->
+            <!--<li>Learns quickly.</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Benefits:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>ABC Corp provides top-tier employee compensation benefits and a relaxed, team-oriented work-->
+              <!--environment,-->
+              <!--including: Medical, Life, Dental-->
+            <!--</li>-->
+          <!--</ul>-->
+          <!--<p><strong>Incentives:</strong></p>-->
+          <!--<ul>-->
+            <!--<li>Performance-based annual bonus plan, project-completion bonuses</li>-->
+          <!--</ul>-->
+          <!--<p>If interested in this position, please email us your resume, along with salary requirements and a cover-->
+            <!--letter to-->
+            <!--Jobs@abc.123.</p>-->
 
-          <p>Date Posted: 2011-10-31</p>
-        </div>
+          <!--<p>Date Posted: 2011-10-31</p>-->
+        <!--</div>-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

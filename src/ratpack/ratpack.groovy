@@ -1,7 +1,9 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
 import jooq.tables.daos.JobPostingDao
+import jooq.tables.daos.SchoolDao
 import jooq.tables.pojos.JobPosting
+import jooq.tables.pojos.School
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
@@ -21,6 +23,7 @@ import vsajja.org.redis.RedisConfig
 
 import javax.sql.DataSource
 import java.sql.Date
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 
 import static ratpack.groovy.Groovy.ratpack
@@ -72,9 +75,17 @@ ratpack {
                 List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
                 render json(jobPostings)
             }
+
+            get('schools') {
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                DataSource dataSource = registry.get(DataSource.class)
+                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
+                List<School> schools = new SchoolDao(configuration).findAll()
+                render json(schools)
+            }
         }
 
-        prefix('data') {
+        prefix('test/data') {
             get('jobs') {
                 DataSource dataSource = registry.get(DataSource.class)
                 DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
@@ -112,7 +123,6 @@ ratpack {
 //                                            .set(JOB_POSTING.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
 //                                            .set(JOB_POSTING.LOCATION, it.formattedLocation.toString())
 //                                            .execute()
-
                                 }
                             }
                         }
@@ -121,20 +131,42 @@ ratpack {
                 }
             }
 
-            get('schools') {
-                def htmlFile = new File('src/ratpack/data/schools_canada_universities_wikipedia.html')
+            prefix('schools') {
+                get('unis/canada') {
+                    def htmlFile = new File('src/ratpack/data/schools_canada_universities_wikipedia.html')
+                    def html = new XmlSlurper().parse(htmlFile)
 
-                def html =  new XmlSlurper().parse(htmlFile)
+                    html.tbody.children().each { tr ->
+                        tr.collect {
 
-//                html."**".findAll { it.@class.toString().contains("td")}.each {
-//                    log.info(it)
-//                }
+                            def name = it.td[0].depthFirst().findAll { it.name() == 'a' }[0].@title.toString()
+                            def schoolType = 'University'
+                            def city = it.td[1].toString().replaceAll("[\\t\\n\\r]"," ").replaceAll("\\s+", " ")
+                            def provinceOrState = it.td[2].toString()
+                            def country = 'Canada'
+                            def established = it.td[4].toString()
+                            def totalStudents = (int) NumberFormat.getIntegerInstance(Locale.US).parse(it.td[7].localText()[0].toString())
+                            def wikiLink = 'https://en.wikipedia.org/wiki/List_of_universities_in_Canada' + it.td[0].depthFirst().findAll { it.name() == 'a' }[0].@href.toString()
+                            def logoSrc = null
 
-                html."**".findAll { it.@class.toString() }.each {
-                    log.info(it.toString())
+//                            log.info("Inserting: $name @ $city , $provinceOrState, $country")
+//                            DataSource dataSource = registry.get(DataSource.class)
+//                            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+//                            create.insertInto(SCHOOL)
+//                                    .set(SCHOOL.NAME, name)
+//                                    .set(SCHOOL.SCHOOLTYPE, schoolType)
+//                                    .set(SCHOOL.CITY, city)
+//                                    .set(SCHOOL.PROVINCEORSTATE, provinceOrState)
+//                                    .set(SCHOOL.COUNTRY, country)
+//                                    .set(SCHOOL.ESTABLISHED, established)
+//                                    .set(SCHOOL.TOTALSTUDENTS, totalStudents)
+//                                    .set(SCHOOL.WIKILINK, wikiLink)
+//                                    .set(SCHOOL.LOGOSRC, 'images/icon_default_company.png')
+//                                    .execute()
+                        }
+                    }
+                    render htmlFile.text
                 }
-
-                render htmlFile.text
             }
 
             get('companies') {
@@ -158,6 +190,24 @@ ratpack {
                         .set(JOB_POSTING.DATEPOSTED_9, new Date(123))
                         .set(JOB_POSTING.LOCATION, 'Waterloo')
                         .execute()
+                render "inserted!"
+            }
+
+            get('schools/insert') {
+                DataSource dataSource = registry.get(DataSource.class)
+                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                create.insertInto(SCHOOL)
+                        .set(SCHOOL.NAME, 'University of Waterloo')
+                        .set(SCHOOL.SCHOOLTYPE, 'University')
+                        .set(SCHOOL.CITY, 'Waterloo')
+                        .set(SCHOOL.PROVINCEORSTATE, 'Ontario')
+                        .set(SCHOOL.COUNTRY, 'Canada')
+                        .set(SCHOOL.ESTABLISHED, '1999')
+                        .set(SCHOOL.TOTALSTUDENTS, 1)
+                        .set(SCHOOL.WIKILINK, 'wiki/UniversityOfWaterloo')
+                        .set(SCHOOL.LOGOSRC, 'dist/images/icon_default_company.578524b6.png')
+                        .execute()
+                render "inserted!"
             }
         }
 
