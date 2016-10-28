@@ -57,11 +57,16 @@ angular
         controller: 'ProfileCtrl',
         controllerAs: 'profile'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
     // TODO: for dev point to Ratpack server
-    RestangularProvider.setBaseUrl('/api/v1');
-     //RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
+    //RestangularProvider.setBaseUrl('/api/v1');
+     RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
