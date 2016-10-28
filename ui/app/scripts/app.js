@@ -52,6 +52,11 @@ angular
         controller: 'CompaniesCtrl',
         controllerAs: 'companies'
       })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
+      })
       .otherwise({
         redirectTo: '/'
       });
