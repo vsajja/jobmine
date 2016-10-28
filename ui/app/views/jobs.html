@@ -15,23 +15,22 @@
 <!--</div>-->
 <!--</div>-->
 
-<h1></h1>
-
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
   <tr>
-    <th colspan="4"><input st-search="" class="form-control" placeholder="Search results ..." type="text"/></th>
-    <th colspan="4"><input class="form-control" placeholder="Location" type="text"/></th>
+    <th colspan="4"><input st-search="" class="form-control" placeholder="Search Company, Job Title, or Skills..." type="text"/></th>
+    <th colspan="4"><input class="form-control" placeholder="Select Location..." type="text"/></th>
   </tr>
   <thead>
   <tr>
     <th></th>
-    <th st-sort="employername" class="st-sort-ascent">Employer</th>
+    <th st-sort="employername" class="st-sort-ascent">Company</th>
     <th st-sort="title" class="st-sort-ascent">Title</th>
     <th st-sort="location" class="st-sort-ascent">Location</th>
     <!--<th >Description</th>-->
     <th>Status</th>
     <th>Apply</th>
-    <th>Applicants</th>
+    <th>Openings</th>
+    <th>Applications</th>
   </tr>
   </thead>
   <tbody>
@@ -45,7 +44,8 @@
     <!--<td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>-->
     <td><span class="label label-warning">Pending</span></td>
     <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Apply</a></td>
-    <td style="text-align: center">0</td>
+    <td style="text-align: center"><h1>0</h1></td>
+    <td style="text-align: center"><h1>0</h1></td>
   </tr>
   </tbody>
 </table>
