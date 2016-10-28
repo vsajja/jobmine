@@ -1,5 +1,62 @@
 <h1>profile</h1>
 
+<style type="text/css">
+  form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+  }
+</style>
+
+<div ng-controller="ProfileCtrl">
+  <!--<p>Select a tab by setting active binding to true:</p>-->
+  <!--<p>-->
+  <!--<button type="button" class="btn btn-default btn-sm" ng-click="active = 1">Select second tab</button>-->
+  <!--<button type="button" class="btn btn-default btn-sm" ng-click="active = 2">Select third tab</button>-->
+  <!--</p>-->
+  <!--<p>-->
+  <!--<button type="button" class="btn btn-default btn-sm" ng-click="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>-->
+  <!--</p>-->
+
+  <uib-tabset active="activeForm">
+    <uib-tab index="0" heading="Tab One">
+      Some Tab Content
+    </uib-tab>
+    <uib-tab index="1" heading="Tab Two">
+      Some Tab Content
+    </uib-tab>
+    <uib-tab index="2" heading="Tab Three">
+      More Tab Content
+    </uib-tab>
+    <uib-tab index="3" heading="Static title">Static content</uib-tab>
+    <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+      {{tab.content}}
+    </uib-tab>
+    <uib-tab index="4" select="alertMe()">
+      <uib-tab-heading>
+        <i class="glyphicon glyphicon-bell"></i> Alert!
+      </uib-tab-heading>
+      I've got an HTML heading, and a select callback. Pretty cool!
+    </uib-tab>
+    <uib-tab index="5" heading="Form Tab">
+      <form name="outerForm" class="tab-form-demo">
+
+        <ng-form name="nestedForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" required ng-model="model.name"/>
+          </div>
+        </ng-form>
+        Model:
+        <pre>{{ model | json }}</pre>
+        Nested Form:
+        <pre>{{ outerForm.nestedForm | json }}</pre>
+
+      </form>
+    </uib-tab>
+  </uib-tabset>
+</div>
+
+<h1>student</h1>
+
 <h2>id</h2>
 <h2>premium, black</h2>
 <h2>last signed in</h2>
@@ -11,6 +68,7 @@
 <h2>age</h2>
 <h2>gender</h2>
 <h2>karma</h2>
+<h2>projects</h2>
 <h2>relationship status</h2>
 <h2>joined</h2>
 <h2>social facebook, linkedin, twitter, instagram, google+</h2>
@@ -28,3 +86,14 @@
 <!--<h2>forum posts</h2>-->
 <!--<h2>teams</h2>-->
 
+<h1>settings</h1>
+
+<h2>update username</h2>
+<h2>update email</h2>
+<h2>update password</h2>
+<h2>deactivate account</h2>
+<h2>email notifications</h2>
+<h2>timezone</h2>
+<h2>privacy</h2>
+<!--<h2>Mobile text notifications</h2>-->
+<!--<h2>Language settings</h2>-->
