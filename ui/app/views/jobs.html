@@ -1,28 +1,13 @@
 <h1>jobs</h1>
 
-<!--<div class="container">-->
-<!--<div class="col-md-12">-->
-<!--<form class="form-horizontal" role="form">-->
-<!--<div class="form-group">-->
-<!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
-<!--<input type="text" class="form-control" placeholder="Job Title, Skills or Company">-->
-<!--<input type="text" class="form-control" placeholder="Location">-->
-<!--<a href="#/jobs">-->
-<!--<button type="submit" class="btn btn-default">Search</button>-->
-<!--</a>-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
-<!--</div>-->
-
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
   <tr>
-    <th colspan="4"><input st-search="" class="form-control" placeholder="Search Company, Job Title, or Skills..." type="text"/></th>
-    <th colspan="4"><input class="form-control" placeholder="Select Location..." type="text"/></th>
+    <!-- TODO: add dropdown, filter by location etc -->
+    <th colspan="8"><input st-search="" class="form-control" placeholder="Search Company, Job Title, or Skills..." type="text"/></th>
   </tr>
   <thead>
   <tr>
-    <th></th>
+    <th>Logo</th>
     <th st-sort="employername" class="st-sort-ascent">Company</th>
     <th st-sort="title" class="st-sort-ascent">Title</th>
     <th st-sort="location" class="st-sort-ascent">Location</th>

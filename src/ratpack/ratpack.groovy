@@ -74,51 +74,78 @@ ratpack {
             }
         }
 
-        get('data/jobs') {
-            DataSource dataSource = registry.get(DataSource.class)
-            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+        prefix('data') {
+            get('jobs') {
+                DataSource dataSource = registry.get(DataSource.class)
+                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
 
-            HttpClient httpClient = registry.get(HttpClient.class)
+                HttpClient httpClient = registry.get(HttpClient.class)
 
-            URI uri = new URI('http://api.indeed.com/ads/apisearch' +
-                    '?publisher=6453215428478291' +
-                    '&v=2' +
-                    '&format=json' +
-                    '&limit=25' +
-                    '&q=software' +
-                    '&l=Waterloo' +
-                    '&co=ca'
-            )
+                URI uri = new URI('http://api.indeed.com/ads/apisearch' +
+                        '?publisher=6453215428478291' +
+                        '&v=2' +
+                        '&format=json' +
+                        '&limit=25' +
+                        '&q=software' +
+                        '&l=Waterloo' +
+                        '&co=ca'
+                )
 
-            httpClient.get(uri).then {
-                def root = new JsonSlurper().parseText(it.body.text)
+                httpClient.get(uri).then {
+                    def root = new JsonSlurper().parseText(it.body.text)
 
-                // get total results
-                int totalResults = root.totalResults
-                log.info(totalResults.toString())
+                    // get total results
+                    int totalResults = root.totalResults
+                    log.info(totalResults.toString())
 
-                1.step(totalResults, 25) {
-                    httpClient.get(uri).then { response ->
-                        root = new JsonSlurper().parseText(response.body.text)
-                        root.results.each {
-                            if (!it.expired) {
-                                SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
-                                log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
-                                create.insertInto(JOB_POSTING)
-                                        .set(JOB_POSTING.TITLE, it.jobtitle.toString())
-                                        .set(JOB_POSTING.EMPLOYERNAME, it.company.toString())
-                                        .set(JOB_POSTING.DESCRIPTION_9, it.snippet.toString())
-                                        .set(JOB_POSTING.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
-                                        .set(JOB_POSTING.LOCATION, it.formattedLocation.toString())
-                                        .execute()
+                    1.step(totalResults, 25) {
+                        httpClient.get(uri).then { response ->
+                            root = new JsonSlurper().parseText(response.body.text)
+                            root.results.each {
+                                if (!it.expired) {
+                                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+//                                    log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
+//                                    create.insertInto(JOB_POSTING)
+//                                            .set(JOB_POSTING.TITLE, it.jobtitle.toString())
+//                                            .set(JOB_POSTING.EMPLOYERNAME, it.company.toString())
+//                                            .set(JOB_POSTING.DESCRIPTION_9, it.snippet.toString())
+//                                            .set(JOB_POSTING.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
+//                                            .set(JOB_POSTING.LOCATION, it.formattedLocation.toString())
+//                                            .execute()
 
+                                }
                             }
                         }
                     }
+                    render totalResults.toString()
                 }
-                render totalResults.toString()
+            }
+
+            get('schools') {
+                def htmlFile = new File('src/ratpack/data/schools_canada_universities_wikipedia.html')
+
+                def html =  new XmlSlurper().parse(htmlFile)
+
+//                html."**".findAll { it.@class.toString().contains("td")}.each {
+//                    log.info(it)
+//                }
+
+                html."**".findAll { it.@class.toString() }.each {
+                    log.info(it.toString())
+                }
+
+                render htmlFile.text
+            }
+
+            get('companies') {
+                render "todo"
+            }
+
+            get('students') {
+                render "todo"
             }
         }
+
 
         prefix('test') {
             get('jobs/insert') {
