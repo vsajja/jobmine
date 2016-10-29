@@ -1,1 +1,37 @@
 <h1>students</h1>
+
+<table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
+  <tr>
+    <!-- TODO: add dropdown, filter by location etc -->
+    <th colspan="10"><input st-search="" class="form-control" placeholder="Search Student..."
+                            type="text"/></th>
+  </tr>
+  <thead>
+  <tr>
+    <th>Logo</th>
+    <th st-sort="name" class="st-sort-ascent">Name</th>
+    <th st-sort="age" class="st-sort-ascent">Age</th>
+    <th st-sort="email" class="st-sort-ascent">Email</th>
+    <th st-sort="location" class="st-sort-ascent">Current Location</th>
+    <th st-sort="school" class="st-sort-ascent">School</th>
+    <th st-sort="company" class="st-sort-ascent">Company</th>
+    <th st-sort="status" class="st-sort-ascent">Status</th>
+    <th st-sort="dateJoined" class="st-sort-ascent">Date Joined</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in rowCollection">
+    <!-- TODO: load icon -->
+    <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
+    </td>
+    <td>{{row.name}}</td>
+    <td>{{row.age}}</td>
+    <td>{{row.email}}</td>
+    <td>{{ row.city + ',' + row.region + ',' + row.country}}</td>
+    <td>University of Waterloo</td>
+    <td>Unemployed</td>
+    <td>Looking</td>
+    <td>{{row.datejoined | date}}</td>
+  </tr>
+  </tbody>
+</table>

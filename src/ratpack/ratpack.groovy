@@ -2,8 +2,10 @@ import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
 import jooq.tables.daos.JobPostingDao
 import jooq.tables.daos.SchoolDao
+import jooq.tables.daos.StudentDao
 import jooq.tables.pojos.JobPosting
 import jooq.tables.pojos.School
+import jooq.tables.pojos.Student
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
@@ -63,7 +65,7 @@ ratpack {
         all RequestLogger.ncsa(log)
 
         get {
-            println "/ ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new Date())}"
+            println "/ ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new java.util.Date())}"
             render 'Hello world!'
         }
 
@@ -82,6 +84,14 @@ ratpack {
                 Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
                 List<School> schools = new SchoolDao(configuration).findAll()
                 render json(schools)
+            }
+
+            get('students') {
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                DataSource dataSource = registry.get(DataSource.class)
+                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
+                List<Student> students = new StudentDao(configuration).findAll()
+                render json(students)
             }
         }
 
