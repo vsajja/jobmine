@@ -32,4 +32,9 @@ public class Sequences {
 	 * The sequence <code>public.school_schoold_seq</code>
 	 */
 	public static final Sequence<Long> SCHOOL_SCHOOLD_SEQ = new SequenceImpl<Long>("school_schoold_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+
+	/**
+	 * The sequence <code>public.student_id_seq</code>
+	 */
+	public static final Sequence<Long> STUDENT_ID_SEQ = new SequenceImpl<Long>("student_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 }

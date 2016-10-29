@@ -8,6 +8,7 @@ import javax.annotation.Generated;
 
 import jooq.tables.JobPosting;
 import jooq.tables.School;
+import jooq.tables.Student;
 
 
 /**
@@ -32,4 +33,9 @@ public class Tables {
 	 * The table public.school
 	 */
 	public static final School SCHOOL = jooq.tables.School.SCHOOL;
+
+	/**
+	 * The table public.student
+	 */
+	public static final Student STUDENT = jooq.tables.Student.STUDENT;
 }

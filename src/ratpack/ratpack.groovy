@@ -169,15 +169,56 @@ ratpack {
                 }
             }
 
+            get('students') {
+                def studentFile = new File('src/ratpack/data/generated_students_200.txt')
+
+                def students = []
+
+                studentFile.text.eachLine { line ->
+
+                    if(!line.startsWith('name'))
+                    {
+                        def studentData = line.tokenize('|')
+
+                        def name = studentData[0]
+                        def phoneNumber = studentData[1]
+                        def email = studentData[2]
+                        def dateJoined = studentData[3]
+                        def streetAddress = studentData[4]
+                        def city = studentData[5]
+                        def region = studentData[6]
+                        def country = studentData[7]
+                        def postalOrZip = studentData[8]
+                        def description = studentData[9]
+                        def age = studentData[10]
+
+//                        log.info("Inserting: $name")
+//                        DataSource dataSource = registry.get(DataSource.class)
+//                        DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+//                        create.insertInto(STUDENT)
+//                                .set(STUDENT.NAME, name)
+//                                .set(STUDENT.PHONENUMBER, phoneNumber)
+//                                 // TODO: date joined
+//                                .set(STUDENT.DATEJOINED, new Date(Calendar.getInstance().getTimeInMillis()))
+//                                .set(STUDENT.EMAIL, email)
+//                                .set(STUDENT.STREETADDRESS, streetAddress)
+//                                .set(STUDENT.CITY, city)
+//                                .set(STUDENT.REGION, region)
+//                                .set(STUDENT.COUNTRY, country)
+//                                .set(STUDENT.POSTALORZIP, postalOrZip)
+//                                .set(STUDENT.DESCRIPTION, description)
+//                                .set(STUDENT.AGE, Integer.parseInt(age))
+//                                .execute()
+                    }
+                }
+
+                render students.toString()
+            }
+
             get('companies') {
                 render "todo"
             }
-
-            get('students') {
-                render "todo"
-            }
         }
-
 
         prefix('test') {
             get('jobs/insert') {
@@ -207,6 +248,26 @@ ratpack {
                         .set(SCHOOL.WIKILINK, 'wiki/UniversityOfWaterloo')
                         .set(SCHOOL.LOGOSRC, 'dist/images/icon_default_company.578524b6.png')
                         .execute()
+                render "inserted!"
+            }
+
+            get('students/insert') {
+//                DataSource dataSource = registry.get(DataSource.class)
+//                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+//                create.insertInto(STUDENT)
+//                    .set(STUDENT.NAME, 'Vinod Sajja')
+//                    .set(STUDENT.PHONENUMBER, '(519) 502-7991')
+//                    .set(STUDENT.DATEJOINED, new Date(Calendar.getInstance().getTimeInMillis()))
+//                    .set(STUDENT.EMAIL, 'vsajja@engmail.uwaterloo.ca')
+//                    .set(STUDENT.STREETADDRESS, '123 Fake Street, Unit 35')
+//                    .set(STUDENT.CITY, 'Waterloo')
+//                    .set(STUDENT.REGION, 'Ontario')
+//                    .set(STUDENT.COUNTRY, 'Canada')
+//                    .set(STUDENT.POSTALORZIP, 'T9H5R7')
+//                    .set(STUDENT.DESCRIPTION, 'description')
+//                    .set(STUDENT.AGE, Integer.parseInt('29'))
+//                    .execute()
+
                 render "inserted!"
             }
         }
