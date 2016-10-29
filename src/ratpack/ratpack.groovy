@@ -180,7 +180,7 @@ ratpack {
             }
 
             get('students') {
-                def studentFile = new File('src/ratpack/data/generated_students_200.txt')
+                def studentFile = new File('src/ratpack/data/students_generated_200.txt')
 
                 def students = []
 
@@ -225,8 +225,12 @@ ratpack {
                 render students.toString()
             }
 
-            get('companies') {
-                render "todo"
+            prefix('companies') {
+                get('canada') {
+                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
+
+                    render wikiLinks.text
+                }
             }
         }
 
