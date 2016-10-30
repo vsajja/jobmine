@@ -229,7 +229,65 @@ ratpack {
                 get('canada') {
                     def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
 
-                    render wikiLinks.text
+                    DataSource dataSource = registry.get(DataSource.class)
+                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+                    HttpClient httpClient = registry.get(HttpClient.class)
+
+                    URI uri = new URI('https://en.wikipedia.org/wiki/1-800-GOT-JUNK%3F')
+
+                    httpClient.get(uri).then {
+                        it.body.text.eachLine { line ->
+                            if(line.contains('class="infobox vcard"'))
+                            {
+//                                log.info(line)
+                            }
+                            if(line.contains('class="logo"'))
+                            {
+                                new XmlSlurper().parseText(line).'**'.findAll {
+                                    log.info(it.toString())
+                                }
+//                                log.info(line)
+                            }
+                        }
+                        render it.body.text
+                    }
+
+//                    def slurper = new XmlSlurper()
+//                    slurper.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
+//                    slurper.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+//                    def html = slurper.parse('https://en.wikipedia.org/wiki/1-800-GOT-JUNK%3F')
+//
+//                    def result = html.'**'.findAll{ it.@class.toString() == 'infobox vcard'
+////                        it.@class == 'infobox'}.each {
+//                        log.info(it.toString())
+//                        render it.toString()
+//                    }
+
+//                    log.info(root.toListString())
+
+//                    render html.text()
+//                    render result.toListString()
+
+//                    wikiLinks.eachLine { wikiLink ->
+//                        wikiLink = wikiLink.replaceAll("<li><a href=\"", '').split("\"")[0]
+//                        log.info(wikiLink)
+//
+//                        def slurper = new XmlSlurper()
+//                        slurper.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
+//                        slurper.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+//                        def html = slurper.parse('https://en.wikipedia.org/' + wikiLink.toString())
+//
+//                        html.'**'.findAll{ it.@class == 'infobox'}.each {
+//                            log.info(it.toString())
+//                        }
+//
+////                        httpClient.get(uri).then {
+////                            def root = new XmlSlurper().parseText(it.body.text)
+////                        }
+//                    }
+
+//                    render html.text()
                 }
             }
         }
