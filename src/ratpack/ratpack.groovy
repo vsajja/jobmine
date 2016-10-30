@@ -24,6 +24,7 @@ import vsajja.org.postgres.PostgresModule
 import vsajja.org.redis.RedisConfig
 
 import javax.sql.DataSource
+import java.nio.charset.StandardCharsets
 import java.sql.Date
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -227,67 +228,57 @@ ratpack {
 
             prefix('companies') {
                 get('canada') {
+//                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_link.txt')
                     def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
 
-                    DataSource dataSource = registry.get(DataSource.class)
-                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                    def something = 'something'
 
-                    HttpClient httpClient = registry.get(HttpClient.class)
+                    wikiLinks.eachLine { wikiLink ->
+                        wikiLink = wikiLink.replaceAll("<li><a href=\"", '').split("\"")[0]
+                        HttpClient httpClient = registry.get(HttpClient.class)
+                        URI uri = new URI('https://en.wikipedia.org' + wikiLink)
 
-                    URI uri = new URI('https://en.wikipedia.org/wiki/1-800-GOT-JUNK%3F')
+                        httpClient.get(uri).then {
+                            log.info("Parsing Wiki Link: $wikiLink")
 
-                    httpClient.get(uri).then {
-                        it.body.text.eachLine { line ->
-                            if(line.contains('class="infobox vcard"'))
-                            {
-//                                log.info(line)
-                            }
-                            if(line.contains('class="logo"'))
-                            {
-                                new XmlSlurper().parseText(line).'**'.findAll {
-                                    log.info(it.toString())
+                            def inInfoBox = false
+                            def infoBoxHtml = ''
+                            it.body.text.eachLine { line ->
+                                if (line.contains('infobox vcard')) {
+                                    inInfoBox = true
+                                }
+                                if (line.contains('</table>')) {
+                                    inInfoBox = false
+                                }
+                                if (inInfoBox) {
+                                    infoBoxHtml += line
+//                                    log.info(line)
                                 }
 //                                log.info(line)
                             }
+                            infoBoxHtml += "</table>"
+//                            log.info(infoBoxHtml)
+
+                            def slurper = new XmlSlurper()
+                            def infoBox = slurper.parseText(infoBoxHtml)
+
+                            def name = infoBox.caption.text()
+                            def logoUrl = infoBox.children().depthFirst().findAll {
+//                            log.info(it.@class.toString())
+                                it.@class.toString() == 'logo'
+                            }[0].a.img.@src
+
+//                            log.info(name.toString())
+//                            log.info(logoUrl.toString())
+
+                            assert name
+                            assert logoUrl
+
+//                        DataSource dataSource = registry.get(DataSource.class)
+//                        DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
                         }
-                        render it.body.text
                     }
-
-//                    def slurper = new XmlSlurper()
-//                    slurper.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-//                    slurper.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-//                    def html = slurper.parse('https://en.wikipedia.org/wiki/1-800-GOT-JUNK%3F')
-//
-//                    def result = html.'**'.findAll{ it.@class.toString() == 'infobox vcard'
-////                        it.@class == 'infobox'}.each {
-//                        log.info(it.toString())
-//                        render it.toString()
-//                    }
-
-//                    log.info(root.toListString())
-
-//                    render html.text()
-//                    render result.toListString()
-
-//                    wikiLinks.eachLine { wikiLink ->
-//                        wikiLink = wikiLink.replaceAll("<li><a href=\"", '').split("\"")[0]
-//                        log.info(wikiLink)
-//
-//                        def slurper = new XmlSlurper()
-//                        slurper.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-//                        slurper.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-//                        def html = slurper.parse('https://en.wikipedia.org/' + wikiLink.toString())
-//
-//                        html.'**'.findAll{ it.@class == 'infobox'}.each {
-//                            log.info(it.toString())
-//                        }
-//
-////                        httpClient.get(uri).then {
-////                            def root = new XmlSlurper().parseText(it.body.text)
-////                        }
-//                    }
-
-//                    render html.text()
+                    render something
                 }
             }
         }
