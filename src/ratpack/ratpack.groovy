@@ -1,10 +1,12 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
-import jooq.tables.daos.JobPostingDao
+import jooq.tables.daos.CompanyDao
+import jooq.tables.daos.JobDao
 import jooq.tables.daos.SchoolDao
 import jooq.tables.daos.StudentDao
-import jooq.tables.pojos.JobPosting
+import jooq.tables.pojos.Company
+import jooq.tables.pojos.Job
 import jooq.tables.pojos.School
 import jooq.tables.pojos.Student
 import org.jooq.Configuration
@@ -25,7 +27,6 @@ import vsajja.org.postgres.PostgresModule
 import vsajja.org.redis.RedisConfig
 
 import javax.sql.DataSource
-import java.nio.charset.StandardCharsets
 import java.sql.Date
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -75,7 +76,7 @@ ratpack {
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 DataSource dataSource = registry.get(DataSource.class)
                 Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-                List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
+                List<Job> jobPostings = new JobDao(configuration).findAll()
                 render json(jobPostings)
             }
             get('schools') {
@@ -92,6 +93,14 @@ ratpack {
                 List<Student> students = new StudentDao(configuration).findAll()
                 render json(students)
             }
+            get('companies') {
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                DataSource dataSource = registry.get(DataSource.class)
+                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
+                List<Company> companies = new CompanyDao(configuration).findAll()
+                render json(companies)
+            }
+
         }
 
         prefix('test/data') {
@@ -125,12 +134,12 @@ ratpack {
                                 if (!it.expired) {
                                     SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
 //                                    log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
-//                                    create.insertInto(JOB_POSTING)
-//                                            .set(JOB_POSTING.TITLE, it.jobtitle.toString())
-//                                            .set(JOB_POSTING.EMPLOYERNAME, it.company.toString())
-//                                            .set(JOB_POSTING.DESCRIPTION_9, it.snippet.toString())
-//                                            .set(JOB_POSTING.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
-//                                            .set(JOB_POSTING.LOCATION, it.formattedLocation.toString())
+//                                    create.insertInto(JOB)
+//                                            .set(JOB.TITLE, it.jobtitle.toString())
+//                                            .set(JOB.EMPLOYERNAME, it.company.toString())
+//                                            .set(JOB.DESCRIPTION_9, it.snippet.toString())
+//                                            .set(JOB.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
+//                                            .set(JOB.LOCATION, it.formattedLocation.toString())
 //                                            .execute()
                                 }
                             }
@@ -224,8 +233,8 @@ ratpack {
             }
             prefix('companies') {
                 get('canada') {
-                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_link.txt')
-//                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
+//                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_link.txt')
+                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
 
                     def something = 'something'
 
@@ -238,14 +247,12 @@ ratpack {
 
                         httpClient.get(uri).then {
                             log.info("Parsing: $wikiLink")
-
                             def wikiHtml = XmlUtil.serialize(it.body.text)
-
                             def infoBoxExists = false
                             def inInfoBox = false
                             def infoBoxHtml = ''
                             wikiHtml.eachLine { line ->
-                                if (line.contains('infobox ')) {
+                                if (line.contains('infobox ') && line.contains('<table')) {
                                     inInfoBox = true
                                     infoBoxExists = true
                                 }
@@ -256,43 +263,45 @@ ratpack {
                                     infoBoxHtml += line
                                 }
                             }
-
                             if (infoBoxExists) {
                                 infoBoxHtml += "</table>"
 //                                log.info(infoBoxHtml)
-
                                 try {
                                     def slurper = new XmlSlurper()
                                     def infoBox = slurper.parseText(infoBoxHtml)
 
-//                                    def name = infoBox.caption?.text()
-
+                                    // parse name
                                     def name = infoBox.children().depthFirst().findAll {
                                         it.@class.toString() == 'fn org'
-                                    }[0].text()
+                                    }[0]?.text()
+                                    if (!name) {
+                                        name = infoBox.caption?.text()
+                                    }
+                                    if (!name) {
+                                        name = wikiLinkName
+                                    }
+                                    // parse logo url
+                                    def logoUrl = infoBox.children().depthFirst().findAll {
+//                            log.info(it.@class.toString())
+                                        it.@class.toString() == 'logo'
+                                    }[0]?.a.img.@src
 
-//                                    if (!name) {
-//                                        name = wikiLinkName
-//                                    }
-
-//                            def logoUrl = infoBox.children().depthFirst().findAll {
-////                            log.info(it.@class.toString())
-//                                it.@class.toString() == 'logo'
-//                            }[0].a.img.@src
-//
                                     log.info("Name: \t\t\t" + name.toString())
-//                            log.info(logoUrl.toString())
+                                    log.info(logoUrl.toString())
                                     assert name
-//                            assert logoUrl
+                                    assert logoUrl
 
+                                    log.info("Inserting: $name")
+                                    DataSource dataSource = registry.get(DataSource.class)
+                                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                                    create.insertInto(COMPANY)
+                                            .set(COMPANY.NAME, name.toString())
+                                            .set(COMPANY.LOGOURL, logoUrl.toString())
+                                            .execute()
                                 }
                                 catch (Exception e) {
                                     log.info("ERROR - ${e.getMessage()}")
                                 }
-//                        DataSource dataSource = registry.get(DataSource.class)
-//                        DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                            log.info(infoBoxHtml)
-
                             } else {
                                 log.info("SKIPPING $wikiLink, missing infoBox")
                             }
@@ -307,12 +316,12 @@ ratpack {
             get('jobs/insert') {
                 DataSource dataSource = registry.get(DataSource.class)
                 DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-                create.insertInto(JOB_POSTING)
-                        .set(JOB_POSTING.TITLE, 'Software Developer II')
-                        .set(JOB_POSTING.EMPLOYERNAME, 'BlackBerry')
-                        .set(JOB_POSTING.DESCRIPTION_9, 'Description')
-                        .set(JOB_POSTING.DATEPOSTED_9, new Date(123))
-                        .set(JOB_POSTING.LOCATION, 'Waterloo')
+                create.insertInto(JOB)
+                        .set(JOB.TITLE, 'Software Developer II')
+                        .set(JOB.EMPLOYERNAME, 'BlackBerry')
+                        .set(JOB.DESCRIPTION_9, 'Description')
+                        .set(JOB.DATEPOSTED_9, new Date(123))
+                        .set(JOB.LOCATION, 'Waterloo')
                         .execute()
                 render "inserted!"
             }
@@ -335,22 +344,31 @@ ratpack {
             }
 
             get('students/insert') {
-//                DataSource dataSource = registry.get(DataSource.class)
-//                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                create.insertInto(STUDENT)
-//                    .set(STUDENT.NAME, 'Vinod Sajja')
-//                    .set(STUDENT.PHONENUMBER, '(519) 502-7991')
-//                    .set(STUDENT.DATEJOINED, new Date(Calendar.getInstance().getTimeInMillis()))
-//                    .set(STUDENT.EMAIL, 'vsajja@engmail.uwaterloo.ca')
-//                    .set(STUDENT.STREETADDRESS, '123 Fake Street, Unit 35')
-//                    .set(STUDENT.CITY, 'Waterloo')
-//                    .set(STUDENT.REGION, 'Ontario')
-//                    .set(STUDENT.COUNTRY, 'Canada')
-//                    .set(STUDENT.POSTALORZIP, 'T9H5R7')
-//                    .set(STUDENT.DESCRIPTION, 'description')
-//                    .set(STUDENT.AGE, Integer.parseInt('29'))
-//                    .execute()
+                DataSource dataSource = registry.get(DataSource.class)
+                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                create.insertInto(STUDENT)
+                        .set(STUDENT.NAME, 'Vinod Sajja')
+                        .set(STUDENT.PHONENUMBER, '(519) 502-7991')
+                        .set(STUDENT.DATEJOINED, new Date(Calendar.getInstance().getTimeInMillis()))
+                        .set(STUDENT.EMAIL, 'vsajja@engmail.uwaterloo.ca')
+                        .set(STUDENT.STREETADDRESS, '123 Fake Street, Unit 35')
+                        .set(STUDENT.CITY, 'Waterloo')
+                        .set(STUDENT.REGION, 'Ontario')
+                        .set(STUDENT.COUNTRY, 'Canada')
+                        .set(STUDENT.POSTALORZIP, 'T9H5R7')
+                        .set(STUDENT.DESCRIPTION, 'description')
+                        .set(STUDENT.AGE, Integer.parseInt('29'))
+                        .execute()
+                render "inserted!"
+            }
 
+            get('companies/insert') {
+                DataSource dataSource = registry.get(DataSource.class)
+                DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+                create.insertInto(COMPANY)
+                        .set(COMPANY.NAME, 'JobMine')
+                        .set(COMPANY.LOGOURL, 'images/logo_jobmine.png')
+                        .execute()
                 render "inserted!"
             }
         }

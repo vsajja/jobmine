@@ -10,7 +10,8 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
-import jooq.tables.JobPosting;
+import jooq.tables.Company;
+import jooq.tables.Job;
 import jooq.tables.School;
 import jooq.tables.Student;
 
@@ -32,7 +33,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -1410232078;
+	private static final long serialVersionUID = 1065991821;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -55,6 +56,7 @@ public class Public extends SchemaImpl {
 
 	private final List<Sequence<?>> getSequences0() {
 		return Arrays.<Sequence<?>>asList(
+			Sequences.COMPANY_ID_SEQ,
 			Sequences.JOB_POSTING_JOBPOSTINGID_SEQ,
 			Sequences.SCHOOL_SCHOOLD_SEQ,
 			Sequences.STUDENT_ID_SEQ);
@@ -69,7 +71,8 @@ public class Public extends SchemaImpl {
 
 	private final List<Table<?>> getTables0() {
 		return Arrays.<Table<?>>asList(
-			JobPosting.JOB_POSTING,
+			Company.COMPANY,
+			Job.JOB,
 			School.SCHOOL,
 			Student.STUDENT);
 	}

@@ -1,1 +1,21 @@
 <h1>companies</h1>
+
+<table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
+  <tr>
+    <th colspan="10"><input st-search="" class="form-control" placeholder="Search Company..."
+                            type="text"/></th>
+  </tr>
+  <thead>
+  <tr>
+    <th>Logo</th>
+    <th st-sort="name" class="st-sort-ascent">Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in rowCollection">
+    <!-- TODO: load icon -->
+    <td><img src="{{row.logourl}}"/></td>
+    <td>{{row.name}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -6,7 +6,8 @@ package jooq;
 
 import javax.annotation.Generated;
 
-import jooq.tables.JobPosting;
+import jooq.tables.Company;
+import jooq.tables.Job;
 import jooq.tables.School;
 import jooq.tables.Student;
 
@@ -25,9 +26,14 @@ import jooq.tables.Student;
 public class Tables {
 
 	/**
-	 * The table public.job_posting
+	 * The table public.company
 	 */
-	public static final JobPosting JOB_POSTING = jooq.tables.JobPosting.JOB_POSTING;
+	public static final Company COMPANY = jooq.tables.Company.COMPANY;
+
+	/**
+	 * The table public.job
+	 */
+	public static final Job JOB = jooq.tables.Job.JOB;
 
 	/**
 	 * The table public.school
