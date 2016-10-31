@@ -1,5 +1,6 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
+import groovy.xml.XmlUtil
 import jooq.tables.daos.JobPostingDao
 import jooq.tables.daos.SchoolDao
 import jooq.tables.daos.StudentDao
@@ -66,7 +67,6 @@ ratpack {
         all RequestLogger.ncsa(log)
 
         get {
-            println "/ ${new SimpleDateFormat('yyyy-MM-dd HH:mm:ss.SSS').format(new java.util.Date())}"
             render 'Hello world!'
         }
 
@@ -78,7 +78,6 @@ ratpack {
                 List<JobPosting> jobPostings = new JobPostingDao(configuration).findAll()
                 render json(jobPostings)
             }
-
             get('schools') {
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 DataSource dataSource = registry.get(DataSource.class)
@@ -86,7 +85,6 @@ ratpack {
                 List<School> schools = new SchoolDao(configuration).findAll()
                 render json(schools)
             }
-
             get('students') {
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 DataSource dataSource = registry.get(DataSource.class)
@@ -141,45 +139,6 @@ ratpack {
                     render totalResults.toString()
                 }
             }
-
-            prefix('schools') {
-                get('unis/canada') {
-                    def htmlFile = new File('src/ratpack/data/schools_canada_universities_wikipedia.html')
-                    def html = new XmlSlurper().parse(htmlFile)
-
-                    html.tbody.children().each { tr ->
-                        tr.collect {
-
-                            def name = it.td[0].depthFirst().findAll { it.name() == 'a' }[0].@title.toString()
-                            def schoolType = 'University'
-                            def city = it.td[1].toString().replaceAll("[\\t\\n\\r]"," ").replaceAll("\\s+", " ")
-                            def provinceOrState = it.td[2].toString()
-                            def country = 'Canada'
-                            def established = it.td[4].toString()
-                            def totalStudents = (int) NumberFormat.getIntegerInstance(Locale.US).parse(it.td[7].localText()[0].toString())
-                            def wikiLink = 'https://en.wikipedia.org/wiki/List_of_universities_in_Canada' + it.td[0].depthFirst().findAll { it.name() == 'a' }[0].@href.toString()
-                            def logoSrc = null
-
-//                            log.info("Inserting: $name @ $city , $provinceOrState, $country")
-//                            DataSource dataSource = registry.get(DataSource.class)
-//                            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                            create.insertInto(SCHOOL)
-//                                    .set(SCHOOL.NAME, name)
-//                                    .set(SCHOOL.SCHOOLTYPE, schoolType)
-//                                    .set(SCHOOL.CITY, city)
-//                                    .set(SCHOOL.PROVINCEORSTATE, provinceOrState)
-//                                    .set(SCHOOL.COUNTRY, country)
-//                                    .set(SCHOOL.ESTABLISHED, established)
-//                                    .set(SCHOOL.TOTALSTUDENTS, totalStudents)
-//                                    .set(SCHOOL.WIKILINK, wikiLink)
-//                                    .set(SCHOOL.LOGOSRC, 'images/icon_default_company.png')
-//                                    .execute()
-                        }
-                    }
-                    render htmlFile.text
-                }
-            }
-
             get('students') {
                 def studentFile = new File('src/ratpack/data/students_generated_200.txt')
 
@@ -187,8 +146,7 @@ ratpack {
 
                 studentFile.text.eachLine { line ->
 
-                    if(!line.startsWith('name'))
-                    {
+                    if (!line.startsWith('name')) {
                         def studentData = line.tokenize('|')
 
                         def name = studentData[0]
@@ -225,57 +183,119 @@ ratpack {
 
                 render students.toString()
             }
+            prefix('schools') {
+                get('unis/canada') {
+                    def htmlFile = new File('src/ratpack/data/schools_canada_universities_wikipedia.html')
+                    def html = new XmlSlurper().parse(htmlFile)
 
+                    html.tbody.children().each { tr ->
+                        tr.collect {
+
+                            def name = it.td[0].depthFirst().findAll { it.name() == 'a' }[0].@title.toString()
+                            def schoolType = 'University'
+                            def city = it.td[1].toString().replaceAll("[\\t\\n\\r]", " ").replaceAll("\\s+", " ")
+                            def provinceOrState = it.td[2].toString()
+                            def country = 'Canada'
+                            def established = it.td[4].toString()
+                            def totalStudents = (int) NumberFormat.getIntegerInstance(Locale.US).parse(it.td[7].localText()[0].toString())
+                            def wikiLink = 'https://en.wikipedia.org/wiki/List_of_universities_in_Canada' + it.td[0].depthFirst().findAll {
+                                it.name() == 'a'
+                            }[0].@href.toString()
+                            def logoSrc = null
+
+//                            log.info("Inserting: $name @ $city , $provinceOrState, $country")
+//                            DataSource dataSource = registry.get(DataSource.class)
+//                            DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+//                            create.insertInto(SCHOOL)
+//                                    .set(SCHOOL.NAME, name)
+//                                    .set(SCHOOL.SCHOOLTYPE, schoolType)
+//                                    .set(SCHOOL.CITY, city)
+//                                    .set(SCHOOL.PROVINCEORSTATE, provinceOrState)
+//                                    .set(SCHOOL.COUNTRY, country)
+//                                    .set(SCHOOL.ESTABLISHED, established)
+//                                    .set(SCHOOL.TOTALSTUDENTS, totalStudents)
+//                                    .set(SCHOOL.WIKILINK, wikiLink)
+//                                    .set(SCHOOL.LOGOSRC, 'images/icon_default_company.png')
+//                                    .execute()
+                        }
+                    }
+                    render htmlFile.text
+                }
+            }
             prefix('companies') {
                 get('canada') {
-//                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_link.txt')
-                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
+                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_link.txt')
+//                    def wikiLinks = new File('src/ratpack/data/companies_canada_wiki_links.txt')
 
                     def something = 'something'
 
                     wikiLinks.eachLine { wikiLink ->
                         wikiLink = wikiLink.replaceAll("<li><a href=\"", '').split("\"")[0]
+                        wikiLinkName = 'TODO'
+
                         HttpClient httpClient = registry.get(HttpClient.class)
                         URI uri = new URI('https://en.wikipedia.org' + wikiLink)
 
                         httpClient.get(uri).then {
-                            log.info("Parsing Wiki Link: $wikiLink")
+                            log.info("Parsing: $wikiLink")
 
+                            def wikiHtml = XmlUtil.serialize(it.body.text)
+
+                            def infoBoxExists = false
                             def inInfoBox = false
                             def infoBoxHtml = ''
-                            it.body.text.eachLine { line ->
-                                if (line.contains('infobox vcard')) {
+                            wikiHtml.eachLine { line ->
+                                if (line.contains('infobox ')) {
                                     inInfoBox = true
+                                    infoBoxExists = true
                                 }
                                 if (line.contains('</table>')) {
                                     inInfoBox = false
                                 }
                                 if (inInfoBox) {
                                     infoBoxHtml += line
-//                                    log.info(line)
                                 }
-//                                log.info(line)
                             }
-                            infoBoxHtml += "</table>"
-//                            log.info(infoBoxHtml)
 
-                            def slurper = new XmlSlurper()
-                            def infoBox = slurper.parseText(infoBoxHtml)
+                            if (infoBoxExists) {
+                                infoBoxHtml += "</table>"
+//                                log.info(infoBoxHtml)
 
-                            def name = infoBox.caption.text()
-                            def logoUrl = infoBox.children().depthFirst().findAll {
-//                            log.info(it.@class.toString())
-                                it.@class.toString() == 'logo'
-                            }[0].a.img.@src
+                                try {
+                                    def slurper = new XmlSlurper()
+                                    def infoBox = slurper.parseText(infoBoxHtml)
 
-//                            log.info(name.toString())
+//                                    def name = infoBox.caption?.text()
+
+                                    def name = infoBox.children().depthFirst().findAll {
+                                        it.@class.toString() == 'fn org'
+                                    }[0].text()
+
+//                                    if (!name) {
+//                                        name = wikiLinkName
+//                                    }
+
+//                            def logoUrl = infoBox.children().depthFirst().findAll {
+////                            log.info(it.@class.toString())
+//                                it.@class.toString() == 'logo'
+//                            }[0].a.img.@src
+//
+                                    log.info("Name: \t\t\t" + name.toString())
 //                            log.info(logoUrl.toString())
+                                    assert name
+//                            assert logoUrl
 
-                            assert name
-                            assert logoUrl
-
+                                }
+                                catch (Exception e) {
+                                    log.info("ERROR - ${e.getMessage()}")
+                                }
 //                        DataSource dataSource = registry.get(DataSource.class)
 //                        DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+//                            log.info(infoBoxHtml)
+
+                            } else {
+                                log.info("SKIPPING $wikiLink, missing infoBox")
+                            }
                         }
                     }
                     render something

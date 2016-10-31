@@ -43,16 +43,7 @@ import org.jooq.util.*
 
 task jooqCodegen {
     doLast {
-        // TODO: move this to a properties file
-//        ['postgres.user'        : 'zoqyxwbxjuntzp',
-//         'postgres.password'    : 'sfXLiNPmZuRUxS_biBDNyNRhDh',
-//         'postgres.portNumber'  : 5432,
-//         'postgres.databaseName': 'd4ogiv1q9mi0tp',
-//         'postgres.serverName'  : 'ec2-54-243-249-65.compute-1.amazonaws.com',
-//         'redis.host'           : 'pub-redis-19472.us-east-1-2.5.ec2.garantiadata.com',
-//         'redis.portNumber'     : 19472,
-//         'redis.password'       : 'sfXLiNPmZuRUxS_biBDNyNRhDh']
-
+        // TODO: move DB config to a properties file
         Configuration configuration = new Configuration()
                 .withJdbc(new Jdbc()
                 .withDriver('org.postgresql.Driver')
