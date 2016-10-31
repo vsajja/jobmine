@@ -15,7 +15,7 @@ grunt
 
 ./gradlew clean run -it
 
-## kill server -- annoying port already in use) ##
+## kill server -- annoying port already in use issue ##
 
 netstat -o -n -a | findstr 0.0:5050
 taskkill /F /PID <pid>
