@@ -6,7 +6,7 @@
   </tr>
   <thead>
   <tr>
-    <th>Logo</th>
+    <th></th>
     <th st-sort="name" class="st-sort-ascent">Name</th>
     <th st-sort="age" class="st-sort-ascent">Age</th>
     <th st-sort="email" class="st-sort-ascent">Email</th>
@@ -20,7 +20,8 @@
   <tbody>
   <tr ng-repeat="row in rowCollection">
     <!-- TODO: load icon -->
-    <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
+    <td>
+      <i class="fa fa-user fa-3x" aria-hidden="true"></i>
     </td>
     <td>{{row.name}}</td>
     <td>{{row.age}}</td>

@@ -6,7 +6,7 @@
   </tr>
   <thead>
   <tr>
-    <th>Logo</th>
+    <th></th>
     <th st-sort="name" class="st-sort-ascent">School</th>
     <th st-sort="schooltype" class="st-sort-ascent">Type</th>
     <th st-sort="city" class="st-sort-ascent">City</th>
@@ -21,7 +21,8 @@
   <tbody>
   <tr ng-repeat="row in rowCollection">
     <!-- TODO: load icon -->
-    <td><img height="50px" width="50px" style="background-color: #00d6b2" src="images/icon_default_company.png"></img>
+    <td>
+      <i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i>
     </td>
     <td>{{row.name}}</td>
     <td>{{row.schooltype}}</td>
