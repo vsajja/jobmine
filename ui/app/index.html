@@ -49,15 +49,19 @@
 
       <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="#/profile"></i>
-            Profile</a></li>
-          <li><a href="#/jobs">Jobs</a></li>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Company, Job, or Skills...">
+              <input type="text" class="form-control" placeholder="Location...">
+            </div>
+            <a href="#/jobs"><button type="submit" class="btn btn-primary">Find Jobs</button></a>
+          </form>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="#/schools">Schools</a></li>
           <li><a href="#/students">Students</a></li>
           <li><a href="#/companies">Companies</a></li>
           <li><a href="#/about">About</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
           <li ng-hide="currentUserSignedIn">
             <button type="button" class="btn btn-default navbar-btn">Sign In</button>
           </li>
@@ -111,8 +115,13 @@
         <p>© 2016 JobMine</p>
       </div>
       <div align="center" class="col-md-4">
-        <a href="http://jobmineteam.slack.com" target="_blank"><img width="15%" height="15%"
-                                                                    src="images/icon_slack.png"/></a>
+
+        <blockquote style="border-left: none;">
+          <a style="align-content: center" href="http://jobmineteam.slack.com" target="_blank"><img width="15%" height="15%"
+                                                                      src="images/icon_slack.png"/></a>
+          <p>"available 24/7"</p>
+          <small>JobMine team</small>
+        </blockquote>
       </div>
     </div>
   </div>

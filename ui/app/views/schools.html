@@ -1,7 +1,7 @@
 <table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
   <tr>
     <!-- TODO: add dropdown, filter by location etc -->
-    <th colspan="10"><input st-search="" class="form-control" placeholder="Search School, Location, Type..."
+    <th colspan="10"><input st-search="" class="form-control" placeholder="Filter results..."
                            type="text"/></th>
   </tr>
   <thead>
@@ -9,13 +9,11 @@
     <th></th>
     <th st-sort="name" class="st-sort-ascent">School</th>
     <th st-sort="schooltype" class="st-sort-ascent">Type</th>
-    <th st-sort="city" class="st-sort-ascent">City</th>
-    <th st-sort="provinceorstate" class="st-sort-ascent">Province/State</th>
-    <th st-sort="country" class="st-sort-ascent">Country</th>
+    <th st-sort="location" class="st-sort-ascent">Location</th>
     <th st-sort="established" class="st-sort-ascent">Established</th>
     <th st-sort="totalstudents" class="st-sort-ascent">Students</th>
-    <th st-sort="registeredstudents" class="st-sort-ascent">Students on JobMine</th>
-    <th st-sort="registeredstudents" class="st-sort-ascent">Alumni on JobMine</th>
+    <th st-sort="registeredstudents" class="st-sort-ascent">Registered</th>
+    <!--<th st-sort="registeredstudents" class="st-sort-ascent">Alumni</th>-->
   </tr>
   </thead>
   <tbody>
@@ -26,13 +24,12 @@
     </td>
     <td>{{row.name}}</td>
     <td>{{row.schooltype}}</td>
-    <td>{{row.city}}</td>
-    <td>{{row.provinceorstate}}</td>
-    <td>{{row.country}}</td>
+    <!-- TODO: format this better, somehow include the city -->
+    <td>{{row.provinceorstate + ',' + row.country}}</td>
     <td>{{row.established}}</td>
     <td>{{row.totalstudents | number}}</td>
-    <td><h1>0</h1></td>
-    <td><h1>0</h1></td>
+    <td>0</td>
+    <!--<td>0</td>-->
   </tr>
   </tbody>
 </table>
