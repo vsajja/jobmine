@@ -31,33 +31,32 @@
 
 <!-- Add your site or application content here -->
 <div class="header">
-
-  <div class="navbar navbar-default">
-    <div class="container">
-
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                data-target="#bs-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#/" class="navbar-left"><img height="50px" width="50px" src="images/logo_jobmine.png"></a>
-
+        <a href="#/">
+          <img height="50px" width="50px" src="images/logo_jobmine.png">
+        </a>
       </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="#/profile">Profile</a></li>
+          <li><a href="#/profile"></i>
+            Profile</a></li>
           <li><a href="#/jobs">Jobs</a></li>
           <li><a href="#/schools">Schools</a></li>
           <li><a href="#/students">Students</a></li>
           <li><a href="#/companies">Companies</a></li>
           <li><a href="#/about">About</a></li>
         </ul>
-
         <ul class="nav navbar-nav navbar-right">
           <li ng-hide="currentUserSignedIn">
             <button type="button" class="btn btn-default navbar-btn">Sign In</button>
@@ -78,9 +77,7 @@
         </ul>
       </div>
     </div>
-  </div>
-
-
+  </nav>
 </div>
 
 <div class="content">
@@ -108,7 +105,9 @@
       </div>
       <div align="center" class="col-md-4">
         <p><a>Terms</a></p>
+
         <p><a>Privacy Policy</a></p>
+
         <p>© 2016 JobMine</p>
       </div>
       <div align="center" class="col-md-4">

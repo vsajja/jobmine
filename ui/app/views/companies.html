@@ -12,9 +12,8 @@
   </thead>
   <tbody>
   <tr ng-repeat="row in rowCollection">
-    <!-- TODO: load icon -->
     <td><i class="fa fa-building fa-3x" aria-hidden="true"></i></td>
-    <td><img src="{{row.logourl}}"/></td>
+    <td><img style="height: auto; width: auto; max-width: 100px; max-height: 100px" ng-src="{{row.logourl}}"/></td>
     <td>{{row.name}}</td>
   </tr>
   </tbody>
