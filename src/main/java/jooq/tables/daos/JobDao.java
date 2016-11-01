@@ -48,21 +48,21 @@ public class JobDao extends DAOImpl<JobRecord, jooq.tables.pojos.Job, Integer> {
 	 */
 	@Override
 	protected Integer getId(jooq.tables.pojos.Job object) {
-		return object.getJobpostingid();
+		return object.getJobId();
 	}
 
 	/**
-	 * Fetch records that have <code>jobpostingid IN (values)</code>
+	 * Fetch records that have <code>job_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Job> fetchByJobpostingid(Integer... values) {
-		return fetch(Job.JOB.JOBPOSTINGID, values);
+	public List<jooq.tables.pojos.Job> fetchByJobId(Integer... values) {
+		return fetch(Job.JOB.JOB_ID, values);
 	}
 
 	/**
-	 * Fetch a unique record that has <code>jobpostingid = value</code>
+	 * Fetch a unique record that has <code>job_id = value</code>
 	 */
-	public jooq.tables.pojos.Job fetchOneByJobpostingid(Integer value) {
-		return fetchOne(Job.JOB.JOBPOSTINGID, value);
+	public jooq.tables.pojos.Job fetchOneByJobId(Integer value) {
+		return fetchOne(Job.JOB.JOB_ID, value);
 	}
 
 	/**

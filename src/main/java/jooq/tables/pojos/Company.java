@@ -22,30 +22,30 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company implements Serializable {
 
-	private static final long serialVersionUID = 1827224785;
+	private static final long serialVersionUID = 683033526;
 
-	private final Integer id;
+	private final Integer companyId;
 	private final String  name;
 	private final String  logourl;
 
 	public Company(Company value) {
-		this.id = value.id;
+		this.companyId = value.companyId;
 		this.name = value.name;
 		this.logourl = value.logourl;
 	}
 
 	public Company(
-		Integer id,
+		Integer companyId,
 		String  name,
 		String  logourl
 	) {
-		this.id = id;
+		this.companyId = companyId;
 		this.name = name;
 		this.logourl = logourl;
 	}
 
-	public Integer getId() {
-		return this.id;
+	public Integer getCompanyId() {
+		return this.companyId;
 	}
 
 	public String getName() {
@@ -60,7 +60,7 @@ public class Company implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Company (");
 
-		sb.append(id);
+		sb.append(companyId);
 		sb.append(", ").append(name);
 		sb.append(", ").append(logourl);
 

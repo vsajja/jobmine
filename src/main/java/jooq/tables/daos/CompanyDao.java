@@ -47,21 +47,21 @@ public class CompanyDao extends DAOImpl<CompanyRecord, jooq.tables.pojos.Company
 	 */
 	@Override
 	protected Integer getId(jooq.tables.pojos.Company object) {
-		return object.getId();
+		return object.getCompanyId();
 	}
 
 	/**
-	 * Fetch records that have <code>id IN (values)</code>
+	 * Fetch records that have <code>company_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Company> fetchById(Integer... values) {
-		return fetch(Company.COMPANY.ID, values);
+	public List<jooq.tables.pojos.Company> fetchByCompanyId(Integer... values) {
+		return fetch(Company.COMPANY.COMPANY_ID, values);
 	}
 
 	/**
-	 * Fetch a unique record that has <code>id = value</code>
+	 * Fetch a unique record that has <code>company_id = value</code>
 	 */
-	public jooq.tables.pojos.Company fetchOneById(Integer value) {
-		return fetchOne(Company.COMPANY.ID, value);
+	public jooq.tables.pojos.Company fetchOneByCompanyId(Integer value) {
+		return fetchOne(Company.COMPANY.COMPANY_ID, value);
 	}
 
 	/**

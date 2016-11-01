@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job implements Serializable {
 
-	private static final long serialVersionUID = 1481343086;
+	private static final long serialVersionUID = -1564971286;
 
-	private final Integer jobpostingid;
+	private final Integer jobId;
 	private final String  title;
 	private final String  description_9;
 	private final String  location;
@@ -34,7 +34,7 @@ public class Job implements Serializable {
 	private final byte[]  employerlogo;
 
 	public Job(Job value) {
-		this.jobpostingid = value.jobpostingid;
+		this.jobId = value.jobId;
 		this.title = value.title;
 		this.description_9 = value.description_9;
 		this.location = value.location;
@@ -44,7 +44,7 @@ public class Job implements Serializable {
 	}
 
 	public Job(
-		Integer jobpostingid,
+		Integer jobId,
 		String  title,
 		String  description_9,
 		String  location,
@@ -52,7 +52,7 @@ public class Job implements Serializable {
 		String  employername,
 		byte[]  employerlogo
 	) {
-		this.jobpostingid = jobpostingid;
+		this.jobId = jobId;
 		this.title = title;
 		this.description_9 = description_9;
 		this.location = location;
@@ -61,8 +61,8 @@ public class Job implements Serializable {
 		this.employerlogo = employerlogo;
 	}
 
-	public Integer getJobpostingid() {
-		return this.jobpostingid;
+	public Integer getJobId() {
+		return this.jobId;
 	}
 
 	public String getTitle() {
@@ -93,7 +93,7 @@ public class Job implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Job (");
 
-		sb.append(jobpostingid);
+		sb.append(jobId);
 		sb.append(", ").append(title);
 		sb.append(", ").append(description_9);
 		sb.append(", ").append(location);

@@ -28,20 +28,20 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CompanyRecord extends UpdatableRecordImpl<CompanyRecord> implements Record3<Integer, String, String> {
 
-	private static final long serialVersionUID = -2127714493;
+	private static final long serialVersionUID = -1347695157;
 
 	/**
-	 * Setter for <code>public.company.id</code>.
+	 * Setter for <code>public.company.company_id</code>.
 	 */
-	public CompanyRecord setId(Integer value) {
+	public CompanyRecord setCompanyId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>public.company.id</code>.
+	 * Getter for <code>public.company.company_id</code>.
 	 */
-	public Integer getId() {
+	public Integer getCompanyId() {
 		return (Integer) getValue(0);
 	}
 
@@ -112,7 +112,7 @@ public class CompanyRecord extends UpdatableRecordImpl<CompanyRecord> implements
 	 */
 	@Override
 	public Field<Integer> field1() {
-		return Company.COMPANY.ID;
+		return Company.COMPANY.COMPANY_ID;
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class CompanyRecord extends UpdatableRecordImpl<CompanyRecord> implements
 	 */
 	@Override
 	public Integer value1() {
-		return getId();
+		return getCompanyId();
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class CompanyRecord extends UpdatableRecordImpl<CompanyRecord> implements
 	 */
 	@Override
 	public CompanyRecord value1(Integer value) {
-		setId(value);
+		setCompanyId(value);
 		return this;
 	}
 
@@ -207,10 +207,10 @@ public class CompanyRecord extends UpdatableRecordImpl<CompanyRecord> implements
 	/**
 	 * Create a detached, initialised CompanyRecord
 	 */
-	public CompanyRecord(Integer id, String name, String logourl) {
+	public CompanyRecord(Integer companyId, String name, String logourl) {
 		super(Company.COMPANY);
 
-		setValue(0, id);
+		setValue(0, companyId);
 		setValue(1, name);
 		setValue(2, logourl);
 	}

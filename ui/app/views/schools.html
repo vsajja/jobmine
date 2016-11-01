@@ -9,6 +9,7 @@
     <th></th>
     <th st-sort="name" class="st-sort-ascent">School</th>
     <th st-sort="schooltype" class="st-sort-ascent">Type</th>
+    <th st-sort="location" class="st-sort-ascent">City</th>
     <th st-sort="location" class="st-sort-ascent">Location</th>
     <th st-sort="established" class="st-sort-ascent">Established</th>
     <th st-sort="totalstudents" class="st-sort-ascent">Students</th>
@@ -24,7 +25,8 @@
     </td>
     <td>{{row.name}}</td>
     <td>{{row.schooltype}}</td>
-    <!-- TODO: format this better, somehow include the city -->
+    <!-- TODO: format the location better, some schools have multiple cities -->
+    <td>{{row.city}}</td>
     <td>{{row.provinceorstate + ',' + row.country}}</td>
     <td>{{row.established}}</td>
     <td>{{row.totalstudents | number}}</td>

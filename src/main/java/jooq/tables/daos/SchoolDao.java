@@ -47,21 +47,21 @@ public class SchoolDao extends DAOImpl<SchoolRecord, jooq.tables.pojos.School, I
 	 */
 	@Override
 	protected Integer getId(jooq.tables.pojos.School object) {
-		return object.getSchoold();
+		return object.getSchoolId();
 	}
 
 	/**
-	 * Fetch records that have <code>schoold IN (values)</code>
+	 * Fetch records that have <code>school_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchBySchoold(Integer... values) {
-		return fetch(School.SCHOOL.SCHOOLD, values);
+	public List<jooq.tables.pojos.School> fetchBySchoolId(Integer... values) {
+		return fetch(School.SCHOOL.SCHOOL_ID, values);
 	}
 
 	/**
-	 * Fetch a unique record that has <code>schoold = value</code>
+	 * Fetch a unique record that has <code>school_id = value</code>
 	 */
-	public jooq.tables.pojos.School fetchOneBySchoold(Integer value) {
-		return fetchOne(School.SCHOOL.SCHOOLD, value);
+	public jooq.tables.pojos.School fetchOneBySchoolId(Integer value) {
+		return fetchOne(School.SCHOOL.SCHOOL_ID, value);
 	}
 
 	/**

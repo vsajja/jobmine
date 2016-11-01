@@ -30,20 +30,20 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record7<Integer, String, String, String, Date, String, byte[]> {
 
-	private static final long serialVersionUID = -1795153825;
+	private static final long serialVersionUID = 1714801674;
 
 	/**
-	 * Setter for <code>public.job.jobpostingid</code>.
+	 * Setter for <code>public.job.job_id</code>.
 	 */
-	public JobRecord setJobpostingid(Integer value) {
+	public JobRecord setJobId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>public.job.jobpostingid</code>.
+	 * Getter for <code>public.job.job_id</code>.
 	 */
-	public Integer getJobpostingid() {
+	public Integer getJobId() {
 		return (Integer) getValue(0);
 	}
 
@@ -174,7 +174,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record7
 	 */
 	@Override
 	public Field<Integer> field1() {
-		return Job.JOB.JOBPOSTINGID;
+		return Job.JOB.JOB_ID;
 	}
 
 	/**
@@ -230,7 +230,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record7
 	 */
 	@Override
 	public Integer value1() {
-		return getJobpostingid();
+		return getJobId();
 	}
 
 	/**
@@ -286,7 +286,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record7
 	 */
 	@Override
 	public JobRecord value1(Integer value) {
-		setJobpostingid(value);
+		setJobId(value);
 		return this;
 	}
 
@@ -373,10 +373,10 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record7
 	/**
 	 * Create a detached, initialised JobRecord
 	 */
-	public JobRecord(Integer jobpostingid, String title, String description_9, String location, Date dateposted_9, String employername, byte[] employerlogo) {
+	public JobRecord(Integer jobId, String title, String description_9, String location, Date dateposted_9, String employername, byte[] employerlogo) {
 		super(Job.JOB);
 
-		setValue(0, jobpostingid);
+		setValue(0, jobId);
 		setValue(1, title);
 		setValue(2, description_9);
 		setValue(3, location);

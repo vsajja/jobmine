@@ -22,9 +22,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School implements Serializable {
 
-	private static final long serialVersionUID = -952103966;
+	private static final long serialVersionUID = -1203218853;
 
-	private final Integer schoold;
+	private final Integer schoolId;
 	private final String  name;
 	private final String  schooltype;
 	private final String  city;
@@ -36,7 +36,7 @@ public class School implements Serializable {
 	private final String  country;
 
 	public School(School value) {
-		this.schoold = value.schoold;
+		this.schoolId = value.schoolId;
 		this.name = value.name;
 		this.schooltype = value.schooltype;
 		this.city = value.city;
@@ -49,7 +49,7 @@ public class School implements Serializable {
 	}
 
 	public School(
-		Integer schoold,
+		Integer schoolId,
 		String  name,
 		String  schooltype,
 		String  city,
@@ -60,7 +60,7 @@ public class School implements Serializable {
 		String  logosrc,
 		String  country
 	) {
-		this.schoold = schoold;
+		this.schoolId = schoolId;
 		this.name = name;
 		this.schooltype = schooltype;
 		this.city = city;
@@ -72,8 +72,8 @@ public class School implements Serializable {
 		this.country = country;
 	}
 
-	public Integer getSchoold() {
-		return this.schoold;
+	public Integer getSchoolId() {
+		return this.schoolId;
 	}
 
 	public String getName() {
@@ -116,7 +116,7 @@ public class School implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("School (");
 
-		sb.append(schoold);
+		sb.append(schoolId);
 		sb.append(", ").append(name);
 		sb.append(", ").append(schooltype);
 		sb.append(", ").append(city);

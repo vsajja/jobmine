@@ -48,7 +48,7 @@ public class StudentDao extends DAOImpl<StudentRecord, jooq.tables.pojos.Student
 	 */
 	@Override
 	protected Integer getId(jooq.tables.pojos.Student object) {
-		return object.getId();
+		return object.getStudentId();
 	}
 
 	/**
@@ -129,16 +129,16 @@ public class StudentDao extends DAOImpl<StudentRecord, jooq.tables.pojos.Student
 	}
 
 	/**
-	 * Fetch records that have <code>id IN (values)</code>
+	 * Fetch records that have <code>student_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Student> fetchById(Integer... values) {
-		return fetch(Student.STUDENT.ID, values);
+	public List<jooq.tables.pojos.Student> fetchByStudentId(Integer... values) {
+		return fetch(Student.STUDENT.STUDENT_ID, values);
 	}
 
 	/**
-	 * Fetch a unique record that has <code>id = value</code>
+	 * Fetch a unique record that has <code>student_id = value</code>
 	 */
-	public jooq.tables.pojos.Student fetchOneById(Integer value) {
-		return fetchOne(Student.STUDENT.ID, value);
+	public jooq.tables.pojos.Student fetchOneByStudentId(Integer value) {
+		return fetchOne(Student.STUDENT.STUDENT_ID, value);
 	}
 }

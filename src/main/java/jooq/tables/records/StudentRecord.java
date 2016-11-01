@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements Record12<String, String, String, Date, String, String, String, String, String, String, Integer, Integer> {
 
-	private static final long serialVersionUID = 1620380022;
+	private static final long serialVersionUID = -1597044118;
 
 	/**
 	 * Setter for <code>public.student.name</code>.
@@ -198,17 +198,17 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 	}
 
 	/**
-	 * Setter for <code>public.student.id</code>.
+	 * Setter for <code>public.student.student_id</code>.
 	 */
-	public StudentRecord setId(Integer value) {
+	public StudentRecord setStudentId(Integer value) {
 		setValue(11, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>public.student.id</code>.
+	 * Getter for <code>public.student.student_id</code>.
 	 */
-	public Integer getId() {
+	public Integer getStudentId() {
 		return (Integer) getValue(11);
 	}
 
@@ -337,7 +337,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 	 */
 	@Override
 	public Field<Integer> field12() {
-		return Student.STUDENT.ID;
+		return Student.STUDENT.STUDENT_ID;
 	}
 
 	/**
@@ -433,7 +433,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 	 */
 	@Override
 	public Integer value12() {
-		return getId();
+		return getStudentId();
 	}
 
 	/**
@@ -540,7 +540,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 	 */
 	@Override
 	public StudentRecord value12(Integer value) {
-		setId(value);
+		setStudentId(value);
 		return this;
 	}
 
@@ -578,7 +578,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 	/**
 	 * Create a detached, initialised StudentRecord
 	 */
-	public StudentRecord(String name, String phonenumber, String email, Date datejoined, String streetaddress, String city, String region, String country, String postalorzip, String description, Integer age, Integer id) {
+	public StudentRecord(String name, String phonenumber, String email, Date datejoined, String streetaddress, String city, String region, String country, String postalorzip, String description, Integer age, Integer studentId) {
 		super(Student.STUDENT);
 
 		setValue(0, name);
@@ -592,6 +592,6 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
 		setValue(8, postalorzip);
 		setValue(9, description);
 		setValue(10, age);
-		setValue(11, id);
+		setValue(11, studentId);
 	}
 }

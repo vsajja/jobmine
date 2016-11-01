@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = 832415123;
+	private static final long serialVersionUID = 1814070278;
 
 	private final String  name;
 	private final String  phonenumber;
@@ -36,7 +36,7 @@ public class Student implements Serializable {
 	private final String  postalorzip;
 	private final String  description;
 	private final Integer age;
-	private final Integer id;
+	private final Integer studentId;
 
 	public Student(Student value) {
 		this.name = value.name;
@@ -50,7 +50,7 @@ public class Student implements Serializable {
 		this.postalorzip = value.postalorzip;
 		this.description = value.description;
 		this.age = value.age;
-		this.id = value.id;
+		this.studentId = value.studentId;
 	}
 
 	public Student(
@@ -65,7 +65,7 @@ public class Student implements Serializable {
 		String  postalorzip,
 		String  description,
 		Integer age,
-		Integer id
+		Integer studentId
 	) {
 		this.name = name;
 		this.phonenumber = phonenumber;
@@ -78,7 +78,7 @@ public class Student implements Serializable {
 		this.postalorzip = postalorzip;
 		this.description = description;
 		this.age = age;
-		this.id = id;
+		this.studentId = studentId;
 	}
 
 	public String getName() {
@@ -125,8 +125,8 @@ public class Student implements Serializable {
 		return this.age;
 	}
 
-	public Integer getId() {
-		return this.id;
+	public Integer getStudentId() {
+		return this.studentId;
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class Student implements Serializable {
 		sb.append(", ").append(postalorzip);
 		sb.append(", ").append(description);
 		sb.append(", ").append(age);
-		sb.append(", ").append(id);
+		sb.append(", ").append(studentId);
 
 		sb.append(")");
 		return sb.toString();

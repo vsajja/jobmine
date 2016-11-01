@@ -7,9 +7,15 @@ package jooq;
 import javax.annotation.Generated;
 
 import jooq.tables.Company;
+import jooq.tables.Image;
 import jooq.tables.Job;
+import jooq.tables.JobApplication;
+import jooq.tables.JobInterview;
+import jooq.tables.JobOffer;
+import jooq.tables.Location;
 import jooq.tables.School;
 import jooq.tables.Student;
+import jooq.tables.User;
 
 
 /**
@@ -31,9 +37,34 @@ public class Tables {
 	public static final Company COMPANY = jooq.tables.Company.COMPANY;
 
 	/**
+	 * The table public.image
+	 */
+	public static final Image IMAGE = jooq.tables.Image.IMAGE;
+
+	/**
 	 * The table public.job
 	 */
 	public static final Job JOB = jooq.tables.Job.JOB;
+
+	/**
+	 * The table public.job_application
+	 */
+	public static final JobApplication JOB_APPLICATION = jooq.tables.JobApplication.JOB_APPLICATION;
+
+	/**
+	 * The table public.job_interview
+	 */
+	public static final JobInterview JOB_INTERVIEW = jooq.tables.JobInterview.JOB_INTERVIEW;
+
+	/**
+	 * The table public.job_offer
+	 */
+	public static final JobOffer JOB_OFFER = jooq.tables.JobOffer.JOB_OFFER;
+
+	/**
+	 * The table public.location
+	 */
+	public static final Location LOCATION = jooq.tables.Location.LOCATION;
 
 	/**
 	 * The table public.school
@@ -44,4 +75,9 @@ public class Tables {
 	 * The table public.student
 	 */
 	public static final Student STUDENT = jooq.tables.Student.STUDENT;
+
+	/**
+	 * The table public.user
+	 */
+	public static final User USER = jooq.tables.User.USER;
 }

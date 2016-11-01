@@ -28,20 +28,20 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SchoolRecord extends UpdatableRecordImpl<SchoolRecord> implements Record10<Integer, String, String, String, String, String, Integer, String, String, String> {
 
-	private static final long serialVersionUID = 982320745;
+	private static final long serialVersionUID = 371738515;
 
 	/**
-	 * Setter for <code>public.school.schoold</code>.
+	 * Setter for <code>public.school.school_id</code>.
 	 */
-	public SchoolRecord setSchoold(Integer value) {
+	public SchoolRecord setSchoolId(Integer value) {
 		setValue(0, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>public.school.schoold</code>.
+	 * Getter for <code>public.school.school_id</code>.
 	 */
-	public Integer getSchoold() {
+	public Integer getSchoolId() {
 		return (Integer) getValue(0);
 	}
 
@@ -217,7 +217,7 @@ public class SchoolRecord extends UpdatableRecordImpl<SchoolRecord> implements R
 	 */
 	@Override
 	public Field<Integer> field1() {
-		return School.SCHOOL.SCHOOLD;
+		return School.SCHOOL.SCHOOL_ID;
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class SchoolRecord extends UpdatableRecordImpl<SchoolRecord> implements R
 	 */
 	@Override
 	public Integer value1() {
-		return getSchoold();
+		return getSchoolId();
 	}
 
 	/**
@@ -377,7 +377,7 @@ public class SchoolRecord extends UpdatableRecordImpl<SchoolRecord> implements R
 	 */
 	@Override
 	public SchoolRecord value1(Integer value) {
-		setSchoold(value);
+		setSchoolId(value);
 		return this;
 	}
 
@@ -494,10 +494,10 @@ public class SchoolRecord extends UpdatableRecordImpl<SchoolRecord> implements R
 	/**
 	 * Create a detached, initialised SchoolRecord
 	 */
-	public SchoolRecord(Integer schoold, String name, String schooltype, String city, String provinceorstate, String established, Integer totalstudents, String wikilink, String logosrc, String country) {
+	public SchoolRecord(Integer schoolId, String name, String schooltype, String city, String provinceorstate, String established, Integer totalstudents, String wikilink, String logosrc, String country) {
 		super(School.SCHOOL);
 
-		setValue(0, schoold);
+		setValue(0, schoolId);
 		setValue(1, name);
 		setValue(2, schooltype);
 		setValue(3, city);

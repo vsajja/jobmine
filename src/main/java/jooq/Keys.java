@@ -62,16 +62,16 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	private static class Identities0 extends AbstractKeys {
-		public static Identity<CompanyRecord, Integer> IDENTITY_COMPANY = createIdentity(Company.COMPANY, Company.COMPANY.ID);
-		public static Identity<JobRecord, Integer> IDENTITY_JOB = createIdentity(Job.JOB, Job.JOB.JOBPOSTINGID);
-		public static Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = createIdentity(School.SCHOOL, School.SCHOOL.SCHOOLD);
-		public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = createIdentity(Student.STUDENT, Student.STUDENT.ID);
+		public static Identity<CompanyRecord, Integer> IDENTITY_COMPANY = createIdentity(Company.COMPANY, Company.COMPANY.COMPANY_ID);
+		public static Identity<JobRecord, Integer> IDENTITY_JOB = createIdentity(Job.JOB, Job.JOB.JOB_ID);
+		public static Identity<SchoolRecord, Integer> IDENTITY_SCHOOL = createIdentity(School.SCHOOL, School.SCHOOL.SCHOOL_ID);
+		public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = createIdentity(Student.STUDENT, Student.STUDENT.STUDENT_ID);
 	}
 
 	private static class UniqueKeys0 extends AbstractKeys {
-		public static final UniqueKey<CompanyRecord> COMPANY_ID_PK = createUniqueKey(Company.COMPANY, Company.COMPANY.ID);
-		public static final UniqueKey<JobRecord> JOB_POSTING_PKEY = createUniqueKey(Job.JOB, Job.JOB.JOBPOSTINGID);
-		public static final UniqueKey<SchoolRecord> SCHOOL_SCHOOLD_PK = createUniqueKey(School.SCHOOL, School.SCHOOL.SCHOOLD);
-		public static final UniqueKey<StudentRecord> STUDENT_ID_PK = createUniqueKey(Student.STUDENT, Student.STUDENT.ID);
+		public static final UniqueKey<CompanyRecord> COMPANY_ID_PK = createUniqueKey(Company.COMPANY, Company.COMPANY.COMPANY_ID);
+		public static final UniqueKey<JobRecord> JOB_POSTING_PKEY = createUniqueKey(Job.JOB, Job.JOB.JOB_ID);
+		public static final UniqueKey<SchoolRecord> SCHOOL_SCHOOLD_PK = createUniqueKey(School.SCHOOL, School.SCHOOL.SCHOOL_ID);
+		public static final UniqueKey<StudentRecord> STUDENT_ID_PK = createUniqueKey(Student.STUDENT, Student.STUDENT.STUDENT_ID);
 	}
 }

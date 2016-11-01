@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job extends TableImpl<JobRecord> {
 
-	private static final long serialVersionUID = 1907925333;
+	private static final long serialVersionUID = -978797326;
 
 	/**
 	 * The reference instance of <code>public.job</code>
@@ -51,9 +51,9 @@ public class Job extends TableImpl<JobRecord> {
 	}
 
 	/**
-	 * The column <code>public.job.jobpostingid</code>.
+	 * The column <code>public.job.job_id</code>.
 	 */
-	public final TableField<JobRecord, Integer> JOBPOSTINGID = createField("jobpostingid", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	public final TableField<JobRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job.title</code>.
