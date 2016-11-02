@@ -78,55 +78,54 @@
   </nav>
 </div>
 
-<div class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <!-- TODO: figure out a better way to keep footer at bottom -->
-        <div ng-view=""></div>
-      </div>
-    </div>
+<!-- Begin page content -->
+<div id="wrap">
+  <!--<div class="col-md-12">-->
+  <div class="col-md-12">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div ng-view=""></div>
   </div>
+  <!--</div>-->
+  <div id="push"></div>
 </div>
 
-<div class="footer">
-  <div class="container-fluid">
-    <div class="row">
-      <hr/>
+<div id="footer">
+  <div align="center" class="col-md-12">
+    <div align="center" class="col-md-3">
+      <br/>
+      <!-- TODO: careers link should point to jobs search listing current jobmine jobs-->
+      <p><a>Terms</a></p>
+      <p><a>Privacy</a></p>
+      <p><a href="#/jobs">Careers</a></p>
+      <p><a href="#/about">About</a></p>
+    </div>
+    <div align="center" class="col-md-6">
+      <br/>
+      <br/>
+      <!-- TODO: Android app link -->
+      <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank">
+        <i class="fa fa-android fa-5x" aria-hidden="true"></i>
+      </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- TODO: iOS app link -->
+      <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank">
+        <i class="fa fa-apple fa-5x" aria-hidden="true"></i>
+      </a>
+    </div>
 
-      <div align="center" class="col-md-1">
-        <!-- TODO: iOS app link -->
-        <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank">
-          <i class="fa fa-apple fa-5x" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div align="center" class="col-md-1">
-        <!-- TODO: Android app link -->
-        <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank">
-          <i class="fa fa-android fa-5x" aria-hidden="true"></i>
-        </a>
-      </div>
-
-      <div align="center" class="col-md-1">
-        <a style="align-content: center" href="http://jobmineteam.slack.com" target="_blank"><img width="80px"
-                                                                                                  height="80px"
-                                                                                                  src="images/icon_slack.png"/></a>
-      </div>
-      <div align="center" class="col-md-6">
-        <!-- TODO: careers link should point to jobs search listing current jobmine jobs-->
-        <p><a href="#/about">About</a></p>
-        <p><a href="#/jobs">Careers</a></p>
-        <p><a>Terms of Use</a></p>
-        <p><a>Privacy Policy</a></p>
-        <p>© 2016 jobmine</p>
-      </div>
-
-      <div align="center" class="col-md-3">
-        <blockquote style="border-left: none;">
-          <p>"available 24/7"</p>
-          <small>jobmine team</small>
-        </blockquote>
-      </div>
+    <div align="center" class="col-md-3">
+      <br/>
+      <a href="https://jobmineteam.slack.com" target="_blank">
+        <img height="60px" width="60px" src="images/icon_slack.png" alt="Slack!"/>
+      </a>
+      <blockquote style="border-left: none;">
+        <p>"available 24/7"</p>
+        <small>jobmine team</small>
+      </blockquote>
     </div>
   </div>
 </div>

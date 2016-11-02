@@ -3,14 +3,14 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'gradle.plugin.io.ratpack:ratpack-gradle:1.4.3'
+        classpath 'gradle.plugin.io.ratpack:ratpack-gradle:1.4.4'
         classpath 'org.postgresql:postgresql:9.4-1206-jdbc42'
         classpath 'org.jooq:jooq-codegen:3.7.1'
     }
 }
 
 plugins {
-    id 'io.ratpack.ratpack-groovy' version '1.4.3'
+    id 'io.ratpack.ratpack-groovy' version '1.4.4'
 }
 
 repositories {

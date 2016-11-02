@@ -1,5 +1,6 @@
 /* fit to screen */
 html {
+  position: relative;
   height: 100%;
 }
 
@@ -9,6 +10,7 @@ body {
   /*background: #FFFFFF;*/
   /*color: #FFFFFF;*/
   position: relative;
+  margin-bottom: 135px;
 }
 
 #header {
@@ -16,28 +18,18 @@ body {
   width: 100%;
   top: 0px;
   left: 0px;
-  background: #1d2129;
+  background: #F8F8F8;
   position: fixed;
 }
 
 #footer {
-  height: 50px;
+  height: 150px;
   width: 100%;
   bottom: 0px;
   left: 0px;
-  background: #CCCCCC;
+  background: #F8F8F8;
   position: fixed;
+  border-top: 2px solid hsl(0, 0%, 87%);
 }
 
-#content {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0 20px;
-}
-
-#content > div {
-  padding: 70px 0;
-}
 /* end fit to screen */
