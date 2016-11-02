@@ -27,7 +27,7 @@ body {
   width: 100%;
   bottom: 0px;
   left: 0px;
-  background: #F8F8F8;
+  background: white;
   position: fixed;
   border-top: 2px solid hsl(0, 0%, 87%);
 }
