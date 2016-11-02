@@ -31,7 +31,7 @@
 
 <!-- Add your site or application content here -->
 <div class="header">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -49,21 +49,13 @@
 
       <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Company, Job, or Skills...">
-              <input type="text" class="form-control" placeholder="Location...">
-            </div>
-            <a href="#/jobs">
-              <button type="submit" class="btn btn-primary">Find Jobs</button>
-            </a>
-          </form>
+          <!--<li><a href="#/schools">Schools</a></li>-->
+          <!--<li><a href="#/students">Students</a></li>-->
+          <!--<li><a href="#/companies">Companies</a></li>-->
+          <!--<li><a href="#/about">About</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#/schools">Schools</a></li>
-          <li><a href="#/students">Students</a></li>
-          <li><a href="#/companies">Companies</a></li>
-          <li><a href="#/about">About</a></li>
+
           <li ng-hide="currentUserSignedIn">
             <button type="button" class="btn btn-default navbar-btn">Sign In</button>
           </li>
@@ -100,13 +92,8 @@
 <div class="footer">
   <div class="container-fluid">
     <div class="row">
-      <div align="center" class="col-md-2">
-        <p><a>Terms</a></p>
+      <hr/>
 
-        <p><a>Privacy Policy</a></p>
-
-        <p>© 2016 JobMine</p>
-      </div>
       <div align="center" class="col-md-1">
         <!-- TODO: iOS app link -->
         <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank">
@@ -120,18 +107,24 @@
         </a>
       </div>
 
-
       <div align="center" class="col-md-1">
         <a style="align-content: center" href="http://jobmineteam.slack.com" target="_blank"><img width="80px"
                                                                                                   height="80px"
                                                                                                   src="images/icon_slack.png"/></a>
       </div>
-
+      <div align="center" class="col-md-6">
+        <!-- TODO: careers link should point to jobs search listing current jobmine jobs-->
+        <p><a href="#/about">About</a></p>
+        <p><a href="#/jobs">Careers</a></p>
+        <p><a>Terms of Use</a></p>
+        <p><a>Privacy Policy</a></p>
+        <p>© 2016 jobmine</p>
+      </div>
 
       <div align="center" class="col-md-3">
         <blockquote style="border-left: none;">
-          <p>"available 24/7 worldwide"</p>
-          <small>JobMine team</small>
+          <p>"available 24/7"</p>
+          <small>jobmine team</small>
         </blockquote>
       </div>
     </div>
@@ -182,4 +175,3 @@
 <!-- endbuild -->
 </body>
 </html>
-

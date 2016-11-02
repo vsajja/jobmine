@@ -40,8 +40,4 @@ body {
 #content > div {
   padding: 70px 0;
 }
-
 /* end fit to screen */
-.navbar-nav .nav-item a {
-  line-height: 50px;
-}
