@@ -18,16 +18,17 @@ body {
   width: 100%;
   top: 0px;
   left: 0px;
-  background: #F8F8F8;
+  /* TODO: figure out why background doens't work */
+  /*background: #F8F8F8;*/
   position: fixed;
 }
 
 #footer {
-  height: 150px;
+  height: 125px;
   width: 100%;
   bottom: 0px;
   left: 0px;
-  background: white;
+  background: #F8F8F8;
   position: fixed;
   border-top: 2px solid hsl(0, 0%, 87%);
 }

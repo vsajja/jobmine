@@ -31,7 +31,7 @@
 
 <!-- Add your site or application content here -->
 <div class="header">
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -43,7 +43,7 @@
           <span class="icon-bar"></span>
         </button>
         <a href="#/">
-          <img height="50px" width="50px" src="images/logo_jobmine.png">
+          <i class="fa fa-home fa-4x" style="color: blue" aria-hidden="true"></i>
         </a>
       </div>
 
@@ -80,53 +80,29 @@
 
 <!-- Begin page content -->
 <div id="wrap">
-  <!--<div class="col-md-12">-->
   <div class="col-md-12">
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-
     <div ng-view=""></div>
   </div>
-  <!--</div>-->
   <div id="push"></div>
 </div>
 
 <div id="footer">
   <div align="center" class="col-md-12">
-    <div align="center" class="col-md-3">
-      <br/>
-      <!-- TODO: careers link should point to jobs search listing current jobmine jobs-->
-      <p><a>Terms</a></p>
-      <p><a>Privacy</a></p>
-      <p><a href="#/jobs">Careers</a></p>
-      <p><a href="#/about">About</a></p>
-    </div>
-    <div align="center" class="col-md-6">
-      <br/>
-      <br/>
+    <div>
       <!-- TODO: Android app link -->
-      <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank">
-        <i class="fa fa-android fa-5x" aria-hidden="true"></i>
-      </a>
-      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank"><i
+        class="fa fa-android fa-5x" aria-hidden="true"></i></a>
       <!-- TODO: iOS app link -->
-      <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank">
-        <i class="fa fa-apple fa-5x" aria-hidden="true"></i>
-      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank"><i
+        class="fa fa-apple fa-5x" aria-hidden="true"></i></a>
     </div>
-
-    <div align="center" class="col-md-3">
-      <br/>
-      <a href="https://jobmineteam.slack.com" target="_blank">
-        <img height="60px" width="60px" src="images/icon_slack.png" alt="Slack!"/>
-      </a>
-      <blockquote style="border-left: none;">
-        <p>"available 24/7"</p>
-        <small>jobmine team</small>
-      </blockquote>
-    </div>
+    <p>
+      <a href="">Privacy Policy</a> |
+      <a href="">Terms of Use</a> |
+      <a href="#/jobs">Careers</a> |
+      <a href="#/about">About</a>
+    </p>
+    © 2016 jobmine
   </div>
 </div>
 
