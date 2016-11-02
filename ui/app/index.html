@@ -31,7 +31,7 @@
 
 <!-- Add your site or application content here -->
 <div class="header">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -42,10 +42,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="#/">
-          <i class="fa fa-home fa-4x" style="color: blue" aria-hidden="true"></i>
-        </a>
+
+        <div style="padding-top: 5px">
+          <a href="#/">
+            <i class="fa fa-home fa-3x" style="color: blue" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
+
+
 
       <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav">
@@ -55,7 +60,6 @@
           <!--<li><a href="#/about">About</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
           <li ng-hide="currentUserSignedIn">
             <button type="button" class="btn btn-default navbar-btn">Sign In</button>
           </li>
@@ -79,7 +83,7 @@
 </div>
 
 <!-- Begin page content -->
-<div id="wrap">
+<div style="padding-top: 65px">
   <div class="col-md-12">
     <div ng-view=""></div>
   </div>
@@ -87,22 +91,24 @@
 </div>
 
 <div id="footer">
+
+
   <div align="center" class="col-md-12">
+    <p>
     <div>
       <!-- TODO: Android app link -->
       <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank"><i
-        class="fa fa-android fa-5x" aria-hidden="true"></i></a>
+        class="fa fa-android fa-3x" aria-hidden="true"></i></a>
       <!-- TODO: iOS app link -->
       <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank"><i
-        class="fa fa-apple fa-5x" aria-hidden="true"></i></a>
+        class="fa fa-apple fa-3x" aria-hidden="true"></i></a>
     </div>
-    <p>
       <a href="">Privacy Policy</a> |
       <a href="">Terms of Use</a> |
       <a href="#/jobs">Careers</a> |
       <a href="#/about">About</a>
     </p>
-    © 2016 jobmine
+    <p>© 2016 jobmine</p>
   </div>
 </div>
 
