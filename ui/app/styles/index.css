@@ -19,7 +19,7 @@ body {
   top: 0px;
   left: 0px;
   /* TODO: figure out why background doens't work */
-  /*background: #F8F8F8;*/
+  background: blue;
   position: fixed;
 }
 

@@ -1,6 +1,5 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
-import groovy.mock.interceptor.StubFor
 import groovy.xml.XmlUtil
 import jooq.tables.daos.CompanyDao
 import jooq.tables.daos.JobDao
@@ -23,7 +22,6 @@ import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
 import ratpack.http.client.HttpClient
-import vsajja.org.jobmine.JobMine
 import vsajja.org.postgres.PostgresConfig
 import vsajja.org.postgres.PostgresModule
 import vsajja.org.redis.RedisConfig
@@ -106,17 +104,6 @@ ratpack {
         }
 
         prefix('test') {
-            prefix('jobmine') {
-                get('student') {
-                    Student student = null
-                    Job job = null
-
-                    JobMine jobMine = new JobMine()
-                    jobMine.apply(student, job).toString()
-
-                    render 'TODO'
-                }
-            }
             prefix('data') {
                 get('jobs') {
                     DataSource dataSource = registry.get(DataSource.class)
