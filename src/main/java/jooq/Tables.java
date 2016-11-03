@@ -7,6 +7,7 @@ package jooq;
 import javax.annotation.Generated;
 
 import jooq.tables.Company;
+import jooq.tables.Group;
 import jooq.tables.Image;
 import jooq.tables.Job;
 import jooq.tables.JobApplication;
@@ -35,6 +36,11 @@ public class Tables {
 	 * The table public.company
 	 */
 	public static final Company COMPANY = jooq.tables.Company.COMPANY;
+
+	/**
+	 * The table public.group
+	 */
+	public static final Group GROUP = jooq.tables.Group.GROUP;
 
 	/**
 	 * The table public.image

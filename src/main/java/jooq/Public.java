@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import jooq.tables.Company;
+import jooq.tables.Group;
 import jooq.tables.Image;
 import jooq.tables.Job;
 import jooq.tables.JobApplication;
@@ -39,7 +40,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -1491589567;
+	private static final long serialVersionUID = -431382805;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -78,6 +79,7 @@ public class Public extends SchemaImpl {
 	private final List<Table<?>> getTables0() {
 		return Arrays.<Table<?>>asList(
 			Company.COMPANY,
+			Group.GROUP,
 			Image.IMAGE,
 			Job.JOB,
 			JobApplication.JOB_APPLICATION,
