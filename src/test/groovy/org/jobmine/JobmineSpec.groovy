@@ -1,4 +1,4 @@
-package org.jobmine.jomine
+package org.jobmine
 
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.test.http.TestHttpClient

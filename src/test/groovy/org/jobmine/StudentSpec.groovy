@@ -1,4 +1,4 @@
-package org.jobmine.jomine
+package org.jobmine
 
 import spock.lang.Specification
 
