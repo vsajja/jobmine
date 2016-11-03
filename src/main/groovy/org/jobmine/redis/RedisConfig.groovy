@@ -1,4 +1,4 @@
-package vsajja.org.redis
+package org.jobmine.redis
 
 import groovy.transform.CompileStatic
 

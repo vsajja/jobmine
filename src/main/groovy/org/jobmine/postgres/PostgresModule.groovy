@@ -1,4 +1,4 @@
-package vsajja.org.postgres
+package org.jobmine.postgres
 
 import groovy.transform.CompileStatic
 import com.google.inject.Provides

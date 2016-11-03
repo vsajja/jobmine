@@ -1,4 +1,4 @@
-package vsajja.org.jomine
+package org.jobmine.jomine
 
 import spock.lang.Specification
 

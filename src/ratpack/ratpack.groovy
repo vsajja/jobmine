@@ -22,9 +22,9 @@ import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
 import ratpack.http.client.HttpClient
-import vsajja.org.postgres.PostgresConfig
-import vsajja.org.postgres.PostgresModule
-import vsajja.org.redis.RedisConfig
+import org.jobmine.postgres.PostgresConfig
+import org.jobmine.postgres.PostgresModule
+import org.jobmine.redis.RedisConfig
 
 import javax.sql.DataSource
 import java.sql.Date
@@ -100,7 +100,6 @@ ratpack {
                 List<Company> companies = new CompanyDao(configuration).findAll()
                 render json(companies)
             }
-
         }
 
         prefix('test') {

@@ -1,11 +1,11 @@
-package vsajja.org.jomine
+package org.jobmine.jomine
 
 import spock.lang.Specification
 
 /**
  * Created by vsajja on 2016-11-02.
  */
-public class CompanySpec extends Specification {
+public class StudentSpec extends Specification {
     def "register"() {
         expect: false
     }
@@ -18,19 +18,27 @@ public class CompanySpec extends Specification {
         expect: false
     }
 
-    def "post jobs for a schools"() {
+    def "search for jobs"() {
         expect: false
     }
 
-    def "view posted jobs"() {
+    def "shortlist jobs"() {
+        expect: false
+    }
+
+    def "manage shortlist"() {
+        expect: false
+    }
+
+    def "create application packages"() {
+        expect: false
+    }
+
+    def "apply to jobs"() {
         expect: false
     }
 
     def "view applications"() {
-        expect: false
-    }
-
-    def "process application - reject, interview"() {
         expect: false
     }
 
@@ -42,7 +50,15 @@ public class CompanySpec extends Specification {
         expect: false
     }
 
-    def "send job offers"() {
+    def "view offers"() {
+        expect: false
+    }
+
+    def "accept offer"() {
+        expect: false
+    }
+
+    def "update settings"() {
         expect: false
     }
 }

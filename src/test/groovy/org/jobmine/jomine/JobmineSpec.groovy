@@ -1,11 +1,10 @@
-package vsajja.org.jomine
+package org.jobmine.jomine
 
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
-import spock.lang.Unroll
 
 /**
  * Created by vsajja on 2016-11-02.
@@ -19,7 +18,7 @@ public class JobmineSpec extends Specification {
     @Delegate
     TestHttpClient httpClient = sut.httpClient
 
-    def "hello world endpoint"() {
+    def "hello world"() {
         when:
         get()
 
@@ -27,9 +26,16 @@ public class JobmineSpec extends Specification {
         response.body.text == 'hello world!'
     }
 
-    def "get stats"()
-    {
+    def "get stats"() {
         expect: false
+    }
+
+    def "search jobs"() {
+        when:
+        get('api/v1/jobs')
+
+        then:
+        response.body.text
     }
 
     def "search jobs by keyword"() {
@@ -41,28 +47,42 @@ public class JobmineSpec extends Specification {
     }
 
     def "get schools"() {
-        expect: false
+        when:
+        get('api/v1/schools')
+
+        then:
+        response.body.text
     }
 
     def "get students"() {
-        expect: false
+        when:
+        get('api/v1/students')
+
+        then:
+        response.body.text
     }
 
     def "get companies"() {
-        expect: false
+        when:
+        get('api/v1/companies')
+
+        then:
+        response.body.text
     }
 
     def "get countries"() {
+        when:
+        get('api/v1/countries')
+
+        then:
+        response.body.text
+    }
+
+    def "approve pending jobs"() {
         expect: false
     }
 
-    def "approve pending jobs"()
-    {
-        expect: false
-    }
-
-    def "send notifications"()
-    {
+    def "send notifications"() {
         expect: false
     }
 }
