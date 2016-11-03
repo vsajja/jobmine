@@ -54,6 +54,10 @@ public class StudentSpec extends Specification {
         expect: false
     }
 
+    def "accept offer"() {
+        expect: false
+    }
+
     def "update settings"() {
         expect: false
     }

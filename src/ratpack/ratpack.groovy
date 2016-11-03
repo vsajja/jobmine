@@ -68,7 +68,7 @@ ratpack {
         all RequestLogger.ncsa(log)
 
         get {
-            render 'Hello world!'
+            render 'hello world!'
         }
 
         prefix('api/v1') {

@@ -24,10 +24,14 @@ dependencies {
     compile 'org.pac4j:pac4j-http:1.8.5'
     compile 'org.pac4j:pac4j-oauth:1.8.5'
     compile 'joda-time:joda-time:2.9.4'
+    runtime 'org.slf4j:slf4j-simple:1.7.12'
+    testCompile ('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
+
     compile ratpack.dependency('hikari')
     compile ratpack.dependency('pac4j')
-    runtime 'org.slf4j:slf4j-simple:1.7.12'
-    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+    testCompile ratpack.dependency('groovy-test')
 }
 
 task stage {
