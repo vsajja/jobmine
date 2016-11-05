@@ -32,9 +32,15 @@ CREATE TABLE job
     status VARCHAR,
     total_openings INTEGER
 );
-CREATE TABLE job_application
+CREATE TABLE job_app
 (
     job_application_id INTEGER PRIMARY KEY NOT NULL
+);
+CREATE TABLE job_app_package
+(
+    job_app_package_id INTEGER PRIMARY KEY NOT NULL,
+    name VARCHAR,
+    student_id INTEGER
 );
 CREATE TABLE job_interview
 (

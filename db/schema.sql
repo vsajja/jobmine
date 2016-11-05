@@ -16,7 +16,9 @@ CREATE TABLE document
 (
     document_id INTEGER PRIMARY KEY NOT NULL,
     name VARCHAR,
-    data BYTEA
+    data BYTEA,
+    job_app_package_id INTEGER,
+    CONSTRAINT document_job_app_package_job_app_package_id_fk FOREIGN KEY (job_app_package_id) REFERENCES job_app_package (job_app_package_id)
 );
 CREATE TABLE image
 (
@@ -37,18 +39,35 @@ CREATE TABLE job
     total_openings INTEGER,
     job_mine_id INTEGER,
     company_id INTEGER,
+    location_id INTEGER,
     CONSTRAINT job_job_mine_job_mine_id_fk FOREIGN KEY (job_mine_id) REFERENCES job_mine (job_mine_id),
-    CONSTRAINT job_company_company_id_fk FOREIGN KEY (company_id) REFERENCES company (company_id)
+    CONSTRAINT job_company_company_id_fk FOREIGN KEY (company_id) REFERENCES company (company_id),
+    CONSTRAINT job_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id)
 );
-CREATE TABLE job_application
+CREATE TABLE job_app
 (
-    job_application_id INTEGER PRIMARY KEY NOT NULL
+    job_app_id INTEGER PRIMARY KEY NOT NULL,
+    job_id INTEGER,
+    job_app_package_id INTEGER,
+    CONSTRAINT job_app_job_job_id_fk FOREIGN KEY (job_id) REFERENCES job (job_id),
+    CONSTRAINT job_app_job_app_package_job_app_package_id_fk FOREIGN KEY (job_app_package_id) REFERENCES job_app_package (job_app_package_id)
+);
+CREATE TABLE job_app_package
+(
+    job_app_package_id INTEGER PRIMARY KEY NOT NULL,
+    name VARCHAR,
+    student_id INTEGER,
+    CONSTRAINT job_app_package_student_student_id_fk FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
 CREATE TABLE job_interview
 (
     job_interview_id INTEGER PRIMARY KEY NOT NULL,
     status VARCHAR,
-    created_timestamp TIMESTAMP
+    created_timestamp TIMESTAMP,
+    job_id INTEGER,
+    student_id INTEGER,
+    CONSTRAINT job_interview_job_job_id_fk FOREIGN KEY (job_id) REFERENCES job (job_id),
+    CONSTRAINT job_interview_student_student_id_fk FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
 CREATE TABLE job_mine
 (
@@ -61,7 +80,11 @@ CREATE TABLE job_offer
 (
     job_offer_id INTEGER PRIMARY KEY NOT NULL,
     expiry_timestamp TIMESTAMP,
-    salary VARCHAR
+    salary VARCHAR,
+    job_id INTEGER,
+    student_id INTEGER,
+    CONSTRAINT job_offer_job_job_id_fk FOREIGN KEY (job_id) REFERENCES job (job_id),
+    CONSTRAINT job_offer_student_student_id_fk FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
 CREATE TABLE location
 (
