@@ -72,6 +72,26 @@ ratpack {
         }
 
         prefix('api/v1') {
+            prefix('jobmine') {
+
+            }
+
+            prefix('company') {
+
+            }
+
+
+            prefix('company') {
+
+            }
+
+
+            prefix('company') {
+
+            }
+
+
+
             get('jobs') {
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 DataSource dataSource = registry.get(DataSource.class)
