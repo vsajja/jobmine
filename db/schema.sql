@@ -30,7 +30,11 @@ CREATE TABLE job
     created_timestamp TIMESTAMP,
     type VARCHAR,
     status VARCHAR,
-    total_openings INTEGER
+    total_openings INTEGER,
+    job_mine_id INTEGER,
+    company_id INTEGER,
+    CONSTRAINT job_job_mine_job_mine_id_fk FOREIGN KEY (job_mine_id) REFERENCES job_mine (job_mine_id),
+    CONSTRAINT job_company_company_id_fk FOREIGN KEY (company_id) REFERENCES company (company_id)
 );
 CREATE TABLE job_application
 (
@@ -45,7 +49,9 @@ CREATE TABLE job_interview
 CREATE TABLE job_mine
 (
     job_mine_id INTEGER PRIMARY KEY NOT NULL,
-    name VARCHAR
+    name VARCHAR,
+    school_id INTEGER,
+    CONSTRAINT job_mine_school_school_id_fk FOREIGN KEY (school_id) REFERENCES school (school_id)
 );
 CREATE TABLE job_offer
 (
