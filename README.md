@@ -19,3 +19,7 @@ taskkill /F /PID <pid>
 # Heroku #
 
 https://jobmine-app.herokuapp.com/index.html
+
+# Total lines of code report #
+
+git ls-files | xargs wc -l

@@ -6,7 +6,11 @@ CREATE TABLE company
     website_url VARCHAR,
     total_employees INTEGER,
     industry VARCHAR,
-    founded_date DATE
+    founded_date DATE,
+    location_id INTEGER,
+    image_id INTEGER,
+    CONSTRAINT company_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id),
+    CONSTRAINT company_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id)
 );
 CREATE TABLE document
 (
@@ -74,7 +78,11 @@ CREATE TABLE school
     type VARCHAR,
     total_students INTEGER,
     established_date DATE,
-    description VARCHAR
+    description VARCHAR,
+    location_id INTEGER,
+    image_id INTEGER,
+    CONSTRAINT school_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id),
+    CONSTRAINT school_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id)
 );
 CREATE TABLE student
 (
@@ -97,5 +105,9 @@ CREATE TABLE student
     employment_history VARCHAR,
     skills VARCHAR,
     school_id INTEGER,
-    CONSTRAINT student_school_school_id_fk FOREIGN KEY (school_id) REFERENCES school (school_id)
+    location_id INTEGER,
+    image_id INTEGER,
+    CONSTRAINT student_school_school_id_fk FOREIGN KEY (school_id) REFERENCES school (school_id),
+    CONSTRAINT student_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id),
+    CONSTRAINT student_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id)
 );
