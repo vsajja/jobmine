@@ -89,7 +89,5 @@ CREATE TABLE student
     dreams VARCHAR,
     phone_number VARCHAR,
     employment_history VARCHAR,
-    skills VARCHAR,
-    school_id INTEGER,
-    CONSTRAINT student_school_school_id_fk FOREIGN KEY (school_id) REFERENCES school (school_id)
+    skills VARCHAR
 );
