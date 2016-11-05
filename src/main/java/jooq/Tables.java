@@ -7,16 +7,17 @@ package jooq;
 import javax.annotation.Generated;
 
 import jooq.tables.Company;
-import jooq.tables.Group;
+import jooq.tables.Document;
 import jooq.tables.Image;
 import jooq.tables.Job;
-import jooq.tables.JobApplication;
+import jooq.tables.JobApp;
+import jooq.tables.JobAppPackage;
 import jooq.tables.JobInterview;
+import jooq.tables.JobMine;
 import jooq.tables.JobOffer;
 import jooq.tables.Location;
 import jooq.tables.School;
 import jooq.tables.Student;
-import jooq.tables.User;
 
 
 /**
@@ -38,9 +39,9 @@ public class Tables {
 	public static final Company COMPANY = jooq.tables.Company.COMPANY;
 
 	/**
-	 * The table public.group
+	 * The table public.document
 	 */
-	public static final Group GROUP = jooq.tables.Group.GROUP;
+	public static final Document DOCUMENT = jooq.tables.Document.DOCUMENT;
 
 	/**
 	 * The table public.image
@@ -53,14 +54,24 @@ public class Tables {
 	public static final Job JOB = jooq.tables.Job.JOB;
 
 	/**
-	 * The table public.job_application
+	 * The table public.job_app
 	 */
-	public static final JobApplication JOB_APPLICATION = jooq.tables.JobApplication.JOB_APPLICATION;
+	public static final JobApp JOB_APP = jooq.tables.JobApp.JOB_APP;
+
+	/**
+	 * The table public.job_app_package
+	 */
+	public static final JobAppPackage JOB_APP_PACKAGE = jooq.tables.JobAppPackage.JOB_APP_PACKAGE;
 
 	/**
 	 * The table public.job_interview
 	 */
 	public static final JobInterview JOB_INTERVIEW = jooq.tables.JobInterview.JOB_INTERVIEW;
+
+	/**
+	 * The table public.job_mine
+	 */
+	public static final JobMine JOB_MINE = jooq.tables.JobMine.JOB_MINE;
 
 	/**
 	 * The table public.job_offer
@@ -81,9 +92,4 @@ public class Tables {
 	 * The table public.student
 	 */
 	public static final Student STUDENT = jooq.tables.Student.STUDENT;
-
-	/**
-	 * The table public.user
-	 */
-	public static final User USER = jooq.tables.User.USER;
 }

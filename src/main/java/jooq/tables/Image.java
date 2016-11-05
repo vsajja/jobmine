@@ -4,14 +4,19 @@
 package jooq.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooq.Keys;
 import jooq.Public;
 import jooq.tables.records.ImageRecord;
 
 import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -28,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Image extends TableImpl<ImageRecord> {
 
-	private static final long serialVersionUID = 645975392;
+	private static final long serialVersionUID = 332133588;
 
 	/**
 	 * The reference instance of <code>public.image</code>
@@ -46,7 +51,27 @@ public class Image extends TableImpl<ImageRecord> {
 	/**
 	 * The column <code>public.image.image_id</code>.
 	 */
-	public final TableField<ImageRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<ImageRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>public.image.name</code>.
+	 */
+	public final TableField<ImageRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.image.src</code>.
+	 */
+	public final TableField<ImageRecord, String> SRC = createField("src", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.image.url</code>.
+	 */
+	public final TableField<ImageRecord, String> URL = createField("url", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.image.data</code>.
+	 */
+	public final TableField<ImageRecord, byte[]> DATA = createField("data", org.jooq.impl.SQLDataType.BLOB, this, "");
 
 	/**
 	 * Create a <code>public.image</code> table reference
@@ -68,6 +93,22 @@ public class Image extends TableImpl<ImageRecord> {
 
 	private Image(String alias, Table<ImageRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UniqueKey<ImageRecord> getPrimaryKey() {
+		return Keys.IMAGE_PKEY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<UniqueKey<ImageRecord>> getKeys() {
+		return Arrays.<UniqueKey<ImageRecord>>asList(Keys.IMAGE_PKEY);
 	}
 
 	/**

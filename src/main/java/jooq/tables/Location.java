@@ -4,14 +4,19 @@
 package jooq.tables;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooq.Keys;
 import jooq.Public;
 import jooq.tables.records.LocationRecord;
 
 import org.jooq.Field;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -28,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location extends TableImpl<LocationRecord> {
 
-	private static final long serialVersionUID = 623185400;
+	private static final long serialVersionUID = -1169752548;
 
 	/**
 	 * The reference instance of <code>public.location</code>
@@ -46,7 +51,27 @@ public class Location extends TableImpl<LocationRecord> {
 	/**
 	 * The column <code>public.location.location_id</code>.
 	 */
-	public final TableField<LocationRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<LocationRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>public.location.city</code>.
+	 */
+	public final TableField<LocationRecord, String> CITY = createField("city", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.location.state_or_province</code>.
+	 */
+	public final TableField<LocationRecord, String> STATE_OR_PROVINCE = createField("state_or_province", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.location.zip_or_postalcode</code>.
+	 */
+	public final TableField<LocationRecord, String> ZIP_OR_POSTALCODE = createField("zip_or_postalcode", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.location.country</code>.
+	 */
+	public final TableField<LocationRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
 	 * Create a <code>public.location</code> table reference
@@ -68,6 +93,22 @@ public class Location extends TableImpl<LocationRecord> {
 
 	private Location(String alias, Table<LocationRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UniqueKey<LocationRecord> getPrimaryKey() {
+		return Keys.LOCATION_PKEY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<UniqueKey<LocationRecord>> getKeys() {
+		return Arrays.<UniqueKey<LocationRecord>>asList(Keys.LOCATION_PKEY);
 	}
 
 	/**

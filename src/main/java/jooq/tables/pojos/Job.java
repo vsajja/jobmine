@@ -5,7 +5,7 @@ package jooq.tables.pojos;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 
@@ -23,42 +23,54 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job implements Serializable {
 
-	private static final long serialVersionUID = -1564971286;
+	private static final long serialVersionUID = 324583466;
 
-	private final Integer jobId;
-	private final String  title;
-	private final String  description_9;
-	private final String  location;
-	private final Date    dateposted_9;
-	private final String  employername;
-	private final byte[]  employerlogo;
+	private final Integer   jobId;
+	private final String    title;
+	private final String    description_9;
+	private final Timestamp createdTimestamp;
+	private final String    type;
+	private final String    status;
+	private final Integer   totalOpenings;
+	private final Integer   jobMineId;
+	private final Integer   companyId;
+	private final Integer   locationId;
 
 	public Job(Job value) {
 		this.jobId = value.jobId;
 		this.title = value.title;
 		this.description_9 = value.description_9;
-		this.location = value.location;
-		this.dateposted_9 = value.dateposted_9;
-		this.employername = value.employername;
-		this.employerlogo = value.employerlogo;
+		this.createdTimestamp = value.createdTimestamp;
+		this.type = value.type;
+		this.status = value.status;
+		this.totalOpenings = value.totalOpenings;
+		this.jobMineId = value.jobMineId;
+		this.companyId = value.companyId;
+		this.locationId = value.locationId;
 	}
 
 	public Job(
-		Integer jobId,
-		String  title,
-		String  description_9,
-		String  location,
-		Date    dateposted_9,
-		String  employername,
-		byte[]  employerlogo
+		Integer   jobId,
+		String    title,
+		String    description_9,
+		Timestamp createdTimestamp,
+		String    type,
+		String    status,
+		Integer   totalOpenings,
+		Integer   jobMineId,
+		Integer   companyId,
+		Integer   locationId
 	) {
 		this.jobId = jobId;
 		this.title = title;
 		this.description_9 = description_9;
-		this.location = location;
-		this.dateposted_9 = dateposted_9;
-		this.employername = employername;
-		this.employerlogo = employerlogo;
+		this.createdTimestamp = createdTimestamp;
+		this.type = type;
+		this.status = status;
+		this.totalOpenings = totalOpenings;
+		this.jobMineId = jobMineId;
+		this.companyId = companyId;
+		this.locationId = locationId;
 	}
 
 	public Integer getJobId() {
@@ -73,20 +85,32 @@ public class Job implements Serializable {
 		return this.description_9;
 	}
 
-	public String getLocation() {
-		return this.location;
+	public Timestamp getCreatedTimestamp() {
+		return this.createdTimestamp;
 	}
 
-	public Date getDateposted_9() {
-		return this.dateposted_9;
+	public String getType() {
+		return this.type;
 	}
 
-	public String getEmployername() {
-		return this.employername;
+	public String getStatus() {
+		return this.status;
 	}
 
-	public byte[] getEmployerlogo() {
-		return this.employerlogo;
+	public Integer getTotalOpenings() {
+		return this.totalOpenings;
+	}
+
+	public Integer getJobMineId() {
+		return this.jobMineId;
+	}
+
+	public Integer getCompanyId() {
+		return this.companyId;
+	}
+
+	public Integer getLocationId() {
+		return this.locationId;
 	}
 
 	@Override
@@ -96,10 +120,13 @@ public class Job implements Serializable {
 		sb.append(jobId);
 		sb.append(", ").append(title);
 		sb.append(", ").append(description_9);
-		sb.append(", ").append(location);
-		sb.append(", ").append(dateposted_9);
-		sb.append(", ").append(employername);
-		sb.append(", ").append("[binary...]");
+		sb.append(", ").append(createdTimestamp);
+		sb.append(", ").append(type);
+		sb.append(", ").append(status);
+		sb.append(", ").append(totalOpenings);
+		sb.append(", ").append(jobMineId);
+		sb.append(", ").append(companyId);
+		sb.append(", ").append(locationId);
 
 		sb.append(")");
 		return sb.toString();

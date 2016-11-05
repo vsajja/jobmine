@@ -4,7 +4,7 @@
 package jooq.tables.daos;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -52,83 +52,6 @@ public class StudentDao extends DAOImpl<StudentRecord, jooq.tables.pojos.Student
 	}
 
 	/**
-	 * Fetch records that have <code>name IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByName(String... values) {
-		return fetch(Student.STUDENT.NAME, values);
-	}
-
-	/**
-	 * Fetch records that have <code>phonenumber IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByPhonenumber(String... values) {
-		return fetch(Student.STUDENT.PHONENUMBER, values);
-	}
-
-	/**
-	 * Fetch records that have <code>email IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByEmail(String... values) {
-		return fetch(Student.STUDENT.EMAIL, values);
-	}
-
-	/**
-	 * Fetch records that have <code>datejoined IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByDatejoined(Date... values) {
-		return fetch(Student.STUDENT.DATEJOINED, values);
-	}
-
-	/**
-	 * Fetch records that have <code>streetaddress IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByStreetaddress(String... values) {
-		return fetch(Student.STUDENT.STREETADDRESS, values);
-	}
-
-	/**
-	 * Fetch records that have <code>city IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByCity(String... values) {
-		return fetch(Student.STUDENT.CITY, values);
-	}
-
-	/**
-	 * Fetch records that have <code>region IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByRegion(String... values) {
-		return fetch(Student.STUDENT.REGION, values);
-	}
-
-	/**
-	 * Fetch records that have <code>country IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByCountry(String... values) {
-		return fetch(Student.STUDENT.COUNTRY, values);
-	}
-
-	/**
-	 * Fetch records that have <code>postalorzip IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByPostalorzip(String... values) {
-		return fetch(Student.STUDENT.POSTALORZIP, values);
-	}
-
-	/**
-	 * Fetch records that have <code>description IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByDescription(String... values) {
-		return fetch(Student.STUDENT.DESCRIPTION, values);
-	}
-
-	/**
-	 * Fetch records that have <code>age IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.Student> fetchByAge(Integer... values) {
-		return fetch(Student.STUDENT.AGE, values);
-	}
-
-	/**
 	 * Fetch records that have <code>student_id IN (values)</code>
 	 */
 	public List<jooq.tables.pojos.Student> fetchByStudentId(Integer... values) {
@@ -140,5 +63,145 @@ public class StudentDao extends DAOImpl<StudentRecord, jooq.tables.pojos.Student
 	 */
 	public jooq.tables.pojos.Student fetchOneByStudentId(Integer value) {
 		return fetchOne(Student.STUDENT.STUDENT_ID, value);
+	}
+
+	/**
+	 * Fetch records that have <code>first_name IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByFirstName(String... values) {
+		return fetch(Student.STUDENT.FIRST_NAME, values);
+	}
+
+	/**
+	 * Fetch records that have <code>last_name IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByLastName(String... values) {
+		return fetch(Student.STUDENT.LAST_NAME, values);
+	}
+
+	/**
+	 * Fetch records that have <code>username IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByUsername(String... values) {
+		return fetch(Student.STUDENT.USERNAME, values);
+	}
+
+	/**
+	 * Fetch records that have <code>email_address IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByEmailAddress(String... values) {
+		return fetch(Student.STUDENT.EMAIL_ADDRESS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>last_loggedin_timestamp IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByLastLoggedinTimestamp(Timestamp... values) {
+		return fetch(Student.STUDENT.LAST_LOGGEDIN_TIMESTAMP, values);
+	}
+
+	/**
+	 * Fetch records that have <code>employment_status IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByEmploymentStatus(String... values) {
+		return fetch(Student.STUDENT.EMPLOYMENT_STATUS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>joined_timestamp IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByJoinedTimestamp(Timestamp... values) {
+		return fetch(Student.STUDENT.JOINED_TIMESTAMP, values);
+	}
+
+	/**
+	 * Fetch records that have <code>karma IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByKarma(Integer... values) {
+		return fetch(Student.STUDENT.KARMA, values);
+	}
+
+	/**
+	 * Fetch records that have <code>total_views IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByTotalViews(Integer... values) {
+		return fetch(Student.STUDENT.TOTAL_VIEWS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>age IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByAge(Integer... values) {
+		return fetch(Student.STUDENT.AGE, values);
+	}
+
+	/**
+	 * Fetch records that have <code>gender IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByGender(String... values) {
+		return fetch(Student.STUDENT.GENDER, values);
+	}
+
+	/**
+	 * Fetch records that have <code>salary IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchBySalary(String... values) {
+		return fetch(Student.STUDENT.SALARY, values);
+	}
+
+	/**
+	 * Fetch records that have <code>relationship_status IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByRelationshipStatus(String... values) {
+		return fetch(Student.STUDENT.RELATIONSHIP_STATUS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>dreams IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByDreams(String... values) {
+		return fetch(Student.STUDENT.DREAMS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>phone_number IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByPhoneNumber(String... values) {
+		return fetch(Student.STUDENT.PHONE_NUMBER, values);
+	}
+
+	/**
+	 * Fetch records that have <code>employment_history IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByEmploymentHistory(String... values) {
+		return fetch(Student.STUDENT.EMPLOYMENT_HISTORY, values);
+	}
+
+	/**
+	 * Fetch records that have <code>skills IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchBySkills(String... values) {
+		return fetch(Student.STUDENT.SKILLS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>school_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchBySchoolId(Integer... values) {
+		return fetch(Student.STUDENT.SCHOOL_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>location_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByLocationId(Integer... values) {
+		return fetch(Student.STUDENT.LOCATION_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>image_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Student> fetchByImageId(Integer... values) {
+		return fetch(Student.STUDENT.IMAGE_ID, values);
 	}
 }

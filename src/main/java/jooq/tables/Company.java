@@ -4,6 +4,7 @@
 package jooq.tables;
 
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import jooq.Public;
 import jooq.tables.records.CompanyRecord;
 
 import org.jooq.Field;
-import org.jooq.Identity;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company extends TableImpl<CompanyRecord> {
 
-	private static final long serialVersionUID = 1424042754;
+	private static final long serialVersionUID = 658308120;
 
 	/**
 	 * The reference instance of <code>public.company</code>
@@ -52,7 +53,7 @@ public class Company extends TableImpl<CompanyRecord> {
 	/**
 	 * The column <code>public.company.company_id</code>.
 	 */
-	public final TableField<CompanyRecord, Integer> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	public final TableField<CompanyRecord, Integer> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>public.company.name</code>.
@@ -60,9 +61,39 @@ public class Company extends TableImpl<CompanyRecord> {
 	public final TableField<CompanyRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.company.logourl</code>.
+	 * The column <code>public.company.description</code>.
 	 */
-	public final TableField<CompanyRecord, String> LOGOURL = createField("logourl", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<CompanyRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.company.website_url</code>.
+	 */
+	public final TableField<CompanyRecord, String> WEBSITE_URL = createField("website_url", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.company.total_employees</code>.
+	 */
+	public final TableField<CompanyRecord, Integer> TOTAL_EMPLOYEES = createField("total_employees", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.company.industry</code>.
+	 */
+	public final TableField<CompanyRecord, String> INDUSTRY = createField("industry", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.company.founded_date</code>.
+	 */
+	public final TableField<CompanyRecord, Date> FOUNDED_DATE = createField("founded_date", org.jooq.impl.SQLDataType.DATE, this, "");
+
+	/**
+	 * The column <code>public.company.location_id</code>.
+	 */
+	public final TableField<CompanyRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.company.image_id</code>.
+	 */
+	public final TableField<CompanyRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.company</code> table reference
@@ -90,16 +121,8 @@ public class Company extends TableImpl<CompanyRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<CompanyRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_COMPANY;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public UniqueKey<CompanyRecord> getPrimaryKey() {
-		return Keys.COMPANY_ID_PK;
+		return Keys.COMPANY_PKEY;
 	}
 
 	/**
@@ -107,7 +130,15 @@ public class Company extends TableImpl<CompanyRecord> {
 	 */
 	@Override
 	public List<UniqueKey<CompanyRecord>> getKeys() {
-		return Arrays.<UniqueKey<CompanyRecord>>asList(Keys.COMPANY_ID_PK);
+		return Arrays.<UniqueKey<CompanyRecord>>asList(Keys.COMPANY_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<CompanyRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<CompanyRecord, ?>>asList(Keys.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK, Keys.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK);
 	}
 
 	/**

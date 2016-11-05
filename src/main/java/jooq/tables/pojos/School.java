@@ -5,6 +5,7 @@ package jooq.tables.pojos;
 
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.annotation.Generated;
 
@@ -22,54 +23,46 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School implements Serializable {
 
-	private static final long serialVersionUID = -1203218853;
+	private static final long serialVersionUID = -348055410;
 
 	private final Integer schoolId;
 	private final String  name;
-	private final String  schooltype;
-	private final String  city;
-	private final String  provinceorstate;
-	private final String  established;
-	private final Integer totalstudents;
-	private final String  wikilink;
-	private final String  logosrc;
-	private final String  country;
+	private final String  type;
+	private final Integer totalStudents;
+	private final Date    establishedDate;
+	private final String  description;
+	private final Integer locationId;
+	private final Integer imageId;
 
 	public School(School value) {
 		this.schoolId = value.schoolId;
 		this.name = value.name;
-		this.schooltype = value.schooltype;
-		this.city = value.city;
-		this.provinceorstate = value.provinceorstate;
-		this.established = value.established;
-		this.totalstudents = value.totalstudents;
-		this.wikilink = value.wikilink;
-		this.logosrc = value.logosrc;
-		this.country = value.country;
+		this.type = value.type;
+		this.totalStudents = value.totalStudents;
+		this.establishedDate = value.establishedDate;
+		this.description = value.description;
+		this.locationId = value.locationId;
+		this.imageId = value.imageId;
 	}
 
 	public School(
 		Integer schoolId,
 		String  name,
-		String  schooltype,
-		String  city,
-		String  provinceorstate,
-		String  established,
-		Integer totalstudents,
-		String  wikilink,
-		String  logosrc,
-		String  country
+		String  type,
+		Integer totalStudents,
+		Date    establishedDate,
+		String  description,
+		Integer locationId,
+		Integer imageId
 	) {
 		this.schoolId = schoolId;
 		this.name = name;
-		this.schooltype = schooltype;
-		this.city = city;
-		this.provinceorstate = provinceorstate;
-		this.established = established;
-		this.totalstudents = totalstudents;
-		this.wikilink = wikilink;
-		this.logosrc = logosrc;
-		this.country = country;
+		this.type = type;
+		this.totalStudents = totalStudents;
+		this.establishedDate = establishedDate;
+		this.description = description;
+		this.locationId = locationId;
+		this.imageId = imageId;
 	}
 
 	public Integer getSchoolId() {
@@ -80,36 +73,28 @@ public class School implements Serializable {
 		return this.name;
 	}
 
-	public String getSchooltype() {
-		return this.schooltype;
+	public String getType() {
+		return this.type;
 	}
 
-	public String getCity() {
-		return this.city;
+	public Integer getTotalStudents() {
+		return this.totalStudents;
 	}
 
-	public String getProvinceorstate() {
-		return this.provinceorstate;
+	public Date getEstablishedDate() {
+		return this.establishedDate;
 	}
 
-	public String getEstablished() {
-		return this.established;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public Integer getTotalstudents() {
-		return this.totalstudents;
+	public Integer getLocationId() {
+		return this.locationId;
 	}
 
-	public String getWikilink() {
-		return this.wikilink;
-	}
-
-	public String getLogosrc() {
-		return this.logosrc;
-	}
-
-	public String getCountry() {
-		return this.country;
+	public Integer getImageId() {
+		return this.imageId;
 	}
 
 	@Override
@@ -118,14 +103,12 @@ public class School implements Serializable {
 
 		sb.append(schoolId);
 		sb.append(", ").append(name);
-		sb.append(", ").append(schooltype);
-		sb.append(", ").append(city);
-		sb.append(", ").append(provinceorstate);
-		sb.append(", ").append(established);
-		sb.append(", ").append(totalstudents);
-		sb.append(", ").append(wikilink);
-		sb.append(", ").append(logosrc);
-		sb.append(", ").append(country);
+		sb.append(", ").append(type);
+		sb.append(", ").append(totalStudents);
+		sb.append(", ").append(establishedDate);
+		sb.append(", ").append(description);
+		sb.append(", ").append(locationId);
+		sb.append(", ").append(imageId);
 
 		sb.append(")");
 		return sb.toString();

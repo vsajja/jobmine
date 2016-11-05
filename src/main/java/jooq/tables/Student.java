@@ -4,7 +4,7 @@
 package jooq.tables;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import jooq.Public;
 import jooq.tables.records.StudentRecord;
 
 import org.jooq.Field;
-import org.jooq.Identity;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-	private static final long serialVersionUID = 75670561;
+	private static final long serialVersionUID = -1422746436;
 
 	/**
 	 * The reference instance of <code>public.student</code>
@@ -51,54 +51,54 @@ public class Student extends TableImpl<StudentRecord> {
 	}
 
 	/**
-	 * The column <code>public.student.name</code>.
+	 * The column <code>public.student.student_id</code>.
 	 */
-	public final TableField<StudentRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, Integer> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
-	 * The column <code>public.student.phonenumber</code>.
+	 * The column <code>public.student.first_name</code>.
 	 */
-	public final TableField<StudentRecord, String> PHONENUMBER = createField("phonenumber", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, String> FIRST_NAME = createField("first_name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.student.email</code>.
+	 * The column <code>public.student.last_name</code>.
 	 */
-	public final TableField<StudentRecord, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, String> LAST_NAME = createField("last_name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.student.datejoined</code>.
+	 * The column <code>public.student.username</code>.
 	 */
-	public final TableField<StudentRecord, Date> DATEJOINED = createField("datejoined", org.jooq.impl.SQLDataType.DATE, this, "");
+	public final TableField<StudentRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.student.streetaddress</code>.
+	 * The column <code>public.student.email_address</code>.
 	 */
-	public final TableField<StudentRecord, String> STREETADDRESS = createField("streetaddress", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, String> EMAIL_ADDRESS = createField("email_address", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.student.city</code>.
+	 * The column <code>public.student.last_loggedin_timestamp</code>.
 	 */
-	public final TableField<StudentRecord, String> CITY = createField("city", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, Timestamp> LAST_LOGGEDIN_TIMESTAMP = createField("last_loggedin_timestamp", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
 	/**
-	 * The column <code>public.student.region</code>.
+	 * The column <code>public.student.employment_status</code>.
 	 */
-	public final TableField<StudentRecord, String> REGION = createField("region", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, String> EMPLOYMENT_STATUS = createField("employment_status", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.student.country</code>.
+	 * The column <code>public.student.joined_timestamp</code>.
 	 */
-	public final TableField<StudentRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, Timestamp> JOINED_TIMESTAMP = createField("joined_timestamp", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
 	/**
-	 * The column <code>public.student.postalorzip</code>.
+	 * The column <code>public.student.karma</code>.
 	 */
-	public final TableField<StudentRecord, String> POSTALORZIP = createField("postalorzip", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, Integer> KARMA = createField("karma", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
-	 * The column <code>public.student.description</code>.
+	 * The column <code>public.student.total_views</code>.
 	 */
-	public final TableField<StudentRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<StudentRecord, Integer> TOTAL_VIEWS = createField("total_views", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * The column <code>public.student.age</code>.
@@ -106,9 +106,54 @@ public class Student extends TableImpl<StudentRecord> {
 	public final TableField<StudentRecord, Integer> AGE = createField("age", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
-	 * The column <code>public.student.student_id</code>.
+	 * The column <code>public.student.gender</code>.
 	 */
-	public final TableField<StudentRecord, Integer> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	public final TableField<StudentRecord, String> GENDER = createField("gender", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.salary</code>.
+	 */
+	public final TableField<StudentRecord, String> SALARY = createField("salary", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.relationship_status</code>.
+	 */
+	public final TableField<StudentRecord, String> RELATIONSHIP_STATUS = createField("relationship_status", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.dreams</code>.
+	 */
+	public final TableField<StudentRecord, String> DREAMS = createField("dreams", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.phone_number</code>.
+	 */
+	public final TableField<StudentRecord, String> PHONE_NUMBER = createField("phone_number", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.employment_history</code>.
+	 */
+	public final TableField<StudentRecord, String> EMPLOYMENT_HISTORY = createField("employment_history", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.skills</code>.
+	 */
+	public final TableField<StudentRecord, String> SKILLS = createField("skills", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.student.school_id</code>.
+	 */
+	public final TableField<StudentRecord, Integer> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.student.location_id</code>.
+	 */
+	public final TableField<StudentRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.student.image_id</code>.
+	 */
+	public final TableField<StudentRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.student</code> table reference
@@ -136,16 +181,8 @@ public class Student extends TableImpl<StudentRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<StudentRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_STUDENT;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public UniqueKey<StudentRecord> getPrimaryKey() {
-		return Keys.STUDENT_ID_PK;
+		return Keys.STUDENT_PKEY;
 	}
 
 	/**
@@ -153,7 +190,15 @@ public class Student extends TableImpl<StudentRecord> {
 	 */
 	@Override
 	public List<UniqueKey<StudentRecord>> getKeys() {
-		return Arrays.<UniqueKey<StudentRecord>>asList(Keys.STUDENT_ID_PK);
+		return Arrays.<UniqueKey<StudentRecord>>asList(Keys.STUDENT_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<StudentRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<StudentRecord, ?>>asList(Keys.STUDENT__STUDENT_SCHOOL_SCHOOL_ID_FK, Keys.STUDENT__STUDENT_LOCATION_LOCATION_ID_FK, Keys.STUDENT__STUDENT_IMAGE_IMAGE_ID_FK);
 	}
 
 	/**

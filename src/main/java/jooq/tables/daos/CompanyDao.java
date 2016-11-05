@@ -4,6 +4,7 @@
 package jooq.tables.daos;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -72,9 +73,51 @@ public class CompanyDao extends DAOImpl<CompanyRecord, jooq.tables.pojos.Company
 	}
 
 	/**
-	 * Fetch records that have <code>logourl IN (values)</code>
+	 * Fetch records that have <code>description IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Company> fetchByLogourl(String... values) {
-		return fetch(Company.COMPANY.LOGOURL, values);
+	public List<jooq.tables.pojos.Company> fetchByDescription(String... values) {
+		return fetch(Company.COMPANY.DESCRIPTION, values);
+	}
+
+	/**
+	 * Fetch records that have <code>website_url IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByWebsiteUrl(String... values) {
+		return fetch(Company.COMPANY.WEBSITE_URL, values);
+	}
+
+	/**
+	 * Fetch records that have <code>total_employees IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByTotalEmployees(Integer... values) {
+		return fetch(Company.COMPANY.TOTAL_EMPLOYEES, values);
+	}
+
+	/**
+	 * Fetch records that have <code>industry IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByIndustry(String... values) {
+		return fetch(Company.COMPANY.INDUSTRY, values);
+	}
+
+	/**
+	 * Fetch records that have <code>founded_date IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByFoundedDate(Date... values) {
+		return fetch(Company.COMPANY.FOUNDED_DATE, values);
+	}
+
+	/**
+	 * Fetch records that have <code>location_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByLocationId(Integer... values) {
+		return fetch(Company.COMPANY.LOCATION_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>image_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Company> fetchByImageId(Integer... values) {
+		return fetch(Company.COMPANY.IMAGE_ID, values);
 	}
 }

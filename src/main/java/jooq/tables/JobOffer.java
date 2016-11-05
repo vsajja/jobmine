@@ -4,14 +4,21 @@
 package jooq.tables;
 
 
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooq.Keys;
 import jooq.Public;
 import jooq.tables.records.JobOfferRecord;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -28,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobOffer extends TableImpl<JobOfferRecord> {
 
-	private static final long serialVersionUID = 1836007586;
+	private static final long serialVersionUID = -720499072;
 
 	/**
 	 * The reference instance of <code>public.job_offer</code>
@@ -46,7 +53,27 @@ public class JobOffer extends TableImpl<JobOfferRecord> {
 	/**
 	 * The column <code>public.job_offer.job_offer_id</code>.
 	 */
-	public final TableField<JobOfferRecord, Integer> JOB_OFFER_ID = createField("job_offer_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<JobOfferRecord, Integer> JOB_OFFER_ID = createField("job_offer_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>public.job_offer.expiry_timestamp</code>.
+	 */
+	public final TableField<JobOfferRecord, Timestamp> EXPIRY_TIMESTAMP = createField("expiry_timestamp", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>public.job_offer.salary</code>.
+	 */
+	public final TableField<JobOfferRecord, String> SALARY = createField("salary", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.job_offer.job_id</code>.
+	 */
+	public final TableField<JobOfferRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.job_offer.student_id</code>.
+	 */
+	public final TableField<JobOfferRecord, Integer> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.job_offer</code> table reference
@@ -68,6 +95,30 @@ public class JobOffer extends TableImpl<JobOfferRecord> {
 
 	private JobOffer(String alias, Table<JobOfferRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UniqueKey<JobOfferRecord> getPrimaryKey() {
+		return Keys.JOB_OFFER_PKEY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<UniqueKey<JobOfferRecord>> getKeys() {
+		return Arrays.<UniqueKey<JobOfferRecord>>asList(Keys.JOB_OFFER_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<JobOfferRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<JobOfferRecord, ?>>asList(Keys.JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK, Keys.JOB_OFFER__JOB_OFFER_STUDENT_STUDENT_ID_FK);
 	}
 
 	/**

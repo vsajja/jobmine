@@ -5,6 +5,7 @@ package jooq.tables.pojos;
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 
@@ -22,22 +23,54 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobOffer implements Serializable {
 
-	private static final long serialVersionUID = 1088144853;
+	private static final long serialVersionUID = 99235611;
 
-	private final Integer jobOfferId;
+	private final Integer   jobOfferId;
+	private final Timestamp expiryTimestamp;
+	private final String    salary;
+	private final Integer   jobId;
+	private final Integer   studentId;
 
 	public JobOffer(JobOffer value) {
 		this.jobOfferId = value.jobOfferId;
+		this.expiryTimestamp = value.expiryTimestamp;
+		this.salary = value.salary;
+		this.jobId = value.jobId;
+		this.studentId = value.studentId;
 	}
 
 	public JobOffer(
-		Integer jobOfferId
+		Integer   jobOfferId,
+		Timestamp expiryTimestamp,
+		String    salary,
+		Integer   jobId,
+		Integer   studentId
 	) {
 		this.jobOfferId = jobOfferId;
+		this.expiryTimestamp = expiryTimestamp;
+		this.salary = salary;
+		this.jobId = jobId;
+		this.studentId = studentId;
 	}
 
 	public Integer getJobOfferId() {
 		return this.jobOfferId;
+	}
+
+	public Timestamp getExpiryTimestamp() {
+		return this.expiryTimestamp;
+	}
+
+	public String getSalary() {
+		return this.salary;
+	}
+
+	public Integer getJobId() {
+		return this.jobId;
+	}
+
+	public Integer getStudentId() {
+		return this.studentId;
 	}
 
 	@Override
@@ -45,6 +78,10 @@ public class JobOffer implements Serializable {
 		StringBuilder sb = new StringBuilder("JobOffer (");
 
 		sb.append(jobOfferId);
+		sb.append(", ").append(expiryTimestamp);
+		sb.append(", ").append(salary);
+		sb.append(", ").append(jobId);
+		sb.append(", ").append(studentId);
 
 		sb.append(")");
 		return sb.toString();

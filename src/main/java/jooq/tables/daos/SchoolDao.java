@@ -4,6 +4,7 @@
 package jooq.tables.daos;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -72,58 +73,44 @@ public class SchoolDao extends DAOImpl<SchoolRecord, jooq.tables.pojos.School, I
 	}
 
 	/**
-	 * Fetch records that have <code>schooltype IN (values)</code>
+	 * Fetch records that have <code>type IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchBySchooltype(String... values) {
-		return fetch(School.SCHOOL.SCHOOLTYPE, values);
+	public List<jooq.tables.pojos.School> fetchByType(String... values) {
+		return fetch(School.SCHOOL.TYPE, values);
 	}
 
 	/**
-	 * Fetch records that have <code>city IN (values)</code>
+	 * Fetch records that have <code>total_students IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchByCity(String... values) {
-		return fetch(School.SCHOOL.CITY, values);
+	public List<jooq.tables.pojos.School> fetchByTotalStudents(Integer... values) {
+		return fetch(School.SCHOOL.TOTAL_STUDENTS, values);
 	}
 
 	/**
-	 * Fetch records that have <code>provinceorstate IN (values)</code>
+	 * Fetch records that have <code>established_date IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchByProvinceorstate(String... values) {
-		return fetch(School.SCHOOL.PROVINCEORSTATE, values);
+	public List<jooq.tables.pojos.School> fetchByEstablishedDate(Date... values) {
+		return fetch(School.SCHOOL.ESTABLISHED_DATE, values);
 	}
 
 	/**
-	 * Fetch records that have <code>established IN (values)</code>
+	 * Fetch records that have <code>description IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchByEstablished(String... values) {
-		return fetch(School.SCHOOL.ESTABLISHED, values);
+	public List<jooq.tables.pojos.School> fetchByDescription(String... values) {
+		return fetch(School.SCHOOL.DESCRIPTION, values);
 	}
 
 	/**
-	 * Fetch records that have <code>totalstudents IN (values)</code>
+	 * Fetch records that have <code>location_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchByTotalstudents(Integer... values) {
-		return fetch(School.SCHOOL.TOTALSTUDENTS, values);
+	public List<jooq.tables.pojos.School> fetchByLocationId(Integer... values) {
+		return fetch(School.SCHOOL.LOCATION_ID, values);
 	}
 
 	/**
-	 * Fetch records that have <code>wikilink IN (values)</code>
+	 * Fetch records that have <code>image_id IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.School> fetchByWikilink(String... values) {
-		return fetch(School.SCHOOL.WIKILINK, values);
-	}
-
-	/**
-	 * Fetch records that have <code>logosrc IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.School> fetchByLogosrc(String... values) {
-		return fetch(School.SCHOOL.LOGOSRC, values);
-	}
-
-	/**
-	 * Fetch records that have <code>country IN (values)</code>
-	 */
-	public List<jooq.tables.pojos.School> fetchByCountry(String... values) {
-		return fetch(School.SCHOOL.COUNTRY, values);
+	public List<jooq.tables.pojos.School> fetchByImageId(Integer... values) {
+		return fetch(School.SCHOOL.IMAGE_ID, values);
 	}
 }

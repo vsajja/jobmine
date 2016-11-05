@@ -4,7 +4,7 @@
 package jooq.tables.daos;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -80,30 +80,51 @@ public class JobDao extends DAOImpl<JobRecord, jooq.tables.pojos.Job, Integer> {
 	}
 
 	/**
-	 * Fetch records that have <code>location IN (values)</code>
+	 * Fetch records that have <code>created_timestamp IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Job> fetchByLocation(String... values) {
-		return fetch(Job.JOB.LOCATION, values);
+	public List<jooq.tables.pojos.Job> fetchByCreatedTimestamp(Timestamp... values) {
+		return fetch(Job.JOB.CREATED_TIMESTAMP, values);
 	}
 
 	/**
-	 * Fetch records that have <code>datePosted	 IN (values)</code>
+	 * Fetch records that have <code>type IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Job> fetchByDateposted_9(Date... values) {
-		return fetch(Job.JOB.DATEPOSTED_9, values);
+	public List<jooq.tables.pojos.Job> fetchByType(String... values) {
+		return fetch(Job.JOB.TYPE, values);
 	}
 
 	/**
-	 * Fetch records that have <code>employername IN (values)</code>
+	 * Fetch records that have <code>status IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Job> fetchByEmployername(String... values) {
-		return fetch(Job.JOB.EMPLOYERNAME, values);
+	public List<jooq.tables.pojos.Job> fetchByStatus(String... values) {
+		return fetch(Job.JOB.STATUS, values);
 	}
 
 	/**
-	 * Fetch records that have <code>employerlogo IN (values)</code>
+	 * Fetch records that have <code>total_openings IN (values)</code>
 	 */
-	public List<jooq.tables.pojos.Job> fetchByEmployerlogo(byte[]... values) {
-		return fetch(Job.JOB.EMPLOYERLOGO, values);
+	public List<jooq.tables.pojos.Job> fetchByTotalOpenings(Integer... values) {
+		return fetch(Job.JOB.TOTAL_OPENINGS, values);
+	}
+
+	/**
+	 * Fetch records that have <code>job_mine_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Job> fetchByJobMineId(Integer... values) {
+		return fetch(Job.JOB.JOB_MINE_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>company_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Job> fetchByCompanyId(Integer... values) {
+		return fetch(Job.JOB.COMPANY_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>location_id IN (values)</code>
+	 */
+	public List<jooq.tables.pojos.Job> fetchByLocationId(Integer... values) {
+		return fetch(Job.JOB.LOCATION_ID, values);
 	}
 }

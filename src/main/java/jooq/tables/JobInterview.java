@@ -4,14 +4,21 @@
 package jooq.tables;
 
 
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
+import jooq.Keys;
 import jooq.Public;
 import jooq.tables.records.JobInterviewRecord;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -28,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobInterview extends TableImpl<JobInterviewRecord> {
 
-	private static final long serialVersionUID = 1973764448;
+	private static final long serialVersionUID = 793309110;
 
 	/**
 	 * The reference instance of <code>public.job_interview</code>
@@ -46,7 +53,27 @@ public class JobInterview extends TableImpl<JobInterviewRecord> {
 	/**
 	 * The column <code>public.job_interview.job_interview_id</code>.
 	 */
-	public final TableField<JobInterviewRecord, Integer> JOB_INTERVIEW_ID = createField("job_interview_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<JobInterviewRecord, Integer> JOB_INTERVIEW_ID = createField("job_interview_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>public.job_interview.status</code>.
+	 */
+	public final TableField<JobInterviewRecord, String> STATUS = createField("status", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.job_interview.created_timestamp</code>.
+	 */
+	public final TableField<JobInterviewRecord, Timestamp> CREATED_TIMESTAMP = createField("created_timestamp", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>public.job_interview.job_id</code>.
+	 */
+	public final TableField<JobInterviewRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.job_interview.student_id</code>.
+	 */
+	public final TableField<JobInterviewRecord, Integer> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.job_interview</code> table reference
@@ -68,6 +95,30 @@ public class JobInterview extends TableImpl<JobInterviewRecord> {
 
 	private JobInterview(String alias, Table<JobInterviewRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UniqueKey<JobInterviewRecord> getPrimaryKey() {
+		return Keys.JOB_INTERVIEW_PKEY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<UniqueKey<JobInterviewRecord>> getKeys() {
+		return Arrays.<UniqueKey<JobInterviewRecord>>asList(Keys.JOB_INTERVIEW_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<JobInterviewRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<JobInterviewRecord, ?>>asList(Keys.JOB_INTERVIEW__JOB_INTERVIEW_JOB_JOB_ID_FK, Keys.JOB_INTERVIEW__JOB_INTERVIEW_STUDENT_STUDENT_ID_FK);
 	}
 
 	/**

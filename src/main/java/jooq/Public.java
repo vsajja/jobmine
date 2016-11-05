@@ -11,18 +11,18 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import jooq.tables.Company;
-import jooq.tables.Group;
+import jooq.tables.Document;
 import jooq.tables.Image;
 import jooq.tables.Job;
-import jooq.tables.JobApplication;
+import jooq.tables.JobApp;
+import jooq.tables.JobAppPackage;
 import jooq.tables.JobInterview;
+import jooq.tables.JobMine;
 import jooq.tables.JobOffer;
 import jooq.tables.Location;
 import jooq.tables.School;
 import jooq.tables.Student;
-import jooq.tables.User;
 
-import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
@@ -40,7 +40,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -431382805;
+	private static final long serialVersionUID = -1704907539;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -55,21 +55,6 @@ public class Public extends SchemaImpl {
 	}
 
 	@Override
-	public final List<Sequence<?>> getSequences() {
-		List result = new ArrayList();
-		result.addAll(getSequences0());
-		return result;
-	}
-
-	private final List<Sequence<?>> getSequences0() {
-		return Arrays.<Sequence<?>>asList(
-			Sequences.COMPANY_ID_SEQ,
-			Sequences.JOB_POSTING_JOBPOSTINGID_SEQ,
-			Sequences.SCHOOL_SCHOOLD_SEQ,
-			Sequences.STUDENT_ID_SEQ);
-	}
-
-	@Override
 	public final List<Table<?>> getTables() {
 		List result = new ArrayList();
 		result.addAll(getTables0());
@@ -79,15 +64,16 @@ public class Public extends SchemaImpl {
 	private final List<Table<?>> getTables0() {
 		return Arrays.<Table<?>>asList(
 			Company.COMPANY,
-			Group.GROUP,
+			Document.DOCUMENT,
 			Image.IMAGE,
 			Job.JOB,
-			JobApplication.JOB_APPLICATION,
+			JobApp.JOB_APP,
+			JobAppPackage.JOB_APP_PACKAGE,
 			JobInterview.JOB_INTERVIEW,
+			JobMine.JOB_MINE,
 			JobOffer.JOB_OFFER,
 			Location.LOCATION,
 			School.SCHOOL,
-			Student.STUDENT,
-			User.USER);
+			Student.STUDENT);
 	}
 }

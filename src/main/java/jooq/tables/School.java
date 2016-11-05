@@ -4,6 +4,7 @@
 package jooq.tables;
 
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import jooq.Public;
 import jooq.tables.records.SchoolRecord;
 
 import org.jooq.Field;
-import org.jooq.Identity;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School extends TableImpl<SchoolRecord> {
 
-	private static final long serialVersionUID = 1763713424;
+	private static final long serialVersionUID = 13589367;
 
 	/**
 	 * The reference instance of <code>public.school</code>
@@ -52,7 +53,7 @@ public class School extends TableImpl<SchoolRecord> {
 	/**
 	 * The column <code>public.school.school_id</code>.
 	 */
-	public final TableField<SchoolRecord, Integer> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	public final TableField<SchoolRecord, Integer> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>public.school.name</code>.
@@ -60,44 +61,34 @@ public class School extends TableImpl<SchoolRecord> {
 	public final TableField<SchoolRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.school.schooltype</code>.
+	 * The column <code>public.school.type</code>.
 	 */
-	public final TableField<SchoolRecord, String> SCHOOLTYPE = createField("schooltype", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<SchoolRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.school.city</code>.
+	 * The column <code>public.school.total_students</code>.
 	 */
-	public final TableField<SchoolRecord, String> CITY = createField("city", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<SchoolRecord, Integer> TOTAL_STUDENTS = createField("total_students", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
-	 * The column <code>public.school.provinceorstate</code>.
+	 * The column <code>public.school.established_date</code>.
 	 */
-	public final TableField<SchoolRecord, String> PROVINCEORSTATE = createField("provinceorstate", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<SchoolRecord, Date> ESTABLISHED_DATE = createField("established_date", org.jooq.impl.SQLDataType.DATE, this, "");
 
 	/**
-	 * The column <code>public.school.established</code>.
+	 * The column <code>public.school.description</code>.
 	 */
-	public final TableField<SchoolRecord, String> ESTABLISHED = createField("established", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<SchoolRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.school.totalstudents</code>.
+	 * The column <code>public.school.location_id</code>.
 	 */
-	public final TableField<SchoolRecord, Integer> TOTALSTUDENTS = createField("totalstudents", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<SchoolRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
-	 * The column <code>public.school.wikilink</code>.
+	 * The column <code>public.school.image_id</code>.
 	 */
-	public final TableField<SchoolRecord, String> WIKILINK = createField("wikilink", org.jooq.impl.SQLDataType.VARCHAR, this, "");
-
-	/**
-	 * The column <code>public.school.logosrc</code>.
-	 */
-	public final TableField<SchoolRecord, String> LOGOSRC = createField("logosrc", org.jooq.impl.SQLDataType.VARCHAR, this, "");
-
-	/**
-	 * The column <code>public.school.country</code>.
-	 */
-	public final TableField<SchoolRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<SchoolRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.school</code> table reference
@@ -125,16 +116,8 @@ public class School extends TableImpl<SchoolRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<SchoolRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_SCHOOL;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public UniqueKey<SchoolRecord> getPrimaryKey() {
-		return Keys.SCHOOL_SCHOOLD_PK;
+		return Keys.SCHOOL_PKEY;
 	}
 
 	/**
@@ -142,7 +125,15 @@ public class School extends TableImpl<SchoolRecord> {
 	 */
 	@Override
 	public List<UniqueKey<SchoolRecord>> getKeys() {
-		return Arrays.<UniqueKey<SchoolRecord>>asList(Keys.SCHOOL_SCHOOLD_PK);
+		return Arrays.<UniqueKey<SchoolRecord>>asList(Keys.SCHOOL_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<SchoolRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<SchoolRecord, ?>>asList(Keys.SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK, Keys.SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK);
 	}
 
 	/**

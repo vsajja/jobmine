@@ -4,7 +4,7 @@
 package jooq.tables;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import jooq.Public;
 import jooq.tables.records.JobRecord;
 
 import org.jooq.Field;
-import org.jooq.Identity;
+import org.jooq.ForeignKey;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job extends TableImpl<JobRecord> {
 
-	private static final long serialVersionUID = -978797326;
+	private static final long serialVersionUID = 390071927;
 
 	/**
 	 * The reference instance of <code>public.job</code>
@@ -53,7 +53,7 @@ public class Job extends TableImpl<JobRecord> {
 	/**
 	 * The column <code>public.job.job_id</code>.
 	 */
-	public final TableField<JobRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaulted(true), this, "");
+	public final TableField<JobRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>public.job.title</code>.
@@ -66,24 +66,39 @@ public class Job extends TableImpl<JobRecord> {
 	public final TableField<JobRecord, String> DESCRIPTION_9 = createField("description	", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.location</code>.
+	 * The column <code>public.job.created_timestamp</code>.
 	 */
-	public final TableField<JobRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<JobRecord, Timestamp> CREATED_TIMESTAMP = createField("created_timestamp", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
 	/**
-	 * The column <code>public.job.datePosted	</code>.
+	 * The column <code>public.job.type</code>.
 	 */
-	public final TableField<JobRecord, Date> DATEPOSTED_9 = createField("datePosted	", org.jooq.impl.SQLDataType.DATE, this, "");
+	public final TableField<JobRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.employername</code>.
+	 * The column <code>public.job.status</code>.
 	 */
-	public final TableField<JobRecord, String> EMPLOYERNAME = createField("employername", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<JobRecord, String> STATUS = createField("status", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.employerlogo</code>.
+	 * The column <code>public.job.total_openings</code>.
 	 */
-	public final TableField<JobRecord, byte[]> EMPLOYERLOGO = createField("employerlogo", org.jooq.impl.SQLDataType.BLOB, this, "");
+	public final TableField<JobRecord, Integer> TOTAL_OPENINGS = createField("total_openings", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.job.job_mine_id</code>.
+	 */
+	public final TableField<JobRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.job.company_id</code>.
+	 */
+	public final TableField<JobRecord, Integer> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.job.location_id</code>.
+	 */
+	public final TableField<JobRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.job</code> table reference
@@ -111,16 +126,8 @@ public class Job extends TableImpl<JobRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Identity<JobRecord, Integer> getIdentity() {
-		return Keys.IDENTITY_JOB;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public UniqueKey<JobRecord> getPrimaryKey() {
-		return Keys.JOB_POSTING_PKEY;
+		return Keys.JOB_PKEY;
 	}
 
 	/**
@@ -128,7 +135,15 @@ public class Job extends TableImpl<JobRecord> {
 	 */
 	@Override
 	public List<UniqueKey<JobRecord>> getKeys() {
-		return Arrays.<UniqueKey<JobRecord>>asList(Keys.JOB_POSTING_PKEY);
+		return Arrays.<UniqueKey<JobRecord>>asList(Keys.JOB_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<JobRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<JobRecord, ?>>asList(Keys.JOB__JOB_JOB_MINE_JOB_MINE_ID_FK, Keys.JOB__JOB_COMPANY_COMPANY_ID_FK, Keys.JOB__JOB_LOCATION_LOCATION_ID_FK);
 	}
 
 	/**
