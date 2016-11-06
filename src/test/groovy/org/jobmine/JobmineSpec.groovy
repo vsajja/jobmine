@@ -69,8 +69,8 @@ public class JobmineSpec extends Specification {
 
     def "create job_mine"() {
         when:
-//        JobMine mine = new JobMine(1, "Waterloo's JobMine")
-//        jobMineDao.insert(mine)
+        JobMine mine = new JobMine(null, "Waterloo's JobMine")
+        jobMineDao.insert(mine)
 
         post('api/v1/jobmine')
 

@@ -1,6 +1,6 @@
 CREATE TABLE location
 (
-  location_id INTEGER PRIMARY KEY NOT NULL,
+  location_id BIGSERIAL PRIMARY KEY,
   city VARCHAR,
   state_or_province VARCHAR,
   zip_or_postalcode VARCHAR,
@@ -9,7 +9,7 @@ CREATE TABLE location
 
 CREATE TABLE image
 (
-  image_id INTEGER PRIMARY KEY NOT NULL,
+  image_id BIGSERIAL PRIMARY KEY,
   name VARCHAR,
   src VARCHAR,
   url VARCHAR,
@@ -18,13 +18,13 @@ CREATE TABLE image
 
 CREATE TABLE job_mine
 (
-  job_mine_id INTEGER PRIMARY KEY NOT NULL,
+  job_mine_id BIGSERIAL PRIMARY KEY,
   name VARCHAR
 );
 
 CREATE TABLE company
 (
-  company_id INTEGER PRIMARY KEY NOT NULL,
+  company_id BIGSERIAL PRIMARY KEY,
   name VARCHAR,
   description VARCHAR,
   website_url VARCHAR,
@@ -41,7 +41,7 @@ CREATE TABLE company
 
 CREATE TABLE school
 (
-  school_id INTEGER PRIMARY KEY NOT NULL,
+  school_id BIGSERIAL PRIMARY KEY,
   name VARCHAR,
   type VARCHAR,
   total_students INTEGER,
@@ -57,7 +57,7 @@ CREATE TABLE school
 
 CREATE TABLE student
 (
-  student_id INTEGER PRIMARY KEY NOT NULL,
+  student_id BIGSERIAL PRIMARY KEY,
   first_name VARCHAR,
   last_name VARCHAR,
   username VARCHAR,
@@ -85,7 +85,7 @@ CREATE TABLE student
 
 CREATE TABLE job
 (
-  job_id INTEGER PRIMARY KEY NOT NULL,
+  job_id BIGSERIAL PRIMARY KEY,
   title VARCHAR,
   "description	" VARCHAR,
   created_timestamp TIMESTAMP,
@@ -102,7 +102,7 @@ CREATE TABLE job
 
 CREATE TABLE job_interview
 (
-  job_interview_id INTEGER PRIMARY KEY NOT NULL,
+  job_interview_id BIGSERIAL PRIMARY KEY,
   status VARCHAR,
   created_timestamp TIMESTAMP,
   job_id INTEGER,
@@ -115,7 +115,7 @@ CREATE TABLE job_interview
 
 CREATE TABLE job_app_package
 (
-  job_app_package_id INTEGER PRIMARY KEY NOT NULL,
+  job_app_package_id BIGSERIAL PRIMARY KEY,
   name VARCHAR,
   student_id INTEGER,
   CONSTRAINT job_app_package_student_student_id_fk FOREIGN KEY (student_id) REFERENCES student (student_id)
@@ -123,7 +123,7 @@ CREATE TABLE job_app_package
 
 CREATE TABLE document
 (
-  document_id INTEGER PRIMARY KEY NOT NULL,
+  document_id BIGSERIAL PRIMARY KEY,
   name VARCHAR,
   data BYTEA,
   job_app_package_id INTEGER,
@@ -132,7 +132,7 @@ CREATE TABLE document
 
 CREATE TABLE job_app
 (
-  job_app_id INTEGER PRIMARY KEY NOT NULL,
+  job_app_id BIGSERIAL PRIMARY KEY,
   job_id INTEGER,
   job_app_package_id INTEGER,
   CONSTRAINT job_app_job_job_id_fk FOREIGN KEY (job_id) REFERENCES job (job_id),
@@ -141,7 +141,7 @@ CREATE TABLE job_app
 
 CREATE TABLE job_offer
 (
-  job_offer_id INTEGER PRIMARY KEY NOT NULL,
+  job_offer_id BIGSERIAL PRIMARY KEY,
   expiry_timestamp TIMESTAMP,
   salary VARCHAR,
   job_id INTEGER,
