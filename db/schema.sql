@@ -9,8 +9,10 @@ CREATE TABLE company
     founded_date DATE,
     location_id INTEGER,
     image_id INTEGER,
+    job_mine_id INTEGER,
     CONSTRAINT company_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id),
-    CONSTRAINT company_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id)
+    CONSTRAINT company_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id),
+    CONSTRAINT company_job_mine_job_mine_id_fk FOREIGN KEY (job_mine_id) REFERENCES job_mine (job_mine_id)
 );
 CREATE TABLE document
 (
@@ -104,8 +106,10 @@ CREATE TABLE school
     description VARCHAR,
     location_id INTEGER,
     image_id INTEGER,
+    job_mine_id INTEGER,
     CONSTRAINT school_location_location_id_fk FOREIGN KEY (location_id) REFERENCES location (location_id),
-    CONSTRAINT school_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id)
+    CONSTRAINT school_image_image_id_fk FOREIGN KEY (image_id) REFERENCES image (image_id),
+    CONSTRAINT school_job_mine_job_mine_id_fk FOREIGN KEY (job_mine_id) REFERENCES job_mine (job_mine_id)
 );
 CREATE TABLE student
 (
