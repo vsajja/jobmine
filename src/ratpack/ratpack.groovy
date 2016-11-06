@@ -1,14 +1,14 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
-import jooq.tables.daos.CompanyDao
-import jooq.tables.daos.JobDao
-import jooq.tables.daos.SchoolDao
-import jooq.tables.daos.StudentDao
-import jooq.tables.pojos.Company
-import jooq.tables.pojos.Job
-import jooq.tables.pojos.School
-import jooq.tables.pojos.Student
+import jooq.generated.tables.daos.CompanyDao
+import jooq.generated.tables.daos.JobDao
+import jooq.generated.tables.daos.SchoolDao
+import jooq.generated.tables.daos.StudentDao
+import jooq.generated.tables.pojos.Company
+import jooq.generated.tables.pojos.Job
+import jooq.generated.tables.pojos.School
+import jooq.generated.tables.pojos.Student
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
@@ -33,8 +33,7 @@ import java.text.SimpleDateFormat
 
 import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
-
-import static jooq.Tables.*;
+import static jooq.generated.Tables.*;
 
 final Logger log = LoggerFactory.getLogger(this.class)
 
@@ -67,31 +66,61 @@ ratpack {
     handlers {
         all RequestLogger.ncsa(log)
 
-        get {
-            render 'hello world!'
-        }
-
         prefix('api/v1') {
-            prefix('jobmine') {
 
+            path('jobmine') {
+                byMethod {
+                    get {
+                        render 'hello pleb'
+                    }
+
+                    post {
+                        render 'creating jobmine'
+                    }
+                }
+
+                path('school') {
+                    byMethod {
+                        get {
+                            render 'list of scools in jobmine'
+                        }
+
+                        post {
+                            render 'added school to jobmine'
+                        }
+                    }
+                }
+
+                path('company') {
+                    byMethod {
+                        get {
+                            render 'list of companies in jobmine'
+                        }
+
+                        post {
+                            render 'added company to jobmine'
+                        }
+                    }
+                }
+
+                prefix('job') {
+                    get {
+                        render 'list of jobs in jobmine'
+                    }
+                }
             }
 
             prefix('company') {
 
             }
+            prefix('school') {
 
-
-            prefix('company') {
+            }
+            prefix('student') {
 
             }
 
-
-            prefix('company') {
-
-            }
-
-
-
+            /*
             get('jobs') {
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 DataSource dataSource = registry.get(DataSource.class)
@@ -120,6 +149,7 @@ ratpack {
                 List<Company> companies = new CompanyDao(configuration).findAll()
                 render json(companies)
             }
+            */
         }
 
         prefix('test') {
