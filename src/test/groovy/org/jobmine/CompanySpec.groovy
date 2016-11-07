@@ -1,5 +1,6 @@
 package org.jobmine
 
+import groovy.json.JsonOutput
 import jooq.generated.tables.daos.JobMineDao
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
@@ -11,6 +12,7 @@ import org.jooq.impl.DefaultConfiguration
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
+import ratpack.http.client.RequestSpec
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
 import spock.lang.Shared
@@ -58,6 +60,35 @@ public class CompanySpec extends Specification {
     {
 
     }
+
+    def "create company"() {
+        setup:
+        def name = this.class.getSimpleName()
+        def description = "$name description"
+        def website_url = "wwww.${name}.com"
+        def total_employees = 1
+        def industry = 'Industry'
+        def founded_date = '2017-01-01'
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [name           : name,
+                     description    : description,
+                     website_url    : website_url,
+                     total_employees: total_employees,
+                     industry       : industry,
+                     founded_date   : founded_date])
+            )
+        }
+
+        when:
+        post('api/v1/company')
+
+        then:
+        response.statusCode == 200
+    }
+
 //
 //    def "register"() {
 //        expect: false

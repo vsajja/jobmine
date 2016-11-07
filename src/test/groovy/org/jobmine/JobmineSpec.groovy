@@ -74,11 +74,11 @@ public class JobmineSpec extends Specification {
 
     def "create a job mine"() {
         setup:
-        def name = this.class.getName()
+        def name = this.class.getSimpleName()
 
         requestSpec { RequestSpec request ->
             request.body.type('application/json')
-            request.body.text(JsonOutput.toJson([name: name ]))
+            request.body.text(JsonOutput.toJson([name: name]))
         }
 
         when:

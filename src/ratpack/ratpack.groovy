@@ -11,6 +11,7 @@ import jooq.generated.tables.pojos.Job
 import jooq.generated.tables.pojos.JobMine
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
+import jooq.generated.tables.records.CompanyRecord
 import jooq.generated.tables.records.JobMineRecord
 import org.jooq.Configuration
 import org.jooq.DSLContext
@@ -109,9 +110,49 @@ ratpack {
                 }
             }
 
-            prefix('company') {
+            path('company') {
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def name = params.get('name').textValue()
+                            def description = params.get('description').textValue()
+                            def website_url = params.get('website_url').textValue()
+                            def total_employees = params.get('total_employees').intValue()
+                            def industry = params.get('industry').textValue()
+                            def founded_date = new java.sql.Date(
+                                    new SimpleDateFormat("yyyy-MM-dd").parse(
+                                            params.get('founded_date').textValue()).getTime())
 
+                            assert name
+                            assert description
+                            assert website_url
+                            assert total_employees
+                            assert industry
+                            assert founded_date
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+
+                            CompanyRecord record = context
+                                    .insertInto(COMPANY)
+                                    .set(COMPANY.NAME, name)
+                                    .set(COMPANY.DESCRIPTION, description)
+                                    .set(COMPANY.WEBSITE_URL, website_url)
+                                    .set(COMPANY.TOTAL_EMPLOYEES, total_employees)
+                                    .set(COMPANY.INDUSTRY, industry)
+                                    .set(COMPANY.FOUNDED_DATE, founded_date)
+                                    .returning(COMPANY.COMPANY_ID)
+                                    .fetchOne()
+
+                            println "created company with id: " + record.getValue(COMPANY.COMPANY_ID)
+                        }.then {
+                            response.send()
+                        }
+                    }
+                }
             }
+
             prefix('school') {
 
             }
