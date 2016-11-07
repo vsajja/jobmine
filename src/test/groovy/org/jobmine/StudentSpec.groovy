@@ -1,5 +1,6 @@
 package org.jobmine
 
+import groovy.json.JsonOutput
 import jooq.generated.tables.daos.JobMineDao
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
@@ -11,6 +12,7 @@ import org.jooq.impl.DefaultConfiguration
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
+import ratpack.http.client.RequestSpec
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
 import spock.lang.Shared
@@ -57,6 +59,55 @@ public class StudentSpec extends Specification {
     def cleanupSpec() {
 
     }
+
+
+    def "create student"() {
+        setup:
+        def first_name = this.class.getSimpleName()
+        def last_name = this.class.getSimpleName()
+        def username = this.class.getSimpleName()
+        def email_address = "${first_name}@waterloo.ca"
+        def employment_status = 'Unemployed'
+        def karama = 1
+        def total_views = 1
+        def age = 19
+        def gender = "Male"
+        def salary = 1
+        def relationship_status = "Single"
+        def dreams = "cure cancer"
+        def phone_number = "(519) 502-7991"
+        def employment_history = "No employment history"
+        def skills = "Really good at Photoshop"
+
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [first_name         : first_name,
+                     last_name          : last_name,
+                     username           : username,
+                     email_address      : email_address,
+                     employment_status  : employment_status,
+                     karama             : karama,
+                     total_views        : total_views,
+                     age                : age,
+                     gender             : gender,
+                     salary             : salary,
+                     relationship_status: relationship_status,
+                     dreams             : dreams,
+                     phone_number       : phone_number,
+                     employment_history : employment_history,
+                     skills             : skills])
+            )
+        }
+
+        when:
+        post('api/v1/student')
+
+        then:
+        response.statusCode == 200
+    }
+
 //
 //    def "register"() {
 //        expect: false

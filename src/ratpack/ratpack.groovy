@@ -14,6 +14,8 @@ import jooq.generated.tables.pojos.Student
 import jooq.generated.tables.records.CompanyRecord
 import jooq.generated.tables.records.JobMineRecord
 import jooq.generated.tables.records.JobRecord
+import jooq.generated.tables.records.SchoolRecord
+import jooq.generated.tables.records.StudentRecord
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.Record
@@ -195,11 +197,116 @@ ratpack {
             }
 
 
-            prefix('school') {
+            path('school') {
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def name = params.get('name').textValue()
+                            def type = params.get('type').textValue()
+                            def total_students = params.get('total_students').intValue()
+                            def established_date = new java.sql.Date(
+                                    new SimpleDateFormat("yyyy").parse(
+                                            params.get('established_date').textValue()).getTime())
+                            def description = params.get('description').textValue()
 
+                            assert name
+                            assert type
+                            assert total_students
+                            assert established_date
+                            assert description
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            SchoolRecord record = context
+                                    .insertInto(SCHOOL)
+                                    .set(SCHOOL.NAME, name)
+                                    .set(SCHOOL.TYPE, type)
+                                    .set(SCHOOL.TOTAL_STUDENTS, total_students)
+                                    .set(SCHOOL.ESTABLISHED_DATE, established_date)
+                                    .set(SCHOOL.DESCRIPTION, description)
+                                    .returning(SCHOOL.SCHOOL_ID)
+                                    .fetchOne()
+
+                            println "created school with id: " + record.getValue(SCHOOL.SCHOOL_ID)
+                        }.then {
+                            response.send()
+                        }
+                    }
+                }
             }
-            prefix('student') {
 
+            path('student') {
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def first_name = params.get('first_name').textValue()
+                            def last_name = params.get('last_name').textValue()
+                            def username = params.get('username').textValue()
+                            def email_address = params.get('email_address').textValue()
+                            def employment_status = params.get('employment_status').textValue()
+                            def karma = params.get('karama').intValue()
+                            def total_views = params.get('total_views').intValue()
+                            def age = params.get('age').intValue()
+                            def gender = params.get('gender').textValue()
+                            def salary = params.get('salary').intValue()
+                            def relationship_status = params.get('relationship_status').textValue()
+                            def dreams = params.get('dreams').textValue()
+                            def phone_number = params.get('phone_number').textValue()
+                            def employment_history = params.get('employment_history').textValue()
+                            def skills = params.get('skills').textValue()
+                            def last_loggedin_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+                            def joined_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+
+                            assert first_name
+                            assert last_name
+                            assert username
+                            assert email_address
+                            assert employment_status
+                            assert karma
+                            assert total_views
+                            assert age
+                            assert gender
+                            assert salary
+                            assert relationship_status
+                            assert dreams
+                            assert phone_number
+                            assert employment_history
+                            assert skills
+                            assert last_loggedin_timestamp
+                            assert joined_timestamp
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            StudentRecord record = context
+                                    .insertInto(STUDENT)
+                                    .set(STUDENT.FIRST_NAME, first_name)
+                                    .set(STUDENT.LAST_NAME, last_name)
+                                    .set(STUDENT.USERNAME, username)
+                                    .set(STUDENT.EMAIL_ADDRESS, email_address)
+                                    .set(STUDENT.EMPLOYMENT_STATUS, employment_status)
+                                    .set(STUDENT.KARMA, karma)
+                                    .set(STUDENT.TOTAL_VIEWS, total_views)
+                                    .set(STUDENT.AGE, age)
+                                    .set(STUDENT.GENDER, gender)
+                                    .set(STUDENT.SALARY, salary)
+                                    .set(STUDENT.RELATIONSHIP_STATUS, relationship_status)
+                                    .set(STUDENT.DREAMS, dreams)
+                                    .set(STUDENT.PHONE_NUMBER, phone_number)
+                                    .set(STUDENT.EMPLOYMENT_HISTORY, employment_history)
+                                    .set(STUDENT.SKILLS, skills)
+                                    .set(STUDENT.LAST_LOGGEDIN_TIMESTAMP, last_loggedin_timestamp)
+                                    .set(STUDENT.JOINED_TIMESTAMP, joined_timestamp)
+                                    .returning(STUDENT.STUDENT_ID)
+                                    .fetchOne()
+//
+                            println "created student with id: " + record.getValue(STUDENT.STUDENT_ID)
+                        }.then {
+                            response.send()
+                        }
+                    }
+                }
             }
 
             /*

@@ -1,5 +1,6 @@
 package org.jobmine
 
+import groovy.json.JsonOutput
 import jooq.generated.tables.daos.JobMineDao
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
@@ -11,6 +12,7 @@ import org.jooq.impl.DefaultConfiguration
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
+import ratpack.http.client.RequestSpec
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
 import spock.lang.Shared
@@ -58,6 +60,33 @@ public class SchoolSpec extends Specification {
     {
 
     }
+
+    def "create school"() {
+        setup:
+        def name = "University of ${this.class.getSimpleName()}"
+        def type = "University"
+        def total_students = 1
+        def established_date = '1986'
+        def description = "$name description"
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [name            : name,
+                     type            : type,
+                     total_students  : total_students,
+                     established_date: established_date,
+                     description     : description])
+            )
+        }
+
+        when:
+        post('api/v1/school')
+
+        then:
+        response.statusCode == 200
+    }
+
 
 //    def "register"() {
 //        expect: false
