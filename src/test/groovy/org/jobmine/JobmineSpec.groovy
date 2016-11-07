@@ -1,7 +1,7 @@
 package org.jobmine
 
+import groovy.json.JsonOutput
 import jooq.generated.tables.daos.JobMineDao
-import jooq.generated.tables.pojos.JobMine
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
 import org.jooq.Configuration
@@ -12,13 +12,13 @@ import org.jooq.impl.DefaultConfiguration
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
+import ratpack.http.client.RequestSpec
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.sql.DataSource
-import static jooq.generated.Tables.JOB
 
 /**
  * Created by vsajja on 2016-11-02.
@@ -36,7 +36,7 @@ public class JobmineSpec extends Specification {
     @Shared
     JobMineDao jobMineDao
 
-    def setup() {
+    def setupSpec() {
         final ConfigData configData = ConfigData.of { ConfigDataBuilder builder ->
             builder.props(
                     ['postgres.user'        : 'zoqyxwbxjuntzp',
@@ -56,6 +56,11 @@ public class JobmineSpec extends Specification {
         context = DSL.using(dataSource, SQLDialect.POSTGRES);
     }
 
+    def cleanupSpec()
+    {
+
+    }
+
     def "hello"() {
         when:
         get('api/v1/jobmine')
@@ -67,11 +72,16 @@ public class JobmineSpec extends Specification {
         }
     }
 
-    def "create job_mine"() {
-        when:
-        JobMine mine = new JobMine(null, "Waterloo's JobMine")
-        jobMineDao.insert(mine)
+    def "create a job mine"() {
+        setup:
+        def name = this.class.getName()
 
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson([name: name ]))
+        }
+
+        when:
         post('api/v1/jobmine')
 
         then:
