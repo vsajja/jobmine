@@ -16,6 +16,7 @@ import jooq.generated.tables.records.SchoolRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School extends TableImpl<SchoolRecord> {
 
-	private static final long serialVersionUID = -948125227;
+	private static final long serialVersionUID = 327345962;
 
 	/**
 	 * The reference instance of <code>public.school</code>
@@ -53,7 +54,7 @@ public class School extends TableImpl<SchoolRecord> {
 	/**
 	 * The column <code>public.school.school_id</code>.
 	 */
-	public final TableField<SchoolRecord, Integer> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<SchoolRecord, Long> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.school.name</code>.
@@ -91,6 +92,11 @@ public class School extends TableImpl<SchoolRecord> {
 	public final TableField<SchoolRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
+	 * The column <code>public.school.job_mine_id</code>.
+	 */
+	public final TableField<SchoolRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
 	 * Create a <code>public.school</code> table reference
 	 */
 	public School() {
@@ -116,6 +122,14 @@ public class School extends TableImpl<SchoolRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Identity<SchoolRecord, Long> getIdentity() {
+		return Keys.IDENTITY_SCHOOL;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public UniqueKey<SchoolRecord> getPrimaryKey() {
 		return Keys.SCHOOL_PKEY;
 	}
@@ -133,7 +147,7 @@ public class School extends TableImpl<SchoolRecord> {
 	 */
 	@Override
 	public List<ForeignKey<SchoolRecord, ?>> getReferences() {
-		return Arrays.<ForeignKey<SchoolRecord, ?>>asList(Keys.SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK, Keys.SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK);
+		return Arrays.<ForeignKey<SchoolRecord, ?>>asList(Keys.SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK, Keys.SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK, Keys.SCHOOL__SCHOOL_JOB_MINE_JOB_MINE_ID_FK);
 	}
 
 	/**

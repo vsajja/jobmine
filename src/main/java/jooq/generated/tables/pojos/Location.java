@@ -22,13 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location implements Serializable {
 
-	private static final long serialVersionUID = -1622965245;
+	private static final long serialVersionUID = 1233448813;
 
-	private final Integer locationId;
-	private final String  city;
-	private final String  stateOrProvince;
-	private final String  zipOrPostalcode;
-	private final String  country;
+	private final Long   locationId;
+	private final String city;
+	private final String stateOrProvince;
+	private final String zipOrPostalcode;
+	private final String country;
 
 	public Location(Location value) {
 		this.locationId = value.locationId;
@@ -39,11 +39,11 @@ public class Location implements Serializable {
 	}
 
 	public Location(
-		Integer locationId,
-		String  city,
-		String  stateOrProvince,
-		String  zipOrPostalcode,
-		String  country
+		Long   locationId,
+		String city,
+		String stateOrProvince,
+		String zipOrPostalcode,
+		String country
 	) {
 		this.locationId = locationId;
 		this.city = city;
@@ -52,7 +52,7 @@ public class Location implements Serializable {
 		this.country = country;
 	}
 
-	public Integer getLocationId() {
+	public Long getLocationId() {
 		return this.locationId;
 	}
 

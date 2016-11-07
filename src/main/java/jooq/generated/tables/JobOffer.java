@@ -16,6 +16,7 @@ import jooq.generated.tables.records.JobOfferRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobOffer extends TableImpl<JobOfferRecord> {
 
-	private static final long serialVersionUID = -1492518724;
+	private static final long serialVersionUID = 1306550138;
 
 	/**
 	 * The reference instance of <code>public.job_offer</code>
@@ -53,7 +54,7 @@ public class JobOffer extends TableImpl<JobOfferRecord> {
 	/**
 	 * The column <code>public.job_offer.job_offer_id</code>.
 	 */
-	public final TableField<JobOfferRecord, Integer> JOB_OFFER_ID = createField("job_offer_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<JobOfferRecord, Long> JOB_OFFER_ID = createField("job_offer_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job_offer.expiry_timestamp</code>.
@@ -95,6 +96,14 @@ public class JobOffer extends TableImpl<JobOfferRecord> {
 
 	private JobOffer(String alias, Table<JobOfferRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<JobOfferRecord, Long> getIdentity() {
+		return Keys.IDENTITY_JOB_OFFER;
 	}
 
 	/**

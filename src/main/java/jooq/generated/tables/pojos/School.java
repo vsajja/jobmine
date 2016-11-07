@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School implements Serializable {
 
-	private static final long serialVersionUID = 766719407;
+	private static final long serialVersionUID = -916208535;
 
-	private final Integer schoolId;
+	private final Long    schoolId;
 	private final String  name;
 	private final String  type;
 	private final Integer totalStudents;
@@ -33,6 +33,7 @@ public class School implements Serializable {
 	private final String  description;
 	private final Integer locationId;
 	private final Integer imageId;
+	private final Integer jobMineId;
 
 	public School(School value) {
 		this.schoolId = value.schoolId;
@@ -43,17 +44,19 @@ public class School implements Serializable {
 		this.description = value.description;
 		this.locationId = value.locationId;
 		this.imageId = value.imageId;
+		this.jobMineId = value.jobMineId;
 	}
 
 	public School(
-		Integer schoolId,
+		Long    schoolId,
 		String  name,
 		String  type,
 		Integer totalStudents,
 		Date    establishedDate,
 		String  description,
 		Integer locationId,
-		Integer imageId
+		Integer imageId,
+		Integer jobMineId
 	) {
 		this.schoolId = schoolId;
 		this.name = name;
@@ -63,9 +66,10 @@ public class School implements Serializable {
 		this.description = description;
 		this.locationId = locationId;
 		this.imageId = imageId;
+		this.jobMineId = jobMineId;
 	}
 
-	public Integer getSchoolId() {
+	public Long getSchoolId() {
 		return this.schoolId;
 	}
 
@@ -97,6 +101,10 @@ public class School implements Serializable {
 		return this.imageId;
 	}
 
+	public Integer getJobMineId() {
+		return this.jobMineId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("School (");
@@ -109,6 +117,7 @@ public class School implements Serializable {
 		sb.append(", ").append(description);
 		sb.append(", ").append(locationId);
 		sb.append(", ").append(imageId);
+		sb.append(", ").append(jobMineId);
 
 		sb.append(")");
 		return sb.toString();

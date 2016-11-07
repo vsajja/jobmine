@@ -22,13 +22,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Image implements Serializable {
 
-	private static final long serialVersionUID = 2120410342;
+	private static final long serialVersionUID = 700823776;
 
-	private final Integer imageId;
-	private final String  name;
-	private final String  src;
-	private final String  url;
-	private final byte[]  data;
+	private final Long   imageId;
+	private final String name;
+	private final String src;
+	private final String url;
+	private final byte[] data;
 
 	public Image(Image value) {
 		this.imageId = value.imageId;
@@ -39,11 +39,11 @@ public class Image implements Serializable {
 	}
 
 	public Image(
-		Integer imageId,
-		String  name,
-		String  src,
-		String  url,
-		byte[]  data
+		Long   imageId,
+		String name,
+		String src,
+		String url,
+		byte[] data
 	) {
 		this.imageId = imageId;
 		this.name = name;
@@ -52,7 +52,7 @@ public class Image implements Serializable {
 		this.data = data;
 	}
 
-	public Integer getImageId() {
+	public Long getImageId() {
 		return this.imageId;
 	}
 

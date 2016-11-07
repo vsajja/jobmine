@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobInterview implements Serializable {
 
-	private static final long serialVersionUID = 217064338;
+	private static final long serialVersionUID = 931708198;
 
-	private final Integer   jobInterviewId;
+	private final Long      jobInterviewId;
 	private final String    status;
 	private final Timestamp createdTimestamp;
 	private final Integer   jobId;
@@ -42,7 +42,7 @@ public class JobInterview implements Serializable {
 	}
 
 	public JobInterview(
-		Integer   jobInterviewId,
+		Long      jobInterviewId,
 		String    status,
 		Timestamp createdTimestamp,
 		Integer   jobId,
@@ -57,7 +57,7 @@ public class JobInterview implements Serializable {
 		this.locationId = locationId;
 	}
 
-	public Integer getJobInterviewId() {
+	public Long getJobInterviewId() {
 		return this.jobInterviewId;
 	}
 

@@ -13,6 +13,7 @@ import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
 import jooq.generated.tables.records.CompanyRecord
 import jooq.generated.tables.records.JobMineRecord
+import jooq.generated.tables.records.JobRecord
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.Record
@@ -152,6 +153,47 @@ ratpack {
                     }
                 }
             }
+
+            path('job') {
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def title = params.get('title').textValue()
+                            def description = params.get('description').textValue()
+                            def type = params.get('type').textValue()
+                            def status = params.get('status').textValue()
+                            def total_openings = params.get('total_openings').intValue()
+                            def created_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+
+                            assert title
+                            assert description
+                            assert type
+                            assert status
+                            assert total_openings
+                            assert created_timestamp
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            JobRecord record = context
+                                    .insertInto(JOB)
+                                    .set(JOB.TITLE, title)
+                                    .set(JOB.DESCRIPTION, description)
+                                    .set(JOB.TYPE, type)
+                                    .set(JOB.STATUS, status)
+                                    .set(JOB.TOTAL_OPENINGS, total_openings)
+                                    .set(JOB.CREATED_TIMESTAMP, created_timestamp)
+                                    .returning(JOB.JOB_ID)
+                                    .fetchOne()
+
+                            println "created job with id: " + record.getValue(JOB.JOB_ID)
+                        }.then {
+                            response.send()
+                        }
+                    }
+                }
+            }
+
 
             prefix('school') {
 

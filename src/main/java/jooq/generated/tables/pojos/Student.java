@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = -1347700340;
+	private static final long serialVersionUID = -484518200;
 
-	private final Integer   studentId;
+	private final Long      studentId;
 	private final String    firstName;
 	private final String    lastName;
 	private final String    username;
@@ -72,7 +72,7 @@ public class Student implements Serializable {
 	}
 
 	public Student(
-		Integer   studentId,
+		Long      studentId,
 		String    firstName,
 		String    lastName,
 		String    username,
@@ -117,7 +117,7 @@ public class Student implements Serializable {
 		this.imageId = imageId;
 	}
 
-	public Integer getStudentId() {
+	public Long getStudentId() {
 		return this.studentId;
 	}
 

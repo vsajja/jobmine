@@ -87,7 +87,7 @@ CREATE TABLE job
 (
   job_id BIGSERIAL PRIMARY KEY,
   title VARCHAR,
-  "description	" VARCHAR,
+  "description" VARCHAR,
   created_timestamp TIMESTAMP,
   type VARCHAR,
   status VARCHAR,

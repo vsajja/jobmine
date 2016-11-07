@@ -15,6 +15,7 @@ import jooq.generated.tables.records.JobAppRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobApp extends TableImpl<JobAppRecord> {
 
-	private static final long serialVersionUID = 1667749522;
+	private static final long serialVersionUID = 1380582812;
 
 	/**
 	 * The reference instance of <code>public.job_app</code>
@@ -52,7 +53,7 @@ public class JobApp extends TableImpl<JobAppRecord> {
 	/**
 	 * The column <code>public.job_app.job_app_id</code>.
 	 */
-	public final TableField<JobAppRecord, Integer> JOB_APP_ID = createField("job_app_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<JobAppRecord, Long> JOB_APP_ID = createField("job_app_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job_app.job_id</code>.
@@ -84,6 +85,14 @@ public class JobApp extends TableImpl<JobAppRecord> {
 
 	private JobApp(String alias, Table<JobAppRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<JobAppRecord, Long> getIdentity() {
+		return Keys.IDENTITY_JOB_APP;
 	}
 
 	/**

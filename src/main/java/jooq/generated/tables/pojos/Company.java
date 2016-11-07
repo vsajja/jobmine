@@ -23,9 +23,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company implements Serializable {
 
-	private static final long serialVersionUID = -408954757;
+	private static final long serialVersionUID = 447141057;
 
-	private final Integer companyId;
+	private final Long    companyId;
 	private final String  name;
 	private final String  description;
 	private final String  websiteUrl;
@@ -34,6 +34,7 @@ public class Company implements Serializable {
 	private final Date    foundedDate;
 	private final Integer locationId;
 	private final Integer imageId;
+	private final Integer jobMineId;
 
 	public Company(Company value) {
 		this.companyId = value.companyId;
@@ -45,10 +46,11 @@ public class Company implements Serializable {
 		this.foundedDate = value.foundedDate;
 		this.locationId = value.locationId;
 		this.imageId = value.imageId;
+		this.jobMineId = value.jobMineId;
 	}
 
 	public Company(
-		Integer companyId,
+		Long    companyId,
 		String  name,
 		String  description,
 		String  websiteUrl,
@@ -56,7 +58,8 @@ public class Company implements Serializable {
 		String  industry,
 		Date    foundedDate,
 		Integer locationId,
-		Integer imageId
+		Integer imageId,
+		Integer jobMineId
 	) {
 		this.companyId = companyId;
 		this.name = name;
@@ -67,9 +70,10 @@ public class Company implements Serializable {
 		this.foundedDate = foundedDate;
 		this.locationId = locationId;
 		this.imageId = imageId;
+		this.jobMineId = jobMineId;
 	}
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return this.companyId;
 	}
 
@@ -105,6 +109,10 @@ public class Company implements Serializable {
 		return this.imageId;
 	}
 
+	public Integer getJobMineId() {
+		return this.jobMineId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Company (");
@@ -118,6 +126,7 @@ public class Company implements Serializable {
 		sb.append(", ").append(foundedDate);
 		sb.append(", ").append(locationId);
 		sb.append(", ").append(imageId);
+		sb.append(", ").append(jobMineId);
 
 		sb.append(")");
 		return sb.toString();

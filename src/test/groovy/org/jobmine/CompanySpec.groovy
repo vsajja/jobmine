@@ -89,7 +89,32 @@ public class CompanySpec extends Specification {
         response.statusCode == 200
     }
 
-//
+    def "post job"() {
+        setup:
+        def title = "Job @ ${this.class.getSimpleName()}"
+        def description = "Job @ ${this.class.getSimpleName()} description"
+        def type = 'Full-Time'
+        def status = 'Pending'
+        def total_openings = 10
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [title         : title,
+                     description   : description,
+                     type          : type,
+                     status        : status,
+                     total_openings: total_openings])
+            )
+        }
+
+        when:
+        post('api/v1/job')
+
+        then:
+        response.statusCode == 200
+    }
+
 //    def "register"() {
 //        expect: false
 //    }
@@ -102,9 +127,6 @@ public class CompanySpec extends Specification {
 //        expect: false
 //    }
 //
-//    def "post jobs for a schools"() {
-//        expect: false
-//    }
 //
 //    def "view posted jobs"() {
 //        expect: false

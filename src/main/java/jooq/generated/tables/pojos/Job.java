@@ -23,11 +23,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job implements Serializable {
 
-	private static final long serialVersionUID = 1028066827;
+	private static final long serialVersionUID = 1339112257;
 
-	private final Integer   jobId;
+	private final Long      jobId;
 	private final String    title;
-	private final String    description_9;
+	private final String    description;
 	private final Timestamp createdTimestamp;
 	private final String    type;
 	private final String    status;
@@ -39,7 +39,7 @@ public class Job implements Serializable {
 	public Job(Job value) {
 		this.jobId = value.jobId;
 		this.title = value.title;
-		this.description_9 = value.description_9;
+		this.description = value.description;
 		this.createdTimestamp = value.createdTimestamp;
 		this.type = value.type;
 		this.status = value.status;
@@ -50,9 +50,9 @@ public class Job implements Serializable {
 	}
 
 	public Job(
-		Integer   jobId,
+		Long      jobId,
 		String    title,
-		String    description_9,
+		String    description,
 		Timestamp createdTimestamp,
 		String    type,
 		String    status,
@@ -63,7 +63,7 @@ public class Job implements Serializable {
 	) {
 		this.jobId = jobId;
 		this.title = title;
-		this.description_9 = description_9;
+		this.description = description;
 		this.createdTimestamp = createdTimestamp;
 		this.type = type;
 		this.status = status;
@@ -73,7 +73,7 @@ public class Job implements Serializable {
 		this.locationId = locationId;
 	}
 
-	public Integer getJobId() {
+	public Long getJobId() {
 		return this.jobId;
 	}
 
@@ -81,8 +81,8 @@ public class Job implements Serializable {
 		return this.title;
 	}
 
-	public String getDescription_9() {
-		return this.description_9;
+	public String getDescription() {
+		return this.description;
 	}
 
 	public Timestamp getCreatedTimestamp() {
@@ -119,7 +119,7 @@ public class Job implements Serializable {
 
 		sb.append(jobId);
 		sb.append(", ").append(title);
-		sb.append(", ").append(description_9);
+		sb.append(", ").append(description);
 		sb.append(", ").append(createdTimestamp);
 		sb.append(", ").append(type);
 		sb.append(", ").append(status);

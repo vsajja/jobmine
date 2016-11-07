@@ -14,6 +14,7 @@ import jooq.generated.Public;
 import jooq.generated.tables.records.JobMineRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobMine extends TableImpl<JobMineRecord> {
 
-	private static final long serialVersionUID = -1167816923;
+	private static final long serialVersionUID = 1412306723;
 
 	/**
 	 * The reference instance of <code>public.job_mine</code>
@@ -51,7 +52,7 @@ public class JobMine extends TableImpl<JobMineRecord> {
 	/**
 	 * The column <code>public.job_mine.job_mine_id</code>.
 	 */
-	public final TableField<JobMineRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<JobMineRecord, Long> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job_mine.name</code>.
@@ -78,6 +79,14 @@ public class JobMine extends TableImpl<JobMineRecord> {
 
 	private JobMine(String alias, Table<JobMineRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<JobMineRecord, Long> getIdentity() {
+		return Keys.IDENTITY_JOB_MINE;
 	}
 
 	/**

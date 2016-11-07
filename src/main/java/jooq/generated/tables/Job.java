@@ -16,6 +16,7 @@ import jooq.generated.tables.records.JobRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job extends TableImpl<JobRecord> {
 
-	private static final long serialVersionUID = -518665293;
+	private static final long serialVersionUID = 294914822;
 
 	/**
 	 * The reference instance of <code>public.job</code>
@@ -53,7 +54,7 @@ public class Job extends TableImpl<JobRecord> {
 	/**
 	 * The column <code>public.job.job_id</code>.
 	 */
-	public final TableField<JobRecord, Integer> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<JobRecord, Long> JOB_ID = createField("job_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job.title</code>.
@@ -61,9 +62,9 @@ public class Job extends TableImpl<JobRecord> {
 	public final TableField<JobRecord, String> TITLE = createField("title", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.description	</code>.
+	 * The column <code>public.job.description</code>.
 	 */
-	public final TableField<JobRecord, String> DESCRIPTION_9 = createField("description	", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<JobRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
 	 * The column <code>public.job.created_timestamp</code>.
@@ -120,6 +121,14 @@ public class Job extends TableImpl<JobRecord> {
 
 	private Job(String alias, Table<JobRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<JobRecord, Long> getIdentity() {
+		return Keys.IDENTITY_JOB;
 	}
 
 	/**

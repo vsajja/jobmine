@@ -22,10 +22,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobMine implements Serializable {
 
-	private static final long serialVersionUID = -1492423747;
+	private static final long serialVersionUID = 1215942283;
 
-	private final Integer jobMineId;
-	private final String  name;
+	private final Long   jobMineId;
+	private final String name;
 
 	public JobMine(JobMine value) {
 		this.jobMineId = value.jobMineId;
@@ -33,14 +33,14 @@ public class JobMine implements Serializable {
 	}
 
 	public JobMine(
-		Integer jobMineId,
-		String  name
+		Long   jobMineId,
+		String name
 	) {
 		this.jobMineId = jobMineId;
 		this.name = name;
 	}
 
-	public Integer getJobMineId() {
+	public Long getJobMineId() {
 		return this.jobMineId;
 	}
 

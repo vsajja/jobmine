@@ -14,6 +14,7 @@ import jooq.generated.Public;
 import jooq.generated.tables.records.LocationRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location extends TableImpl<LocationRecord> {
 
-	private static final long serialVersionUID = -2123750854;
+	private static final long serialVersionUID = 165851607;
 
 	/**
 	 * The reference instance of <code>public.location</code>
@@ -51,7 +52,7 @@ public class Location extends TableImpl<LocationRecord> {
 	/**
 	 * The column <code>public.location.location_id</code>.
 	 */
-	public final TableField<LocationRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<LocationRecord, Long> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.location.city</code>.
@@ -93,6 +94,14 @@ public class Location extends TableImpl<LocationRecord> {
 
 	private Location(String alias, Table<LocationRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<LocationRecord, Long> getIdentity() {
+		return Keys.IDENTITY_LOCATION;
 	}
 
 	/**

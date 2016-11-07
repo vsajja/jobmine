@@ -23,6 +23,7 @@ import jooq.generated.tables.Location;
 import jooq.generated.tables.School;
 import jooq.generated.tables.Student;
 
+import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
@@ -40,7 +41,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -770271026;
+	private static final long serialVersionUID = -388742282;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -52,6 +53,29 @@ public class Public extends SchemaImpl {
 	 */
 	private Public() {
 		super("public");
+	}
+
+	@Override
+	public final List<Sequence<?>> getSequences() {
+		List result = new ArrayList();
+		result.addAll(getSequences0());
+		return result;
+	}
+
+	private final List<Sequence<?>> getSequences0() {
+		return Arrays.<Sequence<?>>asList(
+			Sequences.COMPANY_COMPANY_ID_SEQ,
+			Sequences.DOCUMENT_DOCUMENT_ID_SEQ,
+			Sequences.IMAGE_IMAGE_ID_SEQ,
+			Sequences.JOB_APP_JOB_APP_ID_SEQ,
+			Sequences.JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_SEQ,
+			Sequences.JOB_INTERVIEW_JOB_INTERVIEW_ID_SEQ,
+			Sequences.JOB_JOB_ID_SEQ,
+			Sequences.JOB_MINE_JOB_MINE_ID_SEQ,
+			Sequences.JOB_OFFER_JOB_OFFER_ID_SEQ,
+			Sequences.LOCATION_LOCATION_ID_SEQ,
+			Sequences.SCHOOL_SCHOOL_ID_SEQ,
+			Sequences.STUDENT_STUDENT_ID_SEQ);
 	}
 
 	@Override

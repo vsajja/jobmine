@@ -16,6 +16,7 @@ import jooq.generated.tables.records.StudentRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-	private static final long serialVersionUID = 1978723328;
+	private static final long serialVersionUID = -1254300355;
 
 	/**
 	 * The reference instance of <code>public.student</code>
@@ -53,7 +54,7 @@ public class Student extends TableImpl<StudentRecord> {
 	/**
 	 * The column <code>public.student.student_id</code>.
 	 */
-	public final TableField<StudentRecord, Integer> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<StudentRecord, Long> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.student.first_name</code>.
@@ -175,6 +176,14 @@ public class Student extends TableImpl<StudentRecord> {
 
 	private Student(String alias, Table<StudentRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<StudentRecord, Long> getIdentity() {
+		return Keys.IDENTITY_STUDENT;
 	}
 
 	/**

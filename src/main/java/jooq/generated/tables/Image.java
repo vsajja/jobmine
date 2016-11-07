@@ -14,6 +14,7 @@ import jooq.generated.Public;
 import jooq.generated.tables.records.ImageRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Image extends TableImpl<ImageRecord> {
 
-	private static final long serialVersionUID = 659942262;
+	private static final long serialVersionUID = -1359888987;
 
 	/**
 	 * The reference instance of <code>public.image</code>
@@ -51,7 +52,7 @@ public class Image extends TableImpl<ImageRecord> {
 	/**
 	 * The column <code>public.image.image_id</code>.
 	 */
-	public final TableField<ImageRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<ImageRecord, Long> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.image.name</code>.
@@ -93,6 +94,14 @@ public class Image extends TableImpl<ImageRecord> {
 
 	private Image(String alias, Table<ImageRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<ImageRecord, Long> getIdentity() {
+		return Keys.IDENTITY_IMAGE;
 	}
 
 	/**

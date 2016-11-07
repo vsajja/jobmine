@@ -16,6 +16,7 @@ import jooq.generated.tables.records.CompanyRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company extends TableImpl<CompanyRecord> {
 
-	private static final long serialVersionUID = 1620214518;
+	private static final long serialVersionUID = 1161391393;
 
 	/**
 	 * The reference instance of <code>public.company</code>
@@ -53,7 +54,7 @@ public class Company extends TableImpl<CompanyRecord> {
 	/**
 	 * The column <code>public.company.company_id</code>.
 	 */
-	public final TableField<CompanyRecord, Integer> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<CompanyRecord, Long> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.company.name</code>.
@@ -96,6 +97,11 @@ public class Company extends TableImpl<CompanyRecord> {
 	public final TableField<CompanyRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
+	 * The column <code>public.company.job_mine_id</code>.
+	 */
+	public final TableField<CompanyRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
 	 * Create a <code>public.company</code> table reference
 	 */
 	public Company() {
@@ -121,6 +127,14 @@ public class Company extends TableImpl<CompanyRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Identity<CompanyRecord, Long> getIdentity() {
+		return Keys.IDENTITY_COMPANY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public UniqueKey<CompanyRecord> getPrimaryKey() {
 		return Keys.COMPANY_PKEY;
 	}
@@ -138,7 +152,7 @@ public class Company extends TableImpl<CompanyRecord> {
 	 */
 	@Override
 	public List<ForeignKey<CompanyRecord, ?>> getReferences() {
-		return Arrays.<ForeignKey<CompanyRecord, ?>>asList(Keys.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK, Keys.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK);
+		return Arrays.<ForeignKey<CompanyRecord, ?>>asList(Keys.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK, Keys.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK, Keys.COMPANY__COMPANY_JOB_MINE_JOB_MINE_ID_FK);
 	}
 
 	/**

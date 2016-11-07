@@ -16,6 +16,7 @@ import jooq.generated.tables.records.JobInterviewRecord;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobInterview extends TableImpl<JobInterviewRecord> {
 
-	private static final long serialVersionUID = -634315853;
+	private static final long serialVersionUID = 553866665;
 
 	/**
 	 * The reference instance of <code>public.job_interview</code>
@@ -53,7 +54,7 @@ public class JobInterview extends TableImpl<JobInterviewRecord> {
 	/**
 	 * The column <code>public.job_interview.job_interview_id</code>.
 	 */
-	public final TableField<JobInterviewRecord, Integer> JOB_INTERVIEW_ID = createField("job_interview_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final TableField<JobInterviewRecord, Long> JOB_INTERVIEW_ID = createField("job_interview_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>public.job_interview.status</code>.
@@ -100,6 +101,14 @@ public class JobInterview extends TableImpl<JobInterviewRecord> {
 
 	private JobInterview(String alias, Table<JobInterviewRecord> aliased, Field<?>[] parameters) {
 		super(alias, Public.PUBLIC, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<JobInterviewRecord, Long> getIdentity() {
+		return Keys.IDENTITY_JOB_INTERVIEW;
 	}
 
 	/**

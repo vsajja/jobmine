@@ -87,8 +87,4 @@ public class JobmineSpec extends Specification {
         then:
         response.statusCode == 200
     }
-
-    def "get all jobs in a job mine"() {
-        expect: false
-    }
 }
