@@ -88,67 +88,7 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-//    def "get schools"() {
-//        when:
-//        get('api/v1/jobmine/school')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "get companies"() {
-//        when:
-//        get('api/v1/jobmine/company')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "add school"() {
-//        when:
-//        post('api/v1/jobmine/school')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "add company"() {
-//        when:
-//        post('api/v1/jobmine/company')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "search for jobs"() {
-//        when:
-//        get('api/v1/jobmine/job')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "search for jobs by keyword"() {
-//        when:
-//        get('api/v1/jobmine/job')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "search for jobs by keyword and location"() {
-//        when:
-//        get('api/v1/jobmine/job')
-//
-//        then:
-//        response.statusCode == 200
-//    }
-//
-//    def "approve pending jobs"() {
-//        when:
-//        post('api/v1/jobmine/job/approve')
-//
-//        then:
-//        response.statusCode == 200
-//    }
+    def "get all jobs in a job mine"() {
+        expect: false
+    }
 }

@@ -95,35 +95,13 @@ ratpack {
                                     .returning(JOB_MINE.JOB_MINE_ID)
                                     .fetchOne()
 
-                            println "Created: " + record.getValue(JOB_MINE.JOB_MINE_ID)
+                            println "created job_mine with id: " + record.getValue(JOB_MINE.JOB_MINE_ID)
                         }.then {
                             response.send()
                         }
                     }
                 }
 
-                path('school') {
-                    byMethod {
-                        get {
-                            render 'list of scools in jobmine'
-                        }
-
-                        post {
-                            render 'added school to jobmine'
-                        }
-                    }
-                }
-                path('company') {
-                    byMethod {
-                        get {
-                            render 'list of companies in jobmine'
-                        }
-
-                        post {
-                            render 'added company to jobmine'
-                        }
-                    }
-                }
                 prefix('job') {
                     get {
                         render 'list of jobs in jobmine'
