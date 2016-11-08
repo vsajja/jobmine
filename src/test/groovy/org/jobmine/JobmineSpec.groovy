@@ -72,7 +72,7 @@ public class JobmineSpec extends Specification {
         }
     }
 
-    def "create a job mine"() {
+    def "create a mine"() {
         setup:
         def name = this.class.getSimpleName()
 
@@ -82,7 +82,7 @@ public class JobmineSpec extends Specification {
         }
 
         when:
-        post('api/v1/jobmine')
+        post('api/v1/mines')
 
         then:
         response.statusCode == 200

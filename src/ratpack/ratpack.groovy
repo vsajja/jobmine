@@ -82,7 +82,11 @@ ratpack {
                     get {
                         render 'hello pleb'
                     }
+                }
+            }
 
+            path('mines') {
+                byMethod {
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
@@ -105,15 +109,8 @@ ratpack {
                         }
                     }
                 }
-
-                prefix('job') {
-                    get {
-                        render 'list of jobs in jobmine'
-                    }
-                }
             }
-
-            path('company') {
+            path('companies') {
                 byMethod {
                     post {
                         parse(jsonNode()).map { params ->
@@ -155,8 +152,7 @@ ratpack {
                     }
                 }
             }
-
-            path('job') {
+            path('jobs') {
                 byMethod {
                     post {
                         parse(jsonNode()).map { params ->
@@ -195,9 +191,7 @@ ratpack {
                     }
                 }
             }
-
-
-            path('school') {
+            path('schools') {
                 byMethod {
                     post {
                         parse(jsonNode()).map { params ->
@@ -235,8 +229,7 @@ ratpack {
                     }
                 }
             }
-
-            path('student') {
+            path('students') {
                 byMethod {
                     post {
                         parse(jsonNode()).map { params ->

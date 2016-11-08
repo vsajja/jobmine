@@ -102,7 +102,7 @@ public class StudentSpec extends Specification {
         }
 
         when:
-        post('api/v1/student')
+        post('api/v1/students')
 
         then:
         response.statusCode == 200

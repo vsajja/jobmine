@@ -81,7 +81,7 @@ public class SchoolSpec extends Specification {
         }
 
         when:
-        post('api/v1/school')
+        post('api/v1/schools')
 
         then:
         response.statusCode == 200

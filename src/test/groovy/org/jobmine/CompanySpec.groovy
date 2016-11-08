@@ -83,13 +83,13 @@ public class CompanySpec extends Specification {
         }
 
         when:
-        post('api/v1/company')
+        post('api/v1/companies')
 
         then:
         response.statusCode == 200
     }
 
-    def "post job"() {
+    def "create job"() {
         setup:
         def title = "Job @ ${this.class.getSimpleName()}"
         def description = "Job @ ${this.class.getSimpleName()} description"
@@ -109,7 +109,7 @@ public class CompanySpec extends Specification {
         }
 
         when:
-        post('api/v1/job')
+        post('api/v1/jobs')
 
         then:
         response.statusCode == 200
