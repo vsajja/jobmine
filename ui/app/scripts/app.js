@@ -58,7 +58,7 @@ angular
         controllerAs: 'profile'
       })
       .when('/settings', {
-        templateUrl: 'views/settings.html',
+        templateUrl: 'views/developers.html',
         controller: 'SettingsCtrl',
         controllerAs: 'settings'
       })

@@ -8,7 +8,7 @@
  * Controller of the jobmineApp
  */
 angular.module('jobmineApp')
-  .controller('SettingsCtrl', function () {
+  .controller('DevelopersCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
