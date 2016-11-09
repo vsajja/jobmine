@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class School implements Serializable {
 
-	private static final long serialVersionUID = -916208535;
+	private static final long serialVersionUID = 1445417807;
 
 	private final Long    schoolId;
 	private final String  name;
@@ -33,7 +33,6 @@ public class School implements Serializable {
 	private final String  description;
 	private final Integer locationId;
 	private final Integer imageId;
-	private final Integer jobMineId;
 
 	public School(School value) {
 		this.schoolId = value.schoolId;
@@ -44,7 +43,6 @@ public class School implements Serializable {
 		this.description = value.description;
 		this.locationId = value.locationId;
 		this.imageId = value.imageId;
-		this.jobMineId = value.jobMineId;
 	}
 
 	public School(
@@ -55,8 +53,7 @@ public class School implements Serializable {
 		Date    establishedDate,
 		String  description,
 		Integer locationId,
-		Integer imageId,
-		Integer jobMineId
+		Integer imageId
 	) {
 		this.schoolId = schoolId;
 		this.name = name;
@@ -66,7 +63,6 @@ public class School implements Serializable {
 		this.description = description;
 		this.locationId = locationId;
 		this.imageId = imageId;
-		this.jobMineId = jobMineId;
 	}
 
 	public Long getSchoolId() {
@@ -101,10 +97,6 @@ public class School implements Serializable {
 		return this.imageId;
 	}
 
-	public Integer getJobMineId() {
-		return this.jobMineId;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("School (");
@@ -117,7 +109,6 @@ public class School implements Serializable {
 		sb.append(", ").append(description);
 		sb.append(", ").append(locationId);
 		sb.append(", ").append(imageId);
-		sb.append(", ").append(jobMineId);
 
 		sb.append(")");
 		return sb.toString();

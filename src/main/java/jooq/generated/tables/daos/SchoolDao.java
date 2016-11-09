@@ -113,11 +113,4 @@ public class SchoolDao extends DAOImpl<SchoolRecord, jooq.generated.tables.pojos
 	public List<jooq.generated.tables.pojos.School> fetchByImageId(Integer... values) {
 		return fetch(School.SCHOOL.IMAGE_ID, values);
 	}
-
-	/**
-	 * Fetch records that have <code>job_mine_id IN (values)</code>
-	 */
-	public List<jooq.generated.tables.pojos.School> fetchByJobMineId(Integer... values) {
-		return fetch(School.SCHOOL.JOB_MINE_ID, values);
-	}
 }

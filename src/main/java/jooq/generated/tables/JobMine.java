@@ -14,6 +14,7 @@ import jooq.generated.Public;
 import jooq.generated.tables.records.JobMineRecord;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -34,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobMine extends TableImpl<JobMineRecord> {
 
-	private static final long serialVersionUID = 1412306723;
+	private static final long serialVersionUID = -2137737922;
 
 	/**
 	 * The reference instance of <code>public.job_mine</code>
@@ -58,6 +59,11 @@ public class JobMine extends TableImpl<JobMineRecord> {
 	 * The column <code>public.job_mine.name</code>.
 	 */
 	public final TableField<JobMineRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+
+	/**
+	 * The column <code>public.job_mine.school_id</code>.
+	 */
+	public final TableField<JobMineRecord, Integer> SCHOOL_ID = createField("school_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.job_mine</code> table reference
@@ -103,6 +109,14 @@ public class JobMine extends TableImpl<JobMineRecord> {
 	@Override
 	public List<UniqueKey<JobMineRecord>> getKeys() {
 		return Arrays.<UniqueKey<JobMineRecord>>asList(Keys.JOB_MINE_PKEY);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ForeignKey<JobMineRecord, ?>> getReferences() {
+		return Arrays.<ForeignKey<JobMineRecord, ?>>asList(Keys.JOB_MINE__JOB_MINE_SCHOOL_SCHOOL_ID_FK);
 	}
 
 	/**

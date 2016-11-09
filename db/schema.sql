@@ -18,8 +18,10 @@ CREATE TABLE image
 
 CREATE TABLE job_mine
 (
-  job_mine_id BIGSERIAL PRIMARY KEY,
-  name VARCHAR
+    job_mine_id BIGINT PRIMARY KEY NOT NULL,
+    name VARCHAR,
+    school_id INTEGER,
+    CONSTRAINT job_mine_school_school_id_fk FOREIGN KEY (school_id) REFERENCES school (school_id)
 );
 
 CREATE TABLE company

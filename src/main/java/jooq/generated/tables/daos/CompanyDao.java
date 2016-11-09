@@ -120,11 +120,4 @@ public class CompanyDao extends DAOImpl<CompanyRecord, jooq.generated.tables.poj
 	public List<jooq.generated.tables.pojos.Company> fetchByImageId(Integer... values) {
 		return fetch(Company.COMPANY.IMAGE_ID, values);
 	}
-
-	/**
-	 * Fetch records that have <code>job_mine_id IN (values)</code>
-	 */
-	public List<jooq.generated.tables.pojos.Company> fetchByJobMineId(Integer... values) {
-		return fetch(Company.COMPANY.JOB_MINE_ID, values);
-	}
 }

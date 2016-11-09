@@ -22,22 +22,26 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobMine implements Serializable {
 
-	private static final long serialVersionUID = 1215942283;
+	private static final long serialVersionUID = 1272378833;
 
-	private final Long   jobMineId;
-	private final String name;
+	private final Long    jobMineId;
+	private final String  name;
+	private final Integer schoolId;
 
 	public JobMine(JobMine value) {
 		this.jobMineId = value.jobMineId;
 		this.name = value.name;
+		this.schoolId = value.schoolId;
 	}
 
 	public JobMine(
-		Long   jobMineId,
-		String name
+		Long    jobMineId,
+		String  name,
+		Integer schoolId
 	) {
 		this.jobMineId = jobMineId;
 		this.name = name;
+		this.schoolId = schoolId;
 	}
 
 	public Long getJobMineId() {
@@ -48,12 +52,17 @@ public class JobMine implements Serializable {
 		return this.name;
 	}
 
+	public Integer getSchoolId() {
+		return this.schoolId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("JobMine (");
 
 		sb.append(jobMineId);
 		sb.append(", ").append(name);
+		sb.append(", ").append(schoolId);
 
 		sb.append(")");
 		return sb.toString();
