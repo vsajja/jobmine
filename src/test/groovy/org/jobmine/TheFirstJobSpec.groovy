@@ -35,8 +35,6 @@ public class TheFirstJobSpec extends Specification {
 
     @Shared
     DSLContext context
-    @Shared
-    JobMineDao jobMineDao
 
     def setupSpec() {
         final ConfigData configData = ConfigData.of { ConfigDataBuilder builder ->
@@ -52,9 +50,6 @@ public class TheFirstJobSpec extends Specification {
             builder.build()
         }
         DataSource dataSource = new PostgresModule().dataSource(configData.get('/postgres', PostgresConfig))
-        Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-
-        jobMineDao = new JobMineDao(configuration)
         context = DSL.using(dataSource, SQLDialect.POSTGRES);
     }
 
@@ -62,28 +57,171 @@ public class TheFirstJobSpec extends Specification {
 
     }
 
-    def "jobmine system creates school (UW)"() {
-        expect: false
+    def "1. create school (UW)"() {
+        setup:
+        def name = 'University of Waterloo'
+        def type = 'University'
+        def total_students = 35900
+        def established_date = '1986'
+        def description = "The University of Waterloo is a public research university with a main campus located in Waterloo, Ontario. The main campus is located on 404 hectares of land in 'Uptown' Waterloo, adjacent to Waterloo Park"
+
+        def image_id = null
+        def location_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [name            : name,
+                     type            : type,
+                     total_students  : total_students,
+                     established_date: established_date,
+                     description     : description])
+            )
+        }
+
+        when:
+        post('api/v1/schools')
+
+        then:
+        response.statusCode == 200
+        println response.body.text
     }
 
-    def "jobmine system creates student (vsajja)"() {
-        expect: false
+    def "2. create job_mine (UW's jobmine)"() {
+        setup:
+        def name = 'University of Waterloo jobmine'
+
+        def school_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson([name: name]))
+        }
+
+        when:
+        post('api/v1/mines')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "jobmine system creates a company (jobmine)"() {
-        expect: false
+    def "3. create student (vsajja)"() {
+        setup:
+        def first_name = 'Vinod'
+        def last_name = 'Sajja'
+        def username = 'vsajja'
+        def email_address = 'vsajja@engmail.uwaterloo.ca'
+        def employment_status = 'Unemployed'
+        def karma = 1
+        def total_views = 1
+        def age = 19
+        def gender = 'Male'
+        def salary = 1
+        def relationship_status = 'Single'
+        def dreams = 'help people find jobs'
+        def phone_number = '(519) 502-7991'
+        def employment_history = 'No history'
+        def skills = 'fantasy baseball guru'
+
+        def image_id = null
+        def location_id = null
+        def school_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [first_name         : first_name,
+                     last_name          : last_name,
+                     username           : username,
+                     email_address      : email_address,
+                     employment_status  : employment_status,
+                     karma              : karma,
+                     total_views        : total_views,
+                     age                : age,
+                     gender             : gender,
+                     salary             : salary,
+                     relationship_status: relationship_status,
+                     dreams             : dreams,
+                     phone_number       : phone_number,
+                     employment_history : employment_history,
+                     skills             : skills])
+            )
+        }
+
+        when:
+        post('api/v1/students')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "UW creates a mine (UW's jobmine)"() {
-        expect: false
+    def "4. create company (jobmine)"() {
+        setup:
+        def name = 'jobmine'
+        def description = 'jobmine is a website that helps people find jobs.'
+        def website_url = 'www.jobmine.ca'
+        def total_employees = 1
+        def industry = 'Software'
+        def founded_date = '2017-01-01'
+
+        def image_id = null
+        def location_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [name           : name,
+                     description    : description,
+                     website_url    : website_url,
+                     total_employees: total_employees,
+                     industry       : industry,
+                     founded_date   : founded_date])
+            )
+        }
+
+        when:
+        post('api/v1/companies')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "jobmine posts a job (jobmine's Founder) on UW's jobmine"() {
-        expect: false
+    def "5. post job on UW's jobmine (Founder)"() {
+        setup:
+        def title = 'Founder'
+        def description = 'Find jobmine.ca'
+        def type = 'Full-Time'
+        def status = 'Approved'
+        def total_openings = 1
+
+        def location_id = null
+        def job_mine_id = null
+        def company_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [title         : title,
+                     description   : description,
+                     type          : type,
+                     status        : status,
+                     total_openings: total_openings])
+            )
+        }
+
+        when:
+        post('api/v1/jobs')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "vsajja searches for jobs on UW's jobmine"() {
-        expect: false
+    def "6. searches for jobs on UW's jobmine"() {
+        when:
+        get('api/v1/jobs')
+
+        then:
+        response.statusCode == 200
     }
 
     def "vsajja shortlists for jobs on UW's jobmine"() {

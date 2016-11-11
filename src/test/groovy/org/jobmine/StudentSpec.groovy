@@ -68,7 +68,7 @@ public class StudentSpec extends Specification {
         def username = this.class.getSimpleName()
         def email_address = "${first_name}@waterloo.ca"
         def employment_status = 'Unemployed'
-        def karama = 1
+        def karma = 1
         def total_views = 1
         def age = 19
         def gender = "Male"
@@ -88,7 +88,7 @@ public class StudentSpec extends Specification {
                      username           : username,
                      email_address      : email_address,
                      employment_status  : employment_status,
-                     karama             : karama,
+                     karama             : karma,
                      total_views        : total_views,
                      age                : age,
                      gender             : gender,
@@ -107,61 +107,4 @@ public class StudentSpec extends Specification {
         then:
         response.statusCode == 200
     }
-
-//
-//    def "register"() {
-//        expect: false
-//    }
-//
-//    def "login"() {
-//        expect: false
-//    }
-//
-//    def "update profile"() {
-//        expect: false
-//    }
-//
-//    def "search for jobs"() {
-//        expect: false
-//    }
-//
-//    def "shortlist jobs"() {
-//        expect: false
-//    }
-//
-//    def "manage shortlist"() {
-//        expect: false
-//    }
-//
-//    def "create application packages"() {
-//        expect: false
-//    }
-//
-//    def "apply to jobs"() {
-//        expect: false
-//    }
-//
-//    def "view applications"() {
-//        expect: false
-//    }
-//
-//    def "view interviews"() {
-//        expect: false
-//    }
-//
-//    def "schedule interviews"() {
-//        expect: false
-//    }
-//
-//    def "view offers"() {
-//        expect: false
-//    }
-//
-//    def "accept offer"() {
-//        expect: false
-//    }
-//
-//    def "update settings"() {
-//        expect: false
-//    }
 }

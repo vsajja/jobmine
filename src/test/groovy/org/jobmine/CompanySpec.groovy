@@ -114,41 +114,4 @@ public class CompanySpec extends Specification {
         then:
         response.statusCode == 200
     }
-
-//    def "register"() {
-//        expect: false
-//    }
-//
-//    def "login"() {
-//        expect: false
-//    }
-//
-//    def "update profile"() {
-//        expect: false
-//    }
-//
-//
-//    def "view posted jobs"() {
-//        expect: false
-//    }
-//
-//    def "view applications"() {
-//        expect: false
-//    }
-//
-//    def "process application - reject, interview"() {
-//        expect: false
-//    }
-//
-//    def "view interviews"() {
-//        expect: false
-//    }
-//
-//    def "schedule interviews"() {
-//        expect: false
-//    }
-//
-//    def "send job offers"() {
-//        expect: false
-//    }
 }

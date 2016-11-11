@@ -86,29 +86,4 @@ public class SchoolSpec extends Specification {
         then:
         response.statusCode == 200
     }
-
-
-//    def "register"() {
-//        expect: false
-//    }
-//
-//    def "login"() {
-//        expect: false
-//    }
-//
-//    def "update profile"() {
-//        expect: false
-//    }
-//
-//    def "create jobmine"() {
-//        expect: false
-//    }
-//
-//    def "invite students"() {
-//        expect: false
-//    }
-//
-//    def "invite employers"() {
-//        expect: false
-//    }
 }

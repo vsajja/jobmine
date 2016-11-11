@@ -76,6 +76,11 @@ ratpack {
     handlers {
         all RequestLogger.ncsa(log)
 
+        get {
+            render 'hello dad'
+        }
+
+
         prefix('api/v1') {
             path('jobmine') {
                 byMethod {
@@ -154,6 +159,10 @@ ratpack {
             }
             path('jobs') {
                 byMethod {
+                    get {
+                        render 'jobs'
+                    }
+
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
@@ -239,7 +248,7 @@ ratpack {
                             def username = params.get('username').textValue()
                             def email_address = params.get('email_address').textValue()
                             def employment_status = params.get('employment_status').textValue()
-                            def karma = params.get('karama').intValue()
+                            def karma = params.get('karma').intValue()
                             def total_views = params.get('total_views').intValue()
                             def age = params.get('age').intValue()
                             def gender = params.get('gender').textValue()
