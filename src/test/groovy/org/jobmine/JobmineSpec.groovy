@@ -369,23 +369,74 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "vsajja and jobmine schedule interview"() {
-        expect: false
+    def "14. interview is scheduled"() {
+        setup:
+        def status = 'Scheduled'
+
+        def interview_timestamp = null
+        def job_id = null
+        def student_id = null
+        def location_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [status            : status,
+                     job_app_package_id: job_id,
+                     student_id        : student_id,
+                     location_id       : location_id])
+            )
+        }
+
+        when:
+        post('api/v1/jobs/interviews')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "jobmine conducts interview and sends an offer to vsajja to be jobmine's founder"() {
-        expect: false
+    def "15. company creates an offer for job"() {
+        setup:
+        def expiry_timestamp = '2017-01-01'
+        def salary = 10
+
+        def job_id = null
+        def student_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [expiry_timestamp: expiry_timestamp,
+                     salary          : salary,
+                     job_id          : job_id,
+                     student_id      : student_id])
+            )
+        }
+
+        when:
+        post('api/v1/jobs/offers')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "vsajja accepts offer and becomes jobmine's founder"() {
-        expect: false
+    def "16. student views job offers"() {
+        when:
+        get('api/v1/jobs/offers')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "vsajja shortlists for jobs on UW's jobmine"() {
-        expect: false
-    }
+//    def "vsajja accepts offer and becomes jobmine's founder"() {
+//        expect: false
+//    }
 
-    def "vsajja views job shortlist"() {
-        expect: false
-    }
+//    def "vsajja shortlists for jobs on UW's jobmine"() {
+//        expect: false
+//    }
+//
+//    def "vsajja views job shortlist"() {
+//        expect: false
+//    }
 }

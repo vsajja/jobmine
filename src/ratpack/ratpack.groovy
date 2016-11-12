@@ -13,6 +13,7 @@ import jooq.generated.tables.pojos.JobApp
 import jooq.generated.tables.pojos.JobAppPackage
 import jooq.generated.tables.pojos.JobInterview
 import jooq.generated.tables.pojos.JobMine
+import jooq.generated.tables.pojos.JobOffer
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
 import jooq.generated.tables.records.CompanyRecord
@@ -300,6 +301,50 @@ ratpack {
                 }
             }
 
+            path('jobs/offers') {
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<JobOffer> jobOffers = context.selectFrom(JOB_OFFER)
+                                .fetch()
+                                .into(JobOffer.class)
+                        render json(jobOffers)
+                    }
+
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def expiry_timestamp = new java.sql.Timestamp(
+                                    new SimpleDateFormat("yyyy-MM-dd").parse(
+                                            params.get('expiry_timestamp').textValue()).getTime())
+                            def salary = params.get('salary').intValue()
+
+//                            def job_id = params.get('job_id').intValue()
+//                            def student_id = params.get('student_id').intValue()
+
+                            assert expiry_timestamp
+                            assert salary
+
+//                            assert job_id
+//                            assert student_id
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            context.insertInto(JOB_OFFER)
+                                    .set(JOB_OFFER.EXPIRY_TIMESTAMP, expiry_timestamp)
+                                    .set(JOB_OFFER.SALARY, salary)
+                                    .returning()
+                                    .fetchOne()
+                                    .into(JobOffer.class)
+                        }.then { JobOffer jobOffer ->
+                            println "created job offer with id: " + jobOffer.getJobOfferId()
+                            render json(jobOffer)
+                        }
+                    }
+                }
+            }
 
             path('schools') {
                 byMethod {
