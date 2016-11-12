@@ -9,7 +9,9 @@ import jooq.generated.tables.daos.StudentDao
 import jooq.generated.tables.pojos.Company
 import jooq.generated.tables.pojos.Document
 import jooq.generated.tables.pojos.Job
+import jooq.generated.tables.pojos.JobApp
 import jooq.generated.tables.pojos.JobAppPackage
+import jooq.generated.tables.pojos.JobInterview
 import jooq.generated.tables.pojos.JobMine
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
@@ -213,6 +215,92 @@ ratpack {
                 }
             }
 
+            path('jobs/applications') {
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<JobApp> jobApps = context.selectFrom(JOB_APP)
+                                .fetch()
+                                .into(JobApp.class)
+                        render json(jobApps)
+                    }
+
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def job_id = params.get('job_id').intValue()
+                            def job_app_package_id = params.get('job_app_package_id').intValue()
+
+                            assert job_id
+                            assert job_app_package_id
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            context.insertInto(JOB_APP)
+                                    .set(JOB_APP.JOB_ID, job_id)
+                                    .set(JOB_APP.JOB_APP_PACKAGE_ID, job_app_package_id)
+                                    .returning()
+                                    .fetchOne()
+                                    .into(JobApp.class)
+                        }.then { JobApp jobApp ->
+                            println "created job app with id: " + jobApp.getJobAppId()
+                            render json(jobApp)
+                        }
+                    }
+                }
+            }
+
+            path('jobs/interviews') {
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<JobInterview> jobInterviews = context.selectFrom(JOB_INTERVIEW)
+                                .fetch()
+                                .into(JobInterview.class)
+                        render json(jobInterviews)
+                    }
+
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def status = params.get('status').textValue()
+                            def created_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+
+//                            def job_id = params.get('job_id').intValue()
+//                            def student_id = params.get('student_id').intValue()
+//                            def location_id = params.get('location_id').intValue()
+
+                            assert status
+                            assert created_timestamp
+
+//                            assert job_id
+//                            assert student_id
+//                            assert location_id
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            context.insertInto(JOB_INTERVIEW)
+                                    .set(JOB_INTERVIEW.STATUS, status)
+                                    .set(JOB_INTERVIEW.CREATED_TIMESTAMP, created_timestamp)
+//                                    .set(JOB_INTERVIEW.JOB_ID, job_id)
+//                                    .set(JOB_INTERVIEW.STUDENT_ID, student_id)
+//                                    .set(JOB_INTERVIEW.LOCATION_ID, location_id)
+                                    .returning()
+                                    .fetchOne()
+                                    .into(JobInterview.class)
+                        }.then { JobInterview jobInterview ->
+                            println "created job interview with id: " + jobInterview.getJobInterviewId()
+                            render json(jobInterview)
+                        }
+                    }
+                }
+            }
+
+
             path('schools') {
                 byMethod {
                     post {
@@ -398,7 +486,6 @@ ratpack {
                     }
                 }
             }
-
         }
 
 //        prefix('test') {

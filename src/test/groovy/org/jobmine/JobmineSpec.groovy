@@ -8,14 +8,11 @@ import io.netty.handler.codec.http.DefaultFullHttpRequest
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpVersion
 import io.netty.handler.codec.http.multipart.HttpPostRequestEncoder
-import jooq.generated.tables.daos.JobMineDao
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
-import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
-import org.jooq.impl.DefaultConfiguration
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
 import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
@@ -234,7 +231,7 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "6. searches for jobs on UW's jobmine"() {
+    def "6. search for jobs on UW's jobmine"() {
         when:
         get('api/v1/jobs')
 
@@ -242,7 +239,7 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "7. create job application package (vsajja's application)"() {
+    def "7. create job app package (vsajja's application)"() {
         setup:
         def name = 'App Package 1'
 
@@ -262,7 +259,7 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "8. view job application packages"() {
+    def "8. view job app packages"() {
         setup:
         def student_id = null
 
@@ -273,7 +270,7 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "9. upload documents to job application package (vsajja cover letter & resume)"() {
+    def "9. upload documents to job app package (cover letter & resume)"() {
         setup:
         File resume = File.createTempFile('vsajja_resume', '.pdf')
         File coverLetter = File.createTempFile('vsajja_coverletter', '.pdf')
@@ -308,12 +305,68 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "vsajja applies to Jobmine's Founder on UW's jobmine with vsajja's applicaiton"() {
-        expect: false
+    def "10. apply to job (Founder)"() {
+        setup:
+        def job_id = 64
+        def job_app_package_id = 17
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [job_id            : job_id,
+                     job_app_package_id: job_app_package_id])
+            )
+        }
+
+        when:
+        post('api/v1/jobs/applications')
+
+        then:
+        response.statusCode == 200
     }
 
-    def "jobmine selects vsajja for interview"() {
-        expect: false
+    def "11. view apps for job"() {
+        when:
+        get('api/v1/jobs/applications')
+
+        then:
+        response.statusCode == 200
+    }
+
+    def "12. company creates job interview with student"() {
+        setup:
+        def status = 'Created'
+
+        def job_id = null
+        def student_id = null
+        def location_id = null
+
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [status            : status,
+                     job_app_package_id: job_id,
+                     student_id        : student_id,
+                     location_id       : location_id])
+            )
+        }
+
+        when:
+        post('api/v1/jobs/interviews')
+
+        then:
+        response.statusCode == 200
+    }
+
+    def "13. student views interviews"() {
+        setup:
+        def student_id = null
+
+        when:
+        get('api/v1/jobs/interviews')
+
+        then:
+        response.statusCode == 200
     }
 
     def "vsajja and jobmine schedule interview"() {
