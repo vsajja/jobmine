@@ -15,6 +15,7 @@ import ratpack.groovy.test.GroovyRatpackMainApplicationUnderTest
 import ratpack.http.client.RequestSpec
 import ratpack.test.http.TestHttpClient
 import spock.lang.AutoCleanup
+import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -23,6 +24,7 @@ import javax.sql.DataSource
 /**
  * Created by vsajja on 2016-11-02.
  */
+@Ignore
 public class CompanySpec extends Specification {
     @AutoCleanup
     @Shared

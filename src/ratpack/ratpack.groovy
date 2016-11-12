@@ -8,6 +8,7 @@ import jooq.generated.tables.daos.SchoolDao
 import jooq.generated.tables.daos.StudentDao
 import jooq.generated.tables.pojos.Company
 import jooq.generated.tables.pojos.Job
+import jooq.generated.tables.pojos.JobAppPackage
 import jooq.generated.tables.pojos.JobMine
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
@@ -19,8 +20,10 @@ import jooq.generated.tables.records.StudentRecord
 import org.jooq.Configuration
 import org.jooq.DSLContext
 import org.jooq.Record
+import org.jooq.Result
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
+import org.jooq.impl.DefaultConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import ratpack.config.ConfigData
@@ -80,7 +83,6 @@ ratpack {
             render 'hello dad'
         }
 
-
         prefix('api/v1') {
             path('jobmine') {
                 byMethod {
@@ -115,6 +117,7 @@ ratpack {
                     }
                 }
             }
+
             path('companies') {
                 byMethod {
                     post {
@@ -157,10 +160,17 @@ ratpack {
                     }
                 }
             }
+
             path('jobs') {
                 byMethod {
                     get {
-                        render 'jobs'
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<Job> jobs = context.selectFrom(JOB)
+                                .fetch()
+                                .into(Job.class)
+                        render json(jobs)
                     }
 
                     post {
@@ -182,24 +192,24 @@ ratpack {
 
                             DataSource dataSource = registry.get(DataSource.class)
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                            JobRecord record = context
-                                    .insertInto(JOB)
+                            context.insertInto(JOB)
                                     .set(JOB.TITLE, title)
                                     .set(JOB.DESCRIPTION, description)
                                     .set(JOB.TYPE, type)
                                     .set(JOB.STATUS, status)
                                     .set(JOB.TOTAL_OPENINGS, total_openings)
                                     .set(JOB.CREATED_TIMESTAMP, created_timestamp)
-                                    .returning(JOB.JOB_ID)
+                                    .returning()
                                     .fetchOne()
-
-                            println "created job with id: " + record.getValue(JOB.JOB_ID)
-                        }.then {
-                            response.send()
+                                    .into(Job.class)
+                        }.then { Job createdJob ->
+                            println "created job with id: " + createdJob.getJobId()
+                            render json(createdJob)
                         }
                     }
                 }
             }
+
             path('schools') {
                 byMethod {
                     post {
@@ -238,6 +248,7 @@ ratpack {
                     }
                 }
             }
+
             path('students') {
                 byMethod {
                     post {
@@ -306,6 +317,34 @@ ratpack {
                             println "created student with id: " + record.getValue(STUDENT.STUDENT_ID)
                         }.then {
                             response.send()
+                        }
+                    }
+                }
+            }
+
+            path('students/packages') {
+                byMethod {
+                    get {
+                        render 'app packages'
+                    }
+
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def name = params.get('name').textValue()
+
+                            assert name
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            context.insertInto(JOB_APP_PACKAGE)
+                                    .set(JOB_APP_PACKAGE.NAME, name)
+                                    .returning()
+                                    .fetchOne()
+                                    .into(JobAppPackage.class)
+                        }.then { JobAppPackage createdAppPackage ->
+                            println "created job app package with id: " + createdAppPackage.getJobAppPackageId()
+                            render json(createdAppPackage)
                         }
                     }
                 }
