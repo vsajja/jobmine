@@ -307,8 +307,8 @@ public class JobmineSpec extends Specification {
 
     def "10. apply to job (Founder)"() {
         setup:
-        def job_id = 64
-        def job_app_package_id = 17
+        def job_id = 79
+        def job_app_package_id = 24
 
         requestSpec { RequestSpec request ->
             request.body.type('application/json')

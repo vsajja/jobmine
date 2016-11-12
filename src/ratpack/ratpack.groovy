@@ -100,6 +100,16 @@ ratpack {
 
             path('mines') {
                 byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<JobMine> mines = context.selectFrom(JOB_MINE)
+                                .fetch()
+                                .into(JobMine.class)
+                        render json(mines)
+                    }
+
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
@@ -126,6 +136,16 @@ ratpack {
 
             path('companies') {
                 byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<Company> companies = context.selectFrom(COMPANY)
+                                .fetch()
+                                .into(Company.class)
+                        render json(companies)
+                    }
+
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
@@ -348,6 +368,16 @@ ratpack {
 
             path('schools') {
                 byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<School> schools = context.selectFrom(SCHOOL)
+                                .fetch()
+                                .into(School.class)
+                        render json(schools)
+                    }
+
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
@@ -387,6 +417,16 @@ ratpack {
 
             path('students') {
                 byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<Student> students = context.selectFrom(STUDENT)
+                                .fetch()
+                                .into(Student.class)
+                        render json(students)
+                    }
+
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
