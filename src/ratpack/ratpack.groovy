@@ -7,6 +7,7 @@ import jooq.generated.tables.daos.JobMineDao
 import jooq.generated.tables.daos.SchoolDao
 import jooq.generated.tables.daos.StudentDao
 import jooq.generated.tables.pojos.Company
+import jooq.generated.tables.pojos.Document
 import jooq.generated.tables.pojos.Job
 import jooq.generated.tables.pojos.JobAppPackage
 import jooq.generated.tables.pojos.JobMine
@@ -28,6 +29,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import ratpack.config.ConfigData
 import ratpack.config.ConfigDataBuilder
+import ratpack.form.Form
+import ratpack.form.UploadedFile
 import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
@@ -356,36 +359,46 @@ ratpack {
                 }
             }
 
-            /*
-            get('jobs') {
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                DataSource dataSource = registry.get(DataSource.class)
-                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-                List<Job> jobPostings = new JobDao(configuration).findAll()
-                render json(jobPostings)
+            path('students/packages/documents') {
+                byMethod {
+                    get {
+                        render 'job app package documents'
+                    }
+
+                    post {
+                        parse(Form).then { Form form ->
+                            assert form.files().size()
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+
+                            List<Document> documents = []
+
+                            form.files().each { String key, UploadedFile uploadedFile ->
+                                log.info(uploadedFile.getFileName())
+
+                                def name = uploadedFile.getFileName()
+                                byte[] file = uploadedFile.getBytes()
+
+                                assert name
+                                assert file
+
+                                Document document = context.insertInto(DOCUMENT)
+                                        .set(DOCUMENT.NAME, name)
+                                        .set(DOCUMENT.DATA, file)
+                                        .returning(DOCUMENT.DOCUMENT_ID, DOCUMENT.NAME)
+                                        .fetchOne()
+                                        .into(Document.class)
+
+                                documents.add(document)
+                            }
+
+                            render json(documents)
+                        }
+                    }
+                }
             }
-            get('schools') {
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                DataSource dataSource = registry.get(DataSource.class)
-                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-                List<School> schools = new SchoolDao(configuration).findAll()
-                render json(schools)
-            }
-            get('students') {
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                DataSource dataSource = registry.get(DataSource.class)
-                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-                List<Student> students = new StudentDao(configuration).findAll()
-                render json(students)
-            }
-            get('companies') {
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                DataSource dataSource = registry.get(DataSource.class)
-                Configuration configuration = new DefaultConfiguration().set(dataSource).set(SQLDialect.POSTGRES)
-                List<Company> companies = new CompanyDao(configuration).findAll()
-                render json(companies)
-            }
-            */
+
         }
 
 //        prefix('test') {

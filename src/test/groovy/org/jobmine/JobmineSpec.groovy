@@ -1,6 +1,13 @@
 package org.jobmine
 
 import groovy.json.JsonOutput
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.ByteBufAllocator
+import io.netty.buffer.Unpooled
+import io.netty.handler.codec.http.DefaultFullHttpRequest
+import io.netty.handler.codec.http.HttpRequest
+import io.netty.handler.codec.http.HttpVersion
+import io.netty.handler.codec.http.multipart.HttpPostRequestEncoder
 import jooq.generated.tables.daos.JobMineDao
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
@@ -266,16 +273,39 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "vsajja uploads a document (cover letter) to vsajja's application"() {
-        expect: false
-    }
+    def "9. upload documents to job application package (vsajja cover letter & resume)"() {
+        setup:
+        File resume = File.createTempFile('vsajja_resume', '.pdf')
+        File coverLetter = File.createTempFile('vsajja_coverletter', '.pdf')
+        resume << 'resume content'
+        coverLetter << 'cover letter'
 
-    def "vsajja uploads a document (resume) to vsajja's application"() {
-        expect: false
-    }
+        def job_app_package_id = null
 
-    def "vsajja views job shortlist"() {
-        expect: false
+        requestSpec { RequestSpec requestSpec ->
+            HttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, io.netty.handler.codec.http.HttpMethod.POST, '/')
+            HttpPostRequestEncoder httpPostRequestEncoder = new HttpPostRequestEncoder(request, true)
+            httpPostRequestEncoder.addBodyFileUpload('resume', resume, 'text/plain', true)
+            httpPostRequestEncoder.addBodyFileUpload('coverLetter', coverLetter, 'text/plain', true)
+
+            request = httpPostRequestEncoder.finalizeRequest()
+
+            request.headers().each {
+                requestSpec.headers.set(it.key, it.value)
+            }
+
+            def chunks = []
+            while (!httpPostRequestEncoder.isEndOfInput()) {
+                chunks << httpPostRequestEncoder.readChunk(null as ByteBufAllocator).content()
+            }
+            requestSpec.body.buffer(Unpooled.wrappedBuffer(chunks as ByteBuf[]))
+        }
+
+        when:
+        post('api/v1/students/packages/documents')
+
+        then:
+        response.statusCode == 200
     }
 
     def "vsajja applies to Jobmine's Founder on UW's jobmine with vsajja's applicaiton"() {
@@ -299,6 +329,10 @@ public class JobmineSpec extends Specification {
     }
 
     def "vsajja shortlists for jobs on UW's jobmine"() {
+        expect: false
+    }
+
+    def "vsajja views job shortlist"() {
         expect: false
     }
 }
