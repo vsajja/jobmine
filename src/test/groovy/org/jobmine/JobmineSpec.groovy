@@ -255,6 +255,17 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
+    def "8. view job application packages"() {
+        setup:
+        def student_id = null
+
+        when:
+        get('api/v1/students/packages')
+
+        then:
+        response.statusCode == 200
+    }
+
     def "vsajja uploads a document (cover letter) to vsajja's application"() {
         expect: false
     }

@@ -325,7 +325,13 @@ ratpack {
             path('students/packages') {
                 byMethod {
                     get {
-                        render 'app packages'
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<JobAppPackage> jobAppPackages = context.selectFrom(JOB_APP_PACKAGE)
+                                .fetch()
+                                .into(JobAppPackage.class)
+                        render json(jobAppPackages)
                     }
 
                     post {
