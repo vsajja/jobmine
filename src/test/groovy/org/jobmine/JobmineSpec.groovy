@@ -23,6 +23,7 @@ import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
+import spock.lang.Unroll
 
 import javax.sql.DataSource
 
@@ -122,12 +123,9 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "3. create student (vsajja)"() {
+    @Unroll
+    def "3. create student #username"() {
         setup:
-        def first_name = 'Vinod'
-        def last_name = 'Sajja'
-        def username = 'vsajja'
-        def email_address = 'vsajja@engmail.uwaterloo.ca'
         def employment_status = 'Unemployed'
         def karma = 1
         def total_views = 1
@@ -136,9 +134,9 @@ public class JobmineSpec extends Specification {
         def salary = 1
         def relationship_status = 'Single'
         def dreams = 'help people find jobs'
-        def phone_number = '(519) 502-7991'
+        def phone_number = '(123) 456-7891'
         def employment_history = 'No history'
-        def skills = 'fantasy baseball guru'
+        def skills = 'No skills'
 
         def image_id = null
         def location_id = null
@@ -170,6 +168,17 @@ public class JobmineSpec extends Specification {
 
         then:
         response.statusCode == 200
+
+        where:
+        first_name || last_name    || username   || email_address
+        'Vinod'    || 'Sajja'      || 'vsajja'   || 'vsajja@engmail.uwaterloo.ca'
+        'Riaz'     || 'Hassan'     || 'rhassan'  || 'rhassan@edu.yorku.ca'
+        'Rahal'    || 'Balasuriya' || 'rahalb'   || 'rahalb@edu.yorku.ca'
+        'Jason'    || 'Phinney'    || 'jphinney' || 'jphinney@edu.yorku.ca'
+        'Ramanan'  || 'AR'         || 'ramar'    || 'ramar@edu.yorku.ca'
+        'Thong'    || 'Thai'       || 'tthai'    || 'tthai@mail.utoronto.ca'
+        'Vincent'  || 'Nguyen'     || 'vnguyen'  || 'vnguyen@mail.ryerson.ca'
+        'Donald'   || 'Trump'      || 'dtrump'   || 'dtrump@whitehouse.com'
     }
 
     def "4. create company (jobmine)"() {
