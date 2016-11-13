@@ -7,13 +7,17 @@
   <tr>
     <th></th>
     <th st-sort="title" class="st-sort-ascent">Title</th>
-    <th st-sort="location" class="st-sort-ascent">Location</th>
-    <th st-sort="employername" class="st-sort-ascent">Company</th>
+    <th st-sort="description" class="st-sort-ascent">Description</th>
     <th st-sort="type" class="st-sort-ascent">Type</th>
-    <th >Description</th>
-    <th>Status</th>
-    <th>Apply</th>
-    <th>Openings</th>
+    <th st-sort="createdTimestamp" class="st-sort-ascent">Created</th>
+    <th st-sort="status" class="st-sort-ascent">Status</th>
+    <!--<th st-sort="location" class="st-sort-ascent">Location</th>-->
+    <!--<th st-sort="employername" class="st-sort-ascent">Company</th>-->
+    <!--<th st-sort="type" class="st-sort-ascent">Type</th>-->
+    <!--<th >Description</th>-->
+    <!--<th>Status</th>-->
+    <!--<th>Apply</th>-->
+    <th st-sort="totalOpenings" class="st-sort-ascent">Total Openings</th>
     <th>Applications</th>
   </tr>
   </thead>
@@ -26,13 +30,16 @@
     <td>
       <a data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sm"><h7>{{row.title}}</h7></a>
     </td>
-    <td>{{row.location}}</td>
-    <td>{{row.employername}}</td>
-    <td>Full-Time</td>
-    <td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>
-    <td><span class="label label-warning">Pending</span></td>
-    <td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Apply</a></td>
-    <td style="text-align: center">0</td>
+    <td>{{row.description}}</td>
+    <td>{{row.type}}</td>
+    <td>{{row.createdTimestamp | date}}</td>
+    <!--<td>{{row.location}}</td>-->
+    <!--<td>{{row.employername}}</td>-->
+    <!--<td>Full-Time</td>-->
+    <!--<td>{{row.description_9 | limitTo: 100}}{{row.description_9.length > 100 ? '...' : ''}}</td>-->
+    <td><span class="label label-warning">{{row.status}}</span></td>
+    <!--<td><a data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm">Apply</a></td>-->
+    <td style="text-align: center">{{row.totalOpenings}}</td>
     <td style="text-align: center">0</td>
   </tr>
   </tbody>

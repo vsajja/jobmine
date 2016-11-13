@@ -74,14 +74,9 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
     }
 
-    def "1. create school (UW)"() {
+    @Unroll
+    def "1. create school #name"() {
         setup:
-        def name = 'University of Waterloo'
-        def type = 'University'
-        def total_students = 35900
-        def established_date = '1986'
-        def description = "The University of Waterloo is a public research university with a main campus located in Waterloo, Ontario. The main campus is located on 404 hectares of land in 'Uptown' Waterloo, adjacent to Waterloo Park"
-
         def image_id = null
         def location_id = null
 
@@ -101,8 +96,14 @@ public class JobmineSpec extends Specification {
 
         then:
         response.statusCode == 200
-//        def school = jsonSlurper.parseText(response.body.text)
-//        println school.schoolId
+
+        where:
+        name                                         || type                      || total_students || established_date || description
+        'University of Waterloo'                     || 'University'              || 35900          || '1986'           || "The University of Waterloo is a public research university with a main campus located in Waterloo, Ontario. The main campus is located on 404 hectares of land in 'Uptown' Waterloo, adjacent to Waterloo Park"
+        'York University'                            || 'University'              || 53000          || '1986'           || "York University is a public research university in Toronto, Ontario, Canada. It is Canada's third-largest university. York University has approximately 53,000 students, 7,000 faculty and staff, and 295,000 alumni worldwide."
+        'University of Toronto'                      || 'University'              || 84556          || '1986'           || "The University of Toronto is a public research university in Toronto, Ontario, Canada, situated on the grounds that surround Queen's Park."
+        'Ryserson University'                        || 'University'              || 34831          || '1986'           || "Ryerson University is a public research university located in downtown Toronto, Ontario. Its urban campus surrounds the Yonge-Dundas Square, located at the busiest intersection in downtown Toronto."
+        'Hogwarts School of Witchcraft and Wizardry' || 'Witchcraft and Wizardry' || 1              || '1905'           || "Hogwarts School of Witchcraft and Wizardry, shortened Hogwarts, is a fictional British school of magic for students aged eleven to eighteen, and is the primary setting for the first six books in J.K. Rowling's Harry Potter series."
     }
 
     def "2. create job_mine (UW's jobmine)"() {
@@ -171,6 +172,7 @@ public class JobmineSpec extends Specification {
 
         where:
         first_name || last_name    || username   || email_address
+        'Andrew'   || 'Tran'       || 'atran'    || 'atran@hogwarts.ca'
         'Vinod'    || 'Sajja'      || 'vsajja'   || 'vsajja@engmail.uwaterloo.ca'
         'Riaz'     || 'Hassan'     || 'rhassan'  || 'rhassan@edu.yorku.ca'
         'Rahal'    || 'Balasuriya' || 'rahalb'   || 'rahalb@edu.yorku.ca'
@@ -183,13 +185,6 @@ public class JobmineSpec extends Specification {
 
     def "4. create company (jobmine)"() {
         setup:
-        def name = 'jobmine'
-        def description = 'jobmine is a website that helps people find jobs.'
-        def website_url = 'www.jobmine.ca'
-        def total_employees = 1
-        def industry = 'Software'
-        def founded_date = '2017-01-01'
-
         def image_id = null
         def location_id = null
 
@@ -210,16 +205,16 @@ public class JobmineSpec extends Specification {
 
         then:
         response.statusCode == 200
+
+        where:
+        name                            || description                                         || website_url           || total_employees || industry   || founded_date
+        'jobmine'                       || 'jobmine is a website that helps people find jobs.' || 'www.jobmine.ca'      || 1               || 'Software' || '2017-01-01'
+        'Toronto District School Board' || 'TDSB hires teachers.'                              || 'www.tdsb.ca'         || 1               || 'School'   || '2017-01-01'
+        'Brazzers'                      || 'You know what Brazzers does.'                      || 'brazzerswebsite.com' || 1               || 'Porn'     || '2017-01-01'
     }
 
-    def "5. post job on UW's jobmine (Founder)"() {
+    def "5. post job on UW's jobmine #title"() {
         setup:
-        def title = 'Founder'
-        def description = 'Find jobmine.ca'
-        def type = 'Full-Time'
-        def status = 'Approved'
-        def total_openings = 1
-
         def location_id = null
         def job_mine_id = null
         def company_id = null
@@ -240,6 +235,11 @@ public class JobmineSpec extends Specification {
 
         then:
         response.statusCode == 200
+
+        where:
+        title     || description                        || type        || status    || total_openings
+        'Founder' || 'Become the founder of jobmine.ca' || 'Full-Time' || 'Pending' || 1
+        'Teacher' || 'Teach students.'                  || 'Full-Time' || 'Pending' || 1
     }
 
     def "6. search for jobs on UW's jobmine"() {
