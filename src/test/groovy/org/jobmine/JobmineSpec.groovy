@@ -1,6 +1,7 @@
 package org.jobmine
 
 import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.Unpooled
@@ -40,6 +41,9 @@ public class JobmineSpec extends Specification {
     @Shared
     DSLContext context
 
+    @Shared
+    JsonSlurper jsonSlurper = new JsonSlurper()
+
     def setupSpec() {
         final ConfigData configData = ConfigData.of { ConfigDataBuilder builder ->
             builder.props(
@@ -66,10 +70,7 @@ public class JobmineSpec extends Specification {
         get('api/v1/jobmine')
 
         then:
-        with(response) {
-            statusCode == 200
-            body.text == 'hello pleb'
-        }
+        response.statusCode == 200
     }
 
     def "1. create school (UW)"() {
@@ -99,7 +100,8 @@ public class JobmineSpec extends Specification {
 
         then:
         response.statusCode == 200
-        println response.body.text
+//        def school = jsonSlurper.parseText(response.body.text)
+//        println school.schoolId
     }
 
     def "2. create job_mine (UW's jobmine)"() {

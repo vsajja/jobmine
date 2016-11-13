@@ -23,6 +23,7 @@ import jooq.generated.tables.records.SchoolRecord
 import jooq.generated.tables.records.StudentRecord
 import org.jooq.Configuration
 import org.jooq.DSLContext
+import org.jooq.Field
 import org.jooq.Record
 import org.jooq.Result
 import org.jooq.SQLDialect
@@ -85,15 +86,49 @@ ratpack {
     handlers {
         all RequestLogger.ncsa(log)
 
-        get {
-            render 'hello dad'
-        }
-
         prefix('api/v1') {
             path('jobmine') {
                 byMethod {
                     get {
-                        render 'hello pleb'
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+
+                        /*
+                        def schools = context.selectCount().from(SCHOOL).fetchOne(0, int.class)
+                        def students = context.selectCount().from(STUDENT).fetchOne(0, int.class)
+                        def companies = context.selectCount().from(COMPANY).fetchOne(0, int.class)
+                        def jobs = context.selectCount().from(JOB).fetchOne(0, int.class)
+                        def mines = context.selectCount().from(JOB_MINE).fetchOne(0, int.class)
+                        def countries = 1
+
+                        render json([schools  : schools,
+                                     students : students,
+                                     companies: companies,
+                                     jobs     : jobs,
+                                     mines    : mines,
+                                     countries: countries])
+                        */
+
+
+                        /*
+                        SELECT
+                        (SELECT COUNT(*) FROM company) AS companies,
+                        (SELECT COUNT(*) FROM student) AS students,
+                        (SELECT COUNT(*) FROM job) AS jobs,
+                        ...
+                        */
+
+                        def schools = context.selectCount().from(SCHOOL).asField('schools')
+                        def students = context.selectCount().from(STUDENT).asField('students')
+                        def companies = context.selectCount().from(COMPANY).asField('companies')
+                        def jobs = context.selectCount().from(JOB).asField('jobs')
+                        def mines = context.selectCount().from(JOB_MINE).asField('mines')
+
+                        def result = context.select(schools, students, companies, jobs, mines).fetchOneMap()
+                        result.put('countries', 1)
+
+                        render json(result)
                     }
                 }
             }
@@ -397,19 +432,19 @@ ratpack {
 
                             DataSource dataSource = registry.get(DataSource.class)
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                            SchoolRecord record = context
+                            context
                                     .insertInto(SCHOOL)
                                     .set(SCHOOL.NAME, name)
                                     .set(SCHOOL.TYPE, type)
                                     .set(SCHOOL.TOTAL_STUDENTS, total_students)
                                     .set(SCHOOL.ESTABLISHED_DATE, established_date)
                                     .set(SCHOOL.DESCRIPTION, description)
-                                    .returning(SCHOOL.SCHOOL_ID)
+                                    .returning()
                                     .fetchOne()
-
-                            println "created school with id: " + record.getValue(SCHOOL.SCHOOL_ID)
-                        }.then {
-                            response.send()
+                                    .into(School.class)
+                        }.then { School school ->
+                            println "created school with id: " + school.getSchoolId()
+                            render json(school)
                         }
                     }
                 }
