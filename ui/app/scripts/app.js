@@ -62,6 +62,11 @@ angular
         controller: 'SettingsCtrl',
         controllerAs: 'settings'
       })
+      .when('/students/:userName', {
+        templateUrl: 'views/studentprofile.html',
+        controller: 'StudentprofileCtrl',
+        controllerAs: 'studentprofile'
+      })
       .otherwise({
         redirectTo: '/'
       });

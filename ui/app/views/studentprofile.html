@@ -1,0 +1,144 @@
+<uib-tabset active="activeForm">
+  <uib-tab index="0" heading="Profile">
+    <br/>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">Student</div>
+          <ul class="list-group">
+            <!--<li class="list-group-item text-right">-->
+              <!--<div style="padding: 5px" align="center">-->
+                <!--&lt;!&ndash;<img height="125px" width="125px" style="border-radius: 50%;" src="images/profile_buddy.jpg"&ndash;&gt;-->
+                     <!--&lt;!&ndash;alt="Buddy!">&ndash;&gt;-->
+                <!--<h4>{{student.firstName}} {{student.lastName}}</h4>-->
+              <!--</div>-->
+            <!--</li>-->
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span>
+              {{student.firstName}} {{student.lastName}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Student Id</strong></span>
+              {{student.studentId}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Username</strong></span>
+              {{student.username}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span>
+              {{student.emailAddress}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Status</strong></span>
+              {{student.employmentStatus}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Gender</strong></span>
+              {{student.gender}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> {{student.age}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Phone Number</strong></span>
+              {{student.phoneNumber}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> Waterloo, ON
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Account</div>
+          <ul class="list-group">
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span>
+              {{student.joinedTimestamp | date}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span>
+              {{student.lastLoggedinTimestamp | date}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Karma</strong></span>
+              {{student.karma}}
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Total Views</strong></span>
+              {{student.totalViews}}
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Social Media</div>
+          <div class="panel-body">
+            <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i>
+            <i
+              class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">Schools</div>
+          <div class="panel-body">
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Employment History</div>
+          <div class="panel-body">{{student.employmentHistory}}</div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Skills</div>
+          <div class="panel-body">{{student.skills}}</div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Achievements</div>
+          <div class="panel-body">
+          </div>
+        </div>
+      </div>
+    </div>
+  </uib-tab>
+
+  <uib-tab index="1" heading="Application Packages">
+    <br/>
+    Some Tab Content
+  </uib-tab>
+  <uib-tab index="2" heading="Applications">
+    <br/>
+    More Tab Content
+  </uib-tab>
+
+  <uib-tab index="3" heading="Job Shortlist">
+    <br/>
+    More Tab Content
+  </uib-tab>
+
+  <uib-tab index="4" heading="Interviews">
+    <br/>
+    More Tab Content
+  </uib-tab>
+
+  <uib-tab index="5" heading="Offers">
+    <br/>
+    More Tab Content
+  </uib-tab>
+
+  <uib-tab index="6" heading="Settings">
+    <br/>
+
+    <h2>update username</h2>
+
+    <h2>update email</h2>
+
+    <h2>update password</h2>
+
+    <h2>deactivate account</h2>
+
+    <h2>email notifications</h2>
+
+    <h2>timezone</h2>
+
+    <h2>privacy</h2>
+    <!--<h2>Mobile text notifications</h2>-->
+    <!--<h2>Language settings</h2>-->
+  </uib-tab>
+</uib-tabset>
+
+

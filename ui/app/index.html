@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="styles/students.css">
   <link rel="stylesheet" href="styles/companies.css">
   <link rel="stylesheet" href="styles/profile.css">
-  <link rel="stylesheet" href="styles/students/profile.css">
+  <link rel="stylesheet" href="styles/studentprofile.css">
   <link rel="stylesheet" href="styles/developers.css">
   <!-- endbuild -->
   <!-- TODO: use bower for font-awesome? -->
@@ -33,7 +33,7 @@
 
 <!-- Add your site or application content here -->
 <div class="header">
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -72,7 +72,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vsajja
               <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a ng-href="#/profile">Profile</a></li>
+              <li><a ng-href="#/students/vsajja">Profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a ng-href="#/">Logout</a></li>
             </ul>
@@ -83,16 +83,14 @@
   </nav>
 </div>
 
-<div style="padding-top: 65px;">
+<div id="content">
   <div class="col-md-12">
     <div ng-view=""></div>
   </div>
-  <div id="push"></div>
 </div>
 
 <div id="footer">
-  <div align="center" class="col-md-12">
-    <p>
+  <div class="col-md-12" align="center">
     <div>
       <!-- TODO: Android app link -->
       <a href="https://itunes.apple.com/ca/app/angry-birds/id343200656?mt=8" target="_blank"><i
@@ -101,14 +99,13 @@
       <a href="https://play.google.com/store/apps/details?id=com.rovio.angrybirds&hl=en" target="_blank"><i
         class="fa fa-apple fa-3x" aria-hidden="true"></i></a>
     </div>
-      <a href="">Privacy Policy</a> |
-      <a href="">Terms of Use</a> |
-      <a href="#/jobs">Careers</a> |
-      <a href="#/settings">Developers</a> |
-      <a href="https://jobmineteam.slack.com/messages/jobmine/" target="_blank">Slack</a> |
-      <a href="#/about">About</a>
-      <p>© 2016 jobmine</p>
-    </p>
+    <a href="">Privacy Policy</a> |
+    <a href="">Terms of Use</a> |
+    <a href="#/jobs">Careers</a> |
+    <a href="#/settings">Developers</a> |
+    <a href="https://jobmineteam.slack.com/messages/jobmine/" target="_blank">Slack</a> |
+    <a href="#/about">About</a>
+    <p>© 2016 jobmine</p>
   </div>
 </div>
 
@@ -153,7 +150,7 @@
 <script src="scripts/controllers/schools.js"></script>
 <script src="scripts/controllers/profile.js"></script>
 <script src="scripts/controllers/developers.js"></script>
-<script src="scripts/controllers/students/profile.js"></script>
+<script src="scripts/controllers/studentprofile.js"></script>
 <!-- endbuild -->
 </body>
 </html>
