@@ -533,6 +533,22 @@ ratpack {
                 }
             }
 
+            path('students/:userName') {
+                def userName = pathTokens['userName']
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        Student students = context.selectFrom(STUDENT)
+                                .where(STUDENT.USERNAME.equal(userName))
+                                .fetchOne()
+                                .into(Student.class)
+                        render json(students)
+                    }
+                }
+            }
+
             path('students/packages') {
                 byMethod {
                     get {

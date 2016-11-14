@@ -52,11 +52,6 @@ angular
         controller: 'CompaniesCtrl',
         controllerAs: 'companies'
       })
-      .when('/students/:studentId', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        controllerAs: 'profile'
-      })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
@@ -66,6 +61,11 @@ angular
         templateUrl: 'views/developers.html',
         controller: 'SettingsCtrl',
         controllerAs: 'settings'
+      })
+      .when('/students/:studentId', {
+        templateUrl: 'views/students/profile.html',
+        controller: 'StudentsProfileCtrl',
+        controllerAs: 'students/profile'
       })
       .otherwise({
         redirectTo: '/'
