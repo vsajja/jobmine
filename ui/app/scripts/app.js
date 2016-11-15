@@ -52,20 +52,15 @@ angular
         controller: 'CompaniesCtrl',
         controllerAs: 'companies'
       })
-      .when('/profile', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        controllerAs: 'profile'
-      })
       .when('/settings', {
         templateUrl: 'views/developers.html',
         controller: 'SettingsCtrl',
         controllerAs: 'settings'
       })
-      .when('/students/:userName', {
-        templateUrl: 'views/studentprofile.html',
-        controller: 'StudentprofileCtrl',
-        controllerAs: 'studentprofile'
+      .when('/students/:studentId', {
+        templateUrl: 'views/student-profile.html',
+        controller: 'StudentProfileCtrl',
+        controllerAs: 'studentProfile'
       })
       .otherwise({
         redirectTo: '/'

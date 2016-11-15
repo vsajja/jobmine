@@ -2,23 +2,21 @@
 
 /**
  * @ngdoc function
- * @name jobmineApp.controller:StudentprofileCtrl
+ * @name jobmineApp.controller:StudentProfileCtrl
  * @description
- * # StudentprofileCtrl
+ * # StudentProfileCtrl
  * Controller of the jobmineApp
  */
 angular.module('jobmineApp')
-  .controller('StudentprofileCtrl', ['$scope', '$routeParams', 'Restangular', function ($scope, $routeParams, Restangular) {
+  .controller('StudentProfileCtrl', ['$scope', '$routeParams', 'Restangular', function ($scope, $routeParams, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    var userName = $routeParams.userName;
-
-
-    var student = Restangular.one('students', userName);
+    var studentId = $routeParams.studentId;
+    var student = Restangular.one('students', studentId);
 
     // This will query /students/:userName and return a promise.
     student.customGET().then(function (student) {

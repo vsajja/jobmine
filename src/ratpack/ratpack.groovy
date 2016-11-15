@@ -533,15 +533,15 @@ ratpack {
                 }
             }
 
-            path('students/:userName') {
-                def userName = pathTokens['userName']
+            path('students/:studentId') {
+                def studentId = pathTokens['studentId']
                 byMethod {
                     get {
                         response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         Student students = context.selectFrom(STUDENT)
-                                .where(STUDENT.USERNAME.equal(userName))
+                                .where(STUDENT.STUDENT_ID.equal(studentId))
                                 .fetchOne()
                                 .into(Student.class)
                         render json(students)
