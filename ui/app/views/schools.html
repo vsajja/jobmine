@@ -24,7 +24,8 @@
     <td>
       <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
     </td>
-    <td>{{row.name}}</td>
+    <td><a ng-href="#/schools/{{row.schoolId}}">{{row.name}}</a></td>
+    <!--<td>{{row.name}}</td>-->
     <td>{{row.type}}</td>
     <td>{{row.description}}</td>
     <!-- TODO: format the location better, some schools have multiple cities -->

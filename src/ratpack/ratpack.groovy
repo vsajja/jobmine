@@ -466,6 +466,22 @@ ratpack {
                 }
             }
 
+            path('schools/:schoolId') {
+                def schoolId = pathTokens['schoolId']
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        School school = context.selectFrom(SCHOOL)
+                                .where(SCHOOL.SCHOOL_ID.equal(schoolId))
+                                .fetchOne()
+                                .into(School.class)
+                        render json(school)
+                    }
+                }
+            }
+
             path('students') {
                 byMethod {
                     get {

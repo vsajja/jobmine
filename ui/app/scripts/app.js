@@ -77,7 +77,7 @@ angular
         controller: 'MineProfileCtrl',
         controllerAs: 'mineProfile'
       })
-      .when('/schools/schoolId', {
+      .when('/schools/:schoolId', {
         templateUrl: 'views/school-profile.html',
         controller: 'SchoolProfileCtrl',
         controllerAs: 'schoolProfile'
