@@ -62,6 +62,26 @@ angular
         controller: 'StudentProfileCtrl',
         controllerAs: 'studentProfile'
       })
+      .when('/companies/:companyId', {
+        templateUrl: 'views/company-profile.html',
+        controller: 'CompanyProfileCtrl',
+        controllerAs: 'companyProfile'
+      })
+      .when('/jobs/:jobId', {
+        templateUrl: 'views/job-profile.html',
+        controller: 'JobProfileCtrl',
+        controllerAs: 'jobProfile'
+      })
+      .when('/mines/:mineId', {
+        templateUrl: 'views/mine-profile.html',
+        controller: 'MineProfileCtrl',
+        controllerAs: 'mineProfile'
+      })
+      .when('/schools/schoolId', {
+        templateUrl: 'views/school-profile.html',
+        controller: 'SchoolProfileCtrl',
+        controllerAs: 'schoolProfile'
+      })
       .otherwise({
         redirectTo: '/'
       });
