@@ -222,6 +222,22 @@ ratpack {
                 }
             }
 
+            path('companies/:companyId') {
+                def companyId = pathTokens['companyId']
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        Company company = context.selectFrom(COMPANY)
+                                .where(COMPANY.COMPANY_ID.equal(companyId))
+                                .fetchOne()
+                                .into(Company.class)
+                        render json(company)
+                    }
+                }
+            }
+
             path('jobs') {
                 byMethod {
                     get {

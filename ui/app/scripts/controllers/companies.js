@@ -16,9 +16,9 @@ angular.module('jobmineApp')
     ];
     var companies = Restangular.all('companies');
 
-    // This will query /schools and return a promise.
+    // This will query /companies and return a promise.
     companies.getList().then(function (companies) {
-      $scope.rowList = companies;
-      $scope.rowCollection = [].concat($scope.rowList);
+      $scope.companyList = companies;
+      $scope.companyCollection = [].concat($scope.companyList);
     });
   }]);

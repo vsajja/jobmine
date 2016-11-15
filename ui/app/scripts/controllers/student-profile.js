@@ -18,7 +18,7 @@ angular.module('jobmineApp')
     var studentId = $routeParams.studentId;
     var student = Restangular.one('students', studentId);
 
-    // This will query /students/:userName and return a promise.
+    // This will query /students/:studentId and return a promise.
     student.customGET().then(function (student) {
       $scope.student = student;
     });
