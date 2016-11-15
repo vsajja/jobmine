@@ -271,6 +271,22 @@ ratpack {
                 }
             }
 
+            path('jobs/:jobId') {
+                def jobId = pathTokens['jobId']
+                byMethod {
+                    get {
+                        response.headers.add('Access-Control-Allow-Origin', '*')
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        Job job = context.selectFrom(JOB)
+                                .where(JOB.JOB_ID.equal(jobId))
+                                .fetchOne()
+                                .into(Job.class)
+                        render json(job)
+                    }
+                }
+            }
+
             path('jobs/applications') {
                 byMethod {
                     get {
@@ -540,11 +556,11 @@ ratpack {
                         response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                        Student students = context.selectFrom(STUDENT)
+                        Student student = context.selectFrom(STUDENT)
                                 .where(STUDENT.STUDENT_ID.equal(studentId))
                                 .fetchOne()
                                 .into(Student.class)
-                        render json(students)
+                        render json(student)
                     }
                 }
             }
