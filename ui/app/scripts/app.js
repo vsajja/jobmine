@@ -82,6 +82,11 @@ angular
         controller: 'SchoolProfileCtrl',
         controllerAs: 'schoolProfile'
       })
+      .when('/mines', {
+        templateUrl: 'views/mines.html',
+        controller: 'MinesCtrl',
+        controllerAs: 'mines'
+      })
       .otherwise({
         redirectTo: '/'
       });
