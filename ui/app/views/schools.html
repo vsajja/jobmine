@@ -1,4 +1,4 @@
-<table st-table="rowCollection" st-safe-src="rowList" class="table table-striped">
+<table st-table="schoolCollection" st-safe-src="schoolList" class="table table-striped">
   <tr>
     <!-- TODO: add dropdown, filter by location etc -->
     <th colspan="10"><input st-search="" class="form-control" placeholder="Filter results..."
@@ -19,20 +19,19 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="row in rowCollection">
+  <tr ng-repeat="school in schoolCollection">
     <!-- TODO: load icon -->
     <td>
       <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
     </td>
-    <td><a ng-href="#/schools/{{row.schoolId}}">{{row.name}}</a></td>
-    <!--<td>{{row.name}}</td>-->
-    <td>{{row.type}}</td>
-    <td>{{row.description}}</td>
+    <td><a ng-href="#/schools/{{school.schoolId}}">{{school.name}}</a></td>
+    <td>{{school.type}}</td>
+    <td>{{school.description}}</td>
     <!-- TODO: format the location better, some schools have multiple cities -->
-    <!--<td>{{row.city}}</td>-->
-    <!--<td>{{row.provinceorstate + ',' + row.country}}</td>-->
-    <td>{{row.establishedDate | date}}</td>
-    <td>{{row.totalStudents | number}}</td>
+    <!--<td>{{school.city}}</td>-->
+    <!--<td>{{school.provinceorstate + ',' + school.country}}</td>-->
+    <td>{{school.establishedDate | date}}</td>
+    <td>{{school.totalStudents | number}}</td>
     <!--<td>0</td>-->
     <!--<td>0</td>-->
   </tr>

@@ -19,7 +19,7 @@ angular.module('jobmineApp')
 
     // This will query /schools and return a promise.
     schools.getList().then(function (schools) {
-      $scope.rowList = schools;
-      $scope.rowCollection = [].concat($scope.rowList);
+      $scope.schoolList = schools;
+      $scope.schoolCollection = [].concat($scope.schoolList);
     });
   }]);
