@@ -92,6 +92,21 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
+      .when('/register/student', {
+        templateUrl: 'views/student-register.html',
+        controller: 'StudentRegisterCtrl',
+        controllerAs: 'studentRegister'
+      })
+      .when('/register/school', {
+        templateUrl: 'views/school-register.html',
+        controller: 'SchoolRegisterCtrl',
+        controllerAs: 'schoolRegister'
+      })
+      .when('/register/company', {
+        templateUrl: 'views/company-register.html',
+        controller: 'CompanyRegisterCtrl',
+        controllerAs: 'companyRegister'
+      })
       .otherwise({
         redirectTo: '/'
       });
