@@ -65,14 +65,9 @@
           <!--<li><a href="#/about">About</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-hide="currentUserSignedIn">
-            <button type="button" class="btn btn-default navbar-btn">Sign In</button>
-          </li>
-          <li ng-hide="currentUserSignedIn">
-            <button type="button" class="btn btn-default navbar-btn">Register</button>
-          </li>
+          <a href="#/register"><button ng-show="true"  type="button" class="btn btn-default navbar-btn">Register</button></a>
 
-          <li ng-show="currentUserSignedIn=true" class="dropdown">
+          <li ng-show="false" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vsajja
               <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -158,6 +153,7 @@
 <script src="scripts/controllers/job.js"></script>
 <script src="scripts/controllers/mine.js"></script>
 <script src="scripts/controllers/school.js"></script>
+<script src="scripts/controllers/register.js"></script>
 <!-- endbuild -->
 </body>
 </html>
