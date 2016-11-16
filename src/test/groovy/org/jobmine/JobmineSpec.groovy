@@ -83,11 +83,11 @@ public class JobmineSpec extends Specification {
         requestSpec { RequestSpec request ->
             request.body.type('application/json')
             request.body.text(JsonOutput.toJson(
-                    [name            : name,
-                     type            : type,
-                     total_students  : total_students,
-                     established_date: established_date,
-                     description     : description])
+                    [name           : name,
+                     type           : type,
+                     totalStudents  : totalStudents,
+                     establishedDate: established_date,
+                     description    : description])
             )
         }
 
@@ -98,12 +98,12 @@ public class JobmineSpec extends Specification {
         response.statusCode == 200
 
         where:
-        name                                         || type                      || total_students || established_date || description
-        'University of Waterloo'                     || 'University'              || 35900          || '1986'           || "The University of Waterloo is a public research university with a main campus located in Waterloo, Ontario. The main campus is located on 404 hectares of land in 'Uptown' Waterloo, adjacent to Waterloo Park"
-        'York University'                            || 'University'              || 53000          || '1986'           || "York University is a public research university in Toronto, Ontario, Canada. It is Canada's third-largest university. York University has approximately 53,000 students, 7,000 faculty and staff, and 295,000 alumni worldwide."
-        'University of Toronto'                      || 'University'              || 84556          || '1986'           || "The University of Toronto is a public research university in Toronto, Ontario, Canada, situated on the grounds that surround Queen's Park."
-        'Ryserson University'                        || 'University'              || 34831          || '1986'           || "Ryerson University is a public research university located in downtown Toronto, Ontario. Its urban campus surrounds the Yonge-Dundas Square, located at the busiest intersection in downtown Toronto."
-        'Hogwarts School of Witchcraft and Wizardry' || 'Witchcraft and Wizardry' || 1              || '1905'           || "Hogwarts School of Witchcraft and Wizardry, shortened Hogwarts, is a fictional British school of magic for students aged eleven to eighteen, and is the primary setting for the first six books in J.K. Rowling's Harry Potter series."
+        name                                         || type                      || totalStudents || establishedDate || description
+        'University of Waterloo'                     || 'University'              || 35900         || '1986'          || "The University of Waterloo is a public research university with a main campus located in Waterloo, Ontario. The main campus is located on 404 hectares of land in 'Uptown' Waterloo, adjacent to Waterloo Park"
+        'York University'                            || 'University'              || 53000         || '1986'          || "York University is a public research university in Toronto, Ontario, Canada. It is Canada's third-largest university. York University has approximately 53,000 students, 7,000 faculty and staff, and 295,000 alumni worldwide."
+        'University of Toronto'                      || 'University'              || 84556         || '1986'          || "The University of Toronto is a public research university in Toronto, Ontario, Canada, situated on the grounds that surround Queen's Park."
+        'Ryserson University'                        || 'University'              || 34831         || '1986'          || "Ryerson University is a public research university located in downtown Toronto, Ontario. Its urban campus surrounds the Yonge-Dundas Square, located at the busiest intersection in downtown Toronto."
+        'Hogwarts School of Witchcraft and Wizardry' || 'Witchcraft and Wizardry' || 1             || '1905'          || "Hogwarts School of Witchcraft and Wizardry, shortened Hogwarts, is a fictional British school of magic for students aged eleven to eighteen, and is the primary setting for the first six books in J.K. Rowling's Harry Potter series."
     }
 
     def "2. create job_mine (UW's jobmine)"() {

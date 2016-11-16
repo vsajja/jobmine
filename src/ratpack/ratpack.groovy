@@ -445,29 +445,33 @@ ratpack {
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
-                            def name = params.get('name').textValue()
-                            def type = params.get('type').textValue()
-                            def total_students = params.get('total_students').intValue()
-                            def established_date = new java.sql.Date(
-                                    new SimpleDateFormat("yyyy").parse(
-                                            params.get('established_date').textValue()).getTime())
-                            def description = params.get('description').textValue()
+                            def name = params.get('name')?.textValue()
+                            def description = params.get('description')?.textValue()
+                            def type = params.get('type')?.textValue()
+
+                            def totalStudents = params.get('totalStudents')?.intValue()
+
+                            def establishedDate = params.get('establishedDate').textValue()
+                            if(establishedDate)
+                            {
+                                establishedDate = new java.sql.Date(new SimpleDateFormat("yyyy").parse(establishedDate).getTime())
+                            }
 
                             assert name
-                            assert type
-                            assert total_students
-                            assert established_date
                             assert description
+                            assert type
+//                            assert establishedDate
+//                            assert totalStudents
 
                             DataSource dataSource = registry.get(DataSource.class)
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                             context
                                     .insertInto(SCHOOL)
                                     .set(SCHOOL.NAME, name)
-                                    .set(SCHOOL.TYPE, type)
-                                    .set(SCHOOL.TOTAL_STUDENTS, total_students)
-                                    .set(SCHOOL.ESTABLISHED_DATE, established_date)
                                     .set(SCHOOL.DESCRIPTION, description)
+                                    .set(SCHOOL.TYPE, type)
+                                    .set(SCHOOL.TOTAL_STUDENTS, (Integer) totalStudents)
+                                    .set(SCHOOL.ESTABLISHED_DATE, (java.sql.Date) establishedDate)
                                     .returning()
                                     .fetchOne()
                                     .into(School.class)

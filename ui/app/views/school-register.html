@@ -1,27 +1,82 @@
-<!-- FORM -->
-<form ng-submit="register()">
-  <!-- NAME -->
-  <div id="name-group" class="form-group">
-    <label>Name</label>
-    <input type="text" name="name" class="form-control" placeholder="Bruce Wayne" ng-model="school.name">
-    <span class="help-block"></span>
+<div class="row">
+  <div class="col-sm-4">
   </div>
 
-  <!-- SUPERHERO NAME -->
-  <div id="superhero-group" class="form-group">
-    <label>Superhero Alias</label>
-    <input type="text" name="superheroAlias" class="form-control" placeholder="Caped Crusader"
-           ng-model="school.superheroAlias">
-    <span class="help-block"></span>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>School</h4>
+      </div>
+      <div class="panel-body">
+        <div class="box box-info">
+          <div class="box-body">
+
+            <!-- SHOW ERROR/SUCCESS MESSAGES -->
+            <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
+                 close="closeAlert($index)">{{alert.msg}}
+            </div>
+            <div uib-alert template-url="alert.html" style="background-color:#fa39c3;color:white">A happy alert!</div>
+
+            <!-- FORM -->
+            <form ng-submit="registerSchool()">
+              <!-- NAME -->
+              <div id="name-group" class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Name" ng-model="school.name" required>
+                <span class="help-block"></span>
+              </div>
+
+              <!-- DESCRIPTION -->
+              <div id="name-group" class="form-group">
+                <label>Description</label>
+
+                <textarea style="height:125px; resize: none;" cols="30" rows="10" name="description"
+                          class="form-control" placeholder="Description" ng-model="school.description"
+                          required></textarea>
+                <span class="help-block"></span>
+              </div>
+
+              <!-- TYPE -->
+              <div id="name-group" class="form-group">
+                <label>Type</label>
+                <input type="text" name="type" class="form-control" placeholder="Type" ng-model="school.type" required>
+                <span class="help-block"></span>
+              </div>
+
+              <!-- TOTAL STUDENTS -->
+              <div id="name-group" class="form-group">
+                <label>Total Students</label>
+                <input disabled="true" type="number" name="totalStudents" min="1" class="form-control"
+                       placeholder="Total Students"
+                       ng-model="school.totalStudents">
+                <span class="help-block"></span>
+              </div>
+
+              <!-- ESTABLISHED DATE -->
+              <div id="name-group" class="form-group">
+                <label>Established Date</label>
+                <input disabled="true" type="text" name="establishedDate" class="form-control"
+                       placeholder="Established Date"
+                       ng-model="school.establishedDate">
+                <span class="help-block"></span>
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <button type="submit" class="btn btn-success btn-lg btn-block">
+                Register
+              </button>
+            </form>
+
+            <br/>
+
+            <textarea style="height:125px; resize: none;" cols="30" rows="10" name="description"
+                      class="form-control">{{ school }}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- SUBMIT BUTTON -->
-  <button type="submit" class="btn btn-success btn-lg btn-block">
-    <span class="glyphicon glyphicon-flash"></span> Submit!
-  </button>
-</form>
-
-<!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
-<pre>
-    {{ school }}
-</pre>
+  <div class="col-sm-4">
+  </div>
+</div>
