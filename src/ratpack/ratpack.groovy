@@ -451,7 +451,7 @@ ratpack {
 
                             def totalStudents = params.get('totalStudents')?.intValue()
 
-                            def establishedDate = params.get('establishedDate').textValue()
+                            def establishedDate = params.get('establishedDate')?.textValue()
                             if(establishedDate)
                             {
                                 establishedDate = new java.sql.Date(new SimpleDateFormat("yyyy").parse(establishedDate).getTime())
