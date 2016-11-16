@@ -87,10 +87,16 @@ ratpack {
         all RequestLogger.ncsa(log)
 
         prefix('api/v1') {
+            all {
+                response.headers.add('Access-Control-Allow-Origin', '*')
+                response.headers.add('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type')
+                response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+                next()
+            }
+
             path('jobmine') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
 
@@ -136,7 +142,6 @@ ratpack {
             path('mines') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<JobMine> mines = context.selectFrom(JOB_MINE)
@@ -172,7 +177,6 @@ ratpack {
             path('companies') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<Company> companies = context.selectFrom(COMPANY)
@@ -226,7 +230,6 @@ ratpack {
                 def companyId = pathTokens['companyId']
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         Company company = context.selectFrom(COMPANY)
@@ -241,7 +244,6 @@ ratpack {
             path('jobs') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<Job> jobs = context.selectFrom(JOB)
@@ -291,7 +293,6 @@ ratpack {
                 def jobId = pathTokens['jobId']
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         Job job = context.selectFrom(JOB)
@@ -306,7 +307,6 @@ ratpack {
             path('jobs/applications') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<JobApp> jobApps = context.selectFrom(JOB_APP)
@@ -343,7 +343,6 @@ ratpack {
             path('jobs/interviews') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<JobInterview> jobInterviews = context.selectFrom(JOB_INTERVIEW)
@@ -391,7 +390,6 @@ ratpack {
             path('jobs/offers') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<JobOffer> jobOffers = context.selectFrom(JOB_OFFER)
@@ -436,7 +434,6 @@ ratpack {
             path('schools') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<School> schools = context.selectFrom(SCHOOL)
@@ -486,7 +483,6 @@ ratpack {
                 def schoolId = pathTokens['schoolId']
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         School school = context.selectFrom(SCHOOL)
@@ -501,7 +497,6 @@ ratpack {
             path('students') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<Student> students = context.selectFrom(STUDENT)
@@ -585,7 +580,6 @@ ratpack {
                 def studentId = pathTokens['studentId']
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         Student student = context.selectFrom(STUDENT)
@@ -600,7 +594,6 @@ ratpack {
             path('students/packages') {
                 byMethod {
                     get {
-                        response.headers.add('Access-Control-Allow-Origin', '*')
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<JobAppPackage> jobAppPackages = context.selectFrom(JOB_APP_PACKAGE)
