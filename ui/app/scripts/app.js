@@ -58,27 +58,27 @@ angular
         controllerAs: 'settings'
       })
       .when('/students/:studentId', {
-        templateUrl: 'views/student-profile.html',
+        templateUrl: 'views/student.html',
         controller: 'StudentProfileCtrl',
         controllerAs: 'studentProfile'
       })
       .when('/companies/:companyId', {
-        templateUrl: 'views/company-profile.html',
+        templateUrl: 'views/company.html',
         controller: 'CompanyProfileCtrl',
         controllerAs: 'companyProfile'
       })
       .when('/jobs/:jobId', {
-        templateUrl: 'views/job-profile.html',
+        templateUrl: 'views/job.html',
         controller: 'JobProfileCtrl',
         controllerAs: 'jobProfile'
       })
       .when('/mines/:mineId', {
-        templateUrl: 'views/mine-profile.html',
+        templateUrl: 'views/mine.html',
         controller: 'MineProfileCtrl',
         controllerAs: 'mineProfile'
       })
       .when('/schools/:schoolId', {
-        templateUrl: 'views/school-profile.html',
+        templateUrl: 'views/school.html',
         controller: 'SchoolProfileCtrl',
         controllerAs: 'schoolProfile'
       })
