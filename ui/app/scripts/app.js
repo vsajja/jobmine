@@ -92,20 +92,25 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
-      .when('/register/student', {
+      .when('/student/register', {
         templateUrl: 'views/student-register.html',
         controller: 'StudentRegisterCtrl',
         controllerAs: 'studentRegister'
       })
-      .when('/register/school', {
+      .when('/school/register', {
         templateUrl: 'views/school-register.html',
         controller: 'SchoolRegisterCtrl',
         controllerAs: 'schoolRegister'
       })
-      .when('/register/company', {
+      .when('/company/register', {
         templateUrl: 'views/company-register.html',
         controller: 'CompanyRegisterCtrl',
         controllerAs: 'companyRegister'
+      })
+      .when('/companies/:companyId/job/create', {
+        templateUrl: 'views/job-create.html',
+        controller: 'JobCreateCtrl',
+        controllerAs: 'jobCreate'
       })
       .otherwise({
         redirectTo: '/'

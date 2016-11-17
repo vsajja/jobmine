@@ -246,6 +246,47 @@ ratpack {
                 }
             }
 
+            path('companies/:companyId/jobs') {
+                def companyId = pathTokens['companyId']
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def title = params.get('title')?.textValue()
+                            def description = params.get('description')?.textValue()
+                            def type = params.get('type')?.textValue()
+//                            def status = params.get('status')?.textValue()
+                            def totalOpenings = params.get('totalOpenings')?.intValue()
+                            def createdTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+
+                            assert title
+                            assert description
+                            assert type
+//                            assert status
+                            assert totalOpenings >= 0
+                            assert createdTimestamp
+
+                            DataSource dataSource = registry.get(DataSource.class)
+                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                            context.insertInto(JOB)
+                                    .set(JOB.TITLE, title)
+                                    .set(JOB.DESCRIPTION, description)
+                                    .set(JOB.TYPE, type)
+                                    .set(JOB.STATUS, 'Pending')
+                                    .set(JOB.TOTAL_OPENINGS, totalOpenings)
+                                    .set(JOB.CREATED_TIMESTAMP, createdTimestamp)
+                                    .set(JOB.COMPANY_ID, companyId)
+                                    .returning()
+                                    .fetchOne()
+                                    .into(Job.class)
+                        }.then { Job createdJob ->
+                            println "created job with id: " + createdJob.getJobId()
+                            render json(createdJob)
+                        }
+                    }
+                }
+            }
+
             path('jobs') {
                 byMethod {
                     get {
@@ -255,41 +296,6 @@ ratpack {
                                 .fetch()
                                 .into(Job.class)
                         render json(jobs)
-                    }
-
-                    post {
-                        parse(jsonNode()).map { params ->
-                            log.info(params.toString())
-                            def title = params.get('title').textValue()
-                            def description = params.get('description').textValue()
-                            def type = params.get('type').textValue()
-                            def status = params.get('status').textValue()
-                            def total_openings = params.get('total_openings').intValue()
-                            def created_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
-
-                            assert title
-                            assert description
-                            assert type
-                            assert status
-                            assert total_openings
-                            assert created_timestamp
-
-                            DataSource dataSource = registry.get(DataSource.class)
-                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                            context.insertInto(JOB)
-                                    .set(JOB.TITLE, title)
-                                    .set(JOB.DESCRIPTION, description)
-                                    .set(JOB.TYPE, type)
-                                    .set(JOB.STATUS, status)
-                                    .set(JOB.TOTAL_OPENINGS, total_openings)
-                                    .set(JOB.CREATED_TIMESTAMP, created_timestamp)
-                                    .returning()
-                                    .fetchOne()
-                                    .into(Job.class)
-                        }.then { Job createdJob ->
-                            println "created job with id: " + createdJob.getJobId()
-                            render json(createdJob)
-                        }
                     }
                 }
             }

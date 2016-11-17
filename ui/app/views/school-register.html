@@ -7,7 +7,6 @@
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')"
          close="closeAlert($index)">{{alert.msg}}
     </div>
-    <div uib-alert template-url="alert.html" style="background-color:#fa39c3;color:white"></div>
 
     <div class="panel panel-default">
       <div class="panel-heading">
