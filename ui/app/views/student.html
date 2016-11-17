@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-sm-4">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4>Student</h4>
-      </div>
+      <div class="panel-heading">Student</div>
       <div class="panel-body">
         <div class="box box-info">
           <div class="box-body">
@@ -103,11 +101,8 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Schools</div>
+      <div class="panel-heading">Showcase</div>
       <div class="panel-body">
-        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
-        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
-        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
       </div>
     </div>
 
@@ -124,8 +119,12 @@
 
   <div class="col-sm-8">
     <div class="panel panel-default">
-      <div class="panel-heading">Employment History</div>
-      <div class="panel-body">{{student.employmentHistory}}</div>
+      <div class="panel-heading">Schools</div>
+      <div class="panel-body">
+        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+      </div>
     </div>
 
     <div class="panel panel-default">
@@ -134,35 +133,30 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Showcase</div>
-      <div class="panel-body">
-      </div>
+      <div class="panel-heading">Employment History</div>
+      <div class="panel-body">{{student.employmentHistory}}</div>
     </div>
 
+
     <uib-tabset active="activeForm" style="height: 300px">
-      <uib-tab index="1" heading="Application Packages">
+      <uib-tab index="1" heading="Applications">
         <br/>
-        job app packages
+        applied to job1 job2 job3
       </uib-tab>
 
-      <uib-tab index="2" heading="Job Shortlist">
+      <uib-tab index="2" heading="Shortlist">
         <br/>
-        job short list
-      </uib-tab>
-
-      <uib-tab index="3" heading="Applications">
-        <br/>
-        applications
+        like job1 job2 job3
       </uib-tab>
 
       <uib-tab index="4" heading="Interviews">
         <br/>
-        job interviews
+        job interviews for job1 and job2
       </uib-tab>
 
       <uib-tab index="5" heading="Offers">
         <br/>
-        job offers
+        job offers from job1
       </uib-tab>
 
       <uib-tab index="6" heading="Settings">
