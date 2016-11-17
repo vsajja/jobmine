@@ -19,12 +19,10 @@ angular.module('jobmineApp')
     $scope.alerts = [];
 
     $scope.registerSchool = function () {
-      // console.log($scope.school);
-
       var schools = Restangular.all('schools');
 
       schools.post($scope.school).then(function (addedSchool) {
-        $scope.alerts.push({type: 'success', msg: 'Success! Name: ' + addedSchool.name});
+        $scope.alerts.push({type: 'success', msg: 'Success! Added school! Name: ' + addedSchool.name});
       }, function () {
         $scope.alerts.push({type: 'danger', msg: 'Error! Unable to add school.'});
       });
@@ -34,4 +32,3 @@ angular.module('jobmineApp')
       $scope.alerts.splice(index, 1);
     };
   }]);
-

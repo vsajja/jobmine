@@ -116,7 +116,6 @@ ratpack {
                                      countries: countries])
                         */
 
-
                         /*
                         SELECT
                         (SELECT COUNT(*) FROM company) AS companies,
@@ -452,8 +451,7 @@ ratpack {
                             def totalStudents = params.get('totalStudents')?.intValue()
 
                             def establishedDate = params.get('establishedDate')?.textValue()
-                            if(establishedDate)
-                            {
+                            if (establishedDate) {
                                 establishedDate = new java.sql.Date(new SimpleDateFormat("yyyy").parse(establishedDate).getTime())
                             }
 
@@ -512,69 +510,69 @@ ratpack {
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
-                            def first_name = params.get('first_name').textValue()
-                            def last_name = params.get('last_name').textValue()
-                            def username = params.get('username').textValue()
-                            def email_address = params.get('email_address').textValue()
-                            def employment_status = params.get('employment_status').textValue()
-                            def karma = params.get('karma').intValue()
-                            def total_views = params.get('total_views').intValue()
-                            def age = params.get('age').intValue()
-                            def gender = params.get('gender').textValue()
-                            def salary = params.get('salary').intValue()
-                            def relationship_status = params.get('relationship_status').textValue()
-                            def dreams = params.get('dreams').textValue()
-                            def phone_number = params.get('phone_number').textValue()
-                            def employment_history = params.get('employment_history').textValue()
-                            def skills = params.get('skills').textValue()
-                            def last_loggedin_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
-                            def joined_timestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+                            def firstName = params.get('firstName')?.textValue()
+                            def lastName = params.get('lastName')?.textValue()
+                            def userName = params.get('userName')?.textValue()
+                            def emailAddress = params.get('emailAddress')?.textValue()
+                            def employmentStatus = params.get('employmentStatus')?.textValue()
 
-                            assert first_name
-                            assert last_name
-                            assert username
-                            assert email_address
-                            assert employment_status
-                            assert karma
-                            assert total_views
-                            assert age
-                            assert gender
-                            assert salary
-                            assert relationship_status
-                            assert dreams
-                            assert phone_number
-                            assert employment_history
-                            assert skills
-                            assert last_loggedin_timestamp
-                            assert joined_timestamp
+//                            def karma = params.get('karma').intValue()
+//                            def total_views = params.get('total_views').intValue()
+//                            def age = params.get('age').intValue()
+//                            def gender = params.get('gender').textValue()
+//                            def salary = params.get('salary').intValue()
+//                            def relationship_status = params.get('relationship_status').textValue()
+//                            def dreams = params.get('dreams').textValue()
+//                            def phone_number = params.get('phone_number').textValue()
+//                            def employment_history = params.get('employment_history').textValue()
+//                            def skills = params.get('skills').textValue()
+                            def lastLoggedInTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+                            def joinedTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+
+                            assert firstName
+                            assert lastName
+                            assert userName
+                            assert emailAddress
+                            assert employmentStatus
+//                            assert karma
+//                            assert total_views
+//                            assert age
+//                            assert gender
+//                            assert salary
+//                            assert relationship_status
+//                            assert dreams
+//                            assert phone_number
+//                            assert employment_history
+//                            assert skills
+                            assert lastLoggedInTimestamp
+                            assert joinedTimestamp
 
                             DataSource dataSource = registry.get(DataSource.class)
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                            StudentRecord record = context
-                                    .insertInto(STUDENT)
-                                    .set(STUDENT.FIRST_NAME, first_name)
-                                    .set(STUDENT.LAST_NAME, last_name)
-                                    .set(STUDENT.USERNAME, username)
-                                    .set(STUDENT.EMAIL_ADDRESS, email_address)
-                                    .set(STUDENT.EMPLOYMENT_STATUS, employment_status)
-                                    .set(STUDENT.KARMA, karma)
-                                    .set(STUDENT.TOTAL_VIEWS, total_views)
-                                    .set(STUDENT.AGE, age)
-                                    .set(STUDENT.GENDER, gender)
-                                    .set(STUDENT.SALARY, salary)
-                                    .set(STUDENT.RELATIONSHIP_STATUS, relationship_status)
-                                    .set(STUDENT.DREAMS, dreams)
-                                    .set(STUDENT.PHONE_NUMBER, phone_number)
-                                    .set(STUDENT.EMPLOYMENT_HISTORY, employment_history)
-                                    .set(STUDENT.SKILLS, skills)
-                                    .set(STUDENT.LAST_LOGGEDIN_TIMESTAMP, last_loggedin_timestamp)
-                                    .set(STUDENT.JOINED_TIMESTAMP, joined_timestamp)
-                                    .returning(STUDENT.STUDENT_ID)
+                            context.insertInto(STUDENT)
+                                    .set(STUDENT.FIRST_NAME, firstName)
+                                    .set(STUDENT.LAST_NAME, lastName)
+                                    .set(STUDENT.USERNAME, userName)
+                                    .set(STUDENT.EMAIL_ADDRESS, emailAddress)
+                                    .set(STUDENT.EMPLOYMENT_STATUS, employmentStatus)
+//                                    .set(STUDENT.KARMA, karma)
+//                                    .set(STUDENT.TOTAL_VIEWS, total_views)
+//                                    .set(STUDENT.AGE, age)
+//                                    .set(STUDENT.GENDER, gender)
+//                                    .set(STUDENT.SALARY, salary)
+//                                    .set(STUDENT.RELATIONSHIP_STATUS, relationship_status)
+//                                    .set(STUDENT.DREAMS, dreams)
+//                                    .set(STUDENT.PHONE_NUMBER, phone_number)
+//                                    .set(STUDENT.EMPLOYMENT_HISTORY, employment_history)
+//                                    .set(STUDENT.SKILLS, skills)
+                                    .set(STUDENT.LAST_LOGGEDIN_TIMESTAMP, lastLoggedInTimestamp)
+                                    .set(STUDENT.JOINED_TIMESTAMP, joinedTimestamp)
+                                    .returning()
                                     .fetchOne()
-//
-                            println "created student with id: " + record.getValue(STUDENT.STUDENT_ID)
-                        }.then {
-                            response.send()
+                                    .into(Student.class)
+                        }.then { Student student ->
+                            println "created student with id: " + student.getStudentId()
+                            render json(student)
                         }
                     }
                 }
