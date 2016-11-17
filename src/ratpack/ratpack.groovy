@@ -187,39 +187,45 @@ ratpack {
                     post {
                         parse(jsonNode()).map { params ->
                             log.info(params.toString())
-                            def name = params.get('name').textValue()
-                            def description = params.get('description').textValue()
-                            def website_url = params.get('website_url').textValue()
-                            def total_employees = params.get('total_employees').intValue()
+                            def name = params.get('name')?.textValue()
+                            def description = params.get('description')?.textValue()
+                            def websiteUrl = params.get('websiteUrl')?.textValue()
                             def industry = params.get('industry').textValue()
-                            def founded_date = new java.sql.Date(
-                                    new SimpleDateFormat("yyyy-MM-dd").parse(
-                                            params.get('founded_date').textValue()).getTime())
+
+//                            def totalEmployees = params.get('totalEmployees')?.intValue()
+//                            def foundedDate = params.get('foundedDate')?.textValue()
+
+                            def totalEmployees = 1
+                            def foundedDate = "2017"
+                            if (foundedDate) {
+                                foundedDate = new java.sql.Date(new SimpleDateFormat("yyyy").parse(foundedDate).getTime())
+                            }
 
                             assert name
                             assert description
-                            assert website_url
-                            assert total_employees
+                            assert websiteUrl
                             assert industry
-                            assert founded_date
+
+                            assert totalEmployees
+                            assert foundedDate
 
                             DataSource dataSource = registry.get(DataSource.class)
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
 
-                            CompanyRecord record = context
+                            record = context
                                     .insertInto(COMPANY)
                                     .set(COMPANY.NAME, name)
                                     .set(COMPANY.DESCRIPTION, description)
-                                    .set(COMPANY.WEBSITE_URL, website_url)
-                                    .set(COMPANY.TOTAL_EMPLOYEES, total_employees)
+                                    .set(COMPANY.WEBSITE_URL, websiteUrl)
                                     .set(COMPANY.INDUSTRY, industry)
-                                    .set(COMPANY.FOUNDED_DATE, founded_date)
-                                    .returning(COMPANY.COMPANY_ID)
+                                    .set(COMPANY.TOTAL_EMPLOYEES, totalEmployees)
+                                    .set(COMPANY.FOUNDED_DATE, foundedDate)
+                                    .returning()
                                     .fetchOne()
-
-                            println "created company with id: " + record.getValue(COMPANY.COMPANY_ID)
-                        }.then {
-                            response.send()
+                                    .into(Company.class)
+                        }.then { Company company ->
+                            println "created company with id: " + company.getCompanyId()
+                            render json(company)
                         }
                     }
                 }
