@@ -22,3 +22,4 @@ angular.module('jobmineApp')
       $scope.jobmine = jobmine;
     });
   }]);
+

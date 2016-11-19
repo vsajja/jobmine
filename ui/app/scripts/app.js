@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var jobmineApp = angular
   .module('jobmineApp', [
     'ngAnimate',
     'ngCookies',
@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'ui.bootstrap',
     'smart-table',
-    'restangular'
+    'restangular',
+    'xeditable'
   ])
   .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
@@ -117,7 +118,12 @@ angular
       });
 
     // TODO: for dev point to Ratpack server
-    // RestangularProvider.setBaseUrl('/api/v1');
-    RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
+    RestangularProvider.setBaseUrl('/api/v1');
+    // RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
+
+jobmineApp.run(function (editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
+
 

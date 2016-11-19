@@ -22,4 +22,9 @@ angular.module('jobmineApp')
     student.customGET().then(function (student) {
       $scope.student = student;
     });
+
+    $scope.user = {
+      name: 'awesome user'
+    };
+
   }]);
