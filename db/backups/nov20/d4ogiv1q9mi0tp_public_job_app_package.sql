@@ -1,0 +1,10 @@
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (24, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (25, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (26, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (27, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (28, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (29, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (30, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (31, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (32, 'App Package 1', null);
+INSERT INTO public.job_app_package (job_app_package_id, name, student_id) VALUES (33, 'App Package 1', null);
