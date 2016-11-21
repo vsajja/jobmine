@@ -78,6 +78,8 @@ Server change: 8.562 seconds
 Total lines of code: 20,175
 Percentage of code that is generated: %70 (estimated)
 
+PLEASE DONT FUCK SHIT UP
+
 $ git ls-files | xargs wc -l
       9 .gitignore
       3 Procfile
