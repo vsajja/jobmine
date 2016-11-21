@@ -70,7 +70,7 @@ https://jobmine-app.herokuapp.com/index.html
 TODO:
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-# Report (please don't fuck up the report)#
+# Report #
 
 UI start time: 206ms
 Server startup time: 11.044 seconds
