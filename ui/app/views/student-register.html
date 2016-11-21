@@ -15,6 +15,15 @@
       <div class="panel-body">
         <div class="box box-info">
           <div class="box-body">
+
+            <div align="center">
+              <div class="isa_warning fa-2x">
+                <i class="fa fa-warning" style="color: red"></i>
+                <p style="color: red">Jobmine is currently under construction. Please enter personal details at your own
+                  risk.</p>
+              </div>
+            </div>
+
             <!-- FORM -->
             <form ng-submit="registerStudent()">
               <!-- FIRST NAME -->
@@ -40,6 +49,7 @@
 
               <!-- EMAIL ADDRESS -->
               <div id="name-group" class="form-group">
+                <b></b>
                 <label>Email Address</label>
                 <input type="text" name="emailAddress" class="form-control" placeholder="Email Address" ng-model="student.emailAddress" required>
                 <span class="help-block"></span>
