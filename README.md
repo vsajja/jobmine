@@ -1,4 +1,4 @@
-# The *simple* but complicated stack that took #
+# The *simple* but complicated stack#
 
 UI: 
 
