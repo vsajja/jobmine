@@ -1,6 +1,7 @@
-# The simple stack #
+# The *simple* but complicated stack #
 
 UI: 
+
 Angular JS 1.x
 Restangular
 angular-xeditable
@@ -49,7 +50,7 @@ grunt
 
 ## Server UI dev ##
 
-TODO document this badly!
+TODO: document this badly!
 
 ## Starting Server ##
 ./gradlew clean run -it
@@ -66,9 +67,16 @@ https://jobmine-app.herokuapp.com/index.html
 
 www.jobmine.ca/index.html
 
-# Total lines of code report #
+# Report #
 
-(most of it is generated)
+UI start time: 206ms
+Server startup time: 11.044 seconds
+
+UI change: < 10ms
+Server change: 8.562 seconds
+
+Total lines of code: 20,175
+Percentage of code that is generated: %70 (estimated)
 
 $ git ls-files | xargs wc -l
       9 .gitignore
