@@ -1,4 +1,4 @@
-# The *simple* but complicated stack #
+# The *simple* but complicated stack that took #
 
 UI: 
 
@@ -37,8 +37,8 @@ Heroku
 # UI #
 
 ## Setup UI dev ##
-npm
 TODO: document this badly!
+npm
 
 ## Starting UI ##
 grunt serve
@@ -59,13 +59,16 @@ TODO: document this badly!
 netstat -o -n -a | findstr 0.0:5050
 taskkill /F /PID <pid>
 
+# Website #
+www.jobmine.ca/index.html
+
 # Heroku #
 
 https://jobmine-app.herokuapp.com/index.html
 
-# Website #
-
-www.jobmine.ca/index.html
+## Deploy ##
+TODO:
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 # Report #
 
