@@ -70,7 +70,7 @@ https://jobmine-app.herokuapp.com/index.html
 TODO:
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-# Report #
+# Report (please don't fuck up the report)#
 
 UI start time: 206ms
 Server startup time: 11.044 seconds
@@ -81,7 +81,7 @@ Server change: 8.562 seconds
 Total lines of code: 20,175
 Percentage of code that is generated: %70 (estimated)
 
-PLEASE DONT FUCK SHIT UP
+UI package: 
 
 $ git ls-files | xargs wc -l
       9 .gitignore
