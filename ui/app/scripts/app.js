@@ -21,7 +21,7 @@ var jobmineApp = angular
     'restangular',
     'xeditable'
   ])
-  .config(function ($routeProvider, RestangularProvider) {
+  .config(function ($routeProvider, $compileProvider, RestangularProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -116,6 +116,8 @@ var jobmineApp = angular
       .otherwise({
         redirectTo: '/'
       });
+
+    $compileProvider.debugInfoEnabled(false);
 
     // RestangularProvider.setBaseUrl('/api/v1');
     RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
