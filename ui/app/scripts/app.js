@@ -113,13 +113,18 @@ var jobmineApp = angular
         controller: 'JobCreateCtrl',
         controllerAs: 'jobCreate'
       })
+      .when('', {
+        templateUrl: 'views/index.html',
+      })
       .otherwise({
         redirectTo: '/'
       });
 
-    $compileProvider.debugInfoEnabled(false);
-
+    // release
+    // $compileProvider.debugInfoEnabled(false);
     // RestangularProvider.setBaseUrl('/api/v1');
+
+    // dev
     RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
 
