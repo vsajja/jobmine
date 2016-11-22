@@ -71,10 +71,13 @@ TODO
 
 # Report #
 
-UI start time: 206ms
-Server startup time: 11.044 seconds
+## UI ##
+start: 206ms
+change: < 10ms
 
-UI change: < 10ms
-Server change: 8.562 seconds
+## Server ##
+start: 11.044 seconds
+change: 8.562 seconds
 
-Total Lines of Code: 20175 total
+## Lines of Code ##
+lines: 20175 total
