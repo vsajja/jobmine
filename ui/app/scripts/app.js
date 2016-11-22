@@ -118,15 +118,13 @@ var jobmineApp = angular
       });
 
     // release
-    // $compileProvider.debugInfoEnabled(false);
-    // RestangularProvider.setBaseUrl('/api/v1');
+    $compileProvider.debugInfoEnabled(false);
+    RestangularProvider.setBaseUrl('/api/v1');
 
     // dev
-    RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
+    // RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
 
 jobmineApp.run(function (editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
-
-
