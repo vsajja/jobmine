@@ -1,6 +1,8 @@
 # jobmine #
 
-jobmine, originally founded by the University of Waterloo, is a website that helps people find jobs by creating companies and jobs. jobmine requires courage as it's aiming to eliminate resumes and interviews from the job market. jobmine is also the only company allowed to have a mine, all other mines will be created by schools. Students and alumni will be able to join the site from all universities, colleges and high-schools worldwide. It will be free for everyone and there will be no ads. 
+jobmine, originally founded by the University of Waterloo, is a website that helps students find jobs by creating companies and jobs. jobmine requires courage as it's aiming to eliminate resumes and interviews from the job market. jobmine introduces the concept of a mine and is also the only company allowed to have a mine. All other mines will be created by schools. Students and alumni will be able to join the site from all universities, colleges and high-schools worldwide. 
+
+It will be free for everyone and there will be no ads. 
 
 The ultimate goal of jobmine is to help students and companies automate the startup process.
 
