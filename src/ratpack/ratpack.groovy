@@ -73,7 +73,6 @@ ratpack {
         }
 
         bindInstance PostgresConfig, configData.get('/postgres', PostgresConfig)
-        bindInstance RedisConfig, configData.get('/redis', RedisConfig)
 
         module HikariModule, { HikariConfig config ->
             config.dataSource =
@@ -85,6 +84,10 @@ ratpack {
 
     handlers {
         all RequestLogger.ncsa(log)
+
+        get {
+            redirect('index.html')
+        }
 
         prefix('api/v1') {
             all {
@@ -885,64 +888,6 @@ ratpack {
 //                        }
 //                        render something
 //                    }
-//                }
-//            }
-//
-//            prefix('insert') {
-//                get('jobs') {
-//                    DataSource dataSource = registry.get(DataSource.class)
-//                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                    create.insertInto(JOB)
-//                            .set(JOB.TITLE, 'Software Developer II')
-//                            .set(JOB.EMPLOYERNAME, 'BlackBerry')
-//                            .set(JOB.DESCRIPTION_9, 'Description')
-//                            .set(JOB.DATEPOSTED_9, new Date(123))
-//                            .set(JOB.LOCATION, 'Waterloo')
-//                            .execute()
-//                    render "inserted!"
-//                }
-//                get('schools') {
-//                    DataSource dataSource = registry.get(DataSource.class)
-//                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                    create.insertInto(SCHOOL)
-//                            .set(SCHOOL.NAME, 'University of Waterloo')
-//                            .set(SCHOOL.SCHOOLTYPE, 'University')
-//                            .set(SCHOOL.CITY, 'Waterloo')
-//                            .set(SCHOOL.PROVINCEORSTATE, 'Ontario')
-//                            .set(SCHOOL.COUNTRY, 'Canada')
-//                            .set(SCHOOL.ESTABLISHED, '1999')
-//                            .set(SCHOOL.TOTALSTUDENTS, 1)
-//                            .set(SCHOOL.WIKILINK, 'wiki/UniversityOfWaterloo')
-//                            .set(SCHOOL.LOGOSRC, 'dist/images/icon_default_company.578524b6.png')
-//                            .execute()
-//                    render "inserted!"
-//                }
-//                get('students') {
-//                    DataSource dataSource = registry.get(DataSource.class)
-//                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                    create.insertInto(STUDENT)
-//                            .set(STUDENT.NAME, 'Vinod Sajja')
-//                            .set(STUDENT.PHONENUMBER, '(519) 502-7991')
-//                            .set(STUDENT.DATEJOINED, new Date(Calendar.getInstance().getTimeInMillis()))
-//                            .set(STUDENT.EMAIL, 'vsajja@engmail.uwaterloo.ca')
-//                            .set(STUDENT.STREETADDRESS, '123 Fake Street, Unit 35')
-//                            .set(STUDENT.CITY, 'Waterloo')
-//                            .set(STUDENT.REGION, 'Ontario')
-//                            .set(STUDENT.COUNTRY, 'Canada')
-//                            .set(STUDENT.POSTALORZIP, 'T9H5R7')
-//                            .set(STUDENT.DESCRIPTION, 'description')
-//                            .set(STUDENT.AGE, Integer.parseInt('29'))
-//                            .execute()
-//                    render "inserted!"
-//                }
-//                get('companies') {
-//                    DataSource dataSource = registry.get(DataSource.class)
-//                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//                    create.insertInto(COMPANY)
-//                            .set(COMPANY.NAME, 'JobMine')
-//                            .set(COMPANY.LOGOURL, 'images/logo_jobmine.png')
-//                            .execute()
-//                    render "inserted!"
 //                }
 //            }
 //        }

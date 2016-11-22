@@ -70,7 +70,6 @@ https://jm-app.herokuapp.com/index.html
 TODO
 
 # Report #
-
 UI start time: 206ms
 Server startup time: 11.044 seconds
 
