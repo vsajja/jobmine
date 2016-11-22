@@ -113,9 +113,6 @@ var jobmineApp = angular
         controller: 'JobCreateCtrl',
         controllerAs: 'jobCreate'
       })
-      .when('', {
-        templateUrl: 'views/index.html',
-      })
       .otherwise({
         redirectTo: '/'
       });
