@@ -1,7 +1,6 @@
-# The *simple* but complicated stack#
+# The *simple* stack#
 
 UI:
-
 Angular JS 1.x
 Restangular
 angular-xeditable
@@ -72,12 +71,21 @@ TODO
 # Report #
 
 ## UI ##
-start: 206ms
-change: < 10ms
+
+### start ###
+206ms
+### change ###
+< 10ms
 
 ## Server ##
-start: 11.044 seconds
-change: 8.562 seconds
+### start ###
+11.044 seconds
+### change ###
+8.562 seconds
 
 ## Lines of Code ##
 lines: 20175 total
+
+## Stats ##
+16 schools, 16 students and 14 companies. search 10 jobs from 2 mines
+
