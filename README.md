@@ -94,16 +94,5 @@ https://jm-app.herokuapp.com/index.html
 
 ## deploy ##
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-<<<<<<< HEAD
-TODO
-
-# Report #
-UI start time: 206ms
-Server startup time: 11.044 seconds
-
-UI change: < 10ms
-Server change: 8.562 seconds
 
 Total Lines of Code: 20175 total
-=======
->>>>>>> bae7ca471392fa3f0ce8c5cb2817c013b7cf3e76
