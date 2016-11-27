@@ -94,5 +94,3 @@ https://jm-app.herokuapp.com/index.html
 
 ## deploy ##
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-Total Lines of Code: 20175 total
