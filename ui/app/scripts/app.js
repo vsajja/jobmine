@@ -113,6 +113,11 @@ var jobmineApp = angular
         controller: 'JobCreateCtrl',
         controllerAs: 'jobCreate'
       })
+      .when('/kosenkov/:query?', {
+        templateUrl: 'views/kosenkov.html',
+        controller: 'KosenkovCtrl',
+        controllerAs: 'kosenkov'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -120,7 +125,8 @@ var jobmineApp = angular
     // release
     // $compileProvider.debugInfoEnabled(false);
     // RestangularProvider.setBaseUrl('/api/v1');
-    //
+
+
     // dev
     RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });

@@ -41,21 +41,37 @@
 
     <br/>
 
+    <!--<div align="center">-->
+      <!--&lt;!&ndash; TODO: countries &ndash;&gt;-->
+      <!--<form class="form-inline">-->
+        <!--<input disabled="true" size="20" style="height: 30px; font-family: Calibri; color: blue; font-size: 150%;"-->
+               <!--type="text"-->
+               <!--class="form-control" placeholder="Company, Job, or Skills...">-->
+        <!--<input disabled="true" size="20" style="height: 30px; font-family: Calibri; color: blue; font-size: 150%;"-->
+               <!--class="form-control"-->
+               <!--placeholder="Location...">-->
+        <!--<a href="#/jobs">-->
+          <!--<button style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p>-->
+          <!--</button>-->
+        <!--</a>-->
+      <!--</form>-->
+    <!--</div>-->
+
+    <br/>
+
     <div align="center">
-      <!-- TODO: countries -->
       <form class="form-inline">
-        <input disabled="true" size="20" style="height: 30px; font-family: Calibri; color: blue; font-size: 150%;"
+        <input size="20"
+               style="height: 30px; width: 500px; font-family: Calibri; color: blue; font-size: 150%;"
                type="text"
-               class="form-control" placeholder="Company, Job, or Skills...">
-        <input disabled="true" size="20" style="height: 30px; font-family: Calibri; color: blue; font-size: 150%;"
-               class="form-control"
-               placeholder="Location...">
-        <a href="#/jobs">
-          <button style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p>
-          </button>
-        </a>
+               class="form-control" placeholder="Search 1299 indexed documents..." ng-model="query">
+        <br/>
+        <br/>
+        <button class="button"><a ng-href="#/kosenkov/{{query}}"><img alt="bwasss!" src="images/kosenkov.jpg" class="img-circle img-responsive"></a></button>
       </form>
     </div>
+
+    <br/>
 
     <div align="center">
       <div class="isa_warning fa-5x">
@@ -66,7 +82,6 @@
     </div>
     <br/>
 
-    <br/>
   </div>
   <div class="col-sm-2">
   </div>

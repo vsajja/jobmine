@@ -680,6 +680,21 @@ ratpack {
                     }
                 }
             }
+
+            path('kosenkov/:query') {
+                def query = pathTokens['query']
+                byMethod {
+                    get {
+                        HttpClient httpClient = registry.get(HttpClient.class)
+
+                        String uri = "http://kosenkov.ca/kb?query=$query&submit=Submit"
+
+                        httpClient.get(new URI(uri)).then {
+                            render it.body.text
+                        }
+                    }
+                }
+            }
         }
 
         prefix('test') {
