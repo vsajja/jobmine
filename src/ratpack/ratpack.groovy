@@ -1,4 +1,5 @@
 import com.zaxxer.hikari.HikariConfig
+import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.xml.XmlUtil
 import jooq.generated.tables.daos.CompanyDao
@@ -42,7 +43,6 @@ import ratpack.http.Status
 import ratpack.http.client.HttpClient
 import org.jobmine.postgres.PostgresConfig
 import org.jobmine.postgres.PostgresModule
-import org.jobmine.redis.RedisConfig
 
 import javax.sql.DataSource
 import java.sql.Date
@@ -682,52 +682,71 @@ ratpack {
             }
         }
 
-//        prefix('test') {
-//            prefix('data') {
-//                get('jobs') {
-//                    DataSource dataSource = registry.get(DataSource.class)
-//                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
-//
-//                    HttpClient httpClient = registry.get(HttpClient.class)
-//
-//                    URI uri = new URI('http://api.indeed.com/ads/apisearch' +
-//                            '?publisher=6453215428478291' +
-//                            '&v=2' +
-//                            '&format=json' +
-//                            '&limit=25' +
-//                            '&q=software' +
-//                            '&l=Waterloo' +
-//                            '&co=ca'
-//                    )
-//
-//                    httpClient.get(uri).then {
-//                        def root = new JsonSlurper().parseText(it.body.text)
-//
-//                        // get total results
-//                        int totalResults = root.totalResults
-//                        log.info(totalResults.toString())
-//
-//                        1.step(totalResults, 25) {
-//                            httpClient.get(uri).then { response ->
-//                                root = new JsonSlurper().parseText(response.body.text)
-//                                root.results.each {
-//                                    if (!it.expired) {
-//                                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
-////                                    log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
-////                                    create.insertInto(JOB)
-////                                            .set(JOB.TITLE, it.jobtitle.toString())
-////                                            .set(JOB.EMPLOYERNAME, it.company.toString())
-////                                            .set(JOB.DESCRIPTION_9, it.snippet.toString())
-////                                            .set(JOB.DATEPOSTED_9, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
-////                                            .set(JOB.LOCATION, it.formattedLocation.toString())
-////                                            .execute()
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        render totalResults.toString()
-//                    }
-//                }
+        prefix('test') {
+            prefix('data') {
+                get('jobs') {
+                    DataSource dataSource = registry.get(DataSource.class)
+                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+                    HttpClient httpClient = registry.get(HttpClient.class)
+
+                    String uriStr = 'http://api.indeed.com/ads/apisearch' +
+                            '?publisher=6453215428478291' +
+                            '&v=2' +
+                            '&format=json' +
+                            '&limit=25' +
+                            '&q=java' +
+                            '&l=texas' +
+                            '&co=us'
+
+                    httpClient.get(new URI(uriStr)).then {
+                        def root = new JsonSlurper().parseText(it.body.text)
+
+                        // get total results
+                        int totalResults = root.totalResults
+
+                        log.info(totalResults.toString())
+
+                        uriStr += "&start=%s"
+
+                        1.step(totalResults, 25) { step ->
+                            uri = new URI(String.format(uriStr, step.toString()))
+
+//                            log.info("GET " + uri.path)
+
+                            httpClient.get(uri).then { response ->
+                                root = new JsonSlurper().parseText(response.body.text)
+                                root.results.each {
+                                    if (!it.expired) {
+                                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+
+                                        assert it.jobtitle.toString()
+                                        assert it.company.toString()
+                                        assert it.snippet.toString()
+                                        assert it.date.toString()
+                                        assert it.formattedLocation.toString()
+
+//                                        log.info(it.toString())
+
+                                        /*
+                                        log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
+                                    create.insertInto(JOB)
+                                            .set(JOB.TITLE, it.jobtitle.toString().trim() +
+                                            ' @ ' + it.company.toString() +
+                                            ' @ ' + it.formattedLocation.toString() )
+//                                            .set(JOB.EMPLOYERNAME, it.company.toString())
+                                            .set(JOB.DESCRIPTION, it.snippet.toString())
+//                                            .set(JOB.D, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
+//                                            .set(JOB.LOCATION_ID, it.formattedLocation.toString())
+                                            .execute()
+                                        */
+                                    }
+                                }
+                            }
+                        }
+                        render totalResults.toString()
+                    }
+                }
 //                get('students') {
 //                    def studentFile = new File('src/ratpack/data/students_generated_200.txt')
 //
@@ -889,8 +908,8 @@ ratpack {
 //                        render something
 //                    }
 //                }
-//            }
-//        }
+            }
+        }
 
         files {
             dir 'dist'
