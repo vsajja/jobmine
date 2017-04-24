@@ -85,10 +85,6 @@ ratpack {
     handlers {
         all RequestLogger.ncsa(log)
 
-        get {
-            redirect('index.html')
-        }
-
         prefix('api/v1') {
             all {
                 response.headers.add('Access-Control-Allow-Origin', '*')
@@ -938,6 +934,7 @@ ratpack {
 
         files {
             dir 'dist'
+            indexFiles 'index.html'
         }
     }
 }
