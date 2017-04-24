@@ -21,7 +21,7 @@ var jobmineApp = angular
     'restangular',
     'xeditable'
   ])
-  .config(function ($routeProvider, $compileProvider, RestangularProvider) {
+  .config(function ($routeProvider, $locationProvider, $compileProvider, RestangularProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -122,12 +122,15 @@ var jobmineApp = angular
         redirectTo: '/'
       });
 
+    $locationProvider.html5Mode(false);
+    $locationProvider.hashPrefix('');
+
     // release
-    $compileProvider.debugInfoEnabled(false);
-    RestangularProvider.setBaseUrl('/api/v1');
+    // $compileProvider.debugInfoEnabled(false);
+    // RestangularProvider.setBaseUrl('/api/v1');
 
     // dev
-    // RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
+    RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
 
 jobmineApp.run(function (editableOptions) {
