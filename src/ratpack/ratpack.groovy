@@ -85,6 +85,16 @@ ratpack {
     handlers {
         all RequestLogger.ncsa(log)
 
+        all {
+            String forwardedProto = 'X-Forwarded-Proto'
+            if (request.headers.contains(forwardedProto)
+                    && request.headers.get(forwardedProto) != 'https') {
+                redirect(301, "https://${request.headers.get('Host')}${request.rawUri}")
+            } else {
+                next()
+            }
+        }
+
         prefix('api/v1') {
             all {
                 response.headers.add('Access-Control-Allow-Origin', '*')
