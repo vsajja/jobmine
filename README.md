@@ -1,6 +1,6 @@
 # job #
 
-job is a website that helps students and alumni find jobs. it is a free service.
+job is a website that helps students and alumni find jobs.
 
 # the stack #
 
