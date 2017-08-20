@@ -2,7 +2,7 @@
 
 job is a website that helps students and alumni find jobs. it is a free service.
 
-# the stack#
+# the stack #
 
 UI:
 Angular JS 1.x,
