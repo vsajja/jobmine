@@ -7,7 +7,7 @@
  * # RegisterCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('RegisterCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

@@ -3,7 +3,7 @@
 describe('Controller: KosenkovCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('jobmineApp'));
+  beforeEach(module('jobApp'));
 
   var KosenkovCtrl,
     scope;

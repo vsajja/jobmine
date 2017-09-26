@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location implements Serializable {
 
-	private static final long serialVersionUID = 1233448813;
+	private static final long serialVersionUID = -190034800;
 
 	private final Long   locationId;
 	private final String city;
@@ -70,6 +70,60 @@ public class Location implements Serializable {
 
 	public String getCountry() {
 		return this.country;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Location other = (Location) obj;
+		if (locationId == null) {
+			if (other.locationId != null)
+				return false;
+		}
+		else if (!locationId.equals(other.locationId))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		}
+		else if (!city.equals(other.city))
+			return false;
+		if (stateOrProvince == null) {
+			if (other.stateOrProvince != null)
+				return false;
+		}
+		else if (!stateOrProvince.equals(other.stateOrProvince))
+			return false;
+		if (zipOrPostalcode == null) {
+			if (other.zipOrPostalcode != null)
+				return false;
+		}
+		else if (!zipOrPostalcode.equals(other.zipOrPostalcode))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		}
+		else if (!country.equals(other.country))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((stateOrProvince == null) ? 0 : stateOrProvince.hashCode());
+		result = prime * result + ((zipOrPostalcode == null) ? 0 : zipOrPostalcode.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		return result;
 	}
 
 	@Override

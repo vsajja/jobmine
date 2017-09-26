@@ -7,7 +7,7 @@
  * # SchoolsCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('SchoolsCtrl', ['$scope', 'Restangular', function ($scope, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

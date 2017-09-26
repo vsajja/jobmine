@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company implements Serializable {
 
-	private static final long serialVersionUID = 222586499;
+	private static final long serialVersionUID = 1302814558;
 
 	private final Long    companyId;
 	private final String  name;
@@ -34,6 +34,7 @@ public class Company implements Serializable {
 	private final Date    foundedDate;
 	private final Integer locationId;
 	private final Integer imageId;
+	private final Integer jobMineId;
 
 	public Company(Company value) {
 		this.companyId = value.companyId;
@@ -45,6 +46,7 @@ public class Company implements Serializable {
 		this.foundedDate = value.foundedDate;
 		this.locationId = value.locationId;
 		this.imageId = value.imageId;
+		this.jobMineId = value.jobMineId;
 	}
 
 	public Company(
@@ -56,7 +58,8 @@ public class Company implements Serializable {
 		String  industry,
 		Date    foundedDate,
 		Integer locationId,
-		Integer imageId
+		Integer imageId,
+		Integer jobMineId
 	) {
 		this.companyId = companyId;
 		this.name = name;
@@ -67,6 +70,7 @@ public class Company implements Serializable {
 		this.foundedDate = foundedDate;
 		this.locationId = locationId;
 		this.imageId = imageId;
+		this.jobMineId = jobMineId;
 	}
 
 	public Long getCompanyId() {
@@ -105,6 +109,99 @@ public class Company implements Serializable {
 		return this.imageId;
 	}
 
+	public Integer getJobMineId() {
+		return this.jobMineId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Company other = (Company) obj;
+		if (companyId == null) {
+			if (other.companyId != null)
+				return false;
+		}
+		else if (!companyId.equals(other.companyId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		}
+		else if (!description.equals(other.description))
+			return false;
+		if (websiteUrl == null) {
+			if (other.websiteUrl != null)
+				return false;
+		}
+		else if (!websiteUrl.equals(other.websiteUrl))
+			return false;
+		if (totalEmployees == null) {
+			if (other.totalEmployees != null)
+				return false;
+		}
+		else if (!totalEmployees.equals(other.totalEmployees))
+			return false;
+		if (industry == null) {
+			if (other.industry != null)
+				return false;
+		}
+		else if (!industry.equals(other.industry))
+			return false;
+		if (foundedDate == null) {
+			if (other.foundedDate != null)
+				return false;
+		}
+		else if (!foundedDate.equals(other.foundedDate))
+			return false;
+		if (locationId == null) {
+			if (other.locationId != null)
+				return false;
+		}
+		else if (!locationId.equals(other.locationId))
+			return false;
+		if (imageId == null) {
+			if (other.imageId != null)
+				return false;
+		}
+		else if (!imageId.equals(other.imageId))
+			return false;
+		if (jobMineId == null) {
+			if (other.jobMineId != null)
+				return false;
+		}
+		else if (!jobMineId.equals(other.jobMineId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((websiteUrl == null) ? 0 : websiteUrl.hashCode());
+		result = prime * result + ((totalEmployees == null) ? 0 : totalEmployees.hashCode());
+		result = prime * result + ((industry == null) ? 0 : industry.hashCode());
+		result = prime * result + ((foundedDate == null) ? 0 : foundedDate.hashCode());
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		result = prime * result + ((imageId == null) ? 0 : imageId.hashCode());
+		result = prime * result + ((jobMineId == null) ? 0 : jobMineId.hashCode());
+		return result;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Company (");
@@ -118,6 +215,7 @@ public class Company implements Serializable {
 		sb.append(", ").append(foundedDate);
 		sb.append(", ").append(locationId);
 		sb.append(", ").append(imageId);
+		sb.append(", ").append(jobMineId);
 
 		sb.append(")");
 		return sb.toString();

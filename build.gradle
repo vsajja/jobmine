@@ -3,14 +3,14 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'gradle.plugin.io.ratpack:ratpack-gradle:1.4.4'
+        classpath 'gradle.plugin.io.ratpack:ratpack-gradle:1.5.0'
         classpath 'org.postgresql:postgresql:9.4-1206-jdbc42'
         classpath 'org.jooq:jooq-codegen:3.7.1'
     }
 }
 
 plugins {
-    id 'io.ratpack.ratpack-groovy' version '1.4.4'
+    id 'io.ratpack.ratpack-groovy' version '1.5.0'
 }
 
 repositories {
@@ -28,7 +28,6 @@ dependencies {
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
     }
-
     compile ratpack.dependency('hikari')
     compile ratpack.dependency('pac4j')
     testCompile ratpack.dependency('groovy-test')
@@ -39,7 +38,7 @@ task stage {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
+    gradleVersion = '4.2'
 }
 
 import org.jooq.util.jaxb.*
@@ -47,7 +46,9 @@ import org.jooq.util.*
 
 task jooqCodegen {
     doLast {
-        // TODO: move DB config to a properties file
+        Properties props = new Properties()
+        props.load(new FileInputStream('src/ratpack/db.properties'))
+
         Configuration configuration = new Configuration()
                 .withJdbc(new Jdbc()
                 .withDriver('org.postgresql.Driver')
@@ -57,12 +58,13 @@ task jooqCodegen {
                                  new Property()
                                          .withKey('sslfactory')
                                          .withValue('org.postgresql.ssl.NonValidatingFactory')])
-                .withUrl('jdbc:postgresql://ec2-54-243-249-65.compute-1.amazonaws.com:5432/d4ogiv1q9mi0tp')
-                .withUser('zoqyxwbxjuntzp')
-                .withPassword('sfXLiNPmZuRUxS_biBDNyNRhDh'))
+                .withUrl("jdbc:postgresql://${props.get('postgres.serverName')}:${props.get('postgres.portNumber')}/${props.get('postgres.databaseName')}")
+                .withUser(props.get('postgres.user'))
+                .withPassword(props.get('postgres.password')))
                 .withGenerator(new org.jooq.util.jaxb.Generator()
                 .withGenerate(new Generate()
                 .withImmutablePojos(true)
+                .withPojosEqualsAndHashCode(true)
                 .withDaos(true)
                 .withFluentSetters(true))
                 .withDatabase(new org.jooq.util.jaxb.Database()

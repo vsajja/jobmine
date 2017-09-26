@@ -22,26 +22,22 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobMine implements Serializable {
 
-	private static final long serialVersionUID = 1272378833;
+	private static final long serialVersionUID = -977615896;
 
-	private final Long    jobMineId;
-	private final String  name;
-	private final Integer schoolId;
+	private final Long   jobMineId;
+	private final String name;
 
 	public JobMine(JobMine value) {
 		this.jobMineId = value.jobMineId;
 		this.name = value.name;
-		this.schoolId = value.schoolId;
 	}
 
 	public JobMine(
-		Long    jobMineId,
-		String  name,
-		Integer schoolId
+		Long   jobMineId,
+		String name
 	) {
 		this.jobMineId = jobMineId;
 		this.name = name;
-		this.schoolId = schoolId;
 	}
 
 	public Long getJobMineId() {
@@ -52,8 +48,37 @@ public class JobMine implements Serializable {
 		return this.name;
 	}
 
-	public Integer getSchoolId() {
-		return this.schoolId;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final JobMine other = (JobMine) obj;
+		if (jobMineId == null) {
+			if (other.jobMineId != null)
+				return false;
+		}
+		else if (!jobMineId.equals(other.jobMineId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jobMineId == null) ? 0 : jobMineId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
 
 	@Override
@@ -62,7 +87,6 @@ public class JobMine implements Serializable {
 
 		sb.append(jobMineId);
 		sb.append(", ").append(name);
-		sb.append(", ").append(schoolId);
 
 		sb.append(")");
 		return sb.toString();

@@ -5,6 +5,7 @@ package jooq.generated.tables.pojos;
 
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.annotation.Generated;
 
@@ -22,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Document implements Serializable {
 
-	private static final long serialVersionUID = -281931315;
+	private static final long serialVersionUID = -1078427564;
 
 	private final Long    documentId;
 	private final String  name;
@@ -62,6 +63,53 @@ public class Document implements Serializable {
 
 	public Integer getJobAppPackageId() {
 		return this.jobAppPackageId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Document other = (Document) obj;
+		if (documentId == null) {
+			if (other.documentId != null)
+				return false;
+		}
+		else if (!documentId.equals(other.documentId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		}
+		else if (!Arrays.equals(data, other.data))
+			return false;
+		if (jobAppPackageId == null) {
+			if (other.jobAppPackageId != null)
+				return false;
+		}
+		else if (!jobAppPackageId.equals(other.jobAppPackageId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((documentId == null) ? 0 : documentId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((data == null) ? 0 : Arrays.hashCode(data));
+		result = prime * result + ((jobAppPackageId == null) ? 0 : jobAppPackageId.hashCode());
+		return result;
 	}
 
 	@Override

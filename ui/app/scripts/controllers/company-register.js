@@ -7,7 +7,7 @@
  * # CompanyRegisterCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('CompanyRegisterCtrl', ['$scope', 'Restangular', function ($scope, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

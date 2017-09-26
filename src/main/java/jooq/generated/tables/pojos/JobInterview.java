@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobInterview implements Serializable {
 
-	private static final long serialVersionUID = 931708198;
+	private static final long serialVersionUID = 1997615245;
 
 	private final Long      jobInterviewId;
 	private final String    status;
@@ -79,6 +79,67 @@ public class JobInterview implements Serializable {
 
 	public Integer getLocationId() {
 		return this.locationId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final JobInterview other = (JobInterview) obj;
+		if (jobInterviewId == null) {
+			if (other.jobInterviewId != null)
+				return false;
+		}
+		else if (!jobInterviewId.equals(other.jobInterviewId))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		}
+		else if (!status.equals(other.status))
+			return false;
+		if (createdTimestamp == null) {
+			if (other.createdTimestamp != null)
+				return false;
+		}
+		else if (!createdTimestamp.equals(other.createdTimestamp))
+			return false;
+		if (jobId == null) {
+			if (other.jobId != null)
+				return false;
+		}
+		else if (!jobId.equals(other.jobId))
+			return false;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		}
+		else if (!studentId.equals(other.studentId))
+			return false;
+		if (locationId == null) {
+			if (other.locationId != null)
+				return false;
+		}
+		else if (!locationId.equals(other.locationId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jobInterviewId == null) ? 0 : jobInterviewId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((createdTimestamp == null) ? 0 : createdTimestamp.hashCode());
+		result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		return result;
 	}
 
 	@Override

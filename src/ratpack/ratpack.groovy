@@ -58,26 +58,15 @@ import static jooq.generated.Tables.*;
 final Logger log = LoggerFactory.getLogger(this.class)
 
 ratpack {
+    serverConfig {
+        props("db.properties")
+        require("/postgres", PostgresConfig)
+    }
+
     bindings {
-        final ConfigData configData = ConfigData.of { ConfigDataBuilder builder ->
-            builder.props(
-                    ['postgres.user'        : 'zoqyxwbxjuntzp',
-                     'postgres.password'    : 'sfXLiNPmZuRUxS_biBDNyNRhDh',
-                     'postgres.portNumber'  : 5432,
-                     'postgres.databaseName': 'd4ogiv1q9mi0tp',
-                     'postgres.serverName'  : 'ec2-54-243-249-65.compute-1.amazonaws.com',
-                     'redis.host'           : 'pub-redis-19472.us-east-1-2.5.ec2.garantiadata.com',
-                     'redis.portNumber'     : 19472,
-                     'redis.password'       : 'sfXLiNPmZuRUxS_biBDNyNRhDh'])
-            builder.build()
-        }
-
-        bindInstance PostgresConfig, configData.get('/postgres', PostgresConfig)
-
         module HikariModule, { HikariConfig config ->
-            config.dataSource =
-                    new PostgresModule().dataSource(
-                            configData.get('/postgres', PostgresConfig))
+            config.setMaximumPoolSize(5)
+            config.dataSource = new PostgresModule().dataSource(serverConfig.get('/postgres', PostgresConfig))
         }
         module SqlModule
     }
@@ -279,7 +268,7 @@ ratpack {
                             DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                             context.insertInto(JOB)
                                     .set(JOB.TITLE, title)
-                                    .set(JOB.DESCRIPTION, description)
+//                                    .set(JOB.DESCRIPTION, description)
                                     .set(JOB.TYPE, type)
                                     .set(JOB.STATUS, 'Pending')
                                     .set(JOB.TOTAL_OPENINGS, totalOpenings)

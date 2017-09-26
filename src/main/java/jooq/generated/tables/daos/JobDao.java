@@ -73,10 +73,10 @@ public class JobDao extends DAOImpl<JobRecord, jooq.generated.tables.pojos.Job, 
 	}
 
 	/**
-	 * Fetch records that have <code>description IN (values)</code>
+	 * Fetch records that have <code>description	 IN (values)</code>
 	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByDescription(String... values) {
-		return fetch(Job.JOB.DESCRIPTION, values);
+	public List<jooq.generated.tables.pojos.Job> fetchByDescription_9(String... values) {
+		return fetch(Job.JOB.DESCRIPTION_9, values);
 	}
 
 	/**

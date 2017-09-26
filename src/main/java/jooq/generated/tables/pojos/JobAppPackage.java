@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobAppPackage implements Serializable {
 
-	private static final long serialVersionUID = -712202686;
+	private static final long serialVersionUID = 1878533021;
 
 	private final Long    jobAppPackageId;
 	private final String  name;
@@ -54,6 +54,46 @@ public class JobAppPackage implements Serializable {
 
 	public Integer getStudentId() {
 		return this.studentId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final JobAppPackage other = (JobAppPackage) obj;
+		if (jobAppPackageId == null) {
+			if (other.jobAppPackageId != null)
+				return false;
+		}
+		else if (!jobAppPackageId.equals(other.jobAppPackageId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		}
+		else if (!studentId.equals(other.studentId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jobAppPackageId == null) ? 0 : jobAppPackageId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		return result;
 	}
 
 	@Override

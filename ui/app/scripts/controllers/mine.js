@@ -7,7 +7,7 @@
  * # MineProfileCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('MineProfileCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

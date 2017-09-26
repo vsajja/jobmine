@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = -484518200;
+	private static final long serialVersionUID = 374748843;
 
 	private final Long      studentId;
 	private final String    firstName;
@@ -199,6 +199,172 @@ public class Student implements Serializable {
 
 	public Integer getImageId() {
 		return this.imageId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Student other = (Student) obj;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		}
+		else if (!studentId.equals(other.studentId))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		}
+		else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		}
+		else if (!lastName.equals(other.lastName))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		}
+		else if (!username.equals(other.username))
+			return false;
+		if (emailAddress == null) {
+			if (other.emailAddress != null)
+				return false;
+		}
+		else if (!emailAddress.equals(other.emailAddress))
+			return false;
+		if (lastLoggedinTimestamp == null) {
+			if (other.lastLoggedinTimestamp != null)
+				return false;
+		}
+		else if (!lastLoggedinTimestamp.equals(other.lastLoggedinTimestamp))
+			return false;
+		if (employmentStatus == null) {
+			if (other.employmentStatus != null)
+				return false;
+		}
+		else if (!employmentStatus.equals(other.employmentStatus))
+			return false;
+		if (joinedTimestamp == null) {
+			if (other.joinedTimestamp != null)
+				return false;
+		}
+		else if (!joinedTimestamp.equals(other.joinedTimestamp))
+			return false;
+		if (karma == null) {
+			if (other.karma != null)
+				return false;
+		}
+		else if (!karma.equals(other.karma))
+			return false;
+		if (totalViews == null) {
+			if (other.totalViews != null)
+				return false;
+		}
+		else if (!totalViews.equals(other.totalViews))
+			return false;
+		if (age == null) {
+			if (other.age != null)
+				return false;
+		}
+		else if (!age.equals(other.age))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		}
+		else if (!gender.equals(other.gender))
+			return false;
+		if (salary == null) {
+			if (other.salary != null)
+				return false;
+		}
+		else if (!salary.equals(other.salary))
+			return false;
+		if (relationshipStatus == null) {
+			if (other.relationshipStatus != null)
+				return false;
+		}
+		else if (!relationshipStatus.equals(other.relationshipStatus))
+			return false;
+		if (dreams == null) {
+			if (other.dreams != null)
+				return false;
+		}
+		else if (!dreams.equals(other.dreams))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		}
+		else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		if (employmentHistory == null) {
+			if (other.employmentHistory != null)
+				return false;
+		}
+		else if (!employmentHistory.equals(other.employmentHistory))
+			return false;
+		if (skills == null) {
+			if (other.skills != null)
+				return false;
+		}
+		else if (!skills.equals(other.skills))
+			return false;
+		if (schoolId == null) {
+			if (other.schoolId != null)
+				return false;
+		}
+		else if (!schoolId.equals(other.schoolId))
+			return false;
+		if (locationId == null) {
+			if (other.locationId != null)
+				return false;
+		}
+		else if (!locationId.equals(other.locationId))
+			return false;
+		if (imageId == null) {
+			if (other.imageId != null)
+				return false;
+		}
+		else if (!imageId.equals(other.imageId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
+		result = prime * result + ((lastLoggedinTimestamp == null) ? 0 : lastLoggedinTimestamp.hashCode());
+		result = prime * result + ((employmentStatus == null) ? 0 : employmentStatus.hashCode());
+		result = prime * result + ((joinedTimestamp == null) ? 0 : joinedTimestamp.hashCode());
+		result = prime * result + ((karma == null) ? 0 : karma.hashCode());
+		result = prime * result + ((totalViews == null) ? 0 : totalViews.hashCode());
+		result = prime * result + ((age == null) ? 0 : age.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((salary == null) ? 0 : salary.hashCode());
+		result = prime * result + ((relationshipStatus == null) ? 0 : relationshipStatus.hashCode());
+		result = prime * result + ((dreams == null) ? 0 : dreams.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((employmentHistory == null) ? 0 : employmentHistory.hashCode());
+		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
+		result = prime * result + ((schoolId == null) ? 0 : schoolId.hashCode());
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		result = prime * result + ((imageId == null) ? 0 : imageId.hashCode());
+		return result;
 	}
 
 	@Override

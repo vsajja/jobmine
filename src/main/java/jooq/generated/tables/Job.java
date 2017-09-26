@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job extends TableImpl<JobRecord> {
 
-	private static final long serialVersionUID = 294914822;
+	private static final long serialVersionUID = 592428324;
 
 	/**
 	 * The reference instance of <code>public.job</code>
@@ -62,9 +62,9 @@ public class Job extends TableImpl<JobRecord> {
 	public final TableField<JobRecord, String> TITLE = createField("title", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.description</code>.
+	 * The column <code>public.job.description	</code>.
 	 */
-	public final TableField<JobRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<JobRecord, String> DESCRIPTION_9 = createField("description	", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
 	 * The column <code>public.job.created_timestamp</code>.

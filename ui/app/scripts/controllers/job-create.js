@@ -7,7 +7,7 @@
  * # JobCreateCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('JobCreateCtrl', ['$scope', '$routeParams', 'Restangular', function ($scope, $routeParams, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

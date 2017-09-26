@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name jobmineApp
+ * @name jobApp
  * @description
  * # jobmineApp
  *
  * Main module of the application.
  */
 var jobmineApp = angular
-  .module('jobmineApp', [
+  .module('jobApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

@@ -3,7 +3,7 @@
 describe('Controller: JobProfileCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('jobmineApp'));
+  beforeEach(module('jobApp'));
 
   var JobProfileCtrl,
     scope;

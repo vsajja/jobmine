@@ -5,6 +5,7 @@ package jooq.generated.tables.pojos;
 
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.annotation.Generated;
 
@@ -22,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Image implements Serializable {
 
-	private static final long serialVersionUID = 700823776;
+	private static final long serialVersionUID = -182947953;
 
 	private final Long   imageId;
 	private final String name;
@@ -70,6 +71,60 @@ public class Image implements Serializable {
 
 	public byte[] getData() {
 		return this.data;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Image other = (Image) obj;
+		if (imageId == null) {
+			if (other.imageId != null)
+				return false;
+		}
+		else if (!imageId.equals(other.imageId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		}
+		else if (!name.equals(other.name))
+			return false;
+		if (src == null) {
+			if (other.src != null)
+				return false;
+		}
+		else if (!src.equals(other.src))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		}
+		else if (!url.equals(other.url))
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		}
+		else if (!Arrays.equals(data, other.data))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((imageId == null) ? 0 : imageId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((src == null) ? 0 : src.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((data == null) ? 0 : Arrays.hashCode(data));
+		return result;
 	}
 
 	@Override

@@ -7,7 +7,7 @@
  * # JobProfileCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('JobProfileCtrl', ['$scope', '$routeParams', 'Restangular', function ($scope, $routeParams, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
@@ -20,6 +20,7 @@ angular.module('jobmineApp')
 
     // This will query /jobs/:jobId and return a promise.
     job.customGET().then(function (job) {
+      console.log(job);
       $scope.job = job;
     });
   }]);

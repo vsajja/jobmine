@@ -3,7 +3,7 @@
 describe('Controller: CompanyRegisterCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('jobmineApp'));
+  beforeEach(module('jobApp'));
 
   var CompanyRegisterCtrl,
     scope;

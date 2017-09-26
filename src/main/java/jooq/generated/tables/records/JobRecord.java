@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record10<Long, String, String, Timestamp, String, String, Integer, Integer, Integer, Integer> {
 
-	private static final long serialVersionUID = 1933942977;
+	private static final long serialVersionUID = 1063539049;
 
 	/**
 	 * Setter for <code>public.job.job_id</code>.
@@ -63,17 +63,17 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record1
 	}
 
 	/**
-	 * Setter for <code>public.job.description</code>.
+	 * Setter for <code>public.job.description	</code>.
 	 */
-	public JobRecord setDescription(String value) {
+	public JobRecord setDescription_9(String value) {
 		setValue(2, value);
 		return this;
 	}
 
 	/**
-	 * Getter for <code>public.job.description</code>.
+	 * Getter for <code>public.job.description	</code>.
 	 */
-	public String getDescription() {
+	public String getDescription_9() {
 		return (String) getValue(2);
 	}
 
@@ -235,7 +235,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record1
 	 */
 	@Override
 	public Field<String> field3() {
-		return Job.JOB.DESCRIPTION;
+		return Job.JOB.DESCRIPTION_9;
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record1
 	 */
 	@Override
 	public String value3() {
-		return getDescription();
+		return getDescription_9();
 	}
 
 	/**
@@ -397,7 +397,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record1
 	 */
 	@Override
 	public JobRecord value3(String value) {
-		setDescription(value);
+		setDescription_9(value);
 		return this;
 	}
 
@@ -496,12 +496,12 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> implements Record1
 	/**
 	 * Create a detached, initialised JobRecord
 	 */
-	public JobRecord(Long jobId, String title, String description, Timestamp createdTimestamp, String type, String status, Integer totalOpenings, Integer jobMineId, Integer companyId, Integer locationId) {
+	public JobRecord(Long jobId, String title, String description_9, Timestamp createdTimestamp, String type, String status, Integer totalOpenings, Integer jobMineId, Integer companyId, Integer locationId) {
 		super(Job.JOB);
 
 		setValue(0, jobId);
 		setValue(1, title);
-		setValue(2, description);
+		setValue(2, description_9);
 		setValue(3, createdTimestamp);
 		setValue(4, type);
 		setValue(5, status);

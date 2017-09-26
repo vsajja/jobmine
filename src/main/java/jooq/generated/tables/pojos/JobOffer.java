@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JobOffer implements Serializable {
 
-	private static final long serialVersionUID = -1837681080;
+	private static final long serialVersionUID = -1520338907;
 
 	private final Long      jobOfferId;
 	private final Timestamp expiryTimestamp;
@@ -71,6 +71,60 @@ public class JobOffer implements Serializable {
 
 	public Integer getStudentId() {
 		return this.studentId;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final JobOffer other = (JobOffer) obj;
+		if (jobOfferId == null) {
+			if (other.jobOfferId != null)
+				return false;
+		}
+		else if (!jobOfferId.equals(other.jobOfferId))
+			return false;
+		if (expiryTimestamp == null) {
+			if (other.expiryTimestamp != null)
+				return false;
+		}
+		else if (!expiryTimestamp.equals(other.expiryTimestamp))
+			return false;
+		if (salary == null) {
+			if (other.salary != null)
+				return false;
+		}
+		else if (!salary.equals(other.salary))
+			return false;
+		if (jobId == null) {
+			if (other.jobId != null)
+				return false;
+		}
+		else if (!jobId.equals(other.jobId))
+			return false;
+		if (studentId == null) {
+			if (other.studentId != null)
+				return false;
+		}
+		else if (!studentId.equals(other.studentId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jobOfferId == null) ? 0 : jobOfferId.hashCode());
+		result = prime * result + ((expiryTimestamp == null) ? 0 : expiryTimestamp.hashCode());
+		result = prime * result + ((salary == null) ? 0 : salary.hashCode());
+		result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
+		result = prime * result + ((studentId == null) ? 0 : studentId.hashCode());
+		return result;
 	}
 
 	@Override

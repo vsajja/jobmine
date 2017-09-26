@@ -7,7 +7,7 @@
  * # SettingsCtrl
  * Controller of the jobmineApp
  */
-angular.module('jobmineApp')
+angular.module('jobApp')
   .controller('DevelopersCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

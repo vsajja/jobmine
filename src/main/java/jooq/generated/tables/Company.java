@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Company extends TableImpl<CompanyRecord> {
 
-	private static final long serialVersionUID = -1899695403;
+	private static final long serialVersionUID = 1161391393;
 
 	/**
 	 * The reference instance of <code>public.company</code>
@@ -97,6 +97,11 @@ public class Company extends TableImpl<CompanyRecord> {
 	public final TableField<CompanyRecord, Integer> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
+	 * The column <code>public.company.job_mine_id</code>.
+	 */
+	public final TableField<CompanyRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
 	 * Create a <code>public.company</code> table reference
 	 */
 	public Company() {
@@ -147,7 +152,7 @@ public class Company extends TableImpl<CompanyRecord> {
 	 */
 	@Override
 	public List<ForeignKey<CompanyRecord, ?>> getReferences() {
-		return Arrays.<ForeignKey<CompanyRecord, ?>>asList(Keys.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK, Keys.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK);
+		return Arrays.<ForeignKey<CompanyRecord, ?>>asList(Keys.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK, Keys.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK, Keys.COMPANY__COMPANY_JOB_MINE_JOB_MINE_ID_FK);
 	}
 
 	/**

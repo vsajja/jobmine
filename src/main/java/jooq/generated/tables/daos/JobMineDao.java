@@ -70,11 +70,4 @@ public class JobMineDao extends DAOImpl<JobMineRecord, jooq.generated.tables.poj
 	public List<jooq.generated.tables.pojos.JobMine> fetchByName(String... values) {
 		return fetch(JobMine.JOB_MINE.NAME, values);
 	}
-
-	/**
-	 * Fetch records that have <code>school_id IN (values)</code>
-	 */
-	public List<jooq.generated.tables.pojos.JobMine> fetchBySchoolId(Integer... values) {
-		return fetch(JobMine.JOB_MINE.SCHOOL_ID, values);
-	}
 }
