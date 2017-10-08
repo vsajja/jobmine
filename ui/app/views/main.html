@@ -1,40 +1,56 @@
-<!--<div class="section values">-->
-<!--<div class="container">-->
-<!--<div class="row">-->
-<!--<div class="one-third column value">-->
-<!--<h2 class="value-multiplier">67%</h2>-->
-<!--<h5 class="value-heading">Purchase Increase</h5>-->
-<!--<p class="value-description">Percentage of users more likely to purchase on mobile friendly site.</p>-->
-<!--</div>-->
-<!--<div class="one-third column value">-->
-<!--<h2 class="value-multiplier">90%</h2>-->
-<!--<h5 class="value-heading">Multi-device Users</h5>-->
-<!--<p class="value-description">Most of the world accesses the internet on multiple devices.</p>-->
-<!--</div>-->
-<!--<div class="one-third column value">-->
-<!--<h2 class="value-multiplier">66%</h2>-->
-<!--<h5 class="value-heading">Sad Users</h5>-->
-<!--<p class="value-description">Percentage of users that are frustrated with page load times.</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<div align="center">
-  <h4>free for
-    <strong>{{jobmine.schools}}</strong> <a href="#/schools">schools</a>,
-    <strong>{{jobmine.students}}</strong> <a href="#/students">students</a> and
-    <strong>{{jobmine.companies}}</strong> <a href="#/companies">companies</a>
-  </h4>
-</div>
-
-<div align="center">
-  <h4>
-    <i class="fa fa-sign-in" aria-hidden="true"></i>
-    <a href="#/jobs">find jobs</a>
-  </h4>
-  <h4>
-    <i class="fa fa-sign-in" aria-hidden="true"></i>
-    <a href="#/register">register now!</a>
-  </h4>
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="card-title">Students</h2>
+        <p class="card-text">
+          <a href="#/students" class="btn btn-primary">
+            <strong>
+              <i class="fa fa-user fa-5x" style="font-size: 50px" aria-hidden="true"></i> {{jobmine.students}}
+            </strong>
+          </a>
+        </p>
+      </div>
+      <div class="card-footer" align="center">
+        <button>Login</button>
+        <a href="#/student/register"><button>Register</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="card-title">Schools</h2>
+        <p class="card-text">
+          <a href="#/schools" class="btn btn-primary">
+            <strong>
+              <i class="fa fa-graduation-cap fa-5x" style="font-size: 50px"
+                 aria-hidden="true"></i> {{jobmine.schools}}
+            </strong>
+          </a>
+        </p>
+      </div>
+      <div class="card-footer" align="center">
+        <a href="#/school/register"><button>Register</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="card-title">Companies</h2>
+        <p class="card-text">
+          <a href="#/companies" class="btn btn-primary">
+            <strong>
+              <i class="fa fa-building fa-5x" style="font-size: 50px"
+                 aria-hidden="true"></i> {{jobmine.companies}}
+            </strong>
+          </a>
+        </p>
+      </div>
+      <div class="card-footer" align="center">
+        <a href="#/company/register"><button>Register</button></a>
+      </div>
+    </div>
+  </div>
 </div>
