@@ -118,6 +118,11 @@ var jobmineApp = angular
         controller: 'KosenkovCtrl',
         controllerAs: 'kosenkov'
       })
+      .when('/student/login', {
+        templateUrl: 'views/student-login.html',
+        controller: 'StudentLoginCtrl',
+        controllerAs: 'studentLogin'
+      })
       .otherwise({
         redirectTo: '/'
       });
