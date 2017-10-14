@@ -22,10 +22,9 @@ angular.module('jobApp')
       var students = Restangular.all('students');
 
       students.post($scope.student).then(function (addedStudent) {
-        // console.log(addedStudent);
-        $scope.alerts.push({type: 'success', msg: 'Success! Added student! Email: ' + addedStudent.emailAddress});
+        $scope.alerts.push({type: 'success', msg: 'Success! Registered student! Username: ' + addedStudent.username});
       }, function () {
-        $scope.alerts.push({type: 'danger', msg: 'Error! Unable to add student.'});
+        $scope.alerts.push({type: 'danger', msg: 'Error! Unable to register student.'});
       });
     };
 

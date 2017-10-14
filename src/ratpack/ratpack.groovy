@@ -1,12 +1,5 @@
 import com.zaxxer.hikari.HikariConfig
-import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
-import groovy.xml.XmlUtil
-import jooq.generated.tables.daos.CompanyDao
-import jooq.generated.tables.daos.JobDao
-import jooq.generated.tables.daos.JobMineDao
-import jooq.generated.tables.daos.SchoolDao
-import jooq.generated.tables.daos.StudentDao
 import jooq.generated.tables.pojos.Company
 import jooq.generated.tables.pojos.Document
 import jooq.generated.tables.pojos.Job
@@ -17,36 +10,24 @@ import jooq.generated.tables.pojos.JobMine
 import jooq.generated.tables.pojos.JobOffer
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
-import jooq.generated.tables.records.CompanyRecord
 import jooq.generated.tables.records.JobMineRecord
-import jooq.generated.tables.records.JobRecord
-import jooq.generated.tables.records.SchoolRecord
-import jooq.generated.tables.records.StudentRecord
-import org.jooq.Configuration
+import org.job.JobService
+import org.job.exceptions.InvalidCredentialsException
 import org.jooq.DSLContext
-import org.jooq.Field
-import org.jooq.Record
-import org.jooq.Result
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
-import org.jooq.impl.DefaultConfiguration
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import ratpack.config.ConfigData
-import ratpack.config.ConfigDataBuilder
 import ratpack.form.Form
 import ratpack.form.UploadedFile
 import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
-import ratpack.http.Status
 import ratpack.http.client.HttpClient
-import org.jobmine.postgres.PostgresConfig
-import org.jobmine.postgres.PostgresModule
+import org.job.postgres.PostgresConfig
+import org.job.postgres.PostgresModule
 
 import javax.sql.DataSource
-import java.sql.Date
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 
 import static ratpack.groovy.Groovy.ratpack
@@ -69,9 +50,10 @@ ratpack {
             config.dataSource = new PostgresModule().dataSource(serverConfig.get('/postgres', PostgresConfig))
         }
         module SqlModule
+        bind JobService
     }
 
-    handlers {
+    handlers { JobService jobService ->
         all RequestLogger.ncsa(log)
 
         all {
@@ -92,35 +74,11 @@ ratpack {
                 next()
             }
 
-            path('jobmine') {
+            path('job') {
                 byMethod {
                     get {
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-
-                        /*
-                        def schools = context.selectCount().from(SCHOOL).fetchOne(0, int.class)
-                        def students = context.selectCount().from(STUDENT).fetchOne(0, int.class)
-                        def companies = context.selectCount().from(COMPANY).fetchOne(0, int.class)
-                        def jobs = context.selectCount().from(JOB).fetchOne(0, int.class)
-                        def mines = context.selectCount().from(JOB_MINE).fetchOne(0, int.class)
-                        def countries = 1
-
-                        render json([schools  : schools,
-                                     students : students,
-                                     companies: companies,
-                                     jobs     : jobs,
-                                     mines    : mines,
-                                     countries: countries])
-                        */
-
-                        /*
-                        SELECT
-                        (SELECT COUNT(*) FROM company) AS companies,
-                        (SELECT COUNT(*) FROM student) AS students,
-                        (SELECT COUNT(*) FROM job) AS jobs,
-                        ...
-                        */
 
                         def schools = context.selectCount().from(SCHOOL).asField('schools')
                         def students = context.selectCount().from(STUDENT).asField('students')
@@ -519,69 +477,44 @@ ratpack {
 
                     post {
                         parse(jsonNode()).map { params ->
-                            log.info(params.toString())
-                            def firstName = params.get('firstName')?.textValue()
-                            def lastName = params.get('lastName')?.textValue()
-                            def userName = params.get('userName')?.textValue()
-                            def emailAddress = params.get('emailAddress')?.textValue()
-                            def employmentStatus = params.get('employmentStatus')?.textValue()
+                            def username = params.get('username')?.textValue()
+                            def password = params.get('password')?.textValue()
 
-//                            def karma = params.get('karma').intValue()
-//                            def total_views = params.get('total_views').intValue()
-//                            def age = params.get('age').intValue()
-//                            def gender = params.get('gender').textValue()
-//                            def salary = params.get('salary').intValue()
-//                            def relationship_status = params.get('relationship_status').textValue()
-//                            def dreams = params.get('dreams').textValue()
-//                            def phone_number = params.get('phone_number').textValue()
-//                            def employment_history = params.get('employment_history').textValue()
-//                            def skills = params.get('skills').textValue()
-                            def lastLoggedInTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
-                            def joinedTimestamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime())
+                            if(!username || !password) {
+                                clientError(400)
+                            }
 
-                            assert firstName
-                            assert lastName
-                            assert userName
-                            assert emailAddress
-                            assert employmentStatus
-//                            assert karma
-//                            assert total_views
-//                            assert age
-//                            assert gender
-//                            assert salary
-//                            assert relationship_status
-//                            assert dreams
-//                            assert phone_number
-//                            assert employment_history
-//                            assert skills
-                            assert lastLoggedInTimestamp
-                            assert joinedTimestamp
-
-                            DataSource dataSource = registry.get(DataSource.class)
-                            DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                            context.insertInto(STUDENT)
-                                    .set(STUDENT.FIRST_NAME, firstName)
-                                    .set(STUDENT.LAST_NAME, lastName)
-                                    .set(STUDENT.USERNAME, userName)
-                                    .set(STUDENT.EMAIL_ADDRESS, emailAddress)
-                                    .set(STUDENT.EMPLOYMENT_STATUS, employmentStatus)
-//                                    .set(STUDENT.KARMA, karma)
-//                                    .set(STUDENT.TOTAL_VIEWS, total_views)
-//                                    .set(STUDENT.AGE, age)
-//                                    .set(STUDENT.GENDER, gender)
-//                                    .set(STUDENT.SALARY, salary)
-//                                    .set(STUDENT.RELATIONSHIP_STATUS, relationship_status)
-//                                    .set(STUDENT.DREAMS, dreams)
-//                                    .set(STUDENT.PHONE_NUMBER, phone_number)
-//                                    .set(STUDENT.EMPLOYMENT_HISTORY, employment_history)
-//                                    .set(STUDENT.SKILLS, skills)
-                                    .set(STUDENT.LAST_LOGGEDIN_TIMESTAMP, lastLoggedInTimestamp)
-                                    .set(STUDENT.JOINED_TIMESTAMP, joinedTimestamp)
-                                    .returning()
-                                    .fetchOne()
-                                    .into(Student.class)
+                            jobService.registerStudent(username, password)
+                        }.onError { Throwable e ->
+                            if(e.message.contains('unique constraint')) {
+                                clientError(409)
+                            }
+                            throw e
                         }.then { Student student ->
-                            println "created student with id: " + student.getStudentId()
+                            render json(student)
+                        }
+                    }
+                }
+            }
+
+            path('students/login') {
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            def username = params.get('username')?.textValue()
+                            def password = params.get('password')?.textValue()
+
+                            if (!username || !password) {
+                                clientError(400)
+                            }
+
+                            jobService.loginStudent(username, password)
+                        }.onError { Throwable e ->
+                            if (e instanceof InvalidCredentialsException) {
+                                clientError(401)
+                            }
+                            throw e
+                        }.then { Student student ->
                             render json(student)
                         }
                     }
@@ -671,31 +604,6 @@ ratpack {
                             }
 
                             render json(documents)
-                        }
-                    }
-                }
-            }
-
-            path('kosenkov') {
-                byMethod {
-                    get {
-                        HttpClient httpClient = registry.get(HttpClient.class)
-                        String uri = "http://kosenkov.ca/kb?submit=Submit"
-                        httpClient.get(new URI(uri)).then {
-                            render it.body.text
-                        }
-                    }
-                }
-            }
-
-            path('kosenkov/:query') {
-                def query = pathTokens['query']
-                byMethod {
-                    get {
-                        HttpClient httpClient = registry.get(HttpClient.class)
-                        String uri = "http://kosenkov.ca/kb?query=$query&submit=Submit"
-                        httpClient.get(new URI(uri)).then {
-                            render it.body.text
                         }
                     }
                 }

@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = 374748843;
+	private static final long serialVersionUID = -860070264;
 
 	private final Long      studentId;
 	private final String    firstName;
@@ -46,6 +46,7 @@ public class Student implements Serializable {
 	private final Integer   schoolId;
 	private final Integer   locationId;
 	private final Integer   imageId;
+	private final String    password;
 
 	public Student(Student value) {
 		this.studentId = value.studentId;
@@ -69,6 +70,7 @@ public class Student implements Serializable {
 		this.schoolId = value.schoolId;
 		this.locationId = value.locationId;
 		this.imageId = value.imageId;
+		this.password = value.password;
 	}
 
 	public Student(
@@ -92,7 +94,8 @@ public class Student implements Serializable {
 		String    skills,
 		Integer   schoolId,
 		Integer   locationId,
-		Integer   imageId
+		Integer   imageId,
+		String    password
 	) {
 		this.studentId = studentId;
 		this.firstName = firstName;
@@ -115,6 +118,7 @@ public class Student implements Serializable {
 		this.schoolId = schoolId;
 		this.locationId = locationId;
 		this.imageId = imageId;
+		this.password = password;
 	}
 
 	public Long getStudentId() {
@@ -199,6 +203,10 @@ public class Student implements Serializable {
 
 	public Integer getImageId() {
 		return this.imageId;
+	}
+
+	public String getPassword() {
+		return this.password;
 	}
 
 	@Override
@@ -336,6 +344,12 @@ public class Student implements Serializable {
 		}
 		else if (!imageId.equals(other.imageId))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		}
+		else if (!password.equals(other.password))
+			return false;
 		return true;
 	}
 
@@ -364,6 +378,7 @@ public class Student implements Serializable {
 		result = prime * result + ((schoolId == null) ? 0 : schoolId.hashCode());
 		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
 		result = prime * result + ((imageId == null) ? 0 : imageId.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 
@@ -392,6 +407,7 @@ public class Student implements Serializable {
 		sb.append(", ").append(schoolId);
 		sb.append(", ").append(locationId);
 		sb.append(", ").append(imageId);
+		sb.append(", ").append(password);
 
 		sb.append(")");
 		return sb.toString();

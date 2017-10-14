@@ -12,62 +12,25 @@
       <div class="box-body">
         <!-- FORM -->
         <form ng-submit="registerStudent()">
-          <!-- FIRST NAME -->
-          <div id="name-group" class="form-group">
-            <label>First Name</label>
-            <input type="text" name="firstName" class="form-control" placeholder="First Name" ng-model="student.firstName" required>
-            <span class="help-block"></span>
-          </div>
-
-          <!-- LAST NAME -->
-          <div id="name-group" class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="lastName" class="form-control" placeholder="Last Name" ng-model="student.lastName" required>
-            <span class="help-block"></span>
-          </div>
-
           <!-- USER NAME -->
-          <div id="name-group" class="form-group">
+          <div class="form-group">
             <label>Username</label>
-            <input type="text" name="userName" class="form-control" placeholder="User Name" ng-model="student.userName" required>
+            <input type="text" name="username" class="form-control" placeholder="Username..." ng-model="student.username" required>
             <span class="help-block"></span>
           </div>
 
-          <!-- EMAIL ADDRESS -->
-          <div id="name-group" class="form-group">
-            <b></b>
-            <label>Email Address</label>
-            <input type="text" name="emailAddress" class="form-control" placeholder="Email Address" ng-model="student.emailAddress" required>
+          <!-- PASSWORD -->
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password..." ng-model="student.password" required>
             <span class="help-block"></span>
           </div>
-
-          <!-- EMPLOYMENT STATUS -->
-          <div id="name-group" class="form-group">
-            <label>Employment Status</label>
-            <input type="text" name="emailAddress" class="form-control" placeholder="Employment Status" ng-model="student.employmentStatus" required>
-            <span class="help-block"></span>
-          </div>
-
-          <!--&lt;!&ndash; DESCRIPTION &ndash;&gt;-->
-          <!--<div id="name-group" class="form-group">-->
-            <!--<label>Description</label>-->
-
-            <!--<textarea style="height:125px; resize: none;" cols="30" rows="10" name="description"-->
-                      <!--class="form-control" placeholder="Description" ng-model="student.description"-->
-                      <!--required></textarea>-->
-            <!--<span class="help-block"></span>-->
-          <!--</div>-->
 
           <!-- SUBMIT BUTTON -->
           <button type="submit" class="btn btn-success btn-lg btn-block">
             Register
           </button>
         </form>
-
-        <br/>
-
-        <textarea style="height:125px; resize: none;" cols="30" rows="10" name="description"
-                  class="form-control">{{ student }}</textarea>
       </div>
     </div>
   </div>

@@ -204,4 +204,11 @@ public class StudentDao extends DAOImpl<StudentRecord, jooq.generated.tables.poj
 	public List<jooq.generated.tables.pojos.Student> fetchByImageId(Integer... values) {
 		return fetch(Student.STUDENT.IMAGE_ID, values);
 	}
+
+	/**
+	 * Fetch records that have <code>password IN (values)</code>
+	 */
+	public List<jooq.generated.tables.pojos.Student> fetchByPassword(String... values) {
+		return fetch(Student.STUDENT.PASSWORD, values);
+	}
 }

@@ -8,7 +8,7 @@
  * Controller of the jobApp
  */
 angular.module('jobApp')
-  .controller('StudentLoginCtrl', ['$scope', '$location', 'AuthenticationService', 'Restangular', function ($scope, $location, AuthenticationService, Restangular) {
+  .controller('StudentLoginCtrl', ['$scope', '$location', 'Restangular', function ($scope, $location, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,7 +16,7 @@ angular.module('jobApp')
     ];
 
     // reset login status
-    AuthenticationService.ClearCredentials();
+    // AuthenticationService.ClearCredentials();
 
     $scope.alerts = [];
 
@@ -25,12 +25,10 @@ angular.module('jobApp')
     };
 
     $scope.login = function login() {
-      Restangular.one('login').customPOST($scope.user)
-        .then(function (user) {
-          console.log('login called!')
-
-          AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, user);
-          $location.path('/home');
+      Restangular.all('students/login').post($scope.student)
+        .then(function (student) {
+          // AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, user);
+          $location.path('/students');
         }, function () {
           $scope.alerts.push({type: 'danger', msg: 'Error! Invalid credentials!'});
         });

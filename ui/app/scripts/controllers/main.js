@@ -17,7 +17,7 @@ angular.module('jobApp')
 
     var jobmine = Restangular.all('jobmine');
 
-    // This will query /jobmine and return a promise.
+    // This will query /job and return a promise.
     jobmine.customGET().then(function (jobmine) {
       $scope.jobmine = jobmine;
     });
