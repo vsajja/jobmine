@@ -74,6 +74,23 @@ ratpack {
                 next()
             }
 
+            path('jokes/random') {
+                byMethod {
+                    get {
+                        HttpClient httpClient = registry.get(HttpClient.class)
+
+                        String uriStr = 'http://api.chucknorris.io/jokes/random'
+
+                        String randomJoke
+
+                        httpClient.get(new URI(uriStr)).then {
+                            render it.body.text
+//                            render new JsonSlurper().parseText(it.body.text).value.toString()
+                        }
+                    }
+                }
+            }
+
             path('job') {
                 byMethod {
                     get {

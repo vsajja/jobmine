@@ -34,6 +34,9 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
+
+    console.log('TODO: student login against ratpack server');
+
     // Replace by proper authentication call
     const data = {
       username: context.username,
