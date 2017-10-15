@@ -18,14 +18,14 @@ public class StudentSpec extends JobSpec {
     @Delegate
     TestHttpClient httpClient = sut.httpClient
 
-    static final String TEST_USER_VSAJJA_USERNAME = 'UserSpec_test_user_vsajja'
-    static final String TEST_USER_VSAJJA_PASSWORD = 'UserSpec_test_user_vsajja_password'
+    static final String TEST_STUDENT_USERNAME = 'UserSpec_test_user_vsajja'
+    static final String TEST_STUDENT_PASSWORD = 'UserSpec_test_user_vsajja_password'
 
     def setupSpec() {
     }
 
     def cleanupSpec() {
-        testDatabase.deleteFrom(STUDENT).where(STUDENT.USERNAME.equal(TEST_USER_VSAJJA_USERNAME)).execute()
+        testDatabase.deleteFrom(STUDENT).where(STUDENT.USERNAME.equal(TEST_STUDENT_USERNAME)).execute()
     }
 
     def "register student"() {
@@ -33,10 +33,11 @@ public class StudentSpec extends JobSpec {
         requestSpec { RequestSpec request ->
             request.body.type('application/json')
             request.body.text(JsonOutput.toJson(
-                    [username: TEST_USER_VSAJJA_USERNAME,
-                     password: TEST_USER_VSAJJA_PASSWORD])
+                    [username: TEST_STUDENT_USERNAME,
+                     password: TEST_STUDENT_PASSWORD])
             )
         }
+
         when:
         post('api/v1/students')
 
@@ -45,50 +46,98 @@ public class StudentSpec extends JobSpec {
         studentDao.count() == old(studentDao.count()) + 1
     }
 
-//    def "create student"() {
-//        setup:
-//        def first_name = this.class.getSimpleName()
-//        def last_name = this.class.getSimpleName()
-//        def username = this.class.getSimpleName()
-//        def email_address = "${first_name}@waterloo.ca"
-//        def employment_status = 'Unemployed'
-//        def karma = 1
-//        def total_views = 1
-//        def age = 19
-//        def gender = "Male"
-//        def salary = 1
-//        def relationship_status = "Single"
-//        def dreams = "cure cancer"
-//        def phone_number = "(519) 502-7991"
-//        def employment_history = "No employment history"
-//        def skills = "Really good at Photoshop"
-//
-//
-//        requestSpec { RequestSpec request ->
-//            request.body.type('application/json')
-//            request.body.text(JsonOutput.toJson(
-//                    [first_name         : first_name,
-//                     last_name          : last_name,
-//                     username           : username,
-//                     email_address      : email_address,
-//                     employment_status  : employment_status,
-//                     karama             : karma,
-//                     total_views        : total_views,
-//                     age                : age,
-//                     gender             : gender,
-//                     salary             : salary,
-//                     relationship_status: relationship_status,
-//                     dreams             : dreams,
-//                     phone_number       : phone_number,
-//                     employment_history : employment_history,
-//                     skills             : skills])
-//            )
-//        }
-//
-//        when:
-//        post('api/v1/students')
-//
-//        then:
-//        response.statusCode == 200
-//    }
+    def "register student again (conflict)"() {
+        setup:
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [username: TEST_STUDENT_USERNAME,
+                     password: TEST_STUDENT_PASSWORD])
+            )
+        }
+
+        when:
+        post('api/v1/students')
+
+        then:
+        response.statusCode == HttpResponseStatus.CONFLICT.code()
+        studentDao.count() == old(studentDao.count())
+    }
+
+    def "register student with invalid params (bad request)"() {
+        setup:
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [username: TEST_STUDENT_USERNAME,
+                     password: null])
+            )
+        }
+
+        when:
+        post('api/v1/students')
+
+        then:
+        response.statusCode == HttpResponseStatus.BAD_REQUEST.code()
+        studentDao.count() == old(studentDao.count())
+    }
+
+    def "login student with invalid credentials (unauthorized)"() {
+        setup:
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [username: TEST_STUDENT_USERNAME,
+                     password: 'wrong password'])
+            )
+        }
+
+        when:
+        post('api/v1/students/login')
+
+        then:
+        response.statusCode == HttpResponseStatus.UNAUTHORIZED.code()
+    }
+
+    def "login student with invalid params (bad request)"() {
+        setup:
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [username: TEST_STUDENT_USERNAME,
+                     password: null])
+            )
+        }
+
+        when:
+        post('api/v1/students/login')
+
+        then:
+        response.statusCode == HttpResponseStatus.BAD_REQUEST.code()
+    }
+
+    def "login student"() {
+        setup:
+        requestSpec { RequestSpec request ->
+            request.body.type('application/json')
+            request.body.text(JsonOutput.toJson(
+                    [username: TEST_STUDENT_USERNAME,
+                     password: TEST_STUDENT_PASSWORD])
+            )
+        }
+
+        when:
+        post('api/v1/students/login')
+
+        then:
+        response.statusCode == HttpResponseStatus.OK.code()
+    }
+
+    def "get students"() {
+        when:
+        get('api/v1/students')
+
+        then:
+        response.statusCode == HttpResponseStatus.OK.code()
+    }
 }

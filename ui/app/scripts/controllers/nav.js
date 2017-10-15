@@ -8,7 +8,7 @@
  * Controller of the jobApp
  */
 angular.module('jobApp')
-  .controller('NavCtrl', function ($scope, $rootScope, AuthenticationService) {
+  .controller('NavCtrl', function ($scope, $rootScope, authenticationservice) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,12 +16,12 @@ angular.module('jobApp')
     ];
 
     $rootScope.$on('userLoggedIn', function () {
-      $scope.currentUser = AuthenticationService.GetCurrentUser();
+      $scope.currentUser = authenticationservice.GetCurrentUser();
     });
 
     $rootScope.$on('userLoggedOut', function () {
-      $scope.currentUser = AuthenticationService.GetCurrentUser();
+      $scope.currentUser = authenticationservice.GetCurrentUser();
     });
 
-    $scope.currentUser = AuthenticationService.GetCurrentUser();
+    $scope.currentUser = authenticationservice.GetCurrentUser();
   });

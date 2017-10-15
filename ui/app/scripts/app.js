@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var jobmineApp = angular
+var jobApp = angular
   .module('jobApp', [
     'ngAnimate',
     'ngCookies',
@@ -19,7 +19,9 @@ var jobmineApp = angular
     'ui.bootstrap',
     'smart-table',
     'restangular',
-    'xeditable'
+    'xeditable',
+    'base64',
+    'LocalStorageModule'
   ])
   .config(function ($routeProvider, $locationProvider, $compileProvider, RestangularProvider) {
     $routeProvider
@@ -113,11 +115,6 @@ var jobmineApp = angular
         controller: 'JobCreateCtrl',
         controllerAs: 'jobCreate'
       })
-      .when('/kosenkov/:query?', {
-        templateUrl: 'views/kosenkov.html',
-        controller: 'KosenkovCtrl',
-        controllerAs: 'kosenkov'
-      })
       .when('/student/login', {
         templateUrl: 'views/student-login.html',
         controller: 'StudentLoginCtrl',
@@ -138,6 +135,12 @@ var jobmineApp = angular
     RestangularProvider.setBaseUrl('http://localhost:5050/api/v1');
   });
 
-jobmineApp.run(function (editableOptions) {
+jobApp.run(function (editableOptions, $rootScope, $location, $cookieStore, $http) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+
+  // keep user logged in after page refresh
+  $rootScope.globals = $cookieStore.get('globals') || {};
+  if ($rootScope.globals.currentUser) {
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+  }
 });

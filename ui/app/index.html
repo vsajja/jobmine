@@ -44,12 +44,22 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" ng-controller="NavCtrl">
   <a class="navbar-brand" href="#">home</a>
+    <div ng-if="currentUser" ng-cloak>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span><strong>{{currentUser.username}}</strong></span> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <div style="text-align: center"><a href="#/"><span><i class="fa fa-sign-out"></i> Logout</span></a>
+        </div>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container body">
   <div ng-view="view"></div>
 </div>
 
@@ -103,6 +113,8 @@
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/restangular/dist/restangular.js"></script>
 <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/angular-base64/angular-base64.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -126,8 +138,9 @@
 <script src="scripts/controllers/school-register.js"></script>
 <script src="scripts/controllers/company-register.js"></script>
 <script src="scripts/controllers/job-create.js"></script>
-<script src="scripts/controllers/kosenkov.js"></script>
 <script src="scripts/controllers/student-login.js"></script>
+<script src="scripts/controllers/nav.js"></script>
+<script src="scripts/services/authenticationservice.js"></script>
 <!-- endbuild -->
 </body>
 </html>

@@ -55,13 +55,9 @@ class JobService {
     public Student loginStudent(String username, String password) throws InvalidCredentialsException {
         Student student = getStudent(username)
 
-        println "USERNAME: $username"
-        println "PASSWORD: $password"
-
         if(student) {
             boolean passwordMatches = BCrypt.checkpw(password, student.getPassword())
             if (passwordMatches) {
-                // TODO
                 return student
             } else {
                 throw new InvalidCredentialsException('Invalid username and password')

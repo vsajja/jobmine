@@ -3,7 +3,7 @@
 describe('Controller: StudentLoginCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('jobmineApp'));
+  beforeEach(module('jobApp'));
 
   var StudentLoginCtrl,
     scope;
@@ -17,7 +17,7 @@ describe('Controller: StudentLoginCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(StudentLoginCtrl.awesomeThings.length).toBe(3);
-  });
+  // it('should attach a list of awesomeThings to the scope', function () {
+  //   expect(StudentLoginCtrl.awesomeThings.length).toBe(3);
+  // });
 });

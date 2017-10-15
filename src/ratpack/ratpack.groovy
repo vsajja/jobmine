@@ -69,7 +69,7 @@ ratpack {
         prefix('api/v1') {
             all {
                 response.headers.add('Access-Control-Allow-Origin', '*')
-                response.headers.add('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type')
+                response.headers.add('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type, Authorization')
                 response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
                 next()
             }
@@ -513,7 +513,6 @@ ratpack {
                             if (e instanceof InvalidCredentialsException) {
                                 clientError(401)
                             }
-                            throw e
                         }.then { Student student ->
                             render json(student)
                         }

@@ -8,12 +8,15 @@
  * Controller of the jobmineApp
  */
 angular.module('jobApp')
-  .controller('MainCtrl', ['$scope', 'Restangular', function ($scope, Restangular) {
+  .controller('MainCtrl', ['$scope', 'Restangular', 'authenticationservice', function ($scope, Restangular, authenticationservice) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    // reset login status
+    authenticationservice.ClearCredentials();
 
     var jobmine = Restangular.all('jobmine');
 
