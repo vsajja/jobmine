@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import {Http} from "@angular/http";
+import {Router} from "@angular/router";
 
 export interface Credentials {
   // Customize received credentials here
@@ -24,7 +26,7 @@ export class AuthenticationService {
 
   private _credentials: Credentials;
 
-  constructor() {
+  constructor(private http: Http, private router: Router) {
     this._credentials = JSON.parse(sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey));
   }
 
@@ -34,10 +36,17 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
+    const body = {username: context.username, password: context.password};
+    const req = this.http.post('/students/login', body)
+      .subscribe(
+        res => {
+        },
+        err => {
+          this.router.navigate(['/'], { replaceUrl: true });
+          throw err;
+        }
+      );
 
-    console.log('TODO: student login against ratpack server');
-
-    // Replace by proper authentication call
     const data = {
       username: context.username,
       token: '123456'

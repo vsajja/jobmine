@@ -40,11 +40,14 @@ export class LoginComponent implements OnInit {
         this.isLoading = false;
       })
       .subscribe(credentials => {
-        log.debug(`${credentials.username} successfully logged in`);
-        this.router.navigate(['/'], { replaceUrl: true });
+        if(credentials) {
+          log.debug(`${credentials.username} successfully logged in`);
+          this.router.navigate(['/'], { replaceUrl: true });
+        }
       }, error => {
         log.debug(`Login error: ${error}`);
         this.error = error;
+        return error;
       });
   }
 
