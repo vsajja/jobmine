@@ -13,6 +13,7 @@ export class AboutComponent implements OnInit {
 
   version: string = environment.version;
   username: string;
+  student: any;
 
   constructor(private jobService: JobService, private http: Http) { }
 

@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
+import { JobsModule } from "./jobs/jobs.module";
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { LoginModule } from './login/login.module';
     HomeModule,
     AboutModule,
     LoginModule,
+    JobsModule,
     AppRoutingModule
   ],
   declarations: [AppComponent],
