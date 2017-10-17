@@ -1,18 +1,28 @@
 <div class="container">
-  <form (ngSubmit)="search()">
-    <label class="sr-only" for="inlineFormInput">Name</label>
-    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="searchQuery"
-           placeholder="job title, keywords or company" ngModel>
+  <div class="row">
+    <div class="col-6">
+      <form>
+        <div class="form-group">
+          <label for="query">filter</label>
+          <input type="text" class="form-control" id="query" placeholder="job title, keywords or company name" required
+          (keyup)="updateFilter($event)">
+        </div>
 
-    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input type="text" class="form-control" id="location" placeholder="location" ngModel>
+        <!--<button (click)="search()" type="submit" class="btn btn-primary">Search</button>-->
+      </form>
     </div>
-
-    <button class="btn btn-primary">Search</button>
-  </form>
-</div>
-
-<div class="container">
+  </div>
   <hr/>
+  <div>
+    <ngx-datatable
+      class="material"
+      [rows]="jobs"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'">
+    </ngx-datatable>
+  </div>
 </div>
 
