@@ -93,9 +93,6 @@ public class Keys {
 	public static final ForeignKey<CompanyRecord, ImageRecord> COMPANY__COMPANY_IMAGE_IMAGE_ID_FK = ForeignKeys0.COMPANY__COMPANY_IMAGE_IMAGE_ID_FK;
 	public static final ForeignKey<CompanyRecord, JobMineRecord> COMPANY__COMPANY_JOB_MINE_JOB_MINE_ID_FK = ForeignKeys0.COMPANY__COMPANY_JOB_MINE_JOB_MINE_ID_FK;
 	public static final ForeignKey<DocumentRecord, JobAppPackageRecord> DOCUMENT__DOCUMENT_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK = ForeignKeys0.DOCUMENT__DOCUMENT_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK;
-	public static final ForeignKey<JobRecord, JobMineRecord> JOB__JOB_JOB_MINE_JOB_MINE_ID_FK = ForeignKeys0.JOB__JOB_JOB_MINE_JOB_MINE_ID_FK;
-	public static final ForeignKey<JobRecord, CompanyRecord> JOB__JOB_COMPANY_COMPANY_ID_FK = ForeignKeys0.JOB__JOB_COMPANY_COMPANY_ID_FK;
-	public static final ForeignKey<JobRecord, LocationRecord> JOB__JOB_LOCATION_LOCATION_ID_FK = ForeignKeys0.JOB__JOB_LOCATION_LOCATION_ID_FK;
 	public static final ForeignKey<JobAppRecord, JobRecord> JOB_APP__JOB_APP_JOB_JOB_ID_FK = ForeignKeys0.JOB_APP__JOB_APP_JOB_JOB_ID_FK;
 	public static final ForeignKey<JobAppRecord, JobAppPackageRecord> JOB_APP__JOB_APP_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK = ForeignKeys0.JOB_APP__JOB_APP_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK;
 	public static final ForeignKey<JobAppPackageRecord, StudentRecord> JOB_APP_PACKAGE__JOB_APP_PACKAGE_STUDENT_STUDENT_ID_FK = ForeignKeys0.JOB_APP_PACKAGE__JOB_APP_PACKAGE_STUDENT_STUDENT_ID_FK;
@@ -150,9 +147,6 @@ public class Keys {
 		public static final ForeignKey<CompanyRecord, ImageRecord> COMPANY__COMPANY_IMAGE_IMAGE_ID_FK = createForeignKey(jooq.generated.Keys.IMAGE_PKEY, Company.COMPANY, Company.COMPANY.IMAGE_ID);
 		public static final ForeignKey<CompanyRecord, JobMineRecord> COMPANY__COMPANY_JOB_MINE_JOB_MINE_ID_FK = createForeignKey(jooq.generated.Keys.JOB_MINE_PKEY, Company.COMPANY, Company.COMPANY.JOB_MINE_ID);
 		public static final ForeignKey<DocumentRecord, JobAppPackageRecord> DOCUMENT__DOCUMENT_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK = createForeignKey(jooq.generated.Keys.JOB_APP_PACKAGE_PKEY, Document.DOCUMENT, Document.DOCUMENT.JOB_APP_PACKAGE_ID);
-		public static final ForeignKey<JobRecord, JobMineRecord> JOB__JOB_JOB_MINE_JOB_MINE_ID_FK = createForeignKey(jooq.generated.Keys.JOB_MINE_PKEY, Job.JOB, Job.JOB.JOB_MINE_ID);
-		public static final ForeignKey<JobRecord, CompanyRecord> JOB__JOB_COMPANY_COMPANY_ID_FK = createForeignKey(jooq.generated.Keys.COMPANY_PKEY, Job.JOB, Job.JOB.COMPANY_ID);
-		public static final ForeignKey<JobRecord, LocationRecord> JOB__JOB_LOCATION_LOCATION_ID_FK = createForeignKey(jooq.generated.Keys.LOCATION_PKEY, Job.JOB, Job.JOB.LOCATION_ID);
 		public static final ForeignKey<JobAppRecord, JobRecord> JOB_APP__JOB_APP_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobApp.JOB_APP, JobApp.JOB_APP.JOB_ID);
 		public static final ForeignKey<JobAppRecord, JobAppPackageRecord> JOB_APP__JOB_APP_JOB_APP_PACKAGE_JOB_APP_PACKAGE_ID_FK = createForeignKey(jooq.generated.Keys.JOB_APP_PACKAGE_PKEY, JobApp.JOB_APP, JobApp.JOB_APP.JOB_APP_PACKAGE_ID);
 		public static final ForeignKey<JobAppPackageRecord, StudentRecord> JOB_APP_PACKAGE__JOB_APP_PACKAGE_STUDENT_STUDENT_ID_FK = createForeignKey(jooq.generated.Keys.STUDENT_PKEY, JobAppPackage.JOB_APP_PACKAGE, JobAppPackage.JOB_APP_PACKAGE.STUDENT_ID);

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {JobComponent} from "./job/job.component";
 
 const routes: Routes = [
-  // Fallback when no prior route is matched
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  // { path: 'jobs/:jobId', component: JobComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }   // Fallback when no prior route is matched
 ];
 
 @NgModule({

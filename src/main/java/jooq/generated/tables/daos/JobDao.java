@@ -94,37 +94,23 @@ public class JobDao extends DAOImpl<JobRecord, jooq.generated.tables.pojos.Job, 
 	}
 
 	/**
-	 * Fetch records that have <code>status IN (values)</code>
+	 * Fetch records that have <code>location IN (values)</code>
 	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByStatus(String... values) {
-		return fetch(Job.JOB.STATUS, values);
+	public List<jooq.generated.tables.pojos.Job> fetchByLocation(String... values) {
+		return fetch(Job.JOB.LOCATION, values);
 	}
 
 	/**
-	 * Fetch records that have <code>total_openings IN (values)</code>
+	 * Fetch records that have <code>company IN (values)</code>
 	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByTotalOpenings(Integer... values) {
-		return fetch(Job.JOB.TOTAL_OPENINGS, values);
+	public List<jooq.generated.tables.pojos.Job> fetchByCompany(String... values) {
+		return fetch(Job.JOB.COMPANY, values);
 	}
 
 	/**
-	 * Fetch records that have <code>job_mine_id IN (values)</code>
+	 * Fetch records that have <code>company_logo IN (values)</code>
 	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByJobMineId(Integer... values) {
-		return fetch(Job.JOB.JOB_MINE_ID, values);
-	}
-
-	/**
-	 * Fetch records that have <code>company_id IN (values)</code>
-	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByCompanyId(Integer... values) {
-		return fetch(Job.JOB.COMPANY_ID, values);
-	}
-
-	/**
-	 * Fetch records that have <code>location_id IN (values)</code>
-	 */
-	public List<jooq.generated.tables.pojos.Job> fetchByLocationId(Integer... values) {
-		return fetch(Job.JOB.LOCATION_ID, values);
+	public List<jooq.generated.tables.pojos.Job> fetchByCompanyLogo(String... values) {
+		return fetch(Job.JOB.COMPANY_LOGO, values);
 	}
 }

@@ -15,7 +15,6 @@ import jooq.generated.Public;
 import jooq.generated.tables.records.JobRecord;
 
 import org.jooq.Field;
-import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -36,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job extends TableImpl<JobRecord> {
 
-	private static final long serialVersionUID = 592428324;
+	private static final long serialVersionUID = -1020807279;
 
 	/**
 	 * The reference instance of <code>public.job</code>
@@ -77,29 +76,19 @@ public class Job extends TableImpl<JobRecord> {
 	public final TableField<JobRecord, String> TYPE = createField("type", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.status</code>.
+	 * The column <code>public.job.location</code>.
 	 */
-	public final TableField<JobRecord, String> STATUS = createField("status", org.jooq.impl.SQLDataType.VARCHAR, this, "");
+	public final TableField<JobRecord, String> LOCATION = createField("location", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.total_openings</code>.
+	 * The column <code>public.job.company</code>.
 	 */
-	public final TableField<JobRecord, Integer> TOTAL_OPENINGS = createField("total_openings", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<JobRecord, String> COMPANY = createField("company", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
-	 * The column <code>public.job.job_mine_id</code>.
+	 * The column <code>public.job.company_logo</code>.
 	 */
-	public final TableField<JobRecord, Integer> JOB_MINE_ID = createField("job_mine_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-	/**
-	 * The column <code>public.job.company_id</code>.
-	 */
-	public final TableField<JobRecord, Integer> COMPANY_ID = createField("company_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-	/**
-	 * The column <code>public.job.location_id</code>.
-	 */
-	public final TableField<JobRecord, Integer> LOCATION_ID = createField("location_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<JobRecord, String> COMPANY_LOGO = createField("company_logo", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
 	/**
 	 * Create a <code>public.job</code> table reference
@@ -145,14 +134,6 @@ public class Job extends TableImpl<JobRecord> {
 	@Override
 	public List<UniqueKey<JobRecord>> getKeys() {
 		return Arrays.<UniqueKey<JobRecord>>asList(Keys.JOB_PKEY);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<ForeignKey<JobRecord, ?>> getReferences() {
-		return Arrays.<ForeignKey<JobRecord, ?>>asList(Keys.JOB__JOB_JOB_MINE_JOB_MINE_ID_FK, Keys.JOB__JOB_COMPANY_COMPANY_ID_FK, Keys.JOB__JOB_LOCATION_LOCATION_ID_FK);
 	}
 
 	/**

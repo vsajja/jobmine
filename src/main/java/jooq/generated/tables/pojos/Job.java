@@ -23,18 +23,16 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Job implements Serializable {
 
-	private static final long serialVersionUID = -792110116;
+	private static final long serialVersionUID = 1914937234;
 
 	private final Long      jobId;
 	private final String    title;
 	private final String    description_9;
 	private final Timestamp createdTimestamp;
 	private final String    type;
-	private final String    status;
-	private final Integer   totalOpenings;
-	private final Integer   jobMineId;
-	private final Integer   companyId;
-	private final Integer   locationId;
+	private final String    location;
+	private final String    company;
+	private final String    companyLogo;
 
 	public Job(Job value) {
 		this.jobId = value.jobId;
@@ -42,11 +40,9 @@ public class Job implements Serializable {
 		this.description_9 = value.description_9;
 		this.createdTimestamp = value.createdTimestamp;
 		this.type = value.type;
-		this.status = value.status;
-		this.totalOpenings = value.totalOpenings;
-		this.jobMineId = value.jobMineId;
-		this.companyId = value.companyId;
-		this.locationId = value.locationId;
+		this.location = value.location;
+		this.company = value.company;
+		this.companyLogo = value.companyLogo;
 	}
 
 	public Job(
@@ -55,22 +51,18 @@ public class Job implements Serializable {
 		String    description_9,
 		Timestamp createdTimestamp,
 		String    type,
-		String    status,
-		Integer   totalOpenings,
-		Integer   jobMineId,
-		Integer   companyId,
-		Integer   locationId
+		String    location,
+		String    company,
+		String    companyLogo
 	) {
 		this.jobId = jobId;
 		this.title = title;
 		this.description_9 = description_9;
 		this.createdTimestamp = createdTimestamp;
 		this.type = type;
-		this.status = status;
-		this.totalOpenings = totalOpenings;
-		this.jobMineId = jobMineId;
-		this.companyId = companyId;
-		this.locationId = locationId;
+		this.location = location;
+		this.company = company;
+		this.companyLogo = companyLogo;
 	}
 
 	public Long getJobId() {
@@ -93,24 +85,16 @@ public class Job implements Serializable {
 		return this.type;
 	}
 
-	public String getStatus() {
-		return this.status;
+	public String getLocation() {
+		return this.location;
 	}
 
-	public Integer getTotalOpenings() {
-		return this.totalOpenings;
+	public String getCompany() {
+		return this.company;
 	}
 
-	public Integer getJobMineId() {
-		return this.jobMineId;
-	}
-
-	public Integer getCompanyId() {
-		return this.companyId;
-	}
-
-	public Integer getLocationId() {
-		return this.locationId;
+	public String getCompanyLogo() {
+		return this.companyLogo;
 	}
 
 	@Override
@@ -152,35 +136,23 @@ public class Job implements Serializable {
 		}
 		else if (!type.equals(other.type))
 			return false;
-		if (status == null) {
-			if (other.status != null)
+		if (location == null) {
+			if (other.location != null)
 				return false;
 		}
-		else if (!status.equals(other.status))
+		else if (!location.equals(other.location))
 			return false;
-		if (totalOpenings == null) {
-			if (other.totalOpenings != null)
+		if (company == null) {
+			if (other.company != null)
 				return false;
 		}
-		else if (!totalOpenings.equals(other.totalOpenings))
+		else if (!company.equals(other.company))
 			return false;
-		if (jobMineId == null) {
-			if (other.jobMineId != null)
+		if (companyLogo == null) {
+			if (other.companyLogo != null)
 				return false;
 		}
-		else if (!jobMineId.equals(other.jobMineId))
-			return false;
-		if (companyId == null) {
-			if (other.companyId != null)
-				return false;
-		}
-		else if (!companyId.equals(other.companyId))
-			return false;
-		if (locationId == null) {
-			if (other.locationId != null)
-				return false;
-		}
-		else if (!locationId.equals(other.locationId))
+		else if (!companyLogo.equals(other.companyLogo))
 			return false;
 		return true;
 	}
@@ -194,11 +166,9 @@ public class Job implements Serializable {
 		result = prime * result + ((description_9 == null) ? 0 : description_9.hashCode());
 		result = prime * result + ((createdTimestamp == null) ? 0 : createdTimestamp.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((totalOpenings == null) ? 0 : totalOpenings.hashCode());
-		result = prime * result + ((jobMineId == null) ? 0 : jobMineId.hashCode());
-		result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
-		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((companyLogo == null) ? 0 : companyLogo.hashCode());
 		return result;
 	}
 
@@ -211,11 +181,9 @@ public class Job implements Serializable {
 		sb.append(", ").append(description_9);
 		sb.append(", ").append(createdTimestamp);
 		sb.append(", ").append(type);
-		sb.append(", ").append(status);
-		sb.append(", ").append(totalOpenings);
-		sb.append(", ").append(jobMineId);
-		sb.append(", ").append(companyId);
-		sb.append(", ").append(locationId);
+		sb.append(", ").append(location);
+		sb.append(", ").append(company);
+		sb.append(", ").append(companyLogo);
 
 		sb.append(")");
 		return sb.toString();
