@@ -27,7 +27,11 @@
     "@angular/router": "^4.2.6",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "@ngx-translate/core": "^8.0.0",
+<<<<<<< HEAD
     "@swimlane/ngx-datatable": "^10.2.3",
+=======
+    "@swimlane/ngx-datatable": "^10.3.0",
+>>>>>>> 862808cfdb7cb5358f9da9052883b5e9f414a055
     "bootstrap": "4.0.0-beta",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
