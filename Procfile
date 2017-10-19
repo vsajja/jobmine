@@ -1,3 +1,3 @@
-web: build/install/jobmine/bin/jobmine
+web: build/install/job/bin/job
 
 
