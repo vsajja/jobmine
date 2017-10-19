@@ -1,5 +1,4 @@
 <div class="container">
-<<<<<<< HEAD
   <hr/>
 
   <!--<div>-->
@@ -39,34 +38,6 @@
 
         <ngx-datatable-column name="company"></ngx-datatable-column>
         <ngx-datatable-column name="location"></ngx-datatable-column>
-=======
-  <div class="row">
-    <div class="col-6">
-      <form>
-        <div class="form-group">
-          <label for="query">filter</label>
-          <input type="text" class="form-control" id="query" placeholder="job title, keywords or company name" required
-          (keyup)="updateFilter($event)">
-        </div>
-
-        <!--<button (click)="search()" type="submit" class="btn btn-primary">Search</button>-->
-      </form>
-    </div>
-  </div>
-  <hr/>
-  <div>
-    <ngx-datatable
-      class="material"
-      [rows]="jobs"
-      [columns]="columns"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'">
-    </ngx-datatable>
-  </div>
-</div>
->>>>>>> 862808cfdb7cb5358f9da9052883b5e9f414a055
 
         <ngx-datatable-column name="createdTimestamp">
           <ng-template let-value="value" ngx-datatable-cell-template>

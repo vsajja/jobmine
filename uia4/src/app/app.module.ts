@@ -14,7 +14,6 @@ import {HomeModule} from './home/home.module';
 import {AboutModule} from './about/about.module';
 import {LoginModule} from './login/login.module';
 import {JobsModule} from "./jobs/jobs.module";
-import {NgProgressModule} from "ngx-progressbar";
 import {JobComponent} from './job/job.component';
 import {JobModule} from "./job/job.module";
 
@@ -32,7 +31,6 @@ import {JobModule} from "./job/job.module";
     LoginModule,
     JobsModule,
     JobModule,
-    NgProgressModule,
     AppRoutingModule
   ],
   declarations: [AppComponent, JobComponent],

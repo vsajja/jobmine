@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Http} from "@angular/http";
-import {NgProgressService} from 'ngx-progressbar';
 
 @Component({
   selector: 'app-job',
@@ -13,7 +12,7 @@ export class JobComponent implements OnInit {
   jobId : string;
   job: any;
 
-  constructor(private route: ActivatedRoute, private http: Http, private progressService: NgProgressService) {
+  constructor(private route: ActivatedRoute, private http: Http) {
     this.route.params.subscribe( params => console.log(params) );
   }
 
@@ -25,11 +24,11 @@ export class JobComponent implements OnInit {
     this.route.params.subscribe( params => {
         this.jobId = params.jobId;
 
-        this.progressService.start();
+        // this.progressService.start();
         this.http.get('/jobs/' + this.jobId).subscribe(res => {
           var job = res.json();
           this.job = job;
-          this.progressService.done();
+          // this.progressService.done();
         });
       });
   }
