@@ -1,4 +1,5 @@
 import com.zaxxer.hikari.HikariConfig
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import jooq.generated.tables.pojos.Company
 import jooq.generated.tables.pojos.Document
@@ -709,6 +710,42 @@ ratpack {
                         }
                         render totalResults.toString()
                     }
+                }
+
+                get('jobs2') {
+                    DataSource dataSource = registry.get(DataSource.class)
+                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+                    HttpClient httpClient = registry.get(HttpClient.class)
+
+                    String uriStr = 'https://jobs.github.com/positions.json'
+
+                    httpClient.get(new URI(uriStr)).then { response ->
+                        def root = new JsonSlurper().parseText(response.body.text)
+
+                        root.each { job ->
+                            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+
+                            def title = job.title.toString()
+                            def createdAt = job.created_at.toString()
+                            def company = job.company.toString()
+                            def companyLogo = job.company_logo.toString()
+                            def description = job.description.toString()
+                            def location = job.location.toString()
+
+                            log.info("Inserting: ${job.title.toString()} @ ${job.company.toString()}")
+                            create.insertInto(JOB)
+                                    .set(JOB.TITLE, title)
+                                    .set(JOB.COMPANY, company)
+                                    .set(JOB.DESCRIPTION_9, description)
+                                    .set(JOB.LOCATION, location)
+                                    .set(JOB.COMPANY_LOGO, companyLogo)
+                                    .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(new Date().getTime()))
+                                    .execute()
+                        }
+                    }
+
+                    render 'test/data/jobs2'
                 }
 //                get('students') {
 //                    def studentFile = new File('src/ratpack/data/students_generated_200.txt')

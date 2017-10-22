@@ -10,7 +10,13 @@ import {Http} from "@angular/http";
 export class JobComponent implements OnInit {
 
   jobId : string;
-  job: any;
+  job : any;
+
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  companyLogo: string;
 
   constructor(private route: ActivatedRoute, private http: Http) {
     this.route.params.subscribe( params => console.log(params) );
@@ -29,6 +35,12 @@ export class JobComponent implements OnInit {
           var job = res.json();
           this.job = job;
           // this.progressService.done();
+
+          this.title = this.job.title;
+          this.company = this.job.company;
+          this.location = this.job.location;
+          this.description = this.job.description_9;
+          this.companyLogo = this.job.companyLogo;
         });
       });
   }

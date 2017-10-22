@@ -1,49 +1,44 @@
+<ng-progress [positionUsing]="'marginLeft'"
+             [minimum]="0.15"
+             [maximum]="1"
+             [speed]="200"
+             [showSpinner]="true"
+             [direction]="'leftToRightIncreased'"
+             [color]="'blue'"
+             [trickleSpeed]="250"
+             [thick]="true"
+             [ease]="'linear'">
+</ng-progress>
+
 <div class="container">
-  <hr/>
+  <input type="text" class="form-control" id="query" placeholder="job title, keywords or company name" required
+         (keyup)="updateFilter($event)">
 
-  <!--<div>-->
-    <input
-      type='text'
-      style='padding:8px;margin:15px auto;width:30%;'
-      placeholder='job title, keywords or company name...'
-      (keyup)='updateFilter($event)'
-    />
-  <!--</div>-->
-  <div class="text-center">
-      <ngx-datatable
-        class="material"
-        [rows]="rows"
-        [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [limit]="10"
-        [rowHeight]="'auto'">
-        <!--<ngx-datatable-column name="companyLogo">-->
-        <!--<ng-template let-value="value" ngx-datatable-cell-template>-->
-        <!--<img height="50%" width="50%" src="{{value}}" />-->
-        <!--</ng-template>-->
-        <!--</ngx-datatable-column>-->
+  <ngx-datatable
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'">
 
-        <ngx-datatable-column prop="jobId">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <a href="jobs/{{value}}">{{value}}</a>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="title">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="company"></ngx-datatable-column>
-        <ngx-datatable-column name="location"></ngx-datatable-column>
-
-        <ngx-datatable-column name="createdTimestamp">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <span>{{value | timeAgo}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </div>
+    <ngx-datatable-column style="padding: 5px">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div class="card">
+          <!--<div class="card-block">-->
+          <!--<div class="card-text">-->
+          <!--<img height="15%" width="15%" class="card-img-top" src="{{row.companyLogo}}"-->
+          <!--onerror="this.src='assets/default-company-logo.jpg';">-->
+          <!--</div>-->
+          <!--</div>-->
+          <div><strong>
+            <a href="jobs/{{row.jobId}}">{{row.title}}</a></strong>
+            <button style="float: right; border: none; color: red"><i class="fa fa-heart fa-2x"></i></button>
+          </div>
+          <div><strong>{{row.company}}</strong></div>
+          <div><strong>{{row.location}}</strong></div>
+        </div>
+        <br/>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>

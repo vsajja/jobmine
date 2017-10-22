@@ -140,4 +140,18 @@ public class StudentSpec extends JobSpec {
         then:
         response.statusCode == HttpResponseStatus.OK.code()
     }
+
+    /**
+     * A student or alumni logs into the job app and lands at the home page.
+     *
+     * Home page:
+     * - search for jobs
+     * - job shortlist
+     * - interviews
+     * - offers
+     *
+     *
+     * Profile page:
+     *
+     */
 }

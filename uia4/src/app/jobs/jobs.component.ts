@@ -1,19 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-// import { NgForm } from '@angular/forms';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Http, Response} from '@angular/http';
-import {DatatableComponent} from "@swimlane/ngx-datatable";
-
-export class Page {
-  //The number of elements in the page
-  size: number = 0;
-  //The total number of elements
-  totalElements: number = 0;
-  //The total number of pages
-  totalPages: number = 0;
-  //The current page number
-  pageNumber: number = 0;
-}
+import {NgProgressService} from "ngx-progressbar";
 
 @Component({
   selector: 'app-jobs',
@@ -21,22 +8,14 @@ export class Page {
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-
   rows: any;
   temp: any;
 
-  page = new Page();
-  cache: any = {};
-
-  @ViewChild(DatatableComponent) table: DatatableComponent;
-
-  constructor(private http: Http) {
-    this.page.pageNumber = 0;
-    this.page.size = 20;
+  constructor(private http: Http, private progressService: NgProgressService) {
+    this.getJobs();
   }
 
   ngOnInit() {
-    this.getJobs();
   }
 
   search() {
@@ -44,11 +23,13 @@ export class JobsComponent implements OnInit {
   }
 
   getJobs() {
+    this.progressService.start();
     this.http.get('/jobs').subscribe(res => {
       var jobs = res.json();
 
       this.rows = jobs;
       this.temp = this.rows;
+      this.progressService.done();
     });
   }
 
@@ -64,6 +45,6 @@ export class JobsComponent implements OnInit {
     });
 
     this.rows = temp;
-    this.table.offset = 0;
+    // this.table.offset = 0;
   }
 }

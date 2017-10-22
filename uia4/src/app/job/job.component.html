@@ -1,12 +1,16 @@
 <div class="container">
-  <hr/>
-
-  <div>{{job.title}}</div>
-  <div>{{job.company}}</div>
-  <div>{{job.location}}</div>
-
-  <br>
-
-  <div ><h4><strong>Description</strong></h4></div>
-  <p class="card-text jumbotron" [innerHtml]="job.description_9"></p>
+  <div class="row">
+    <div class="col-sm-2">
+      <img height="100px" width="100px" src="{{value}}" onerror="this.src='assets/default-company-logo.jpg';">
+    </div>
+    <div class="col-sm-4">
+      <div>{{title}}</div>
+      <div>{{company}}</div>
+      <div>{{location}}</div>
+    </div>
+    <div class="col-sm-6">
+      <div><strong>Description</strong></div>
+      <div [innerHTML]="description"></div>
+    </div>
+  </div>
 </div>
