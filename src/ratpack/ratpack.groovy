@@ -729,6 +729,86 @@ ratpack {
                         render totalResults.toString()
                     }
                 }
+                get('jobs/alberta') {
+                    DataSource dataSource = registry.get(DataSource.class)
+                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+                    HttpClient httpClient = registry.get(HttpClient.class)
+
+                    String uriStr = 'http://api.indeed.com/ads/apisearch' +
+                            '?publisher=6453215428478291' +
+                            '&v=2' +
+                            '&format=json' +
+                            '&limit=25' +
+                            '&q=software' +
+                            '&l=alberta' +
+                            '&co=ca' +
+                            '&limit=1'
+
+                    httpClient.get(new URI(uriStr)).then {
+                        def root = new JsonSlurper().parseText(it.body.text)
+
+                        // get total results
+                        int totalResults = root.totalResults
+
+                        log.info(totalResults.toString())
+
+                        uriStr += "&start=%s"
+
+                        1.step(totalResults, 25) { step ->
+                            uri = new URI(String.format(uriStr, step.toString()))
+
+                            httpClient.get(uri).then { response ->
+                                root = new JsonSlurper().parseText(response.body.text)
+                                root.results.each {
+//                                    if (!it.expired) {
+                                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+
+                                    String title = it.jobtitle.toString()
+                                    String company = it.company.toString()
+                                    String companyUrl = it.url.toString()
+                                    String location = it.formattedLocation.toString()
+                                    String date = it.date.toString()
+
+                                    httpClient.get(new URI(companyUrl)).then {
+                                        def jobDetail = new XmlParser(new Parser()).parseText(it.body.text)
+
+                                        String description = null
+                                        String companyLogo = null
+
+                                        jobDetail.'**'.findAll {
+                                            if (it.toString().contains('job_summary')) {
+                                                description = it.text()
+                                            }
+                                        }
+
+                                        it.body.text.eachLine {
+                                            if (it.contains('img') && it.contains('"cmp_logo_img"')) {
+                                                def logoUrl = it.replaceAll('<img src="', '')
+                                                companyLogo = logoUrl.substring(0, logoUrl.indexOf('"'))
+                                            }
+                                        }
+
+                                        if(!companyLogo) {
+                                            return
+                                        }
+
+                                        log.info("Inserting: ${title} @ ${company}")
+                                        create.insertInto(JOB)
+                                                .set(JOB.TITLE, (String) title)
+                                                .set(JOB.COMPANY, (String) company)
+                                                .set(JOB.COMPANY_LOGO, (String) companyLogo)
+                                                .set(JOB.LOCATION, (String) location)
+                                                .set(JOB.DESCRIPTION_9, (String) description)
+                                                .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z").parse(date).getTime()))
+                                                .execute()
+                                    }
+                                }
+                            }
+                        }
+                        render totalResults.toString()
+                    }
+                }
 
                 get('logo') {
                     DataSource dataSource = registry.get(DataSource.class)
