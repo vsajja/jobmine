@@ -79,28 +79,13 @@ ratpack {
 
             path('jobs') {
                 byMethod {
-//                    get {
-//                        DataSource dataSource = registry.get(DataSource.class)
-//                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-//                        List<Job> jobs = context.selectFrom(JOB)
-//                                .fetch()
-//                                .into(Job.class)
-//                        render json(jobs)
-//                    }
                     get {
-                        parse(jsonNode()).map { params ->
-                            log.info(params.toString())
-                            def searchTerm = params.get('searchTerm').textValue()
-                            def location = params.get('location').textValue()
-
-                            assert searchTerm
-                            assert location
-
-                            println searchTerm
-                            println location
-                        }.then {
-                            response.send()
-                        }
+                        DataSource dataSource = registry.get(DataSource.class)
+                        DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
+                        List<Job> jobs = context.selectFrom(JOB)
+                                .fetch()
+                                .into(Job.class)
+                        render json(jobs)
                     }
                 }
             }
