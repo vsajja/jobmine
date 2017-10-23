@@ -1,6 +1,7 @@
 import com.zaxxer.hikari.HikariConfig
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
+import jooq.generated.tables.daos.JobDao
 import jooq.generated.tables.pojos.Company
 import jooq.generated.tables.pojos.Document
 import jooq.generated.tables.pojos.Job
@@ -12,6 +13,7 @@ import jooq.generated.tables.pojos.JobOffer
 import jooq.generated.tables.pojos.School
 import jooq.generated.tables.pojos.Student
 import jooq.generated.tables.records.JobMineRecord
+import org.ccil.cowan.tagsoup.Parser
 import org.job.JobService
 import org.job.exceptions.InvalidCredentialsException
 import org.jooq.DSLContext
@@ -75,24 +77,6 @@ ratpack {
                 next()
             }
 
-            path('jokes/random') {
-                byMethod {
-                    get {
-                        HttpClient httpClient = registry.get(HttpClient.class)
-
-                        String uriStr = 'http://api.chucknorris.io/jokes/random'
-
-                        String randomJoke
-
-                        httpClient.get(new URI(uriStr)).then {
-                            render it.body.text
-//                            render new JsonSlurper().parseText(it.body.text).value.toString()
-                        }
-                    }
-                }
-            }
-
-
             path('jobs') {
                 byMethod {
                     get {
@@ -117,6 +101,24 @@ ratpack {
                                 .fetchOne()
                                 .into(Job.class)
                         render json(job)
+                    }
+                }
+            }
+
+            path('jobs/:jobId/shortlist') {
+                def jobId = pathTokens['jobId']
+                byMethod {
+                    post {
+                        parse(jsonNode()).map { params ->
+                            log.info(params.toString())
+                            def username = params.get('username').textValue()
+
+                            assert username
+
+//                            jobService.shortlist(username, jobId)
+                        }.then {
+                            response.send()
+                        }
                     }
                 }
             }
@@ -659,8 +661,9 @@ ratpack {
                             '&format=json' +
                             '&limit=25' +
                             '&q=software' +
-                            '&l=ab' +
-                            '&co=ca'
+                            '&l=ontario' +
+                            '&co=ca' +
+                            '&limit=1'
 
                     httpClient.get(new URI(uriStr)).then {
                         def root = new JsonSlurper().parseText(it.body.text)
@@ -675,41 +678,77 @@ ratpack {
                         1.step(totalResults, 25) { step ->
                             uri = new URI(String.format(uriStr, step.toString()))
 
-
                             httpClient.get(uri).then { response ->
                                 root = new JsonSlurper().parseText(response.body.text)
                                 root.results.each {
 //                                    if (!it.expired) {
-                                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
+                                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z");
 
-                                        assert it.jobtitle.toString()
-                                        assert it.url.toString()
-                                        assert it.company.toString()
-                                        assert it.snippet.toString()
-                                        assert it.date.toString()
-                                        assert it.formattedLocation.toString()
+                                    String title = it.jobtitle.toString()
+                                    String company = it.company.toString()
+                                    String companyUrl = it.url.toString()
+                                    String location = it.formattedLocation.toString()
+                                    String date = it.date.toString()
 
-                                        def title = it.jobtitle.toString()
-                                        def company = it.company.toString()
-                                        def companyUrl = it.url.toString()
-                                        def description = it.snippet.toString()
-                                        def location = it.formattedLocation.toString()
+                                    httpClient.get(new URI(companyUrl)).then {
+                                        def jobDetail = new XmlParser(new Parser()).parseText(it.body.text)
 
-                                        log.info("Inserting: ${it.jobtitle.toString()} @ ${it.company.toString()}")
+                                        String description = null
+                                        String companyLogo = null
+
+                                        jobDetail.'**'.findAll {
+                                            if (it.toString().contains('job_summary')) {
+                                                description = it.text()
+                                            }
+                                        }
+
+                                        it.body.text.eachLine {
+                                            if (it.contains('img') && it.contains('"cmp_logo_img"')) {
+                                                def logoUrl = it.replaceAll('<img src="', '')
+                                                companyLogo = logoUrl.substring(0, logoUrl.indexOf('"'))
+                                            }
+                                        }
+
+                                        if(!companyLogo) {
+                                            return
+                                        }
+
+                                        log.info("Inserting: ${title} @ ${company}")
                                         create.insertInto(JOB)
-                                                .set(JOB.TITLE, title)
-                                                .set(JOB.COMPANY, company)
-                                                .set(JOB.DESCRIPTION_9, description)
-                                                .set(JOB.LOCATION, location)
-//                                                .set(JOB.TYPE, 'Full-Time')
-                                                .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(formatter.parse(it.date.toString()).getTime()))
-                                                .execute()
-//                                    }
+                                            .set(JOB.TITLE, (String) title)
+                                            .set(JOB.COMPANY, (String) company)
+                                            .set(JOB.COMPANY_LOGO, (String) companyLogo)
+                                            .set(JOB.LOCATION, (String) location)
+                                            .set(JOB.DESCRIPTION_9, (String) description)
+                                            .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z").parse(date).getTime()))
+                                            .execute()
+                                    }
                                 }
                             }
                         }
                         render totalResults.toString()
                     }
+                }
+
+                get('logo') {
+                    DataSource dataSource = registry.get(DataSource.class)
+                    DSLContext create = DSL.using(dataSource, SQLDialect.POSTGRES);
+
+                    HttpClient httpClient = registry.get(HttpClient.class)
+
+                    def companyUrl = "http://www.indeed.com/viewjob?jk=0f36671d375fcbc2&qd=QFQrwyJRmOyr4jxWeg5rqpRRCnSmD_Xxod2yIs1BKVIRdIPXjia8Il1dvSZwyXqeL7zHmKmsNqZ2r1qVSJlEB3ic-wgE3VA26S12tYHkCEQ&indpubnum=6453215428478291&atk=1bt4o42bcah0qev1"
+                    httpClient.get(new URI(companyUrl)).then {
+                        def jobDetail = new XmlParser(new Parser()).parseText(it.body.text)
+
+                        it.body.text.eachLine {
+                            if(it.contains('img') && it.contains('"cmp_logo_img"')) {
+                                def logoUrl = it.replaceAll('<img src="', '')
+                                println logoUrl.substring(0, logoUrl.indexOf('"'))
+                            }
+                        }
+                    }
+
+                    render 'test'
                 }
 
                 get('jobs2') {

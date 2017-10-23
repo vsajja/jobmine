@@ -15,6 +15,7 @@ import jooq.generated.tables.JobAppPackage;
 import jooq.generated.tables.JobInterview;
 import jooq.generated.tables.JobMine;
 import jooq.generated.tables.JobOffer;
+import jooq.generated.tables.JobShortlist;
 import jooq.generated.tables.Location;
 import jooq.generated.tables.School;
 import jooq.generated.tables.Student;
@@ -27,6 +28,7 @@ import jooq.generated.tables.records.JobInterviewRecord;
 import jooq.generated.tables.records.JobMineRecord;
 import jooq.generated.tables.records.JobOfferRecord;
 import jooq.generated.tables.records.JobRecord;
+import jooq.generated.tables.records.JobShortlistRecord;
 import jooq.generated.tables.records.LocationRecord;
 import jooq.generated.tables.records.SchoolRecord;
 import jooq.generated.tables.records.StudentRecord;
@@ -64,6 +66,7 @@ public class Keys {
 	public static final Identity<JobInterviewRecord, Long> IDENTITY_JOB_INTERVIEW = Identities0.IDENTITY_JOB_INTERVIEW;
 	public static final Identity<JobMineRecord, Long> IDENTITY_JOB_MINE = Identities0.IDENTITY_JOB_MINE;
 	public static final Identity<JobOfferRecord, Long> IDENTITY_JOB_OFFER = Identities0.IDENTITY_JOB_OFFER;
+	public static final Identity<JobShortlistRecord, Integer> IDENTITY_JOB_SHORTLIST = Identities0.IDENTITY_JOB_SHORTLIST;
 	public static final Identity<LocationRecord, Long> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
 	public static final Identity<SchoolRecord, Long> IDENTITY_SCHOOL = Identities0.IDENTITY_SCHOOL;
 	public static final Identity<StudentRecord, Long> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
@@ -81,6 +84,7 @@ public class Keys {
 	public static final UniqueKey<JobInterviewRecord> JOB_INTERVIEW_PKEY = UniqueKeys0.JOB_INTERVIEW_PKEY;
 	public static final UniqueKey<JobMineRecord> JOB_MINE_PKEY = UniqueKeys0.JOB_MINE_PKEY;
 	public static final UniqueKey<JobOfferRecord> JOB_OFFER_PKEY = UniqueKeys0.JOB_OFFER_PKEY;
+	public static final UniqueKey<JobShortlistRecord> JOB_SHORTLIST_PKEY = UniqueKeys0.JOB_SHORTLIST_PKEY;
 	public static final UniqueKey<LocationRecord> LOCATION_PKEY = UniqueKeys0.LOCATION_PKEY;
 	public static final UniqueKey<SchoolRecord> SCHOOL_PKEY = UniqueKeys0.SCHOOL_PKEY;
 	public static final UniqueKey<StudentRecord> STUDENT_PKEY = UniqueKeys0.STUDENT_PKEY;
@@ -101,6 +105,8 @@ public class Keys {
 	public static final ForeignKey<JobInterviewRecord, LocationRecord> JOB_INTERVIEW__JOB_INTERVIEW_LOCATION_LOCATION_ID_FK = ForeignKeys0.JOB_INTERVIEW__JOB_INTERVIEW_LOCATION_LOCATION_ID_FK;
 	public static final ForeignKey<JobOfferRecord, JobRecord> JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK = ForeignKeys0.JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK;
 	public static final ForeignKey<JobOfferRecord, StudentRecord> JOB_OFFER__JOB_OFFER_STUDENT_STUDENT_ID_FK = ForeignKeys0.JOB_OFFER__JOB_OFFER_STUDENT_STUDENT_ID_FK;
+	public static final ForeignKey<JobShortlistRecord, JobRecord> JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK = ForeignKeys0.JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK;
+	public static final ForeignKey<JobShortlistRecord, StudentRecord> JOB_SHORTLIST__JOB_SHORTLIST_STUDENT_STUDENT_ID_FK = ForeignKeys0.JOB_SHORTLIST__JOB_SHORTLIST_STUDENT_STUDENT_ID_FK;
 	public static final ForeignKey<SchoolRecord, LocationRecord> SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK = ForeignKeys0.SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK;
 	public static final ForeignKey<SchoolRecord, ImageRecord> SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK = ForeignKeys0.SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK;
 	public static final ForeignKey<SchoolRecord, JobMineRecord> SCHOOL__SCHOOL_JOB_MINE_JOB_MINE_ID_FK = ForeignKeys0.SCHOOL__SCHOOL_JOB_MINE_JOB_MINE_ID_FK;
@@ -122,6 +128,7 @@ public class Keys {
 		public static Identity<JobInterviewRecord, Long> IDENTITY_JOB_INTERVIEW = createIdentity(JobInterview.JOB_INTERVIEW, JobInterview.JOB_INTERVIEW.JOB_INTERVIEW_ID);
 		public static Identity<JobMineRecord, Long> IDENTITY_JOB_MINE = createIdentity(JobMine.JOB_MINE, JobMine.JOB_MINE.JOB_MINE_ID);
 		public static Identity<JobOfferRecord, Long> IDENTITY_JOB_OFFER = createIdentity(JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_OFFER_ID);
+		public static Identity<JobShortlistRecord, Integer> IDENTITY_JOB_SHORTLIST = createIdentity(JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_SHORTLIST_ID);
 		public static Identity<LocationRecord, Long> IDENTITY_LOCATION = createIdentity(Location.LOCATION, Location.LOCATION.LOCATION_ID);
 		public static Identity<SchoolRecord, Long> IDENTITY_SCHOOL = createIdentity(School.SCHOOL, School.SCHOOL.SCHOOL_ID);
 		public static Identity<StudentRecord, Long> IDENTITY_STUDENT = createIdentity(Student.STUDENT, Student.STUDENT.STUDENT_ID);
@@ -137,6 +144,7 @@ public class Keys {
 		public static final UniqueKey<JobInterviewRecord> JOB_INTERVIEW_PKEY = createUniqueKey(JobInterview.JOB_INTERVIEW, JobInterview.JOB_INTERVIEW.JOB_INTERVIEW_ID);
 		public static final UniqueKey<JobMineRecord> JOB_MINE_PKEY = createUniqueKey(JobMine.JOB_MINE, JobMine.JOB_MINE.JOB_MINE_ID);
 		public static final UniqueKey<JobOfferRecord> JOB_OFFER_PKEY = createUniqueKey(JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_OFFER_ID);
+		public static final UniqueKey<JobShortlistRecord> JOB_SHORTLIST_PKEY = createUniqueKey(JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_SHORTLIST_ID);
 		public static final UniqueKey<LocationRecord> LOCATION_PKEY = createUniqueKey(Location.LOCATION, Location.LOCATION.LOCATION_ID);
 		public static final UniqueKey<SchoolRecord> SCHOOL_PKEY = createUniqueKey(School.SCHOOL, School.SCHOOL.SCHOOL_ID);
 		public static final UniqueKey<StudentRecord> STUDENT_PKEY = createUniqueKey(Student.STUDENT, Student.STUDENT.STUDENT_ID);
@@ -155,6 +163,8 @@ public class Keys {
 		public static final ForeignKey<JobInterviewRecord, LocationRecord> JOB_INTERVIEW__JOB_INTERVIEW_LOCATION_LOCATION_ID_FK = createForeignKey(jooq.generated.Keys.LOCATION_PKEY, JobInterview.JOB_INTERVIEW, JobInterview.JOB_INTERVIEW.LOCATION_ID);
 		public static final ForeignKey<JobOfferRecord, JobRecord> JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_ID);
 		public static final ForeignKey<JobOfferRecord, StudentRecord> JOB_OFFER__JOB_OFFER_STUDENT_STUDENT_ID_FK = createForeignKey(jooq.generated.Keys.STUDENT_PKEY, JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.STUDENT_ID);
+		public static final ForeignKey<JobShortlistRecord, JobRecord> JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_ID);
+		public static final ForeignKey<JobShortlistRecord, StudentRecord> JOB_SHORTLIST__JOB_SHORTLIST_STUDENT_STUDENT_ID_FK = createForeignKey(jooq.generated.Keys.STUDENT_PKEY, JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.STUDENT_ID);
 		public static final ForeignKey<SchoolRecord, LocationRecord> SCHOOL__SCHOOL_LOCATION_LOCATION_ID_FK = createForeignKey(jooq.generated.Keys.LOCATION_PKEY, School.SCHOOL, School.SCHOOL.LOCATION_ID);
 		public static final ForeignKey<SchoolRecord, ImageRecord> SCHOOL__SCHOOL_IMAGE_IMAGE_ID_FK = createForeignKey(jooq.generated.Keys.IMAGE_PKEY, School.SCHOOL, School.SCHOOL.IMAGE_ID);
 		public static final ForeignKey<SchoolRecord, JobMineRecord> SCHOOL__SCHOOL_JOB_MINE_JOB_MINE_ID_FK = createForeignKey(jooq.generated.Keys.JOB_MINE_PKEY, School.SCHOOL, School.SCHOOL.JOB_MINE_ID);

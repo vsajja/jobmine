@@ -69,6 +69,11 @@ public class Sequences {
 	public static final Sequence<Long> JOB_OFFER_JOB_OFFER_ID_SEQ = new SequenceImpl<Long>("job_offer_job_offer_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 
 	/**
+	 * The sequence <code>public.job_shortlist_job_shortlist_id_seq</code>
+	 */
+	public static final Sequence<Long> JOB_SHORTLIST_JOB_SHORTLIST_ID_SEQ = new SequenceImpl<Long>("job_shortlist_job_shortlist_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+
+	/**
 	 * The sequence <code>public.location_location_id_seq</code>
 	 */
 	public static final Sequence<Long> LOCATION_LOCATION_ID_SEQ = new SequenceImpl<Long>("location_location_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));

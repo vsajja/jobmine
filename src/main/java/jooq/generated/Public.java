@@ -19,6 +19,7 @@ import jooq.generated.tables.JobAppPackage;
 import jooq.generated.tables.JobInterview;
 import jooq.generated.tables.JobMine;
 import jooq.generated.tables.JobOffer;
+import jooq.generated.tables.JobShortlist;
 import jooq.generated.tables.Location;
 import jooq.generated.tables.School;
 import jooq.generated.tables.Student;
@@ -41,7 +42,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -388742282;
+	private static final long serialVersionUID = -1997138694;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -73,6 +74,7 @@ public class Public extends SchemaImpl {
 			Sequences.JOB_JOB_ID_SEQ,
 			Sequences.JOB_MINE_JOB_MINE_ID_SEQ,
 			Sequences.JOB_OFFER_JOB_OFFER_ID_SEQ,
+			Sequences.JOB_SHORTLIST_JOB_SHORTLIST_ID_SEQ,
 			Sequences.LOCATION_LOCATION_ID_SEQ,
 			Sequences.SCHOOL_SCHOOL_ID_SEQ,
 			Sequences.STUDENT_STUDENT_ID_SEQ);
@@ -96,6 +98,7 @@ public class Public extends SchemaImpl {
 			JobInterview.JOB_INTERVIEW,
 			JobMine.JOB_MINE,
 			JobOffer.JOB_OFFER,
+			JobShortlist.JOB_SHORTLIST,
 			Location.LOCATION,
 			School.SCHOOL,
 			Student.STUDENT);

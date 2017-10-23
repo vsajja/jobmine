@@ -141,17 +141,19 @@ public class StudentSpec extends JobSpec {
         response.statusCode == HttpResponseStatus.OK.code()
     }
 
-    /**
-     * A student or alumni logs into the job app and lands at the home page.
-     *
-     * Home page:
-     * - search for jobs
-     * - job shortlist
-     * - interviews
-     * - offers
-     *
-     *
-     * Profile page:
-     *
-     */
+    def "get jobs"() {
+        when:
+        get('api/v1/jobs')
+
+        then:
+        response.statusCode == HttpResponseStatus.OK.code()
+    }
+
+    def "get job"() {
+        expect: false
+    }
+
+    def "student shortlists jobs"() {
+        expect: false
+    }
 }

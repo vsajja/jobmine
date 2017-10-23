@@ -11,8 +11,23 @@
 </ng-progress>
 
 <div class="container">
-  <input type="text" class="form-control" id="query" placeholder="job title, keywords or company name" required
-         (keyup)="updateFilter($event)">
+  <div class="row">
+    <div class="col-4">
+      <input type="text" class="form-control" id="query" placeholder="job title, or company name..." required
+             (keyup)="updateFilter($event)">
+    </div>
+    <div class="col-3">
+      <input type="text" class="form-control" id="q" placeholder="location" required>
+    </div>
+    <div class="col-3">
+      <select>
+        <option value="on">Ontario</option>
+        <option value="ab">Alberta</option>
+      </select>    </div>
+    <div class="col-2 text-right">
+      <button (click)="search()" style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p> </button>
+    </div>
+  </div>
 
   <ngx-datatable
     [rows]="rows"
@@ -24,18 +39,19 @@
     <ngx-datatable-column style="padding: 5px">
       <ng-template let-row="row" ngx-datatable-cell-template>
         <div class="card">
-          <!--<div class="card-block">-->
-          <!--<div class="card-text">-->
-          <!--<img height="15%" width="15%" class="card-img-top" src="{{row.companyLogo}}"-->
-          <!--onerror="this.src='assets/default-company-logo.jpg';">-->
-          <!--</div>-->
-          <!--</div>-->
-          <div><strong>
-            <a href="jobs/{{row.jobId}}">{{row.title}}</a></strong>
-            <button style="float: right; border: none; color: red"><i class="fa fa-heart fa-2x"></i></button>
+          <div>
+            <img *ngIf="row.companyLogo" width="15%" height="15%" src="{{row.companyLogo}}">
           </div>
-          <div><strong>{{row.company}}</strong></div>
-          <div><strong>{{row.location}}</strong></div>
+          <div>
+            <a href="jobs/{{row.jobId}}">
+              <strong>{{row.title}}</strong>
+            </a>
+          </div>
+          <div>
+            {{row.company}}
+            <button style="float: right; border: none; background-color: white; color: red" (click)="shortlist(row.jobId)"><i class="fa fa-heart"></i></button>
+          </div>
+          <div>{{row.location}}</div>
         </div>
         <br/>
       </ng-template>

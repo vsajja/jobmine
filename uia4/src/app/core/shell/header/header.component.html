@@ -36,8 +36,18 @@
 
           </a>
           <div ngbDropdownMenu aria-labelledby="user-dropdown">
-            <h6 class="dropdown-header">
-              <span translate>Logged in as</span> <b>{{username}}</b></h6>
+            <a href="/about">
+              <h6 class="dropdown-header">
+                <span translate>Profile</span></h6>
+            </a>
+
+            <a href="/jobs/shortlist">
+              <h6 class="dropdown-header">
+                <span translate>Job Shortlist</span></h6>
+            </a>
+
+
+
             <div class="dropdown-divider"></div>
             <button class="dropdown-item" (click)="logout()" translate>Logout</button>
           </div>

@@ -1,7 +1,9 @@
 package org.job
 
 import com.google.inject.Inject
+import jooq.generated.tables.daos.JobShortlistDao
 import jooq.generated.tables.daos.StudentDao
+import jooq.generated.tables.pojos.JobShortlist
 import jooq.generated.tables.pojos.Student
 import org.job.exceptions.InvalidCredentialsException
 import org.jooq.DSLContext
@@ -19,11 +21,13 @@ class JobService {
 
     DSLContext context
     StudentDao studentDao
+    JobShortlistDao jobShortlistDao
 
     @Inject
     public JobService(DataSource dataSource) {
         context = DSL.using(dataSource, SQLDialect.POSTGRES)
         studentDao = new StudentDao(context.configuration())
+        jobShortlistDao = new JobShortlistDao(context.configuration())
     }
 
     public Student getStudent(String username) {
@@ -64,6 +68,18 @@ class JobService {
             }
         } else {
             throw new InvalidCredentialsException('Username not found')
+        }
+    }
+
+    public shortlistJob(String username, String jobId) {
+        Student student = getStudent(username)
+
+        if(student) {
+//            JobShortlist shortlist = new JobShortlist()
+//            shortlist.studentId = student.studentId
+//            shortlist.jobId = jobId
+//            jobShortlistDao.insert(shortlist)
+            println 'shortlisting'
         }
     }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {NgProgressService} from "ngx-progressbar";
+import {JobService} from "../services/job.service";
 
 @Component({
   selector: 'app-jobs',
@@ -11,7 +12,7 @@ export class JobsComponent implements OnInit {
   rows: any;
   temp: any;
 
-  constructor(private http: Http, private progressService: NgProgressService) {
+  constructor(private http: Http, private progressService: NgProgressService, private jobService: JobService) {
     this.getJobs();
   }
 
@@ -31,6 +32,10 @@ export class JobsComponent implements OnInit {
       this.temp = this.rows;
       this.progressService.done();
     });
+  }
+
+  shortlist(jobId : any) {
+    this.jobService.shortlistJob(jobId);
   }
 
   updateFilter(event : any) {

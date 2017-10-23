@@ -5,12 +5,26 @@ import { Injectable }   from '@angular/core';
 import { Observable }   from 'rxjs/Observable';
 
 import { Http, Response } from '@angular/http';
+import {AuthenticationService} from "../core/authentication/authentication.service";
+import {NgProgressService} from "ngx-progressbar";
 
 @Injectable()
 export class JobService {
-  constructor() { }
+  constructor(private http: Http,
+              private authenticationService: AuthenticationService,
+              private progressService: NgProgressService) { }
 
-  getJob() {
-    return 'software developer (dev ops)';
+  shortlistJob(jobId : any) {
+    const req = this.http.post('/jobs/' + jobId + '/shortlist', { username: this.username() })
+      .subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+  }
+
+  username() {
+    const credentials = this.authenticationService.credentials;
+    return credentials ? credentials.username : null;
   }
 }

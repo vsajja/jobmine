@@ -25,6 +25,7 @@ dependencies {
     compile 'org.pac4j:pac4j-oauth:1.8.5'
     compile 'joda-time:joda-time:2.9.4'
     compile 'org.mindrot:jbcrypt:0.4'
+    compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
     compile ratpack.dependency('hikari')
     compile ratpack.dependency('pac4j')
     runtime 'org.slf4j:slf4j-simple:1.7.12'

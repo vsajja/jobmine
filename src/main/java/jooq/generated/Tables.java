@@ -15,6 +15,7 @@ import jooq.generated.tables.JobAppPackage;
 import jooq.generated.tables.JobInterview;
 import jooq.generated.tables.JobMine;
 import jooq.generated.tables.JobOffer;
+import jooq.generated.tables.JobShortlist;
 import jooq.generated.tables.Location;
 import jooq.generated.tables.School;
 import jooq.generated.tables.Student;
@@ -77,6 +78,11 @@ public class Tables {
 	 * The table public.job_offer
 	 */
 	public static final JobOffer JOB_OFFER = jooq.generated.tables.JobOffer.JOB_OFFER;
+
+	/**
+	 * The table public.job_shortlist
+	 */
+	public static final JobShortlist JOB_SHORTLIST = jooq.generated.tables.JobShortlist.JOB_SHORTLIST;
 
 	/**
 	 * The table public.location
