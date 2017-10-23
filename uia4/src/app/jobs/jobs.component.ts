@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {NgProgressService} from "ngx-progressbar";
 import {JobService} from "../services/job.service";
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -11,17 +13,20 @@ export class JobsComponent implements OnInit {
   rows: any;
   temp: any;
 
-  constructor(private http: Http, private progressService: NgProgressService, private jobService: JobService) {
+  constructor(private http: Http,
+              private progressService: NgProgressService,
+              private jobService: JobService,
+              private router: Router)
+  {
     this.getJobs();
   }
 
   ngOnInit() {
   }
 
-  search(query: any) {
-    console.log('search jobs' + query);
+  search() {
     this.progressService.start();
-    this.http.get('/jobs' + '?q={term}&l={location}').subscribe(res => {
+    this.http.get('/jobs' + '?q=software&l=waterloo').subscribe(res => {
       this.progressService.done();
     });
   }
@@ -54,5 +59,9 @@ export class JobsComponent implements OnInit {
 
     this.rows = temp;
     // this.table.offset = 0;
+  }
+
+  viewJobDetails(jobId : any) {
+    this.router.navigateByUrl('/jobs/' + jobId);
   }
 }

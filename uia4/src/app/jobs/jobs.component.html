@@ -23,7 +23,8 @@
       </select>
     </div>
     <div class="col-2 text-right">
-      <button (click)="search(query)" style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p> </button>
+      <button (click)="search()" style="border: none; background: none"><p><i class="fa fa-search fa-2x"
+                                                                                   aria-hidden="true"></i></p></button>
     </div>
   </div>
 
@@ -35,25 +36,34 @@
     [limit]="10"
     [rowHeight]="'auto'">
 
-    <ngx-datatable-column style="padding: 5px">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <div class="card">
-          <div>
-            <img *ngIf="row.companyLogo" width="15%" height="15%" src="{{row.companyLogo}}">
+    <div class="card-deck">
+      <ngx-datatable-column>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div id="job" class="card" style="width: 20rem; cursor: pointer;" (click)="viewJobDetails(row.jobId)">
+            <div style="align: center">
+              <img *ngIf="row.companyLogo" style="float: left; padding-top: 15px; padding-left: 20px" width="35%"
+                   height="35%" src="{{row.companyLogo}}">
+            </div>
+            <div class="card-body">
+              <div>
+                <h6 class="card-title">
+                  <a href="jobs/{{row.jobId}}">
+                    <strong>{{row.title}}</strong>
+                  </a>
+                </h6>
+                <div>
+                  <h6 class="card-subtitle mb-2 text-muted">{{row.company}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{row.location}}</h6>
+                  <hr/>
+                  <h6 class="card-subtitle mb-2 text-muted">{{row.createdTimestamp | timeAgo}}</h6>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <a href="jobs/{{row.jobId}}">
-              <strong>{{row.title}}</strong>
-            </a>
-          </div>
-          <div>
-            {{row.company}}
-            <button style="float: right; border: none; background-color: white; color: red" (click)="shortlist(row.jobId)"><i class="fa fa-heart"></i></button>
-          </div>
-          <div>{{row.location}}</div>
-        </div>
-        <br/>
-      </ng-template>
-    </ngx-datatable-column>
+          <br/>
+        </ng-template>
+      </ngx-datatable-column>
+    </div>
   </ngx-datatable>
 </div>
+
