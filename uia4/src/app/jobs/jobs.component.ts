@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {NgProgressService} from "ngx-progressbar";
 import {JobService} from "../services/job.service";
-
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -19,8 +18,12 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
   }
 
-  search() {
-    console.log('search jobs');
+  search(query: any) {
+    console.log('search jobs' + query);
+    this.progressService.start();
+    this.http.get('/jobs' + '?q={term}&l={location}').subscribe(res => {
+      this.progressService.done();
+    });
   }
 
   getJobs() {

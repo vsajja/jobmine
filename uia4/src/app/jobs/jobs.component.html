@@ -17,15 +17,13 @@
              (keyup)="updateFilter($event)">
     </div>
     <div class="col-3">
-      <input type="text" class="form-control" id="q" placeholder="location" required>
-    </div>
-    <div class="col-3">
       <select>
         <option value="on">Ontario</option>
         <option value="ab">Alberta</option>
-      </select>    </div>
+      </select>
+    </div>
     <div class="col-2 text-right">
-      <button (click)="search()" style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p> </button>
+      <button (click)="search(query)" style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p> </button>
     </div>
   </div>
 
@@ -34,6 +32,7 @@
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
+    [limit]="10"
     [rowHeight]="'auto'">
 
     <ngx-datatable-column style="padding: 5px">
