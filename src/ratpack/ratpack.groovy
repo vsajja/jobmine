@@ -80,15 +80,20 @@ ratpack {
             path('jobs') {
                 byMethod {
                     get {
-                        def q = request.queryParams.q
+                        def query = request.queryParams.query
+                        def location = request.queryParams.location
 
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
 
                         def jooqQuery = context.selectFrom(JOB)
 
-                        if(q) {
-                            jooqQuery.where(JOB.TITLE.like("%$q%"))
+                        if(query) {
+                            jooqQuery.where(lower(JOB.TITLE).like("%$query%"))
+                        }
+
+                        if(location) {
+                            jooqQuery.where(lower(JOB.LOCATION).like("%$location%"))
                         }
 
                         List<Job> jobs = jooqQuery.fetch().into(Job.class)
