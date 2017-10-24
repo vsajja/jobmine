@@ -24,9 +24,12 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
   }
 
-  search() {
+  search(query: string) {
+    console.log(query);
     this.progressService.start();
-    this.http.get('/jobs' + '?q=software&l=waterloo').subscribe(res => {
+
+    this.http.get('/jobs' + '?q=' + query).subscribe(res => {
+      console.log(res);
       this.progressService.done();
     });
   }

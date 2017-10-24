@@ -11,22 +11,40 @@
 </ng-progress>
 
 <div class="container">
+
+
   <div class="row">
-    <div class="col-4">
-      <input type="text" class="form-control" id="query" placeholder="job title, or company name..." required
-             (keyup)="updateFilter($event)">
-    </div>
-    <div class="col-3">
-      <select>
-        <option value="on">Ontario</option>
-        <option value="ab">Alberta</option>
-      </select>
-    </div>
-    <div class="col-2 text-right">
-      <button (click)="search()" style="border: none; background: none"><p><i class="fa fa-search fa-2x"
-                                                                                   aria-hidden="true"></i></p></button>
+  <div class="col-4">
+    <div>
+      <label>Title: </label>
+      <input #searchBox id="search-box" />
     </div>
   </div>
+  <div class="col-3">
+  </div>
+  <div class="col-2 text-right">
+    <div>
+      <button (click)="search(searchBox.value)">
+        Search
+      </button>
+    </div>
+  </div>
+  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-4">-->
+      <!--<input type="text" class="form-control" id="query" placeholder="job title, or company name..." required-->
+             <!--(keyup)="updateFilter($event)">-->
+    <!--</div>-->
+    <!--<div class="col-3">-->
+      <!--<select>-->
+        <!--<option value="on">Ontario</option>-->
+        <!--<option value="ab">Alberta</option>-->
+      <!--</select>-->
+    <!--</div>-->
+    <!--<div class="col-2 text-right">-->
+      <!--<button (click)="search()" style="border: none; background: none"><p><i class="fa fa-search fa-2x" aria-hidden="true"></i></p></button>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <ngx-datatable
     [rows]="rows"
