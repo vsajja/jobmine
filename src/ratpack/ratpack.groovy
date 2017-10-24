@@ -80,7 +80,7 @@ ratpack {
             path('jobs') {
                 byMethod {
                     get {
-                        def query = request.queryParams.query
+                        String query = request.queryParams.query
                         def location = request.queryParams.location
 
                         DataSource dataSource = registry.get(DataSource.class)
@@ -89,12 +89,12 @@ ratpack {
                         def jooqQuery = context.selectFrom(JOB)
 
                         if(query) {
-                            jooqQuery.where(lower(JOB.TITLE).like("%$query%"))
+                            jooqQuery.where(lower(JOB.TITLE).like("%${query.toLowerCase()}%"))
                         }
 
-                        if(location) {
-                            jooqQuery.where(lower(JOB.LOCATION).like("%$location%"))
-                        }
+//                        if(location) {
+//                            jooqQuery.where(lower(JOB.LOCATION).like("%$location%"))
+//                        }
 
                         List<Job> jobs = jooqQuery.fetch().into(Job.class)
                         render json(jobs)

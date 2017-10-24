@@ -18,18 +18,19 @@ export class JobsComponent implements OnInit {
               private jobService: JobService,
               private router: Router)
   {
-    this.getJobs();
+    // this.getJobs();
   }
 
   ngOnInit() {
   }
 
   search(query: string) {
-    console.log(query);
     this.progressService.start();
 
     this.http.get('/jobs' + '?q=' + query).subscribe(res => {
-      console.log(res);
+      var jobs = res.json();
+      this.rows = jobs;
+      this.temp = this.rows;
       this.progressService.done();
     });
   }
