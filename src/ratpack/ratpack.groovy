@@ -87,7 +87,7 @@ ratpack {
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<Job> jobs = context.selectFrom(JOB)
-                                .where(JOB.TITLE.LIKE(q))
+                                .where(JOB.TITLE.like("%$q%"))
                                 .fetch()
                                 .into(Job.class)
                         render json(jobs)
