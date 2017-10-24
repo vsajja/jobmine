@@ -80,16 +80,18 @@ ratpack {
             path('jobs') {
                 byMethod {
                     get {
-
-                        def q = request.queryParams['q']
-                        def l = request.queryParams['l']
+                        def q = request.queryParams.q
 
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
                         List<Job> jobs = context.selectFrom(JOB)
-                                .where(JOB.TITLE.like("%$q%"))
                                 .fetch()
                                 .into(Job.class)
+
+                        if(q) {
+                            jobs = jobs.findAll { it.title.contains(q) }
+                        }
+
                         render json(jobs)
                     }
                 }
