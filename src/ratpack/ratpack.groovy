@@ -84,14 +84,14 @@ ratpack {
 
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                        List<Job> jobs = context.selectFrom(JOB)
-                                .fetch()
-                                .into(Job.class)
+
+                        def jooqQuery = context.selectFrom(JOB)
 
                         if(q) {
-                            jobs = jobs.findAll { it.title.contains(q) }
+                            jooqQuery.where(JOB.TITLE.like("%$q%"))
                         }
 
+                        List<Job> jobs = jooqQuery.fetch().into(Job.class)
                         render json(jobs)
                     }
                 }
