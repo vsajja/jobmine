@@ -92,7 +92,7 @@ ratpack {
                             jobsQ.or(DSL.lower(JOB.COMPANY).like("%$query%"))
                         }
                         if(location) {
-                            jobsQ.or(DSL.lower(JOB.LOCATION).like("%$location%"))
+                            jobsQ.and(DSL.lower(JOB.LOCATION).like("%$location%"))
                         }
                         List<Job> jobs = jobsQ.fetch().into(Job.class)
 

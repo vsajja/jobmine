@@ -11,24 +11,20 @@
 </ng-progress>
 
 <div class="container">
-
-
   <div class="row">
-  <div class="col-4">
-    <div>
-      <label>Title: </label>
-      <input #searchBox id="search-box" />
+    <div class="col-4">
+      <input #searchBox id="search-box" placeholder="title or company..."/>
     </div>
-  </div>
-  <div class="col-3">
-  </div>
-  <div class="col-2 text-right">
-    <div>
-      <button (click)="search(searchBox.value)">
-        Search
-      </button>
+    <div class="col-4">
+      <input #locationBox id="location-box" placeholder="ontario or alberta..."/>
     </div>
-  </div>
+    <div class="col-2 text-right">
+      <div>
+        <button (click)="search(searchBox.value, locationBox.value)">
+          Search
+        </button>
+      </div>
+    </div>
   </div>
 
   <ngx-datatable
