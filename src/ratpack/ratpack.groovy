@@ -87,15 +87,14 @@ ratpack {
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
 
                         def jobsQ = context.selectFrom(JOB)
-                        if(query) {
+                        if (query) {
                             jobsQ.where(DSL.lower(JOB.TITLE).like("%$query%"))
                             jobsQ.or(DSL.lower(JOB.COMPANY).like("%$query%"))
                         }
-                        if(location) {
-                            jobsQ.and(DSL.lower(JOB.LOCATION).like("%$location%"))
+                        if (location) {
+                            jobsQ.or(DSL.lower(JOB.LOCATION).like("%$location%"))
                         }
                         List<Job> jobs = jobsQ.fetch().into(Job.class)
-
                         render json(jobs)
                     }
                 }
@@ -302,8 +301,6 @@ ratpack {
 //                    }
 //                }
 //            }
-
-
 
 //            path('jobs/:jobId') {
 //                def jobId = pathTokens['jobId']
@@ -720,19 +717,19 @@ ratpack {
                                             }
                                         }
 
-                                        if(!companyLogo) {
+                                        if (!companyLogo) {
                                             return
                                         }
 
                                         log.info("Inserting: ${title} @ ${company}")
                                         create.insertInto(JOB)
-                                            .set(JOB.TITLE, (String) title)
-                                            .set(JOB.COMPANY, (String) company)
-                                            .set(JOB.COMPANY_LOGO, (String) companyLogo)
-                                            .set(JOB.LOCATION, (String) location)
-                                            .set(JOB.DESCRIPTION_9, (String) description)
-                                            .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z").parse(date).getTime()))
-                                            .execute()
+                                                .set(JOB.TITLE, (String) title)
+                                                .set(JOB.COMPANY, (String) company)
+                                                .set(JOB.COMPANY_LOGO, (String) companyLogo)
+                                                .set(JOB.LOCATION, (String) location)
+                                                .set(JOB.DESCRIPTION_9, (String) description)
+                                                .set(JOB.CREATED_TIMESTAMP, new java.sql.Date(new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm:ss z").parse(date).getTime()))
+                                                .execute()
                                     }
                                 }
                             }
@@ -800,7 +797,7 @@ ratpack {
                                             }
                                         }
 
-                                        if(!companyLogo) {
+                                        if (!companyLogo) {
                                             return
                                         }
 
@@ -832,7 +829,7 @@ ratpack {
                         def jobDetail = new XmlParser(new Parser()).parseText(it.body.text)
 
                         it.body.text.eachLine {
-                            if(it.contains('img') && it.contains('"cmp_logo_img"')) {
+                            if (it.contains('img') && it.contains('"cmp_logo_img"')) {
                                 def logoUrl = it.replaceAll('<img src="', '')
                                 println logoUrl.substring(0, logoUrl.indexOf('"'))
                             }
