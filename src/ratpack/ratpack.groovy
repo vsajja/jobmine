@@ -95,6 +95,7 @@ ratpack {
                             jobsQ.or(DSL.lower(JOB.LOCATION).like("%$location%"))
                         }
                         List<Job> jobs = jobsQ.fetch().into(Job.class)
+
                         render json(jobs)
                     }
                 }
