@@ -61,7 +61,7 @@ export class JobsComponent implements OnInit {
     // this.table.offset = 0;
   }
 
-  viewJobDetails(jobId : any) {
+  public viewJobDetails(jobId : any) {
     this.router.navigateByUrl('/jobs/' + jobId);
   }
 }

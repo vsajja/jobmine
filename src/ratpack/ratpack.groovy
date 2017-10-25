@@ -80,11 +80,21 @@ ratpack {
             path('jobs') {
                 byMethod {
                     get {
+                        String query = request.queryParams.q?.toLowerCase()
+                        String location = request.queryParams.l?.toLowerCase()
+
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
-                        List<Job> jobs = context.selectFrom(JOB)
-                                .fetch()
-                                .into(Job.class)
+
+                        def jobsQ = context.selectFrom(JOB)
+                        if(query) {
+                            jobsQ.where(DSL.lower(JOB.TITLE).like("%$query%"))
+                            jobsQ.or(DSL.lower(JOB.COMPANY).like("%$query%"))
+                        }
+                        if(location) {
+                            jobsQ.or(DSL.lower(JOB.LOCATION).like("%$location%"))
+                        }
+                        List<Job> jobs = jobsQ.fetch().into(Job.class)
                         render json(jobs)
                     }
                 }
