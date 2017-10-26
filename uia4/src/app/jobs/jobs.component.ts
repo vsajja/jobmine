@@ -25,8 +25,19 @@ export class JobsComponent implements OnInit {
 
   searchJobs(query: string) {
     this.progressService.start();
+    let jobsUrl = '/jobs';
+    if(query) {
+      jobsUrl += ('?q=' + query);
+    }
 
-    this.http.get('/jobs' + '?q=' + query).subscribe(res => {
+    if(location) {
+      if(query) {
+        jobsUrl += '&';
+      }
+      jobsUrl += ('?l=' + location);
+    }
+
+    this.http.get(jobsUrl).subscribe(res => {
       var jobs = res.json();
       this.rows = jobs;
       this.temp = this.rows;
