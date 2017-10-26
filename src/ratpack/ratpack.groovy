@@ -92,8 +92,12 @@ ratpack {
                             jobsQ.or(DSL.lower(JOB.COMPANY).like("%$query%"))
                         }
                         if(location) {
-                            jobsQ.or(DSL.lower(JOB.LOCATION).like("%$location%"))
+                            jobsQ.where(DSL.lower(JOB.LOCATION).like("%$location%"))
                         }
+
+
+                        jobsQ.orderBy(JOB.CREATED_TIMESTAMP.desc())
+
                         List<Job> jobs = jobsQ.fetch().into(Job.class)
                         render json(jobs)
                     }

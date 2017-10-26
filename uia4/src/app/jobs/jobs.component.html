@@ -11,25 +11,19 @@
 </ng-progress>
 
 <div class="container">
+  <div>
+    <label>Location:</label>
+    <select #location ng-model="location" >
+      <option>Calgary</option>
+      <option>Edmonton</option>
+      <option>Toronto</option>
+      <option>Waterloo</option>
+    </select>
+  </div>
   <div class="row">
-    <div class="col-4">
-      <input #searchBox id="search-box" placeholder="title or company..."/>
-    </div>
-  </div>
-  <div class="col-3">
-    <!--<div class="container">-->
-      <!--<h1>Angular 2 + Google Maps Places Autocomplete</h1>-->
-      <!--<div class="form-group">-->
-        <!--<input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">-->
-      <!--</div>-->
-      <!--<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">-->
-        <!--<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>-->
-      <!--</agm-map>-->
-    <!--</div>-->
-  </div>
-  <div class="col-2 text-right">
-    <div>
-      <button (click)="searchJobs(searchBox.value)">
+    <div class="col-3">
+      <input #searchBox id="search-box" placeholder="title or company..." (keyup)="updateFilter($event)"/>
+      <button (click)="searchJobs(searchBox.value, location.value)">
         Search
       </button>
     </div>
@@ -73,4 +67,3 @@
     </div>
   </ngx-datatable>
 </div>
-
