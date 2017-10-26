@@ -6,6 +6,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {TimeAgoPipeModule} from "time-ago-pipe/index";
 import {TimeAgoPipe} from "time-ago-pipe";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {TimeAgoPipe} from "time-ago-pipe";
     NgxDatatableModule,
     NgProgressModule,
     TimeAgoPipeModule,
+    FormsModule,
     JobsRoutingModule
   ],
   declarations: [JobsComponent, TimeAgoPipe]

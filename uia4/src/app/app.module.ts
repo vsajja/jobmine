@@ -16,6 +16,8 @@ import {LoginModule} from './login/login.module';
 import {JobsModule} from "./jobs/jobs.module";
 import {JobComponent} from './job/job.component';
 import {JobModule} from "./job/job.module";
+import { SettingsComponent } from './settings/settings.component';
+import {SettingsModule} from "./settings/settings.module";
 
 @NgModule({
   imports: [
@@ -31,9 +33,10 @@ import {JobModule} from "./job/job.module";
     LoginModule,
     JobsModule,
     JobModule,
+    SettingsModule,
     AppRoutingModule
   ],
-  declarations: [AppComponent, JobComponent],
+  declarations: [AppComponent, JobComponent, SettingsComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
