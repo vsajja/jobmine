@@ -15,12 +15,15 @@ export class JobService {
               private progressService: NgProgressService) { }
 
   shortlistJob(jobId : any) {
-    const req = this.http.post('/jobs/' + jobId + '/shortlist', { username: this.username() })
-      .subscribe(
-        res => {
-          console.log(res);
-        }
-      );
+    console.log('shortlist' + jobId);
+
+    //
+    // const req = this.http.post('/students/shortlist/' + jobId, { username: this.username() })
+    //   .subscribe(
+    //     res => {
+    //       console.log(res);
+    //     }
+    //   );
   }
 
   username() {

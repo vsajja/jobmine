@@ -57,6 +57,7 @@
                   <h6 class="card-subtitle mb-2 text-muted">{{row.location}}</h6>
                   <hr/>
                   <h6 class="card-subtitle mb-2 text-muted">{{row.createdTimestamp | timeAgo}}</h6>
+                  <button (click)="shortlist($event, row.jobId)">&hearts; Shortlist</button>
                 </div>
               </div>
             </div>

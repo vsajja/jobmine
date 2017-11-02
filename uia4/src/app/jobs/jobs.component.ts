@@ -46,7 +46,8 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  shortlist(jobId: any) {
+  shortlist(event: any, jobId: any) {
+    event.preventDefault();
     this.jobService.shortlistJob(jobId);
   }
 

@@ -95,7 +95,6 @@ ratpack {
                             jobsQ.where(DSL.lower(JOB.LOCATION).like("%$location%"))
                         }
 
-
                         jobsQ.orderBy(JOB.CREATED_TIMESTAMP.desc())
 
                         List<Job> jobs = jobsQ.fetch().into(Job.class)
@@ -119,7 +118,7 @@ ratpack {
                 }
             }
 
-            path('jobs/:jobId/shortlist') {
+            path('student/shortlist/:jobId') {
                 def jobId = pathTokens['jobId']
                 byMethod {
                     post {
