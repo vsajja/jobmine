@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "job"
+    "name": "jobmine"
   },
   "apps": [
     {
@@ -10,6 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
+        "manifest.json",
         "robots.txt"
       ],
       "index": "index.html",
@@ -53,7 +54,10 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {},
+    "serve": {
+      "port": 1338
+    }
   },
   "warnings": {
     "typescriptMismatch": false

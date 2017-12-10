@@ -1,4 +1,4 @@
-# job
+# jobmine
 
 Welcome to the project documentation!
 

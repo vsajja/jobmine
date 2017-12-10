@@ -1,28 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { CoreModule } from '../core/core.module';
-import { SharedModule } from '../shared/shared.module';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
-import { QuoteService } from './quote.service';
-import { JobService } from "../services/job.service";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
+import {CoreModule} from '../core/core.module';
+import {HomeRoutingModule} from './home-routing.module';
+import {HomeComponent} from './home.component';
+import {QuoteService} from '../services/quote.service';
+import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
     CoreModule,
-    SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    NgbTypeaheadModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     HomeComponent
   ],
   providers: [
-    QuoteService,
-    JobService
+    QuoteService
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

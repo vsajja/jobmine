@@ -1,7 +1,7 @@
-# job
+# jobmine
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
-version 2.2.1
+version 2.3.1
 
 # Getting started
 

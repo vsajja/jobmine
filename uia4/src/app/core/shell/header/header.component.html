@@ -1,66 +1,50 @@
-<header class="container">
-  <nav class="navbar navbar-expand-lg">
-    <span class="navbar-brand" href="/" translate>
-      <!--<a class="nav-item" routerLink="/home" routerLinkActive="active"><img height="75px" width="75px" src="../assets/logo_job.png"/></a>-->
-      <a href="home"><img height="75px" width="75px" src="assets/logo_job.png"></a>
-    </span>
-    <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
-            aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
-      <div class="navbar-nav">
-        <!--<a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">-->
-          <!--<i class="fa fa-home"></i>-->
-          <!--<span translate>Home</span>-->
-        <!--</a>-->
-        <!--<a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">-->
-          <!--<i class="fa fa-question-circle"></i>-->
-          <!--<span translate>About</span>-->
-        <!--</a>-->
-      </div>
-      <div class="navbar-nav ml-auto">
-        <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{currentLanguage}}</a>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">
-              {{language}}
-            </button>
+<div class="container">
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" routerLink="/home" translate>APP_NAME</a>
+      <button class="navbar-toggler" type="button" aria-controls="navbar-menu"
+              aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="!menuHidden">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
+        <div class="navbar-nav ml-auto">
+          <div class="nav-item" ngbDropdown placement="bottom-right">
+            <!--<a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{currentLanguage}}</a>-->
+            <!--<div ngbDropdownMenu aria-labelledby="language-dropdown">-->
+              <!--<button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">-->
+                <!--{{language}}-->
+              <!--</button>-->
+            <!--</div>-->
           </div>
-        </div>
-        <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
-            <!--<i class="fa fa-user-circle"></i>-->
-            <!--<i class="fa fa-user" style="font-size: 50px" aria-hidden="true"></i>-->
-            <strong>{{username}}</strong>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown">
-            <a href="/about">
-              <h6 class="dropdown-item">
-              <span translate>Your profile</span></h6>
+          <div class="nav-item" ngbDropdown placement="bottom-right">
+            <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
+              <i class="fa fa-user-circle"></i>
             </a>
+            <div ngbDropdownMenu aria-labelledby="user-dropdown">
+              <h6 class="dropdown-header">
+                <div class="text-muted">
+                  <span class="text-muted">Logged in as <b>{{username}}</b></span>
+                </div>
+              </h6>
 
-            <a href="/jobs/shortlist">
-              <h6 class="dropdown-item">
-                <span translate>Your shortlist</span></h6>
-            </a>
+              <div class="dropdown-divider"></div>
 
-            <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">
+                <a href="/users/{{username}}">Your profile</a>
+              </h6>
 
-            <a href="/settings">
-              <h6 class="dropdown-item">
-                <span translate>Settings</span></h6>
-            </a>
-
-            <div class="dropdown-divider"></div>
-
-            <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+              <h6 class="dropdown-header">
+                <a href="/help">Help</a>
+              </h6>
+              <h6 class="dropdown-header">
+                <a href="/settings">Settings</a>
+              </h6>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
-</header>
-
-
-
+    </nav>
+  </header>
+</div>

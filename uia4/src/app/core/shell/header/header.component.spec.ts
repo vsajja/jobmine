@@ -8,7 +8,7 @@ import { MockAuthenticationService } from '../../authentication/authentication.s
 import { I18nService } from '../../i18n.service';
 import { HeaderComponent } from './header.component';
 
-describe('HeaderComponent', () => {
+describe('FooterComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
