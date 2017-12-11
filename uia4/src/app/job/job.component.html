@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table>
+        <tr>
+          <td>
+            <img [src]="job?.companyLogo" style="margin: 3px">
+            <pre>{{job?.title}}
+<span>{{job?.company}}</span>
+<span class="text-muted">{{job?.location}}</span>
+<span>{{job?.jobId}} posted {{FIXME_timeAgo(job?.createdTimestamp)}}</span>
+          </pre>
+          </td>
+        </tr>
+        <tr>
+          <pre>{{job?.description_9}}</pre>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

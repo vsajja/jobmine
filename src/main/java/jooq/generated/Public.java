@@ -12,8 +12,10 @@ import javax.annotation.Generated;
 
 import jooq.generated.tables.Company;
 import jooq.generated.tables.Job;
-import jooq.generated.tables.JobOffer;
+import jooq.generated.tables.JobApp;
+import jooq.generated.tables.JobShortlist;
 import jooq.generated.tables.Location;
+import jooq.generated.tables.Mine;
 import jooq.generated.tables.User;
 
 import org.jooq.Sequence;
@@ -34,7 +36,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = 1519054793;
+	private static final long serialVersionUID = 1386825525;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -58,9 +60,11 @@ public class Public extends SchemaImpl {
 	private final List<Sequence<?>> getSequences0() {
 		return Arrays.<Sequence<?>>asList(
 			Sequences.COMPANY_COMPANY_ID_SEQ,
+			Sequences.JOB_APP_JOB_APP_ID_SEQ,
 			Sequences.JOB_JOB_ID_SEQ,
-			Sequences.JOB_OFFER_JOB_OFFER_ID_SEQ,
+			Sequences.JOB_SHORTLIST_JOB_SHORTLIST_ID_SEQ,
 			Sequences.LOCATION_LOCATION_ID_SEQ,
+			Sequences.MINE_MINE_ID_SEQ,
 			Sequences.USER_USER_ID_SEQ);
 	}
 
@@ -75,8 +79,10 @@ public class Public extends SchemaImpl {
 		return Arrays.<Table<?>>asList(
 			Company.COMPANY,
 			Job.JOB,
-			JobOffer.JOB_OFFER,
+			JobApp.JOB_APP,
+			JobShortlist.JOB_SHORTLIST,
 			Location.LOCATION,
+			Mine.MINE,
 			User.USER);
 	}
 }

@@ -11,31 +11,45 @@ import {AuthenticationService} from "../core/authentication/authentication.servi
 export class UserComponent implements OnInit {
   username: any;
   user: any;
-  userTweets: any;
+
+  shortlist: any;
+  applications: any;
 
   constructor(private route: ActivatedRoute,
               private quoteService: QuoteService,
               private authenticationService: AuthenticationService) {
     this.username = this.route.snapshot.paramMap.get('username');
+    this.getUser(this.username);
 
-    this.getUsers(this.username);
-    this.getUserTweets(this.username);
   }
 
   ngOnInit() {
   }
 
-  getUsers(username: string) {
+  getUser(username: string) {
     this.quoteService.getUser(username).subscribe(
       (data: any) => {
         this.user = data;
+        this.getShortlist(this.user.userId);
+        this.getApplications(this.user.userId);
       });
   }
 
-  getUserTweets(username: string) {
-    this.quoteService.getUserTweets(username).subscribe(
+  getShortlist(userId: string) {
+    this.quoteService.getShortlist(userId).subscribe(
       (data: any) => {
-        this.userTweets = data;
+        this.shortlist = data;
+      });
+  }
+
+  apply(jobId: string) {
+    this.quoteService.apply(this.user.userId, jobId);
+  }
+
+  getApplications(userId: string) {
+    this.quoteService.getApplications(userId).subscribe(
+      (data: any) => {
+        this.applications = data;
       });
   }
 

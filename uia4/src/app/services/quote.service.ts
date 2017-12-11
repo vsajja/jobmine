@@ -11,32 +11,12 @@ export class QuoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getPlayerLabels() {
-    return this.httpClient.get('/playerLabels');
+  getJobs(): any {
+    return this.httpClient.get('/jobs');
   }
 
-  getTweets() {
-    return this.httpClient.get('/tweets');
-  }
-
-  getPlayer(playerId: string): any {
-    return this.httpClient.get('/players/' + playerId);
-  }
-
-  getPlayers(): any {
-    return this.httpClient.get('/players');
-  }
-
-  getTeams(): any {
-    return this.httpClient.get('/teams');
-  }
-
-  getTeam(teamId: string): any {
-    return this.httpClient.get('/teams/' + teamId);
-  }
-
-  getTeamRoster(teamId: string): any {
-    return this.httpClient.get('/teams/' + teamId + '/roster');
+  getJob(jobId: string): any {
+    return this.httpClient.get('/jobs/' + jobId);
   }
 
   getUsers(): any {
@@ -47,20 +27,29 @@ export class QuoteService {
     return this.httpClient.get('/users/' + username);
   }
 
-  getUserTweets(username: string): any {
-    return this.httpClient.get('/users/' + username + '/tweets');
+  getShortlist(userId: string) {
+    // console.log(userId);
+    // return;
+    return  this.httpClient.get('/users/' + userId + '/shortlist');
   }
 
-  getPlayerTweets(playerId: string): any {
-    return this.httpClient.get('/players/' + playerId + '/tweets');
+  shortlist(userId: string, jobId: string) {
+    this.httpClient.post('/users/' + userId + '/shortlist/' + jobId, {}).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
-  getPlayerStats(playerId: string): any {
-    return this.httpClient.get('/players/' + playerId + '/stats');
+  getApplications(userId: string) {
+    // console.log(userId);
+    // return;
+    //
+    return this.httpClient.get('/users/' + userId + '/apps');
   }
 
-  getPlayerMugshotUrl(mlbPlayerId: string): string {
-    return environment.serverUrl + '/players/' + mlbPlayerId + '/mugshot';
+  apply(userId: string, jobId: string) {
+    this.httpClient.post('/users/' + userId + '/apply/' + jobId, {}).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   calculateAge(birthDate: any) {

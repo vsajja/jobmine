@@ -17,6 +17,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {APIInterceptor} from "./core/http/http-interceptor";
 import {PagerService} from "./services/pager.service";
 import {DecimalPipe} from '@angular/common';
+import { JobComponent } from './job/job.component';
+import {JobModule} from "./job/job.module";
 
 @NgModule({
   imports: [
@@ -31,12 +33,14 @@ import {DecimalPipe} from '@angular/common';
     UserModule,
     UsersModule,
     NgxDatatableModule,
+    JobModule,
     AppRoutingModule
   ],
   declarations: [
     AppComponent,
     UserComponent,
-    UsersComponent
+    UsersComponent,
+    JobComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

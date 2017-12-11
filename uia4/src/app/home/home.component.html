@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-    </div>
-
-    <div class="col-md-8">
-      hello world
+    <div class="col-12" style="margin: 5px" *ngFor="let job of jobs">
+      <div class="card">
+        <pre><strong><a href="/jobs/{{job?.jobId}}">{{job?.title}}</a></strong><span style="float:right; margin: 5px"><button
+        (click)="apply(job?.jobId)">apply</button></span><span style="float:right; margin: 5px"><button
+        (click)="shortlist(job?.jobId)">shortlist</button></span>
+<span class="text-muted">{{job?.company}} @ {{job?.location}}</span>
+<span>#{{job?.jobId}} posted {{FIXME_timeAgo(job?.createdTimestamp)}}</span></pre>
+      </div>
     </div>
   </div>
 </div>

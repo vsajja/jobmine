@@ -1,9 +1,8 @@
 import com.zaxxer.hikari.HikariConfig
-import groovy.json.JsonBuilder
-import groovy.json.JsonSlurper
 import jooq.generated.tables.pojos.Job
+import jooq.generated.tables.pojos.JobApp
 import jooq.generated.tables.pojos.User
-import org.job.JobService
+import org.job.JobmineService
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
@@ -12,12 +11,10 @@ import org.slf4j.LoggerFactory
 import ratpack.groovy.sql.SqlModule
 import ratpack.handling.RequestLogger
 import ratpack.hikari.HikariModule
-import ratpack.http.client.HttpClient
 import org.job.postgres.PostgresConfig
 import org.job.postgres.PostgresModule
 
 import javax.sql.DataSource
-import java.text.SimpleDateFormat
 
 import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
@@ -35,14 +32,14 @@ ratpack {
 
     bindings {
         module HikariModule, { HikariConfig config ->
-            config.setMaximumPoolSize(5)
+            config.setMaximumPoolSize(3)
             config.dataSource = new PostgresModule().dataSource(serverConfig.get('/postgres', PostgresConfig))
         }
         module SqlModule
-        bind JobService
+        bind JobmineService
     }
 
-    handlers { JobService jobService ->
+    handlers { JobmineService jobService ->
         all RequestLogger.ncsa(log)
 
         all {
@@ -114,7 +111,7 @@ ratpack {
                         DataSource dataSource = registry.get(DataSource.class)
                         DSLContext context = DSL.using(dataSource, SQLDialect.POSTGRES)
 
-                        def jobsQ = context.selectFrom(JOB)
+                        def jobsQ = context.selectFrom(JOB).limit(100)
                         if (query) {
                             jobsQ.where(DSL.lower(JOB.TITLE).like("%$query%"))
                             jobsQ.or(DSL.lower(JOB.COMPANY).like("%$query%"))
@@ -142,6 +139,58 @@ ratpack {
                                 .fetchOne()
                                 .into(Job.class)
                         render json(job)
+                    }
+                }
+            }
+
+            path('users/:username') {
+                def username = pathTokens['username']
+                byMethod {
+                    get {
+                        User user = jobService.getUser(username)
+                        render json(user)
+                    }
+                }
+            }
+
+            path('users/:userId/shortlist') {
+                String userId = pathTokens['userId']
+                byMethod {
+                    get {
+                        def shortlist = jobService.getJobShortlist(userId)
+                        render json(shortlist)
+                    }
+                }
+            }
+
+            path('users/:userId/shortlist/:jobId') {
+                def userId = pathTokens['userId']
+                def jobId = pathTokens['jobId']
+                byMethod {
+                    post {
+                        jobService.shortlist(userId, jobId)
+                        response.send()
+                    }
+                }
+            }
+
+            path('users/:userId/apps') {
+                String userId = pathTokens['userId']
+                byMethod {
+                    get {
+                        def jobApps = jobService.getJobApps(userId)
+                        render json(jobApps)
+                    }
+                }
+            }
+
+            path('users/:userId/apply/:jobId') {
+                def userId = pathTokens['userId']
+                def jobId = pathTokens['jobId']
+                byMethod {
+                    post {
+                        jobService.apply(userId, jobId)
+                        response.send()
                     }
                 }
             }

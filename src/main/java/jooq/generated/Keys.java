@@ -8,13 +8,17 @@ import javax.annotation.Generated;
 
 import jooq.generated.tables.Company;
 import jooq.generated.tables.Job;
-import jooq.generated.tables.JobOffer;
+import jooq.generated.tables.JobApp;
+import jooq.generated.tables.JobShortlist;
 import jooq.generated.tables.Location;
+import jooq.generated.tables.Mine;
 import jooq.generated.tables.User;
 import jooq.generated.tables.records.CompanyRecord;
-import jooq.generated.tables.records.JobOfferRecord;
+import jooq.generated.tables.records.JobAppRecord;
 import jooq.generated.tables.records.JobRecord;
+import jooq.generated.tables.records.JobShortlistRecord;
 import jooq.generated.tables.records.LocationRecord;
+import jooq.generated.tables.records.MineRecord;
 import jooq.generated.tables.records.UserRecord;
 
 import org.jooq.ForeignKey;
@@ -43,8 +47,10 @@ public class Keys {
 
 	public static final Identity<CompanyRecord, Long> IDENTITY_COMPANY = Identities0.IDENTITY_COMPANY;
 	public static final Identity<JobRecord, Long> IDENTITY_JOB = Identities0.IDENTITY_JOB;
-	public static final Identity<JobOfferRecord, Long> IDENTITY_JOB_OFFER = Identities0.IDENTITY_JOB_OFFER;
+	public static final Identity<JobAppRecord, Integer> IDENTITY_JOB_APP = Identities0.IDENTITY_JOB_APP;
+	public static final Identity<JobShortlistRecord, Integer> IDENTITY_JOB_SHORTLIST = Identities0.IDENTITY_JOB_SHORTLIST;
 	public static final Identity<LocationRecord, Long> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
+	public static final Identity<MineRecord, Integer> IDENTITY_MINE = Identities0.IDENTITY_MINE;
 	public static final Identity<UserRecord, Integer> IDENTITY_USER = Identities0.IDENTITY_USER;
 
 	// -------------------------------------------------------------------------
@@ -53,8 +59,10 @@ public class Keys {
 
 	public static final UniqueKey<CompanyRecord> COMPANY_PKEY = UniqueKeys0.COMPANY_PKEY;
 	public static final UniqueKey<JobRecord> JOB_PKEY = UniqueKeys0.JOB_PKEY;
-	public static final UniqueKey<JobOfferRecord> JOB_OFFER_PKEY = UniqueKeys0.JOB_OFFER_PKEY;
+	public static final UniqueKey<JobAppRecord> JOB_APP_PKEY = UniqueKeys0.JOB_APP_PKEY;
+	public static final UniqueKey<JobShortlistRecord> JOB_SHORTLIST_JOB_SHORTLIST_ID_PK = UniqueKeys0.JOB_SHORTLIST_JOB_SHORTLIST_ID_PK;
 	public static final UniqueKey<LocationRecord> LOCATION_PKEY = UniqueKeys0.LOCATION_PKEY;
+	public static final UniqueKey<MineRecord> MINE_PKEY = UniqueKeys0.MINE_PKEY;
 	public static final UniqueKey<UserRecord> USER_PKEY = UniqueKeys0.USER_PKEY;
 
 	// -------------------------------------------------------------------------
@@ -62,7 +70,10 @@ public class Keys {
 	// -------------------------------------------------------------------------
 
 	public static final ForeignKey<CompanyRecord, LocationRecord> COMPANY__COMPANY_LOCATION_LOCATION_ID_FK = ForeignKeys0.COMPANY__COMPANY_LOCATION_LOCATION_ID_FK;
-	public static final ForeignKey<JobOfferRecord, JobRecord> JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK = ForeignKeys0.JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK;
+	public static final ForeignKey<JobAppRecord, UserRecord> JOB_APP__JOB_APP_USER_USER_ID_FK = ForeignKeys0.JOB_APP__JOB_APP_USER_USER_ID_FK;
+	public static final ForeignKey<JobAppRecord, JobRecord> JOB_APP__JOB_APP_JOB_JOB_ID_FK = ForeignKeys0.JOB_APP__JOB_APP_JOB_JOB_ID_FK;
+	public static final ForeignKey<JobShortlistRecord, JobRecord> JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK = ForeignKeys0.JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK;
+	public static final ForeignKey<JobShortlistRecord, UserRecord> JOB_SHORTLIST__JOB_SHORTLIST_USER_USER_ID_FK = ForeignKeys0.JOB_SHORTLIST__JOB_SHORTLIST_USER_USER_ID_FK;
 
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
@@ -71,21 +82,28 @@ public class Keys {
 	private static class Identities0 extends AbstractKeys {
 		public static Identity<CompanyRecord, Long> IDENTITY_COMPANY = createIdentity(Company.COMPANY, Company.COMPANY.COMPANY_ID);
 		public static Identity<JobRecord, Long> IDENTITY_JOB = createIdentity(Job.JOB, Job.JOB.JOB_ID);
-		public static Identity<JobOfferRecord, Long> IDENTITY_JOB_OFFER = createIdentity(JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_OFFER_ID);
+		public static Identity<JobAppRecord, Integer> IDENTITY_JOB_APP = createIdentity(JobApp.JOB_APP, JobApp.JOB_APP.JOB_APP_ID);
+		public static Identity<JobShortlistRecord, Integer> IDENTITY_JOB_SHORTLIST = createIdentity(JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_SHORTLIST_ID);
 		public static Identity<LocationRecord, Long> IDENTITY_LOCATION = createIdentity(Location.LOCATION, Location.LOCATION.LOCATION_ID);
+		public static Identity<MineRecord, Integer> IDENTITY_MINE = createIdentity(Mine.MINE, Mine.MINE.MINE_ID);
 		public static Identity<UserRecord, Integer> IDENTITY_USER = createIdentity(User.USER, User.USER.USER_ID);
 	}
 
 	private static class UniqueKeys0 extends AbstractKeys {
 		public static final UniqueKey<CompanyRecord> COMPANY_PKEY = createUniqueKey(Company.COMPANY, Company.COMPANY.COMPANY_ID);
 		public static final UniqueKey<JobRecord> JOB_PKEY = createUniqueKey(Job.JOB, Job.JOB.JOB_ID);
-		public static final UniqueKey<JobOfferRecord> JOB_OFFER_PKEY = createUniqueKey(JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_OFFER_ID);
+		public static final UniqueKey<JobAppRecord> JOB_APP_PKEY = createUniqueKey(JobApp.JOB_APP, JobApp.JOB_APP.JOB_APP_ID);
+		public static final UniqueKey<JobShortlistRecord> JOB_SHORTLIST_JOB_SHORTLIST_ID_PK = createUniqueKey(JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_SHORTLIST_ID);
 		public static final UniqueKey<LocationRecord> LOCATION_PKEY = createUniqueKey(Location.LOCATION, Location.LOCATION.LOCATION_ID);
+		public static final UniqueKey<MineRecord> MINE_PKEY = createUniqueKey(Mine.MINE, Mine.MINE.MINE_ID);
 		public static final UniqueKey<UserRecord> USER_PKEY = createUniqueKey(User.USER, User.USER.USER_ID);
 	}
 
 	private static class ForeignKeys0 extends AbstractKeys {
 		public static final ForeignKey<CompanyRecord, LocationRecord> COMPANY__COMPANY_LOCATION_LOCATION_ID_FK = createForeignKey(jooq.generated.Keys.LOCATION_PKEY, Company.COMPANY, Company.COMPANY.LOCATION_ID);
-		public static final ForeignKey<JobOfferRecord, JobRecord> JOB_OFFER__JOB_OFFER_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobOffer.JOB_OFFER, JobOffer.JOB_OFFER.JOB_ID);
+		public static final ForeignKey<JobAppRecord, UserRecord> JOB_APP__JOB_APP_USER_USER_ID_FK = createForeignKey(jooq.generated.Keys.USER_PKEY, JobApp.JOB_APP, JobApp.JOB_APP.USER_ID);
+		public static final ForeignKey<JobAppRecord, JobRecord> JOB_APP__JOB_APP_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobApp.JOB_APP, JobApp.JOB_APP.JOB_ID);
+		public static final ForeignKey<JobShortlistRecord, JobRecord> JOB_SHORTLIST__JOB_SHORTLIST_JOB_JOB_ID_FK = createForeignKey(jooq.generated.Keys.JOB_PKEY, JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.JOB_ID);
+		public static final ForeignKey<JobShortlistRecord, UserRecord> JOB_SHORTLIST__JOB_SHORTLIST_USER_USER_ID_FK = createForeignKey(jooq.generated.Keys.USER_PKEY, JobShortlist.JOB_SHORTLIST, JobShortlist.JOB_SHORTLIST.USER_ID);
 	}
 }

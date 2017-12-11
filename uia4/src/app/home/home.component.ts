@@ -13,20 +13,14 @@ import {AuthenticationService} from "../core/authentication/authentication.servi
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  model: any;
-  message: any;
-
-  playerLabels: any;
-  isLoading: boolean;
   username: any;
   user: any;
-  items: any;
-
-  @Input() tweets: any;
+  jobs: any;
 
   constructor(private quoteService: QuoteService, private authService: AuthenticationService) {
     this.username = authService.credentials.username;
     this.getUser(this.username);
+    this.getJobs();
   }
 
   ngOnInit() {
@@ -39,10 +33,25 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  getJobs() {
+    this.quoteService.getJobs().subscribe(
+      (data: any) => {
+        this.jobs = data;
+      });
+  }
+
+  shortlist(jobId: string) {
+    this.quoteService.shortlist(this.user.userId, jobId);
+  }
+
+  apply(jobId: string) {
+    this.quoteService.apply(this.user.userId, jobId);
+  }
+
   FIXME_timeAgo(value: string) {
     return this.quoteService.FIXME_timeAgo(value);
   }
-  //
+
   // search = (text$: Observable<string>) =>
   //   text$
   //     .debounceTime(100)
