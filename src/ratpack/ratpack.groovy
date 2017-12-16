@@ -52,6 +52,13 @@ ratpack {
             }
         }
 
+        all {
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type, Authorization')
+            response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            next()
+        }
+
         path('login') {
             byMethod {
                 post {
@@ -63,10 +70,14 @@ ratpack {
                         assert password
 
                         jobService.login(username, password)
-                    }.onError { Throwable e ->
+                    }.onError { Exception e ->
                         if (e instanceof IllegalArgumentException) {
                             clientError(401)
                         }
+                        else {
+                            clientError(401)
+                        }
+                        e.printStackTrace()
                     }.then { User user ->
                         if (user) {
                             render json(user)
@@ -95,13 +106,6 @@ ratpack {
         }
 
         prefix('api/v1') {
-            all {
-                response.headers.add('Access-Control-Allow-Origin', '*')
-                response.headers.add('Access-Control-Allow-Headers', 'origin, x-requested-with, content-type, Authorization')
-                response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-                next()
-            }
-
             path('jobs') {
                 byMethod {
                     get {

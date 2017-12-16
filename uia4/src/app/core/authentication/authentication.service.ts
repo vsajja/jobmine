@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import {QuoteService} from "../../services/quote.service";
 
 export interface Credentials {
   // Customize received credentials here
@@ -23,8 +24,10 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
 
   private _credentials: Credentials;
+  private _quoteService: QuoteService;
 
-  constructor() {
+  constructor(private quoteService: QuoteService) {
+    this._quoteService = quoteService;
     this._credentials = JSON.parse(sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey));
   }
 
@@ -39,8 +42,13 @@ export class AuthenticationService {
       username: context.username,
       token: '123456'
     };
+
     this.setCredentials(data, context.remember);
     return Observable.of(data);
+  }
+
+  errorHandler(error: any): void {
+    console.log(error)
   }
 
   /**

@@ -11,6 +11,10 @@ export class QuoteService {
   constructor(private httpClient: HttpClient) {
   }
 
+  login(username: string, password: string): any {
+    return this.httpClient.post('/login', { username: username, password: password});
+  }
+
   getJobs(): any {
     return this.httpClient.get('/jobs');
   }
