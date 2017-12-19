@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   version: '(dev)',
-  // serverUrl: 'http://localhost:5050',
-  serverUrl: 'http://jm-app.herokuapp.com',
+  serverUrl: 'http://localhost:5050',
+  // serverUrl: 'http://jm-app.herokuapp.com',
   apiUrl: '/api/v1',
   defaultLanguage: 'en-US',
   supportedLanguages: [

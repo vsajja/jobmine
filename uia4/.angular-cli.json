@@ -21,7 +21,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "main.scss"
+        "main.scss",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -56,7 +59,7 @@
     "styleExt": "scss",
     "component": {},
     "serve": {
-      "port": 1388
+      "port": 1350
     }
   },
   "warnings": {

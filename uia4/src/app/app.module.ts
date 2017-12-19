@@ -17,12 +17,14 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {APIInterceptor} from "./core/http/http-interceptor";
 import {PagerService} from "./services/pager.service";
 import {DecimalPipe} from '@angular/common';
-import { JobComponent } from './job/job.component';
+import {JobComponent} from './job/job.component';
 import {JobModule} from "./job/job.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     TranslateModule.forRoot(),
