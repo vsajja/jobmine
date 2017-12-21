@@ -1,6 +1,25 @@
-# job #
+# jobmine #
 
-job is a website that helps students and alumni find jobs.
+- email notifications
+- periodically approve jobs
 
-# heroku #
-https://jm-app.herokuapp.com
+# mine
+
+- 001
+- 002
+- 003
+- 004
+- 005
+
+# users
+
+## company
+- login / register
+- post a job
+
+## worker
+- update profile
+- search mines
+- shortlist job
+- apply for job
+- complete job
