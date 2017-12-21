@@ -1,74 +1,74 @@
 <!--<div class="login-container bg-light">-->
-  <!--<div class="login-box">-->
-    <!--<h1 translate>APP_NAME</h1>-->
-    <!--<div>-->
-      <!--<h6 class="d-inline-block">v{{version}}</h6>-->
-      <!--<div class="d-inline-block ml-3" ngbDropdown>-->
-        <!--<button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>-->
-          <!--{{currentLanguage}}-->
-        <!--</button>-->
-        <!--<div ngbDropdownMenu aria-labelledby="language-dropdown">-->
-          <!--<button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">-->
-            <!--{{language}}-->
-          <!--</button>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="container">-->
-      <!--<div class="card col-md-6 mt-3 mx-auto">-->
-        <!--<div class="card-body">-->
-          <!--<h4 class="card-title text-center">-->
-            <!--<i class="fa fa-3x fa-user-circle-o text-muted"></i>-->
-          <!--</h4>-->
-          <!--<form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>-->
-            <!--<div class="alert alert-danger" [hidden]="!error || isLoading" translate>-->
-              <!--Username or password incorrect.-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-              <!--<label class="d-block">-->
-                <!--<input type="text" class="form-control" formControlName="username"-->
-                       <!--[placeholder]="'Username' | translate"/>-->
-                <!--<span hidden translate>Username</span>-->
-                <!--<small [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"-->
-                       <!--class="text-danger" translate>-->
-                  <!--Username is required-->
-                <!--</small>-->
-              <!--</label>-->
-              <!--<label class="d-block">-->
-                <!--<input type="password" class="form-control" formControlName="password"-->
-                       <!--[placeholder]="'Password' | translate" required/>-->
-                <!--<span hidden translate>Password</span>-->
-                <!--<small [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"-->
-                       <!--class="text-danger" translate>-->
-                  <!--Password is required-->
-                <!--</small>-->
-              <!--</label>-->
-              <!--<label class="form-check-label">-->
-                <!--<input type="checkbox" class="form-check-input" formControlName="remember"/>-->
-                <!--<span translate>Remember me</span>-->
-              <!--</label>-->
-            <!--</div>-->
-            <!--<button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid || isLoading">-->
-              <!--<i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>-->
-              <!--<span translate>Login</span>-->
-            <!--</button>-->
-          <!--</form>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div class="login-box">-->
+<!--<h1 translate>APP_NAME</h1>-->
+<!--<div>-->
+<!--<h6 class="d-inline-block">v{{version}}</h6>-->
+<!--<div class="d-inline-block ml-3" ngbDropdown>-->
+<!--<button id="language-dropdown" class="btn btn-sm btn-secondary" ngbDropdownToggle>-->
+<!--{{currentLanguage}}-->
+<!--</button>-->
+<!--<div ngbDropdownMenu aria-labelledby="language-dropdown">-->
+<!--<button class="dropdown-item" *ngFor="let language of languages" (click)="setLanguage(language)">-->
+<!--{{language}}-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--<div class="card col-md-6 mt-3 mx-auto">-->
+<!--<div class="card-body">-->
+<!--<h4 class="card-title text-center">-->
+<!--<i class="fa fa-3x fa-user-circle-o text-muted"></i>-->
+<!--</h4>-->
+<!--<form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>-->
+<!--<div class="alert alert-danger" [hidden]="!error || isLoading" translate>-->
+<!--Username or password incorrect.-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<label class="d-block">-->
+<!--<input type="text" class="form-control" formControlName="username"-->
+<!--[placeholder]="'Username' | translate"/>-->
+<!--<span hidden translate>Username</span>-->
+<!--<small [hidden]="loginForm.controls.username.valid || loginForm.controls.username.untouched"-->
+<!--class="text-danger" translate>-->
+<!--Username is required-->
+<!--</small>-->
+<!--</label>-->
+<!--<label class="d-block">-->
+<!--<input type="password" class="form-control" formControlName="password"-->
+<!--[placeholder]="'Password' | translate" required/>-->
+<!--<span hidden translate>Password</span>-->
+<!--<small [hidden]="loginForm.controls.password.valid || loginForm.controls.password.untouched"-->
+<!--class="text-danger" translate>-->
+<!--Password is required-->
+<!--</small>-->
+<!--</label>-->
+<!--<label class="form-check-label">-->
+<!--<input type="checkbox" class="form-check-input" formControlName="remember"/>-->
+<!--<span translate>Remember me</span>-->
+<!--</label>-->
+<!--</div>-->
+<!--<button class="btn btn-primary w-100" type="submit" [disabled]="loginForm.invalid || isLoading">-->
+<!--<i class="fa fa-cog fa-spin" [hidden]="!isLoading"></i>-->
+<!--<span translate>Login</span>-->
+<!--</button>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <br/>
 <br/>
 <br/>
 <br/>
-
 <div class="container">
   <div class="row">
     <div class="col-md-6 paddingbottom10">
-      <h1>Welcome to jobmine!</h1>
-      <p class="lead">You're probably thinking why would I pay $4.99 for a PRO Membership when I can just buy a latte for the same price?</p>
+      <h1>Welcome to the jobmine project!</h1>
+      <p class="lead">You're probably thinking why would I pay $4.99 for a PRO Membership when I can just buy a latte
+        for the same price?</p>
     </div>
     <div class="col-md-3 paddingbottom20">
       <img src="http://i.imgur.com/3FV3UqO.png" alt="" width="200" height="200">
@@ -80,17 +80,21 @@
   </div>
   <div class="col-md-6 paddingbottom20">
     <ul class="font-raleway">
-      <li>Apply for <span class="alert-danger">unlimited castings</span>. Basic member is limited to one application per day.</li>
+      <li>Apply for <span class="alert-warning">unlimited castings</span>. Basic member is limited to one application
+        per day.
+      </li>
       <li>Unlimited messaging. Basic Member is limited to three messages per day.</li>
       <li>Make your profile beautiful with videos and extra photos</li>
       <li>Get featured in the homepage and talent directory</li>
       <li>Get a PRO seal of aPROval</li>
       <li>Get promoted on our popular social media channels. We always scour pro members
-        profiles and pick talent of the week and feature it on our blog</li>
+        profiles and pick talent of the week and feature it on our blog
+      </li>
     </ul>
     <p class="lead">See I told you it's going to be an easy decision. Now upgrade to Pro Membership</p>
   </div>
   <div class="col-md-12 paddingbottom20">
-    <p><a href="http://castcaller.com" class="btn btn-primary btn-primary btn-lg">Upgrade Now <span class="glyphicon glyphicon-star-empty"></span></a></p>
+    <p><a href="http://castcaller.com" class="btn btn-primary btn-primary btn-lg">Upgrade Now <span
+      class="glyphicon glyphicon-star-empty"></span></a></p>
   </div>
 </div>

@@ -6,6 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {LoginRoutingModule} from './login-routing.module';
 import {LoginComponent} from './login.component';
+import {PanelModule} from "primeng/primeng";
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {LoginComponent} from './login.component';
     ReactiveFormsModule,
     TranslateModule,
     NgbModule,
+    PanelModule,
     LoginRoutingModule
   ],
   declarations: [
