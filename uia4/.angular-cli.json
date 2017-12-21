@@ -59,7 +59,7 @@
     "styleExt": "scss",
     "component": {},
     "serve": {
-      "port": 1350
+      "port": 1450
     }
   },
   "warnings": {
