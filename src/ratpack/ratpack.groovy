@@ -59,6 +59,14 @@ ratpack {
             next()
         }
 
+        ['login',
+         'home'
+        ].each { path ->
+            get(path) {
+                response.contentType('text/html').send new File(this.class.getResource('dist/index.html').toURI()).text
+            }
+        }
+
         path('login') {
             byMethod {
                 post {
