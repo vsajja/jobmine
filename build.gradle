@@ -46,6 +46,8 @@ task wrapper(type: Wrapper) {
 import org.jooq.util.jaxb.*
 import org.jooq.util.*
 
+// TODO: jobmine repo is public now and renamed to jobmine-old.
+// fix this
 task jooqCodegen {
     doLast {
         Properties props = new Properties()
