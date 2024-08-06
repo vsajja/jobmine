@@ -1,6 +1,3 @@
-** unkown / stale project, idk **
-https://www.youtube.com/watch?v=0LrcmllRMOE
-
 # www.jobmine.ca #
 
 welcome to jobmine.
